@@ -2,7 +2,43 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="sheet-card hero-sheet reveal" aria-labelledby="home-title">
+    <p class="sheet-kicker mb-2">Grand Archive of Heroes</p>
+    <h1 id="home-title" class="display-5 mb-3">DnD Character Sheet Creator</h1>
+    <p class="lead mb-4">
+        Keep your campaign records on a living parchment ledger. Track players, inspect heroes, and review every tale from first quest to final legend.
+    </p>
+    <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-ink" asp-controller="Players" asp-action="Index">Open Player Register</a>
+        <a class="btn btn-outline-ink" asp-controller="Characters" asp-action="Index">Open Character Ledger</a>
+    </div>
+</section>
+
+<section class="row g-4 mt-1" aria-label="Core sections">
+    <div class="col-12 col-lg-4">
+        <article class="sheet-card info-block h-100 reveal">
+            <h2 class="h4">Player Register</h2>
+            <p class="mb-0">Review every player profile with contact details, activity, and linked heroes.</p>
+        </article>
+    </div>
+    <div class="col-12 col-lg-4">
+        <article class="sheet-card info-block h-100 reveal">
+            <h2 class="h4">Hero Dossiers</h2>
+            <p class="mb-0">Inspect class, race, alignment, level progress, and equipment at a glance.</p>
+        </article>
+    </div>
+    <div class="col-12 col-lg-4">
+        <article class="sheet-card info-block h-100 reveal">
+            <h2 class="h4">Table-Ready Layout</h2>
+            <p class="mb-0">Designed for desktop and mobile so records remain clear during active play.</p>
+        </article>
+    </div>
+</section>
+
+<section class="sheet-note mt-4 reveal" aria-label="Technology note">
+    Forged with ASP.NET Core MVC and Bootstrap, restyled into an earthy manuscript interface with ink-like contrast and subtle motion.
+</section>
+
+<div class="mt-3 text-center">
+    <a href="https://learn.microsoft.com/aspnet/core" class="small">Read ASP.NET Core documentation</a>
 </div>

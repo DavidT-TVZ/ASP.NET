@@ -1,5 +1,19 @@
+﻿:root {
+  --parchment-1: #f4e8cf;
+  --parchment-2: #ead7b0;
+  --parchment-edge: #c4a97d;
+  --ink-main: #2f2416;
+  --ink-soft: #5b4b34;
+  --accent: #7d4f22;
+  --accent-dark: #5d3716;
+  --danger-ink: #842c1f;
+  --line: rgba(85, 58, 28, 0.28);
+  --focus-ring: rgba(125, 79, 34, 0.5);
+}
+
 html {
-  font-size: 14px;
+  font-size: 15px;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,24 +22,270 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+body.theme-parchment {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink-main);
+  font-family: "Cardo", Georgia, serif;
+  line-height: 1.6;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(255, 250, 237, 0.9), transparent 34%),
+    radial-gradient(circle at 84% 20%, rgba(202, 164, 112, 0.16), transparent 30%),
+    radial-gradient(circle at 50% 86%, rgba(169, 125, 76, 0.15), transparent 34%),
+    linear-gradient(160deg, #efe0c2 0%, #e1c89c 38%, #d6b37f 100%);
+  background-attachment: fixed;
 }
 
-html {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.chronicle-brand,
+.sheet-kicker {
+  font-family: "Cinzel Decorative", "Times New Roman", serif;
+  color: #2a1d0c;
+  letter-spacing: 0.03em;
+}
+
+a {
+  color: #533317;
+  text-underline-offset: 0.12rem;
+}
+
+a:hover {
+  color: #2f1d0a;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.8rem;
+  background: #fff7e7;
+  color: #211204;
+  border: 2px solid var(--accent);
+  border-radius: 0.25rem;
+  z-index: 1100;
+}
+
+.chronicle-nav {
+  background: linear-gradient(180deg, rgba(250, 239, 214, 0.95), rgba(233, 210, 168, 0.9));
+  border-bottom: 2px solid var(--line);
+  box-shadow: 0 6px 20px rgba(78, 48, 22, 0.14);
+}
+
+.chronicle-brand {
+  font-size: 1.05rem;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.chronicle-nav .nav-link {
+  color: var(--ink-main);
+  font-weight: 700;
+  border-radius: 0.35rem;
+  padding: 0.45rem 0.7rem;
+}
+
+.chronicle-nav .nav-link:hover,
+.chronicle-nav .nav-link:focus-visible {
+  color: #1f1308;
+  background: rgba(125, 79, 34, 0.12);
+}
+
+.navbar-toggler {
+  border-color: rgba(75, 46, 20, 0.45);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
+}
+
+.sheet-card {
+  background:
+    linear-gradient(180deg, rgba(255, 248, 231, 0.96), rgba(243, 226, 191, 0.97)),
+    repeating-linear-gradient(0deg, rgba(74, 52, 28, 0.03) 0, rgba(74, 52, 28, 0.03) 1px, transparent 1px, transparent 5px);
+  border: 1px solid rgba(105, 72, 37, 0.42);
+  border-radius: 0.85rem;
+  box-shadow: 0 16px 28px -20px rgba(48, 30, 13, 0.85), inset 0 0 0 1px rgba(255, 245, 223, 0.5);
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.hero-sheet {
   position: relative;
-  min-height: 100%;
+  overflow: hidden;
 }
 
-body {
-  margin-bottom: 60px;
+.hero-sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 10% 20%, rgba(151, 95, 41, 0.14), transparent 45%);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.sheet-kicker {
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.sheet-note {
+  border-left: 4px solid var(--accent);
+  border-radius: 0.4rem;
+  background: rgba(247, 233, 201, 0.86);
+  padding: 0.95rem 1rem;
+}
+
+.info-block h2 {
+  margin-bottom: 0.65rem;
+}
+
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-hover:hover,
+.card-hover:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 34px -22px rgba(48, 30, 13, 0.85), inset 0 0 0 1px rgba(255, 245, 223, 0.5);
+}
+
+.btn-ink,
+.btn-outline-ink {
+  font-weight: 700;
+  border-radius: 0.45rem;
+}
+
+.btn-ink {
+  color: #fff8eb;
+  background-color: var(--accent);
+  border: 1px solid var(--accent-dark);
+}
+
+.btn-ink:hover,
+.btn-ink:focus-visible {
+  color: #fff;
+  background-color: #653b18;
+  border-color: #4e2d11;
+}
+
+.btn-outline-ink {
+  color: var(--accent-dark);
+  border: 1px solid var(--accent-dark);
+  background: transparent;
+}
+
+.btn-outline-ink:hover,
+.btn-outline-ink:focus-visible {
+  color: #fff8eb;
+  background: #6d401a;
+  border-color: #573213;
+}
+
+.chronicle-badge {
+  color: #2f2416;
+  background: rgba(248, 236, 209, 0.95);
+  border: 2px solid rgba(88, 57, 25, 0.4);
+}
+
+.parchment-alert {
+  border: 1px solid rgba(117, 80, 42, 0.45);
+  color: #3f2a12;
+  background: rgba(248, 235, 202, 0.95);
+}
+
+.chronicle-progress {
+  height: 0.7rem;
+  background: rgba(149, 115, 72, 0.22);
+}
+
+.chronicle-progress .progress-bar {
+  background: linear-gradient(90deg, #73431a, #a56a32);
+}
+
+dt {
+  font-weight: 700;
+  color: #2b1d0d;
+}
+
+dd {
+  color: #463520;
+}
+
+.ink-danger {
+  color: var(--danger-ink);
+}
+
+.chronicle-footer {
+  margin-top: 2rem;
+  border-top: 2px solid var(--line);
+  background: rgba(241, 223, 187, 0.8);
+}
+
+.chronicle-footer .container-lg {
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+.reveal {
+  animation: fade-rise 0.42s ease-out both;
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .card-hover {
+    animation: none;
+    transition: none;
+  }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus,
+.nav-link:focus-visible,
+a:focus-visible {
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
+}
+
+@media (max-width: 767.98px) {
+  .sheet-card {
+    border-radius: 0.7rem;
+    padding: 1rem;
+  }
+
+  .display-5 {
+    font-size: 1.85rem;
+  }
+
+  .chronicle-footer .container-lg {
+    text-align: center;
+  }
 }
