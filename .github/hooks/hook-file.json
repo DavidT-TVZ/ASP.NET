@@ -1,7 +1,7 @@
 {
 	"version": 1,
 	"hooks": {
-		"UserPromptSubmit": [
+		"userPromptSubmitted": [
 			{
 				"type": "command",
 				"powershell": "-ExecutionPolicy Bypass -Command \"$input | Add-Content -Path 'C:\\TVZ\\Druga_apsolventska\\ASP_Net\\Projekt\\.github\\hooks\\agent_log.txt'\""
