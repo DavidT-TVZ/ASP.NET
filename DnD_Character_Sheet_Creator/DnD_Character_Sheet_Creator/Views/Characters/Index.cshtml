@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DnD_Character_Sheet_Creator.ViewModels.CharacterWithPlayerViewModel>
+
+@{
+    ViewData["Title"] = "Characters";
+}
+
+<div class="sheet-card mb-4 reveal d-flex flex-wrap justify-content-between align-items-center gap-3">
+    <div>
+        <p class="sheet-kicker mb-1">Hero Ledger</p>
+        <h1 class="h3 mb-1">Characters</h1>
+        <p class="text-muted mb-0">Browse every recorded hero and their player associations.</p>
+    </div>
+    <span class="badge chronicle-badge rounded-pill px-3 py-2">@Model.Count() total</span>
+</div>
+
+<div class="row g-4">
+    @foreach (var character in Model)
+    {
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card sheet-card card-hover h-100 reveal">
+                <div class="card-body">
+                    <h2 class="h5 card-title">@character.Character.CharacterName</h2>
+                    <p class="card-text mb-1"><strong>Player:</strong> <a asp-controller="Players" asp-action="Details" asp-route-id="@character.PlayerId">@character.PlayerName</a></p>
+                    <p class="card-text mb-1"><strong>Class:</strong> @character.Character.Class</p>
+                    <p class="card-text mb-1"><strong>Level:</strong> @character.Character.Level.Level</p>
+                    <p class="card-text mb-1"><strong>Race:</strong> @character.Character.Race</p>
+                    <p class="card-text mb-1"><strong>Background:</strong> @character.Character.Background</p>
+                    <p class="card-text mb-0"><strong>Alignment:</strong> @character.Character.Alignment</p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@character.Character.CharacterId">View details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,79 @@
+﻿@model DnD_Character_Sheet_Creator.ViewModels.CharacterWithPlayerViewModel
+
+@{
+    ViewData["Title"] = "Character Details";
+    var xpCurrent = Model.Character.Level.CurrentExperiencePoints;
+    var xpNext = Model.Character.Level.ExperiencePointsToNextLevel;
+    var xpPercent = xpNext <= 0 ? 0 : Math.Clamp((int)Math.Round((double)xpCurrent / xpNext * 100), 0, 100);
+}
+
+<section class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">Character Record</p>
+    <h1 class="h3 mb-0">Character Details</h1>
+</section>
+
+<div class="mb-4">
+    <a class="btn btn-outline-ink" asp-controller="Characters" asp-action="Index">Back to all characters</a>
+</div>
+
+<div class="card sheet-card mb-4 reveal">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Character.CharacterName</dd>
+
+            <dt class="col-sm-3">Player</dt>
+            <dd class="col-sm-9"><a asp-controller="Players" asp-action="Details" asp-route-id="@Model.PlayerId">@Model.PlayerName</a></dd>
+
+            <dt class="col-sm-3">Class</dt>
+            <dd class="col-sm-9">@Model.Character.Class</dd>
+
+            <dt class="col-sm-3">Race</dt>
+            <dd class="col-sm-9">@Model.Character.Race</dd>
+
+            <dt class="col-sm-3">Background</dt>
+            <dd class="col-sm-9">@Model.Character.Background</dd>
+
+            <dt class="col-sm-3">Alignment</dt>
+            <dd class="col-sm-9">@Model.Character.Alignment</dd>
+
+            <dt class="col-sm-3">Level</dt>
+            <dd class="col-sm-9">@Model.Character.Level.Level</dd>
+
+            <dt class="col-sm-3">Experience</dt>
+            <dd class="col-sm-9">
+                <div class="mb-1">@xpCurrent / @xpNext</div>
+                <div class="progress chronicle-progress" role="img" aria-label="Experience progress @xpPercent percent toward next level">
+                    <div class="progress-bar" role="progressbar" style="width: @xpPercent%;" aria-valuenow="@xpPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </dd>
+
+            <dt class="col-sm-3">Proficiency Bonus</dt>
+            <dd class="col-sm-9">+@Model.Character.Level.ProficiencyBonus</dd>
+        </dl>
+    </div>
+</div>
+
+<h2 class="h4 mb-3">Equipment</h2>
+@if (!Model.Character.EquipmentList.Any())
+{
+    <div class="alert parchment-alert" role="status">This character has no equipment in the mock repository.</div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var equipment in Model.Character.EquipmentList)
+        {
+            <div class="col-12 col-lg-4">
+                <div class="card sheet-card card-hover h-100 reveal">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">@equipment.Name</h3>
+                        <p class="card-text mb-1"><strong>Type:</strong> @equipment.Type</p>
+                        <p class="card-text mb-1"><strong>Cost:</strong> @equipment.Cost</p>
+                        <p class="card-text mb-0"><strong>Weight:</strong> @equipment.Weight</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
