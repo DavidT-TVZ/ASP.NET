@@ -4,7 +4,7 @@
 		"userPromptSubmitted": [
 			{
 				"type": "command",
-				"powershell": "Add-Content -Path 'C:\\TVZ\\Druga_apsolventska\\ASP_Net\\Projekt\\.github\\hooks\\agent_log.txt'\" -Value \"$input\""
+				"powershell": "Add-Content -Path 'C:\\TVZ\\Druga_apsolventska\\ASP_Net\\Projekt\\.github\\hooks\\agent_log.txt' -Value \"$input\""
 			}
 		],
 		"preToolUse": [
