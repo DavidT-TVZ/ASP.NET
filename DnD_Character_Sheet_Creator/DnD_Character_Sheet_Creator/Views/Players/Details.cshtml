@@ -1,0 +1,59 @@
+@model DnD_Character_Sheet_Creator.Models.Player
+@using DnD_Character_Sheet_Creator.Models
+
+@{
+    ViewData["Title"] = "Player Details";
+    var characters = ViewBag.Characters as IEnumerable<Character> ?? Enumerable.Empty<Character>();
+}
+
+<h1 class="h3 mb-4">Player Details</h1>
+
+<div class="mb-4">
+    <a class="btn btn-outline-secondary" asp-controller="Players" asp-action="Index">Back to all players</a>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name @Model.Surname</dd>
+
+            <dt class="col-sm-3">Username</dt>
+            <dd class="col-sm-9">@Model.Username</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3">Last Login</dt>
+            <dd class="col-sm-9">@Model.LastLogin.ToString("u")</dd>
+        </dl>
+    </div>
+</div>
+
+<h2 class="h4 mb-3">Characters</h2>
+@if (!characters.Any())
+{
+    <div class="alert alert-info">This player has no characters in the mock repository.</div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var character in characters)
+        {
+            <div class="col-12 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">@character.CharacterName</h3>
+                        <p class="card-text mb-1"><strong>Class:</strong> @character.Class</p>
+                        <p class="card-text mb-1"><strong>Level:</strong> @character.Level.Level</p>
+                        <p class="card-text mb-1"><strong>Race:</strong> @character.Race</p>
+                        <p class="card-text mb-0"><strong>Alignment:</strong> @character.Alignment</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a class="btn btn-outline-primary btn-sm" asp-controller="Characters" asp-action="Details" asp-route-id="@character.CharacterId">View details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
