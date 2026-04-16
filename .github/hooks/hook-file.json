@@ -10,7 +10,7 @@
 		"preToolUse": [
 			{
 				"type": "command",
-				"powershell": "-ExecutionPolicy Bypass -Command \"$input | Add-Content -Path 'C:\\TVZ\\Druga_apsolventska\\ASP_Net\\Projekt\\.github\\hooks\\agent_log.txt'\""
+				"powershell": "Add-Content -Path 'C:\\TVZ\\Druga_apsolventska\\ASP_Net\\Projekt\\.github\\hooks\\agent_log.txt' -Value \"$input\""
 			}
 		]
 	}
