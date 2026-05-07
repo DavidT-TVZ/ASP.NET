@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DnD_Character_Sheet_Creator.Models\DnD_Character_Sheet_Creator.Models.csproj" />
+    <ProjectReference Include="..\DnD_Character_Sheet_Creator.DAL\DnD_Character_Sheet_Creator.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

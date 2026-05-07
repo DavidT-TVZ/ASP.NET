@@ -1,0 +1,13 @@
+.chronicle-nav .navbar-nav {
+  gap: 0.2rem;
+}
+
+.chronicle-footer a {
+  color: #4e2f13;
+  font-weight: 700;
+}
+
+.chronicle-footer a:hover,
+.chronicle-footer a:focus-visible {
+  color: #2e1b09;
+}
