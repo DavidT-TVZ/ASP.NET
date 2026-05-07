@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="DnD_Character_Sheet_Creator/DnD_Character_Sheet_Creator.csproj" />
+  <Project Path="DnD_Character_Sheet_Creator.Models/DnD_Character_Sheet_Creator.Models.csproj" />
+  <Project Path="DnD_Character_Sheet_Creator.DAL/DnD_Character_Sheet_Creator.DAL.csproj" />
+  <Project Path="DnD_Character_Sheet_Creator.Web/DnD_Character_Sheet_Creator.Web.csproj" />
 </Solution>
