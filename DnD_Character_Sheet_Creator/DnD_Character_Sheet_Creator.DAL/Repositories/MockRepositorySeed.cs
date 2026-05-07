@@ -2,7 +2,7 @@ using DnD_Character_Sheet_Creator.Models;
 
 namespace DnD_Character_Sheet_Creator.Repositories
 {
-    internal static class MockRepositorySeed
+    public static class MockRepositorySeed
     {
         public static List<Player> CreatePlayers()
         {
