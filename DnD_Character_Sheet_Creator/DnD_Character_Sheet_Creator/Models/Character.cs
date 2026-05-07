@@ -4,6 +4,10 @@
     {
         public int CharacterId { get; set; }
 
+        public int PlayerId { get; set; }
+
+        public int? LevelId { get; set; }
+
         public required string CharacterName { get; set; }
 
         public RaceEnum Race { get; set; }
@@ -14,8 +18,11 @@
 
         public ClassEnum Class { get; set; }
 
-        public required CharacterLevel Level { get; set; }
+        public CharacterLevel? Level { get; set; }
 
         public List<Equipment> EquipmentList { get; set; } = new List<Equipment>();
+
+        // Navigation property
+        public Player? Player { get; set; }
     }
 }

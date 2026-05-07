@@ -1,12 +1,32 @@
+using DnD_Character_Sheet_Creator.Data;
 using DnD_Character_Sheet_Creator.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add DbContext
+builder.Services.AddDbContext<DnDDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IPlayerRepository, MockPlayerRepository>();
-builder.Services.AddSingleton<ICharacterRepository, MockCharacterRepository>();
+
+// Register repositories - choose one of the following:
+// Option 1: Use Entity Framework repositories
+builder.Services.AddScoped<IPlayerRepository, EFPlayerRepository>();
+builder.Services.AddScoped<ICharacterRepository, EFCharacterRepository>();
+
+// Option 2: Use Mock repositories (comment out Option 1 and uncomment these to use mock data)
+// builder.Services.AddSingleton<IPlayerRepository, MockPlayerRepository>();
+// builder.Services.AddSingleton<ICharacterRepository, MockCharacterRepository>();
 
 var app = builder.Build();
+
+// Apply migrations and create database if needed (EF only)
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
+    context.Database.Migrate();
+}
 
 if (!app.Environment.IsDevelopment())
 {

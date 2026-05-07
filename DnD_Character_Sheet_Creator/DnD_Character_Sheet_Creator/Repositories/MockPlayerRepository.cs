@@ -25,5 +25,30 @@ namespace DnD_Character_Sheet_Creator.Repositories
         {
             return _players.FirstOrDefault(player => player.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
+
+        public void AddPlayer(Player player)
+        {
+            player.PlayerId = _players.Count > 0 ? _players.Max(p => p.PlayerId) + 1 : 1;
+            _players.Add(player);
+        }
+
+        public void UpdatePlayer(Player player)
+        {
+            var existingPlayer = GetPlayerById(player.PlayerId);
+            if (existingPlayer != null)
+            {
+                var index = _players.IndexOf(existingPlayer);
+                _players[index] = player;
+            }
+        }
+
+        public void DeletePlayer(int playerId)
+        {
+            var player = GetPlayerById(playerId);
+            if (player != null)
+            {
+                _players.Remove(player);
+            }
+        }
     }
 }

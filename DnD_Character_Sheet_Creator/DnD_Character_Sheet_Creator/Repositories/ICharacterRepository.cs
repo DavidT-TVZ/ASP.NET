@@ -7,5 +7,8 @@ namespace DnD_Character_Sheet_Creator.Repositories
         IEnumerable<Character> GetAllCharacters();
         IEnumerable<Character> GetCharactersByPlayerId(int playerId);
         Character? GetCharacterById(int characterId);
+        void AddCharacter(Character character);
+        void UpdateCharacter(Character character);
+        void DeleteCharacter(int characterId);
     }
 }
