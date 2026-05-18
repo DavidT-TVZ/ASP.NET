@@ -15,19 +15,12 @@ namespace DnD_Character_Sheet_Creator.Repositories
 
         public IEnumerable<Character> GetAllCharacters()
         {
-            return _context.Characters
-                .Include(c => c.Level)
-                .Include(c => c.EquipmentList)
-                .Include(c => c.Player)
-                .ToList();
+            return _context.Characters.ToList();
         }
 
         public IEnumerable<Character> GetCharactersByPlayerId(int playerId)
         {
             return _context.Characters
-                .Include(c => c.Level)
-                .Include(c => c.EquipmentList)
-                .Include(c => c.Player)
                 .Where(c => c.PlayerId == playerId)
                 .ToList();
         }
@@ -35,9 +28,6 @@ namespace DnD_Character_Sheet_Creator.Repositories
         public Character? GetCharacterById(int characterId)
         {
             return _context.Characters
-                .Include(c => c.Level)
-                .Include(c => c.EquipmentList)
-                .Include(c => c.Player)
                 .FirstOrDefault(c => c.CharacterId == characterId);
         }
 
