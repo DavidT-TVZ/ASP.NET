@@ -7,14 +7,23 @@
 | `/` | `HomeController.Index()` | `Views/Home/Index.cshtml` | Also available through `/Home` and `/Home/Index` because of the default route |
 | `/Home` | `HomeController.Index()` | `Views/Home/Index.cshtml` | Default route alias |
 | `/Home/Index` | `HomeController.Index()` | `Views/Home/Index.cshtml` | Default route alias |
+| `/TheAdventurerLedger` | `HomeController.Index()` | `Views/Home/Index.cshtml` | DnD-themed custom route |
 | `/Home/Privacy` | `HomeController.Privacy()` | `Views/Home/Privacy.cshtml` | Standard static page |
 | `/Home/Error` | `HomeController.Error()` | `Views/Shared/Error.cshtml` | Used by the exception handler in non-development environments |
 | `/Players` | `PlayersController.Index()` | `Views/Players/Index.cshtml` | Also available through `/Players/Index` |
 | `/Players/Index` | `PlayersController.Index()` | `Views/Players/Index.cshtml` | Default route alias |
+| `/Actors` | `PlayersController.Index()` | `Views/Players/Index.cshtml` | DnD-themed custom route |
 | `/Players/Details/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | Returns `NotFound()` when the player does not exist |
+| `/Players/Info/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
+| `/Actors/Details/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
+| `/Actors/Info/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
 | `/Characters` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | Also available through `/Characters/Index` |
 | `/Characters/Index` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | Default route alias |
+| `/Adventurers` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | DnD-themed custom route |
 | `/Characters/Details/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | Returns `NotFound()` when the character does not exist |
+| `/Characters/Info/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |
+| `/Adventurers/Details/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |
+| `/Adventurers/Info/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |
 
 ## View model and data passed to views
 

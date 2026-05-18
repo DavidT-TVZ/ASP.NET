@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
+    [Route("[controller]")]
+    [Route("Actors")]
     public class PlayersController : Controller
     {
         private readonly IPlayerRepository _playerRepository;
@@ -14,6 +16,8 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             _characterRepository = characterRepository;
         }
 
+        [HttpGet]
+        [Route("")]
         public IActionResult Index()
         {
             var players = _playerRepository.GetAllPlayers()
@@ -27,6 +31,9 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(players);
         }
 
+        [HttpGet]
+        [Route("Details/{id?}")]
+        [Route("Info/{id?}")]
         public IActionResult Details(int id)
         {
             var player = _playerRepository.GetPlayerById(id);
