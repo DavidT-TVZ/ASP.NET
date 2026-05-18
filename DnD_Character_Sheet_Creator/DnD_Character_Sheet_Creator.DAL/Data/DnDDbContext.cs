@@ -14,6 +14,12 @@ namespace DnD_Character_Sheet_Creator.Data
         public DbSet<CharacterLevel> CharacterLevels { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -15,22 +15,18 @@ namespace DnD_Character_Sheet_Creator.Repositories
 
         public IEnumerable<Player> GetAllPlayers()
         {
-            return _context.Players
-                .Include(p => p.CharacterList)
-                .ToList();
+            return _context.Players.ToList();
         }
 
         public Player? GetPlayerById(int playerId)
         {
             return _context.Players
-                .Include(p => p.CharacterList)
                 .FirstOrDefault(p => p.PlayerId == playerId);
         }
 
         public Player? GetPlayerByUsername(string username)
         {
             return _context.Players
-                .Include(p => p.CharacterList)
                 .FirstOrDefault(p => p.Username == username);
         }
 

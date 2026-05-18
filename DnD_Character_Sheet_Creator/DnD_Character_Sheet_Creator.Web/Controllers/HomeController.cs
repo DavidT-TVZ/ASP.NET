@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
+    [Route("")]
+    [Route("TheAdventurerLedger")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,6 +15,8 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
+        [Route("")]
         public IActionResult Index()
         {
             return View();

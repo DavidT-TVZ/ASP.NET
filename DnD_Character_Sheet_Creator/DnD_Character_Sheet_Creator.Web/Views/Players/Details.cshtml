@@ -12,7 +12,10 @@
 </section>
 
 <div class="mb-4">
-    <a class="btn btn-outline-ink" asp-controller="Players" asp-action="Index">Back to all players</a>
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-ink" asp-controller="Players" asp-action="Index">Back to all players</a>
+        <a class="btn btn-primary" asp-controller="Players" asp-action="Edit" asp-route-id="@Model.PlayerId">Edit Player</a>
+    </div>
 </div>
 
 <div class="card sheet-card mb-4 reveal">

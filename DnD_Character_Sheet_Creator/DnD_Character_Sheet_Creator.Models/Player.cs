@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace DnD_Character_Sheet_Creator.Models
 {
     public class Player
     {
+        [Key]
         public int PlayerId { get; set; }
         public required string Name { get; set; }
 
@@ -15,6 +19,6 @@ namespace DnD_Character_Sheet_Creator.Models
 
         public DateTime LastLogin { get; set; }
 
-        public List<Character> CharacterList { get; set; } = new List<Character>();
+        public virtual ICollection<Character> CharacterList { get; set; } = new List<Character>();
     }
 }

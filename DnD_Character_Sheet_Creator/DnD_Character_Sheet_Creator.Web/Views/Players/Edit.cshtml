@@ -1,0 +1,55 @@
+@model PlayerFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Player";
+}
+
+<div class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">Modify Guild Member</p>
+    <h1 class="h3 mb-0">@ViewData["Title"]</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <form asp-action="Edit" asp-controller="Players" method="post">
+                    <input type="hidden" asp-for="PlayerId" />
+
+                    <div class="mb-4">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" placeholder="First name" />
+                        <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Surname" class="form-label"></label>
+                        <input asp-for="Surname" class="form-control" placeholder="Last name" />
+                        <span asp-validation-for="Surname" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Username" class="form-label"></label>
+                        <input asp-for="Username" class="form-control" placeholder="Username" />
+                        <span asp-validation-for="Username" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" type="email" placeholder="Email address" />
+                        <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a asp-action="Details" asp-route-id="@Model.PlayerId" class="btn btn-outline-ink">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

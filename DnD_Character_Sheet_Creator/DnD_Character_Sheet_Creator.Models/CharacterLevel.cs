@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace DnD_Character_Sheet_Creator.Models
 {
     public class CharacterLevel
     {
+        [Key]
         public int LevelId { get; set; }
 
         public int Level { get; set; }
