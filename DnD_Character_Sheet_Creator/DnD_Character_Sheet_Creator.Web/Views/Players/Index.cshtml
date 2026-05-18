@@ -26,7 +26,10 @@
                     <p class="card-text mb-0"><strong>Characters:</strong> @player.CharacterList.Count</p>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
-                    <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@player.PlayerId">View details</a>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@player.PlayerId">View details</a>
+                        <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@player.PlayerId">Edit</a>
+                    </div>
                 </div>
             </div>
         </div>
