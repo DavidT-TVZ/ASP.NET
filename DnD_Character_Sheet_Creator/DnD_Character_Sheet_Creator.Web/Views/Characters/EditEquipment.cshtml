@@ -1,0 +1,53 @@
+@model DnD_Character_Sheet_Creator.Web.ViewModels.EquipmentFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Equipment";
+}
+
+<section class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">Edit Gear</p>
+    <h1 class="h3 mb-1">@ViewData["Title"]</h1>
+</section>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <form asp-action="EditEquipment" asp-controller="Characters" method="post">
+                    <input asp-for="CharacterId" type="hidden" />
+                    <input asp-for="EquipmentId" type="hidden" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Type" class="form-label"></label>
+                        <input asp-for="Type" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Cost" class="form-label"></label>
+                        <input asp-for="Cost" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Weight" class="form-label"></label>
+                        <input asp-for="Weight" class="form-control" />
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a asp-action="Details" asp-route-id="@Model.CharacterId" class="btn btn-outline-ink">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

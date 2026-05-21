@@ -37,6 +37,23 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                        @if (User?.Identity?.IsAuthenticated == true)
+                        {
+                            <div class="text-end small">
+                                <div class="fw-bold">@((User.FindFirst("FullName")?.Value) ?? User.Identity?.Name)</div>
+                                <div class="text-muted">@((User.IsInRole("Admin") ? "Admin" : "User"))</div>
+                            </div>
+                            <form asp-controller="Account" asp-action="SignOut" method="post" class="m-0">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-outline-ink btn-sm">Sign out</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a class="btn btn-ink btn-sm" asp-controller="Account" asp-action="SignIn">Sign in</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

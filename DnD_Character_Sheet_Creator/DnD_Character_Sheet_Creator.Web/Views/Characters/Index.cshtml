@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Characters";
+    var searchQuery = ViewData["SearchQuery"] as string ?? string.Empty;
 }
 
 <div class="sheet-card mb-4 reveal d-flex flex-wrap justify-content-between align-items-center gap-3">
@@ -10,27 +11,25 @@
         <h1 class="h3 mb-1">Characters</h1>
         <p class="text-muted mb-0">Browse every recorded hero and their player associations.</p>
     </div>
-    <span class="badge chronicle-badge rounded-pill px-3 py-2">@Model.Count() total</span>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <a asp-controller="Characters" asp-action="Create" class="btn btn-create">Create Character</a>
+        <span id="characterCountBadge" class="badge chronicle-badge rounded-pill px-3 py-2">@Model.Count() shown</span>
+    </div>
 </div>
 
-<div class="row g-4">
-    @foreach (var character in Model)
-    {
-        <div class="col-12 col-md-6 col-xl-4">
-            <div class="card sheet-card card-hover h-100 reveal">
-                <div class="card-body">
-                    <h2 class="h5 card-title">@character.Character.CharacterName</h2>
-                    <p class="card-text mb-1"><strong>Player:</strong> <a asp-controller="Players" asp-action="Details" asp-route-id="@character.PlayerId">@character.PlayerName</a></p>
-                    <p class="card-text mb-1"><strong>Class:</strong> @character.Character.Class</p>
-                    <p class="card-text mb-1"><strong>Level:</strong> @character.Character.Level.Level</p>
-                    <p class="card-text mb-1"><strong>Race:</strong> @character.Character.Race</p>
-                    <p class="card-text mb-1"><strong>Background:</strong> @character.Character.Background</p>
-                    <p class="card-text mb-0"><strong>Alignment:</strong> @character.Character.Alignment</p>
-                </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@character.Character.CharacterId">View details</a>
-                </div>
-            </div>
+<div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("Search", "Characters")" data-autocomplete-url="@Url.Action("Autocomplete", "Characters")" data-count-badge="#characterCountBadge">
+    <div class="row g-3 align-items-end">
+        <div class="col-12 col-lg-8 position-relative ajax-list-search-field">
+            <label for="characterSearchInput" class="form-label">Search characters</label>
+            <input id="characterSearchInput" class="form-control ajax-list-search-input" type="search" placeholder="Search by name, player, class, level, race, background, or alignment" autocomplete="off" value="@searchQuery" />
+            <div id="characterAutocomplete" class="list-group ajax-list-search-autocomplete d-none"></div>
         </div>
-    }
+        <div class="col-12 col-lg-4">
+            <p class="text-muted mb-0 small">Live search and autocomplete run through AJAX.</p>
+        </div>
+    </div>
+</div>
+
+<div id="characterListRegion" class="ajax-list-search-region">
+    @await Html.PartialAsync("_CharacterCards", Model)
 </div>

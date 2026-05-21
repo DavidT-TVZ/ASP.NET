@@ -1,3 +1,4 @@
+using System;
 using DnD_Character_Sheet_Creator.Models;
 
 namespace DnD_Character_Sheet_Creator.Repositories
@@ -15,21 +16,50 @@ namespace DnD_Character_Sheet_Creator.Repositories
 
         public IEnumerable<Character> GetAllCharacters()
         {
-            return _charactersByPlayerId.Values.SelectMany(characters => characters).ToList();
+            return _charactersByPlayerId.Values
+                .SelectMany(characters => characters)
+                .Where(character => character.DeletedAt == null)
+                .ToList();
         }
 
         public IEnumerable<Character> GetCharactersByPlayerId(int playerId)
         {
             return _charactersByPlayerId.TryGetValue(playerId, out var characters)
-                ? characters.AsReadOnly()
+                ? characters.Where(character => character.DeletedAt == null).ToList()
                 : Enumerable.Empty<Character>();
+        }
+
+        public IEnumerable<Character> SearchCharacters(string? searchTerm)
+        {
+            var normalizedTerm = searchTerm?.Trim();
+
+            if (string.IsNullOrWhiteSpace(normalizedTerm))
+            {
+                return _charactersByPlayerId.Values
+                    .SelectMany(characters => characters)
+                    .Where(character => character.DeletedAt == null)
+                    .ToList();
+            }
+
+            normalizedTerm = normalizedTerm.ToLower();
+
+            return _charactersByPlayerId.Values
+                .SelectMany(characters => characters)
+                .Where(character => character.DeletedAt == null)
+                .Where(character =>
+                    character.CharacterName.Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Class.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Race.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Background.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Alignment.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
 
         public Character? GetCharacterById(int characterId)
         {
             foreach (var characterList in _charactersByPlayerId.Values)
             {
-                var character = characterList.FirstOrDefault(existingCharacter => existingCharacter.CharacterId == characterId);
+                var character = characterList.FirstOrDefault(existingCharacter => existingCharacter.CharacterId == characterId && existingCharacter.DeletedAt == null);
                 if (character != null)
                 {
                     return character;
@@ -68,10 +98,10 @@ namespace DnD_Character_Sheet_Creator.Repositories
         {
             foreach (var characterList in _charactersByPlayerId.Values)
             {
-                var character = characterList.FirstOrDefault(c => c.CharacterId == characterId);
+                var character = characterList.FirstOrDefault(c => c.CharacterId == characterId && c.DeletedAt == null);
                 if (character != null)
                 {
-                    characterList.Remove(character);
+                    character.DeletedAt = DateTime.UtcNow;
                     return;
                 }
             }

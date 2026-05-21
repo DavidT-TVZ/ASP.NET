@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,5 +21,6 @@ namespace DnD_Character_Sheet_Creator.Models
         public int Weight { get; set; }
 
         public virtual Character? Character { get; set; }
+        public DateTime? DeletedAt { get; set; }
     }
 }

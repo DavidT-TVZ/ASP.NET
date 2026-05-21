@@ -4,7 +4,7 @@
 
 | Entity / table | Main properties | Connections |
 | --- | --- | --- |
-| `Player` / `Players` | `PlayerId`, `Name`, `Surname`, `Username`, `Email`, `Password`, `LastLogin` | One player has many `Character` records through `CharacterList` |
+| `Player` / `Players` | `PlayerId`, `Name`, `Surname`, `Username`, `Email`, `Password`, `LastLogin`, `IsAdmin`, `DeletedAt` | One player has many `Character` records through `CharacterList`; `IsAdmin` marks elevated accounts that can see and edit all players |
 | `Character` / `Characters` | `CharacterId`, `PlayerId`, `LevelId`, `CharacterName`, `Race`, `Background`, `Alignment`, `Class` | Belongs to one `Player`; optionally belongs to one `CharacterLevel`; has many `Equipment` items |
 | `CharacterLevel` / `CharacterLevels` | `LevelId`, `Level`, `CurrentExperiencePoints`, `ExperiencePointsToNextLevel`, `ProficiencyBonus`, `DateOfLastLevelUp` | Used by one `Character` at most; `Character.LevelId` is nullable and unique when present |
 | `Equipment` / `Equipment` | `EquipmentId`, `CharacterId`, `Type`, `Name`, `Cost`, `Weight` | Belongs to one `Character`; base type for equipment variants |
@@ -41,3 +41,6 @@
 - The current EF model creates tables for `Players`, `Characters`, `CharacterLevels`, and `Equipment`.
 - The derived equipment classes exist in the domain model, but the current `DbContext` only exposes `DbSet<Equipment>` and the initial migration only creates the base `Equipment` table.
 - `CharacterWithPlayerViewModel` is a web-layer view model, not a database entity.
+- The web app now uses cookie authentication with an active-player selector in `AccountController`; the selected `Player` is stored in the auth cookie as `ClaimTypes.Name` and a role claim.
+- Non-admin users are scoped to their own `Player` record and characters; admin users can see and edit all players and characters.
+- `PlayersController` and `CharactersController` are both protected with `[Authorize]`.

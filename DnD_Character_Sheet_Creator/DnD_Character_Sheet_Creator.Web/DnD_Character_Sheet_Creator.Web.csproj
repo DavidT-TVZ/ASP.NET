@@ -11,4 +11,8 @@
     <ProjectReference Include="..\DnD_Character_Sheet_Creator.DAL\DnD_Character_Sheet_Creator.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 </Project>

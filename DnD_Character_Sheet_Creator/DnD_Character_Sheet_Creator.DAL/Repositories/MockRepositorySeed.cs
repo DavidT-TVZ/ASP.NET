@@ -16,6 +16,7 @@ namespace DnD_Character_Sheet_Creator.Repositories
                     Username = "john.smith",
                     Email = "john.smith@example.com",
                     Password = "changeme",
+                    IsAdmin = true,
                     LastLogin = DateTime.UtcNow,
                     CharacterList = new List<Character>()
                 },
@@ -27,6 +28,7 @@ namespace DnD_Character_Sheet_Creator.Repositories
                     Username = "maria.garcia",
                     Email = "maria.garcia@example.com",
                     Password = "changeme",
+                    IsAdmin = false,
                     LastLogin = DateTime.UtcNow.AddDays(-1),
                     CharacterList = new List<Character>()
                 },
@@ -38,6 +40,7 @@ namespace DnD_Character_Sheet_Creator.Repositories
                     Username = "michael.brown",
                     Email = "michael.brown@example.com",
                     Password = "changeme",
+                    IsAdmin = false,
                     LastLogin = DateTime.UtcNow.AddHours(-5),
                     CharacterList = new List<Character>()
                 }

@@ -1,0 +1,104 @@
+@model DnD_Character_Sheet_Creator.Web.ViewModels.CharacterFormViewModel
+
+@{
+    ViewData["Title"] = "Create Character";
+
+    if (!Model.RaceOptions.Any())
+    {
+        Model.RaceOptions = Enum.GetValues<DnD_Character_Sheet_Creator.Models.RaceEnum>()
+            .Select(value => new SelectListItem { Value = value.ToString(), Text = value.ToString().Replace("_", " ") })
+            .ToList();
+    }
+
+    if (!Model.BackgroundOptions.Any())
+    {
+        Model.BackgroundOptions = Enum.GetValues<DnD_Character_Sheet_Creator.Models.BackgroundEnum>()
+            .Select(value => new SelectListItem { Value = value.ToString(), Text = value.ToString().Replace("_", " ") })
+            .ToList();
+    }
+
+    if (!Model.AlignmentOptions.Any())
+    {
+        Model.AlignmentOptions = Enum.GetValues<DnD_Character_Sheet_Creator.Models.AlignmentEnum>()
+            .Select(value => new SelectListItem { Value = value.ToString(), Text = value.ToString().Replace("_", " ") })
+            .ToList();
+    }
+
+    if (!Model.ClassOptions.Any())
+    {
+        Model.ClassOptions = Enum.GetValues<DnD_Character_Sheet_Creator.Models.ClassEnum>()
+            .Select(value => new SelectListItem { Value = value.ToString(), Text = value.ToString() })
+            .ToList();
+    }
+}
+
+<section class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">New Hero</p>
+    <h1 class="h3 mb-1">@ViewData["Title"]</h1>
+    <p class="text-muted mb-0">Register a new adventurer with their origin, alignment, and class.</p>
+</section>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <form asp-action="Create" asp-controller="Characters" method="post">
+                    <div class="mb-4">
+                        <label asp-for="PlayerId" class="form-label"></label>
+                        <select asp-for="PlayerId" asp-items="Model.AvailablePlayers" class="form-select">
+                            <option value="">Select a player</option>
+                        </select>
+                        <span asp-validation-for="PlayerId" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="CharacterName" class="form-label"></label>
+                        <input asp-for="CharacterName" class="form-control" placeholder="Character name" />
+                        <span asp-validation-for="CharacterName" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Race" class="form-label"></label>
+                        <select asp-for="Race" asp-items="Model.RaceOptions" class="form-select">
+                            <option value="">Select a race</option>
+                        </select>
+                        <span asp-validation-for="Race" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Background" class="form-label"></label>
+                        <select asp-for="Background" asp-items="Model.BackgroundOptions" class="form-select">
+                            <option value="">Select a background</option>
+                        </select>
+                        <span asp-validation-for="Background" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Alignment" class="form-label"></label>
+                        <select asp-for="Alignment" asp-items="Model.AlignmentOptions" class="form-select">
+                            <option value="">Select an alignment</option>
+                        </select>
+                        <span asp-validation-for="Alignment" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Class" class="form-label"></label>
+                        <select asp-for="Class" asp-items="Model.ClassOptions" class="form-select">
+                            <option value="">Select a class</option>
+                        </select>
+                        <span asp-validation-for="Class" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-create">Create Character</button>
+                        <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,24 @@
+@model DnD_Character_Sheet_Creator.Web.ViewModels.DateTimeControlViewModel
+@using System.Globalization
+
+@{
+    var cssClass = string.IsNullOrWhiteSpace(Model.CssClass) ? string.Empty : $" {Model.CssClass}";
+}
+
+@if (Model.Value.HasValue)
+{
+    var utcValue = DateTime.SpecifyKind(Model.Value.Value, DateTimeKind.Utc);
+    var isoValue = utcValue.ToString("O", CultureInfo.InvariantCulture);
+    var fallbackValue = utcValue.ToString("u", CultureInfo.InvariantCulture);
+
+    <time class="date-time-control js-date-time-control@cssClass"
+          datetime="@isoValue"
+          data-date-time-control="true"
+          data-date-time-iso="@isoValue"
+          data-date-time-fallback="@fallbackValue"
+          title="@fallbackValue">@fallbackValue</time>
+}
+else
+{
+    <span class="date-time-control date-time-control--empty@cssClass" data-date-time-control="true">@Model.EmptyText</span>
+}

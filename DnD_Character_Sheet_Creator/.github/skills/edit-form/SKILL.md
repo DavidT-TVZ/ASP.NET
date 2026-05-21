@@ -1,11 +1,26 @@
+> UI note: Use `btn-edit` for Edit/Update actions. The repository contains a `btn-edit` CSS pattern that renders a thin purple rotating ring around the button edge (inspired by the reference). When scaffolding Edit/Update forms, prefer `btn-edit` for primary save actions so the site UI remains consistent.
+
+Example (form snippet):
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-edit">Save</button>
+        <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
+    </div>
+
+Mobile guidance:
+
+- The CSS includes a responsive tweak which reduces the size and blur of the rotating ring on narrow viewports (phones). After generating the view, test it in a mobile emulator to ensure the ring does not overflow and that the button remains easily tappable (aim for ~44px minimum height).
+- If the generated form uses stacked/vertical buttons on mobile, prefer `w-100` on the primary `btn-edit` for a comfortable full-width touch target.
+
+When you run the skill to generate an Edit page, the README or the generated file header will include this note reminding you to test the page at narrow widths.
 ---
 name: edit-form
-description: "Use when: creating or updating a Create/Edit form page for ASP.NET Core Models. Includes ViewModel, controller actions, and Razor view with validation."
+description: "Use when: creating or updating a Create/Edit form page for ASP.NET Core Models. Includes ViewModel, controller actions, Razor view with validation, and the parchment-paper UI conventions from UI_Web_agent."
 ---
 
 # Edit/Create Form Page Builder
 
-Creates a complete Create/Edit form workflow for D&D Character Sheet entities (Players, Characters). Produces: ViewModel, controller actions (GET/POST), and form view with client/server validation.
+Creates a complete Create/Edit form workflow for D&D Character Sheet entities (Players, Characters). Produces: ViewModel, controller actions (GET/POST), and form view with client/server validation and the paper/parchment visual style used across the app.
 
 ## Workflow
 
@@ -16,6 +31,7 @@ Creates a complete Create/Edit form workflow for D&D Character Sheet entities (P
 - Add `[Required]`, `[Range]`, `[StringLength]` validation attributes
 - Include nested collections (e.g., list of available options for dropdowns)
 - Example: `PlayerFormViewModel` with Name, Surname, and list of available Classes
+- Style the form to match UI_Web_agent: parchment background, earthy palette, ink-like text, decorative medieval headings, and card-like sheet sections
 
 **Checklist:**
 - [ ] Properties match entity fields
@@ -231,8 +247,8 @@ private List<SelectListItem> GetClassOptions()
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Create</button>
-                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-ink">Create</button>
+                    <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
                 </div>
             </form>
         </div>
@@ -257,6 +273,16 @@ private List<SelectListItem> GetClassOptions()
 - [ ] Form tested with valid data → saves ✓
 - [ ] Form tested with invalid data → shows errors ✓
 - [ ] Form tested with missing entity (Edit) → NotFound ✓
+ - [ ] Sitemap updated when new views/pages are added
+
+## When adding views/pages
+- Remember to update `sitemap.md` (or the project navigation file) with any new controller routes and their link text so the site index remains accurate.
+
+Example entry:
+
+```
+- [Players — Edit](/Players/Edit/{id})
+```
 
 ## Related Skills
 - Character equipment management (nested forms)

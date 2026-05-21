@@ -6,6 +6,7 @@ namespace DnD_Character_Sheet_Creator.Repositories
     {
         IEnumerable<Character> GetAllCharacters();
         IEnumerable<Character> GetCharactersByPlayerId(int playerId);
+        IEnumerable<Character> SearchCharacters(string? searchTerm);
         Character? GetCharacterById(int characterId);
         void AddCharacter(Character character);
         void UpdateCharacter(Character character);

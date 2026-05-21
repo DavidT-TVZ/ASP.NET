@@ -15,19 +15,21 @@ namespace DnD_Character_Sheet_Creator.Repositories
 
         public IEnumerable<Player> GetAllPlayers()
         {
-            return _context.Players.ToList();
+            return _context.Players
+                .Where(player => player.DeletedAt == null)
+                .ToList();
         }
 
         public Player? GetPlayerById(int playerId)
         {
             return _context.Players
-                .FirstOrDefault(p => p.PlayerId == playerId);
+                .FirstOrDefault(p => p.PlayerId == playerId && p.DeletedAt == null);
         }
 
         public Player? GetPlayerByUsername(string username)
         {
             return _context.Players
-                .FirstOrDefault(p => p.Username == username);
+                .FirstOrDefault(p => p.Username == username && p.DeletedAt == null);
         }
 
         public void AddPlayer(Player player)
@@ -44,10 +46,10 @@ namespace DnD_Character_Sheet_Creator.Repositories
 
         public void DeletePlayer(int playerId)
         {
-            var player = _context.Players.Find(playerId);
+            var player = _context.Players.FirstOrDefault(p => p.PlayerId == playerId && p.DeletedAt == null);
             if (player != null)
             {
-                _context.Players.Remove(player);
+                player.DeletedAt = DateTime.UtcNow;
                 _context.SaveChanges();
             }
         }
