@@ -63,10 +63,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
         [HttpGet]
         [Route("Create")]
-        public IActionResult Create()
+        public IActionResult Create(int? playerId)
         {
             var viewModel = new CharacterFormViewModel
             {
+                PlayerId = playerId ?? 0,
                 AvailablePlayers = GetPlayerOptions()
             };
 

@@ -40,6 +40,7 @@ Creates a complete soft-delete workflow for D&D Character Sheet entities such as
 - Show the key identifying fields only, enough for the user to confirm the target record
 - Use the existing parchment/card styling and the project button conventions
 - Include a primary remove button and a cancel/back link
+- For this project, the Players details page should expose a Remove entry point that opens the soft-delete confirmation page
 
 **Checklist:**
 - [ ] Confirmation page identifies the record clearly

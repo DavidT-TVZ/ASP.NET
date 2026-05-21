@@ -201,6 +201,7 @@ public IActionResult Create(PlayerFormViewModel viewModel)
 
 ## When adding views/pages
 - After adding new Razor views or controller routes, update the `sitemap.md` (or project navigation) with the new route and link text so the site index stays in sync.
+- For this project, `Players/Index` should always expose a Create entry point when a `Players/Create` page exists.
 
 Example entry:
 

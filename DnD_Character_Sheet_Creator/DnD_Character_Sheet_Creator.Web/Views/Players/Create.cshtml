@@ -1,0 +1,54 @@
+@model DnD_Character_Sheet_Creator.Web.ViewModels.PlayerFormViewModel
+
+@{
+    ViewData["Title"] = "Create Player";
+}
+
+<section class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">Guild Registration</p>
+    <h1 class="h3 mb-1">@ViewData["Title"]</h1>
+    <p class="text-muted mb-0">Add a new player to the ledger.</p>
+</section>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <form asp-action="Create" asp-controller="Players" method="post">
+                    <div class="mb-4">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" placeholder="First name" />
+                        <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Surname" class="form-label"></label>
+                        <input asp-for="Surname" class="form-control" placeholder="Last name" />
+                        <span asp-validation-for="Surname" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Username" class="form-label"></label>
+                        <input asp-for="Username" class="form-control" placeholder="Username" />
+                        <span asp-validation-for="Username" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" type="email" placeholder="Email address" />
+                        <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-create">Create Player</button>
+                        <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

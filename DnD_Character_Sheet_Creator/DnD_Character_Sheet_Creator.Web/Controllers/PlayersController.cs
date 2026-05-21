@@ -1,6 +1,8 @@
 using DnD_Character_Sheet_Creator.Repositories;
+using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
@@ -19,17 +21,80 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public IActionResult Index()
+        public IActionResult Index(string? query)
         {
-            var players = _playerRepository.GetAllPlayers()
-                .Select(player =>
+            ViewData["SearchQuery"] = query ?? string.Empty;
+
+            return View(BuildPlayerCards(query));
+        }
+
+        [HttpGet]
+        [Route("Search")]
+        public IActionResult Search(string? query)
+        {
+            ViewData["SearchQuery"] = query ?? string.Empty;
+
+            return PartialView("_PlayerCards", BuildPlayerCards(query));
+        }
+
+        [HttpGet]
+        [Route("Autocomplete")]
+        public IActionResult Autocomplete(string term)
+        {
+            var normalizedTerm = term?.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedTerm) || normalizedTerm.Length < 2)
+            {
+                return Json(Array.Empty<object>());
+            }
+
+            var suggestions = BuildPlayerCards(normalizedTerm)
+                .Take(8)
+                .Select(player => new
                 {
-                    player.CharacterList = _characterRepository.GetCharactersByPlayerId(player.PlayerId).ToList();
-                    return player;
+                    value = $"{player.Name} {player.Surname}",
+                    label = $"{player.Name} {player.Surname} - {player.Username} - {player.Email}",
+                    playerId = player.PlayerId
                 })
                 .ToList();
 
-            return View(players);
+            return Json(suggestions);
+        }
+
+        [HttpGet]
+        [Route("Create")]
+        public IActionResult Create(int? playerId)
+        {
+            return View(new PlayerFormViewModel
+            {
+                Name = string.Empty,
+                Surname = string.Empty,
+                Username = string.Empty,
+                Email = string.Empty
+            });
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Create(PlayerFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var player = new Player
+            {
+                Name = viewModel.Name,
+                Surname = viewModel.Surname,
+                Username = viewModel.Username,
+                Email = viewModel.Email,
+                Password = string.Empty,
+                LastLogin = DateTime.UtcNow
+            };
+
+            _playerRepository.AddPlayer(player);
+
+            return RedirectToAction("Details", new { id = player.PlayerId });
         }
 
         [HttpGet]
@@ -43,10 +108,53 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            player.CharacterList = _characterRepository.GetCharactersByPlayerId(id).ToList();
-            var characters = player.CharacterList;
-            ViewBag.Characters = characters;
+            player.CharacterList = _characterRepository.GetCharactersByPlayerId(id)
+                .Where(character => character.DeletedAt == null)
+                .ToList();
+            ViewBag.Characters = BuildPlayerCharacterCards(player, null);
             return View(player);
+        }
+
+        [HttpGet]
+        [Route("{id:int}/CharactersSearch")]
+        public IActionResult CharactersSearch(int id, string? query)
+        {
+            var player = _playerRepository.GetPlayerById(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_PlayerCharacters", BuildPlayerCharacterCards(player, query));
+        }
+
+        [HttpGet]
+        [Route("{id:int}/CharactersAutocomplete")]
+        public IActionResult CharactersAutocomplete(int id, string term)
+        {
+            var player = _playerRepository.GetPlayerById(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            var normalizedTerm = term?.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedTerm) || normalizedTerm.Length < 2)
+            {
+                return Json(Array.Empty<object>());
+            }
+
+            var suggestions = BuildPlayerCharacterCards(player, normalizedTerm)
+                .Take(8)
+                .Select(character => new
+                {
+                    value = character.Character.CharacterName,
+                    label = $"{character.Character.CharacterName} - {character.Character.Class} - Level {character.Character.Level?.Level ?? 0}",
+                    characterId = character.Character.CharacterId
+                })
+                .ToList();
+
+            return Json(suggestions);
         }
 
         [HttpGet]
@@ -96,5 +204,109 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             return RedirectToAction("Details", new { id = player.PlayerId });
         }
+
+        [HttpGet]
+        [Route("Remove/{id?}")]
+        public IActionResult Remove(int id)
+        {
+            var player = _playerRepository.GetPlayerById(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            player.CharacterList = _characterRepository.GetCharactersByPlayerId(id).ToList();
+
+            return View(player);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Remove")]
+        [Route("Remove/{id?}")]
+        public IActionResult RemoveConfirmed(int id)
+        {
+            _playerRepository.DeletePlayer(id);
+
+            return RedirectToAction("Index");
+        }
+
+        private List<Player> BuildPlayerCards(string? query)
+        {
+            var players = _playerRepository.GetAllPlayers()
+                .Select(player =>
+                {
+                    player.CharacterList = _characterRepository.GetCharactersByPlayerId(player.PlayerId)
+                        .Where(character => character.DeletedAt == null)
+                        .ToList();
+                    return player;
+                })
+                .ToList();
+
+            var normalizedTerm = query?.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedTerm))
+            {
+                return players
+                    .OrderBy(player => player.Name)
+                    .ThenBy(player => player.Surname)
+                    .ThenBy(player => player.PlayerId)
+                    .ToList();
+            }
+
+            return players
+                .Where(player => PlayerMatchesSearch(player, normalizedTerm))
+                .OrderBy(player => player.Name)
+                .ThenBy(player => player.Surname)
+                .ThenBy(player => player.PlayerId)
+                .ToList();
+        }
+
+        private static bool PlayerMatchesSearch(Player player, string searchTerm)
+        {
+            return player.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || player.Surname.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || player.Username.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || player.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || player.PlayerId.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private List<CharacterWithPlayerViewModel> BuildPlayerCharacterCards(Player player, string? query)
+        {
+            var characters = _characterRepository.GetCharactersByPlayerId(player.PlayerId)
+                .Where(character => character.DeletedAt == null)
+                .Select(character => new CharacterWithPlayerViewModel
+                {
+                    Character = character,
+                    PlayerId = player.PlayerId,
+                    PlayerName = $"{player.Name} {player.Surname}"
+                })
+                .ToList();
+
+            var normalizedTerm = query?.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedTerm))
+            {
+                return characters
+                    .OrderBy(character => character.Character.CharacterName)
+                    .ThenBy(character => character.Character.CharacterId)
+                    .ToList();
+            }
+
+            return characters
+                .Where(character => CharacterMatchesSearch(character, normalizedTerm))
+                .OrderBy(character => character.Character.CharacterName)
+                .ThenBy(character => character.Character.CharacterId)
+                .ToList();
+        }
+
+        private static bool CharacterMatchesSearch(CharacterWithPlayerViewModel character, string searchTerm)
+        {
+            return character.Character.CharacterName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Class.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Race.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Background.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Alignment.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || (character.Character.Level?.Level.ToString() ?? string.Empty).Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
+        }
+
     }
 }

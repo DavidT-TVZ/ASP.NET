@@ -60,6 +60,7 @@ When the page shows several fields, search across the displayed fields unless th
 - For nested lists in details views, place the search box directly above the child collection section.
 - Keep the existing card and sheet styling intact.
 - Make the autocomplete panel use a higher stacking context than surrounding cards so it appears above nearby content.
+- For this project, `Players/Index` should use this pattern for the player list, and `Players/Details` should use it for the character list inside the page.
 
 **Checklist:**
 - [ ] Search UI is easy to find

@@ -13,11 +13,17 @@
 | `/Players` | `PlayersController.Index()` | `Views/Players/Index.cshtml` | Also available through `/Players/Index` |
 | `/Players/Index` | `PlayersController.Index()` | `Views/Players/Index.cshtml` | Default route alias |
 | `/Actors` | `PlayersController.Index()` | `Views/Players/Index.cshtml` | DnD-themed custom route |
+| `/Players/Search` | `PlayersController.Search(string? query)` | `Views/Players/_PlayerCards.cshtml` | AJAX list-search endpoint for the player index |
+| `/Players/Autocomplete` | `PlayersController.Autocomplete(string term)` | JSON | AJAX autocomplete endpoint for the player index |
 | `/Players/Details/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | Returns `NotFound()` when the player does not exist |
 | `/Players/Info/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
 | `/Actors/Details/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
 | `/Actors/Info/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
 | `/Players/Edit/{id}` | `PlayersController.Edit(int id)` | `Views/Players/Edit.cshtml` | Edit player form; returns `NotFound()` when the player is missing |
+| `/Players/Create` | `PlayersController.Create()` | `Views/Players/Create.cshtml` | Create player form |
+| `/Players/Remove/{id}` | `PlayersController.Remove(int id)` | `Views/Players/Remove.cshtml` | Soft-delete confirmation page for players |
+| `/Players/{id}/CharactersSearch` | `PlayersController.CharactersSearch(int id, string? query)` | `Views/Players/_PlayerCharacters.cshtml` | AJAX list-search endpoint for the player's character section |
+| `/Players/{id}/CharactersAutocomplete` | `PlayersController.CharactersAutocomplete(int id, string term)` | JSON | AJAX autocomplete endpoint for the player's character section |
 | `/Characters` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | Also available through `/Characters/Index` |
 | `/Characters/Index` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | Default route alias |
 | `/Adventurers` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | DnD-themed custom route |

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Players";
+    var searchQuery = ViewData["SearchQuery"] as string ?? string.Empty;
 }
 
 <div class="sheet-card mb-4 reveal d-flex flex-wrap justify-content-between align-items-center gap-3">
@@ -10,28 +11,25 @@
         <h1 class="h3 mb-1">Players</h1>
         <p class="text-muted mb-0">Explore all registered players and their linked heroes.</p>
     </div>
-    <span class="badge chronicle-badge rounded-pill px-3 py-2">@Model.Count() total</span>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <a asp-controller="Players" asp-action="Create" class="btn btn-create">Create Player</a>
+        <span id="playerCountBadge" class="badge chronicle-badge rounded-pill px-3 py-2">@Model.Count() shown</span>
+    </div>
 </div>
 
-<div class="row g-4">
-    @foreach (var player in Model)
-    {
-        <div class="col-12 col-md-6 col-xl-4">
-            <div class="card sheet-card card-hover h-100 reveal">
-                <div class="card-body">
-                    <h2 class="h5 card-title mb-3">@player.Name @player.Surname</h2>
-                    <p class="card-text mb-1"><strong>Username:</strong> @player.Username</p>
-                    <p class="card-text mb-1"><strong>Email:</strong> @player.Email</p>
-                    <p class="card-text mb-1"><strong>Last Login:</strong> <time datetime="@player.LastLogin.ToString("o")">@player.LastLogin.ToString("u")</time></p>
-                    <p class="card-text mb-0"><strong>Characters:</strong> @player.CharacterList.Count</p>
-                </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <div class="d-flex gap-2">
-                        <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@player.PlayerId">View details</a>
-                        <a class="btn btn-edit btn-sm" asp-action="Edit" asp-route-id="@player.PlayerId">Edit</a>
-                    </div>
-                </div>
-            </div>
+<div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("Search", "Players")" data-autocomplete-url="@Url.Action("Autocomplete", "Players")" data-count-badge="#playerCountBadge">
+    <div class="row g-3 align-items-end">
+        <div class="col-12 col-lg-8 position-relative ajax-list-search-field">
+            <label for="playerSearchInput" class="form-label">Search players</label>
+            <input id="playerSearchInput" class="form-control ajax-list-search-input" type="search" placeholder="Search by name, surname, username, email, or id" autocomplete="off" value="@searchQuery" />
+            <div id="playerAutocomplete" class="list-group ajax-list-search-autocomplete d-none"></div>
         </div>
-    }
+        <div class="col-12 col-lg-4">
+            <p class="text-muted mb-0 small">Live search and autocomplete run through AJAX.</p>
+        </div>
+    </div>
+</div>
+
+<div id="playerListRegion" class="ajax-list-search-region">
+    @await Html.PartialAsync("_PlayerCards", Model)
 </div>

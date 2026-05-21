@@ -1,0 +1,32 @@
+@model IEnumerable<DnD_Character_Sheet_Creator.Models.Player>
+
+@if (!Model.Any())
+{
+    <div class="alert parchment-alert" role="status">No players match your search.</div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var player in Model)
+        {
+            <div class="col-12 col-md-6 col-xl-4 player-card" data-player-id="@player.PlayerId">
+                <div class="card sheet-card card-hover h-100 reveal">
+                    <div class="card-body">
+                        <h2 class="h5 card-title mb-3">@player.Name @player.Surname</h2>
+                        <p class="card-text mb-1"><strong>Username:</strong> @player.Username</p>
+                        <p class="card-text mb-1"><strong>Email:</strong> @player.Email</p>
+                        <p class="card-text mb-1"><strong>Last Login:</strong> <time datetime="@player.LastLogin.ToString("o")">@player.LastLogin.ToString("u")</time></p>
+                        <p class="card-text mb-0"><strong>Characters:</strong> @player.CharacterList.Count(character => character.DeletedAt == null)</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex flex-wrap gap-2">
+                            <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@player.PlayerId">View details</a>
+                            <a class="btn btn-edit btn-sm" asp-action="Edit" asp-route-id="@player.PlayerId">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm" asp-action="Remove" asp-route-id="@player.PlayerId">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
