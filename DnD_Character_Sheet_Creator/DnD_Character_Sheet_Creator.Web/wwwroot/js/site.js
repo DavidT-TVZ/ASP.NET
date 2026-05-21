@@ -5,6 +5,42 @@
 
 (function ($) {
 	$(function () {
+		var scrollOpenings = document.querySelectorAll("[data-scroll-opening]");
+
+		if (scrollOpenings.length) {
+			var isReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+			scrollOpenings.forEach(function (opening) {
+				var sheet = opening.querySelector(".scroll-opening__sheet");
+
+				function setHeight() {
+					if (!sheet) return;
+					opening = opening; // keep reference
+					var h = sheet.scrollHeight;
+					opening.style.setProperty("--scroll-opening-height", h + "px");
+				}
+
+				if (sheet) {
+					setHeight();
+
+					// recompute on resize with debounce
+					var resizeTimer = null;
+					window.addEventListener('resize', function () {
+						clearTimeout(resizeTimer);
+						resizeTimer = setTimeout(setHeight, 150);
+					});
+				}
+
+				opening.classList.add("is-preparing");
+
+				window.requestAnimationFrame(function () {
+					window.setTimeout(function () {
+						opening.classList.add("is-open");
+					}, isReducedMotion ? 0 : 120);
+				});
+			});
+		}
+
 		$(".ajax-list-search-shell").each(function () {
 			var $shell = $(this);
 			var searchUrl = $shell.data("search-url");

@@ -12,25 +12,31 @@
 
 <div class="row justify-content-center">
     <div class="col-12 col-lg-7">
-        <div class="card sheet-card reveal mb-4">
-            <div class="card-body">
-                <form asp-action="SignIn" asp-controller="Account" method="post">
-                    <input type="hidden" asp-for="ReturnUrl" />
+        <div class="scroll-opening reveal mb-4" data-scroll-opening>
+            <div class="scroll-opening__rod scroll-opening__rod--top" aria-hidden="true"></div>
+            <div class="card sheet-card scroll-opening__sheet">
+                <div class="scroll-opening__glow scroll-opening__glow--left" aria-hidden="true"></div>
+                <div class="scroll-opening__glow scroll-opening__glow--right" aria-hidden="true"></div>
+                <div class="card-body">
+                    <form asp-action="SignIn" asp-controller="Account" method="post">
+                        <input type="hidden" asp-for="ReturnUrl" />
 
-                    <div class="mb-4">
-                        <label asp-for="PlayerId" class="form-label"></label>
-                        <select asp-for="PlayerId" asp-items="Model.Players" class="form-select">
-                            <option value="">Select a player</option>
-                        </select>
-                        <span asp-validation-for="PlayerId" class="text-danger small d-block mt-1"></span>
-                    </div>
+                        <div class="mb-4">
+                            <label asp-for="PlayerId" class="form-label"></label>
+                            <select asp-for="PlayerId" asp-items="Model.Players" class="form-select">
+                                <option value="">Select a player</option>
+                            </select>
+                            <span asp-validation-for="PlayerId" class="text-danger small d-block mt-1"></span>
+                        </div>
 
-                    <div class="d-flex flex-wrap gap-2">
-                        <button type="submit" class="btn btn-ink">Enter Ledger</button>
-                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-ink">Cancel</a>
-                    </div>
-                </form>
+                        <div class="d-flex flex-wrap gap-2 align-items-end">
+                            <button type="submit" class="btn btn-ink scroll-opening__cta">Enter Ledger</button>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-ink">Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
+            <div class="scroll-opening__rod scroll-opening__rod--bottom" aria-hidden="true"></div>
         </div>
     </div>
 </div>
