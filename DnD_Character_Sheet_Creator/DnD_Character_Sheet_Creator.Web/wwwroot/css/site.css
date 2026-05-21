@@ -624,3 +624,14 @@ a:focus-visible {
     font-size: 1rem;
   }
 }
+
+.date-time-control {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.date-time-control--empty {
+  color: var(--ink-soft);
+  font-style: italic;
+}

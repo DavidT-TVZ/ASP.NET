@@ -5,6 +5,45 @@
 
 (function ($) {
 	$(function () {
+		function formatDateTimeControls(root) {
+			if (!window.Intl || !Intl.DateTimeFormat) {
+				return;
+			}
+
+			var scope = root || document;
+			var dateTimeControls = scope.querySelectorAll("[data-date-time-control='true']");
+
+			if (!dateTimeControls.length) {
+				return;
+			}
+
+			var browserLocale = (navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language) || document.documentElement.lang || "en-US";
+			var dateTimeFormatter = new Intl.DateTimeFormat(browserLocale, {
+				dateStyle: "medium",
+				timeStyle: "short"
+			});
+
+			dateTimeControls.forEach(function (control) {
+				var isoValue = control.getAttribute("data-date-time-iso") || control.getAttribute("datetime");
+
+				if (!isoValue) {
+					return;
+				}
+
+				var date = new Date(isoValue);
+
+				if (isNaN(date.getTime())) {
+					return;
+				}
+
+				var formatted = dateTimeFormatter.format(date);
+
+				control.textContent = formatted;
+				control.setAttribute("title", formatted);
+				control.setAttribute("datetime", date.toISOString());
+			});
+		}
+
 		var scrollOpenings = document.querySelectorAll("[data-scroll-opening]");
 
 		if (scrollOpenings.length) {
@@ -40,6 +79,8 @@
 				});
 			});
 		}
+
+		formatDateTimeControls(document);
 
 		$(".ajax-list-search-shell").each(function () {
 			var $shell = $(this);
@@ -95,6 +136,7 @@
 					data: { query: query }
 				}).done(function (html) {
 					$listRegion.html(html);
+					formatDateTimeControls($listRegion[0]);
 					updateCount(html);
 				});
 			}

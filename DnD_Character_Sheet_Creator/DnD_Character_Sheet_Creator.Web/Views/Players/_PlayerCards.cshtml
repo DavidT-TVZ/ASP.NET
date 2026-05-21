@@ -15,7 +15,7 @@ else
                         <h2 class="h5 card-title mb-3">@player.Name @player.Surname</h2>
                         <p class="card-text mb-1"><strong>Username:</strong> @player.Username</p>
                         <p class="card-text mb-1"><strong>Email:</strong> @player.Email</p>
-                        <p class="card-text mb-1"><strong>Last Login:</strong> <time datetime="@player.LastLogin.ToString("o")">@player.LastLogin.ToString("u")</time></p>
+                        <p class="card-text mb-1"><strong>Last Login:</strong> @await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = player.LastLogin })</p>
                         <p class="card-text mb-0"><strong>Characters:</strong> @player.CharacterList.Count(character => character.DeletedAt == null)</p>
                     </div>
                     <div class="card-footer bg-transparent border-top-0">

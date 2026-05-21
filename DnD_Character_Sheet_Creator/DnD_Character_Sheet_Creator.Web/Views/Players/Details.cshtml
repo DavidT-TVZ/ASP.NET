@@ -33,7 +33,7 @@
             <dd class="col-sm-9">@Model.Email</dd>
 
             <dt class="col-sm-3">Last Login</dt>
-            <dd class="col-sm-9"><time datetime="@Model.LastLogin.ToString("o")">@Model.LastLogin.ToString("u")</time></dd>
+            <dd class="col-sm-9">@await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = Model.LastLogin })</dd>
         </dl>
     </div>
 </div>

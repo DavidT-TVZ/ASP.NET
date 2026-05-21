@@ -54,6 +54,9 @@
 
             <dt class="col-sm-3">Proficiency Bonus</dt>
             <dd class="col-sm-9">+@Model.Character.Level.ProficiencyBonus</dd>
+
+            <dt class="col-sm-3">Last Level Up</dt>
+            <dd class="col-sm-9">@await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = Model.Character.Level.DateOfLastLevelUp })</dd>
         </dl>
     </div>
 </div>
