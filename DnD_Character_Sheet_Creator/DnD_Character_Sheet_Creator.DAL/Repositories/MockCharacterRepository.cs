@@ -29,6 +29,32 @@ namespace DnD_Character_Sheet_Creator.Repositories
                 : Enumerable.Empty<Character>();
         }
 
+        public IEnumerable<Character> SearchCharacters(string? searchTerm)
+        {
+            var normalizedTerm = searchTerm?.Trim();
+
+            if (string.IsNullOrWhiteSpace(normalizedTerm))
+            {
+                return _charactersByPlayerId.Values
+                    .SelectMany(characters => characters)
+                    .Where(character => character.DeletedAt == null)
+                    .ToList();
+            }
+
+            normalizedTerm = normalizedTerm.ToLower();
+
+            return _charactersByPlayerId.Values
+                .SelectMany(characters => characters)
+                .Where(character => character.DeletedAt == null)
+                .Where(character =>
+                    character.CharacterName.Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Class.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Race.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Background.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                    character.Alignment.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+
         public Character? GetCharacterById(int characterId)
         {
             foreach (var characterList in _charactersByPlayerId.Values)

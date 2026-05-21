@@ -28,6 +28,30 @@ namespace DnD_Character_Sheet_Creator.Repositories
                 .ToList();
         }
 
+        public IEnumerable<Character> SearchCharacters(string? searchTerm)
+        {
+            var normalizedTerm = searchTerm?.Trim();
+            var characters = _context.Characters
+                .Where(character => character.DeletedAt == null)
+                .ToList();
+
+            if (string.IsNullOrWhiteSpace(normalizedTerm))
+            {
+                return characters;
+            }
+
+            normalizedTerm = normalizedTerm.ToLower();
+
+            return characters
+                .Where(character =>
+                    character.CharacterName.ToLower().Contains(normalizedTerm) ||
+                    character.Class.ToString().ToLower().Contains(normalizedTerm) ||
+                    character.Race.ToString().ToLower().Contains(normalizedTerm) ||
+                    character.Background.ToString().ToLower().Contains(normalizedTerm) ||
+                    character.Alignment.ToString().ToLower().Contains(normalizedTerm))
+                .ToList();
+        }
+
         public Character? GetCharacterById(int characterId)
         {
             return _context.Characters

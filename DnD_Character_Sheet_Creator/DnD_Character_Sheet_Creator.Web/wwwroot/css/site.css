@@ -325,6 +325,49 @@ a:hover {
   background: linear-gradient(90deg, #73431a, #a56a32);
 }
 
+.ajax-list-search-shell {
+  position: relative;
+  z-index: 50;
+  overflow: visible;
+}
+
+.ajax-list-search-autocomplete {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 5000;
+  max-height: 18rem;
+  overflow-y: auto;
+  border: 1px solid rgba(105, 72, 37, 0.4);
+  border-radius: 0.55rem;
+  background: #fff8e9;
+  box-shadow: 0 16px 30px -20px rgba(48, 30, 13, 0.7);
+}
+
+.ajax-list-search-region {
+  position: relative;
+  z-index: 1;
+}
+
+.ajax-list-search-autocomplete__item {
+  border: 0;
+  border-bottom: 1px solid rgba(105, 72, 37, 0.12);
+  background: transparent;
+  color: var(--ink-main);
+  text-align: left;
+}
+
+.ajax-list-search-autocomplete__item:hover,
+.ajax-list-search-autocomplete__item:focus-visible {
+  background: rgba(125, 79, 34, 0.1);
+  color: var(--ink-main);
+}
+
+.ajax-list-search-autocomplete__item:last-child {
+  border-bottom: 0;
+}
+
 dt {
   font-weight: 700;
   color: #2b1d0d;

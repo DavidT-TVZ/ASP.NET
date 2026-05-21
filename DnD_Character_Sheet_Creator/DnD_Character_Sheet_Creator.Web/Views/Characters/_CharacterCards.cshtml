@@ -1,0 +1,33 @@
+@model IEnumerable<DnD_Character_Sheet_Creator.Web.ViewModels.CharacterWithPlayerViewModel>
+
+@if (!Model.Any())
+{
+    <div class="alert parchment-alert" role="status">No characters match your search.</div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var character in Model)
+        {
+            <div class="col-12 col-md-6 col-xl-4 character-card" data-character-id="@character.Character.CharacterId">
+                <div class="card sheet-card card-hover h-100 reveal">
+                    <div class="card-body">
+                        <h2 class="h5 card-title">@character.Character.CharacterName</h2>
+                        <p class="card-text mb-1"><strong>Player:</strong> <a asp-controller="Players" asp-action="Details" asp-route-id="@character.PlayerId">@character.PlayerName</a></p>
+                        <p class="card-text mb-1"><strong>Class:</strong> @character.Character.Class</p>
+                        <p class="card-text mb-1"><strong>Level:</strong> @character.Character.Level?.Level</p>
+                        <p class="card-text mb-1"><strong>Race:</strong> @character.Character.Race</p>
+                        <p class="card-text mb-1"><strong>Background:</strong> @character.Character.Background</p>
+                        <p class="card-text mb-0"><strong>Alignment:</strong> @character.Character.Alignment</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex flex-wrap gap-2">
+                            <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@character.Character.CharacterId">View details</a>
+                            <a class="btn btn-outline-danger btn-sm" asp-action="Remove" asp-route-id="@character.Character.CharacterId">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

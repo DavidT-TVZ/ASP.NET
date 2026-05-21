@@ -1,0 +1,24 @@
+@model IEnumerable<DnD_Character_Sheet_Creator.Models.Equipment>
+
+@if (!Model.Any())
+{
+    <div class="alert parchment-alert" role="status">No equipment matches your search.</div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var equipment in Model)
+        {
+            <div class="col-12 col-lg-4 ajax-list-search-item" data-equipment-id="@equipment.EquipmentId">
+                <div class="card sheet-card card-hover h-100 reveal">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">@equipment.Name</h3>
+                        <p class="card-text mb-1"><strong>Type:</strong> @(equipment.Type ?? "Equipment")</p>
+                        <p class="card-text mb-1"><strong>Cost:</strong> @equipment.Cost</p>
+                        <p class="card-text mb-0"><strong>Weight:</strong> @equipment.Weight</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

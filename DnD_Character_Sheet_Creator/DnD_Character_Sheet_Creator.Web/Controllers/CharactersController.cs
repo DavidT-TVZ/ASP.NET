@@ -21,19 +21,44 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public IActionResult Index()
+        public IActionResult Index(string? query)
         {
-            var characters = _playerRepository.GetAllPlayers()
-                .SelectMany(player => _characterRepository.GetCharactersByPlayerId(player.PlayerId)
-                    .Select(character => new CharacterWithPlayerViewModel
-                    {
-                        Character = character,
-                        PlayerId = player.PlayerId,
-                        PlayerName = $"{player.Name} {player.Surname}"
-                    }))
+            ViewData["SearchQuery"] = query ?? string.Empty;
+
+            return View(BuildCharacterCards(query));
+        }
+
+        [HttpGet]
+        [Route("Search")]
+        public IActionResult Search(string? query)
+        {
+            ViewData["SearchQuery"] = query ?? string.Empty;
+
+            return PartialView("_CharacterCards", BuildCharacterCards(query));
+        }
+
+        [HttpGet]
+        [Route("Autocomplete")]
+        public IActionResult Autocomplete(string term)
+        {
+            var normalizedTerm = term?.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedTerm) || normalizedTerm.Length < 2)
+            {
+                return Json(Array.Empty<object>());
+            }
+
+            var suggestions = BuildCharacterCards(normalizedTerm)
+                .Take(8)
+                .Select(character => new
+                {
+                    value = character.Character.CharacterName,
+                    label = $"{character.Character.CharacterName} - {character.PlayerName} - Level {character.Character.Level?.Level ?? 0}",
+                    playerId = character.PlayerId,
+                    characterId = character.Character.CharacterId
+                })
                 .ToList();
 
-            return View(characters);
+            return Json(suggestions);
         }
 
         [HttpGet]
@@ -141,6 +166,109 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             _characterRepository.DeleteCharacter(id);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Route("{id:int}/EquipmentSearch")]
+        public IActionResult EquipmentSearch(int id, string? query)
+        {
+            var equipment = BuildEquipmentCards(id, query);
+
+            if (!equipment.Any() && _characterRepository.GetCharacterById(id) == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_EquipmentCards", equipment);
+        }
+
+        [HttpGet]
+        [Route("{id:int}/EquipmentAutocomplete")]
+        public IActionResult EquipmentAutocomplete(int id, string term)
+        {
+            var normalizedTerm = term?.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedTerm) || normalizedTerm.Length < 2)
+            {
+                return Json(Array.Empty<object>());
+            }
+
+            var suggestions = BuildEquipmentCards(id, normalizedTerm)
+                .Take(8)
+                .Select(equipment => new
+                {
+                    value = equipment.Name,
+                    label = $"{equipment.Name} - {equipment.Type ?? "Equipment"} - {equipment.Cost} gp"
+                })
+                .ToList();
+
+            return Json(suggestions);
+        }
+
+        private List<CharacterWithPlayerViewModel> BuildCharacterCards(string? query)
+        {
+            var cards = _playerRepository.GetAllPlayers()
+                .SelectMany(player => _characterRepository.GetCharactersByPlayerId(player.PlayerId)
+                    .Select(character => new CharacterWithPlayerViewModel
+                    {
+                        Character = character,
+                        PlayerId = player.PlayerId,
+                        PlayerName = $"{player.Name} {player.Surname}"
+                    }))
+                .ToList();
+
+            var normalizedTerm = query?.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedTerm))
+            {
+                return cards
+                    .OrderBy(character => character.Character.CharacterName)
+                    .ThenBy(character => character.Character.CharacterId)
+                    .ToList();
+            }
+
+            return cards
+                .Where(character => CharacterMatchesSearch(character, normalizedTerm))
+                .OrderBy(character => character.Character.CharacterName)
+                .ThenBy(character => character.Character.CharacterId)
+                .ToList();
+        }
+
+        private static bool CharacterMatchesSearch(CharacterWithPlayerViewModel character, string searchTerm)
+        {
+            return character.Character.CharacterName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.PlayerName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Class.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Race.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Background.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || character.Character.Alignment.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                || (character.Character.Level?.Level.ToString() ?? string.Empty).Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private List<Equipment> BuildEquipmentCards(int characterId, string? query)
+        {
+            var character = _characterRepository.GetCharacterById(characterId);
+            if (character == null)
+            {
+                return new List<Equipment>();
+            }
+
+            var normalizedTerm = query?.Trim();
+            var equipmentList = character.EquipmentList
+                .Where(equipment => string.IsNullOrWhiteSpace(normalizedTerm) || EquipmentMatchesSearch(equipment, normalizedTerm))
+                .OrderBy(equipment => equipment.Name)
+                .ThenBy(equipment => equipment.EquipmentId)
+                .ToList();
+
+            return equipmentList;
+        }
+
+        private static bool EquipmentMatchesSearch(Equipment equipment, string searchTerm)
+        {
+            var normalizedTerm = searchTerm.ToLower();
+
+            return equipment.Name.ToLower().Contains(normalizedTerm) ||
+                   (equipment.Type ?? string.Empty).ToLower().Contains(normalizedTerm) ||
+                   equipment.Cost.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase) ||
+                   equipment.Weight.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase);
         }
 
         private List<SelectListItem> GetPlayerOptions()
