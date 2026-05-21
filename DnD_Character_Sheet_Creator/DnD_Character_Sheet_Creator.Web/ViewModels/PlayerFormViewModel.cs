@@ -26,5 +26,8 @@ namespace DnD_Character_Sheet_Creator.Web.ViewModels
         [StringLength(100)]
         [Display(Name = "Email Address")]
         public required string Email { get; set; }
+
+        [Display(Name = "Is Admin")]
+        public bool IsAdmin { get; set; } = false;
     }
 }

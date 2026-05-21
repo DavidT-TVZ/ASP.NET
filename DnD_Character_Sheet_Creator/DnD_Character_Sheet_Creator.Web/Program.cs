@@ -1,5 +1,6 @@
 using DnD_Character_Sheet_Creator.Data;
 using DnD_Character_Sheet_Creator.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -11,6 +12,15 @@ builder.Services.AddDbContext<DnDDbContext>(options =>
         sql => sql.MigrationsAssembly("DnD_Character_Sheet_Creator.DAL")));
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/SignIn";
+        options.LogoutPath = "/Account/SignOut";
+        options.AccessDeniedPath = "/Account/SignIn";
+        options.Cookie.Name = "AdventurerLedger.Auth";
+    });
+builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IPlayerRepository, EFPlayerRepository>();
 builder.Services.AddScoped<ICharacterRepository, EFCharacterRepository>();
@@ -68,6 +78,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

@@ -1,11 +1,13 @@
 using DnD_Character_Sheet_Creator.Repositories;
 using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [Route("Actors")]
     public class PlayersController : Controller
@@ -24,6 +26,18 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         public IActionResult Index(string? query)
         {
             ViewData["SearchQuery"] = query ?? string.Empty;
+
+            var current = GetCurrentPlayer();
+
+            if (current != null && !current.IsAdmin)
+            {
+                // Non-admins only see their own data
+                current.CharacterList = _characterRepository.GetCharactersByPlayerId(current.PlayerId)
+                    .Where(character => character.DeletedAt == null)
+                    .ToList();
+                ViewBag.Characters = BuildPlayerCharacterCards(current, null);
+                return View(new List<Player> { current });
+            }
 
             return View(BuildPlayerCards(query));
         }
@@ -64,6 +78,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Create")]
         public IActionResult Create(int? playerId)
         {
+            if (!IsCurrentPlayerAdmin())
+            {
+                return Forbid();
+            }
+
+            ViewBag.CanSetAdmin = GetCurrentPlayer()?.IsAdmin == true;
             return View(new PlayerFormViewModel
             {
                 Name = string.Empty,
@@ -77,6 +97,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Create")]
         public IActionResult Create(PlayerFormViewModel viewModel)
         {
+            if (!IsCurrentPlayerAdmin())
+            {
+                return Forbid();
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
@@ -92,6 +117,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 LastLogin = DateTime.UtcNow
             };
 
+            // Only an admin can create another admin user
+            var current = GetCurrentPlayer();
+            if (current != null && current.IsAdmin)
+            {
+                player.IsAdmin = viewModel.IsAdmin;
+            }
+
             _playerRepository.AddPlayer(player);
 
             return RedirectToAction("Details", new { id = player.PlayerId });
@@ -106,6 +138,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             if (player == null)
             {
                 return NotFound();
+            }
+            var current = GetCurrentPlayer();
+            if (current != null && !current.IsAdmin && current.PlayerId != id)
+            {
+                return Forbid();
             }
 
             player.CharacterList = _characterRepository.GetCharactersByPlayerId(id)
@@ -167,6 +204,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
+            var current = GetCurrentPlayer();
+            if (current != null && !current.IsAdmin && current.PlayerId != id)
+            {
+                return Forbid();
+            }
+
             var viewModel = new PlayerFormViewModel
             {
                 PlayerId = player.PlayerId,
@@ -175,6 +218,9 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 Username = player.Username,
                 Email = player.Email
             };
+
+            viewModel.IsAdmin = player.IsAdmin;
+            ViewBag.CanSetAdmin = GetCurrentPlayer()?.IsAdmin == true;
 
             return View(viewModel);
         }
@@ -193,12 +239,18 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             {
                 return NotFound();
             }
-
             // Update player properties from viewModel
             player.Name = viewModel.Name;
             player.Surname = viewModel.Surname;
             player.Username = viewModel.Username;
             player.Email = viewModel.Email;
+
+            // Only admins may change the IsAdmin flag
+            var current = GetCurrentPlayer();
+            if (current != null && current.IsAdmin)
+            {
+                player.IsAdmin = viewModel.IsAdmin;
+            }
 
             _playerRepository.UpdatePlayer(player);
 
@@ -209,10 +261,21 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Remove/{id?}")]
         public IActionResult Remove(int id)
         {
+            if (!IsCurrentPlayerAdmin())
+            {
+                return Forbid();
+            }
+
             var player = _playerRepository.GetPlayerById(id);
             if (player == null)
             {
                 return NotFound();
+            }
+
+            var current = GetCurrentPlayer();
+            if (current != null && !current.IsAdmin && current.PlayerId != id)
+            {
+                return Forbid();
             }
 
             player.CharacterList = _characterRepository.GetCharactersByPlayerId(id).ToList();
@@ -226,14 +289,43 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Remove/{id?}")]
         public IActionResult RemoveConfirmed(int id)
         {
+            if (!IsCurrentPlayerAdmin())
+            {
+                return Forbid();
+            }
+
+            var current = GetCurrentPlayer();
+            if (current != null && !current.IsAdmin && current.PlayerId != id)
+            {
+                return Forbid();
+            }
+
             _playerRepository.DeletePlayer(id);
 
             return RedirectToAction("Index");
         }
 
+        private Player? GetCurrentPlayer()
+        {
+            var username = HttpContext?.User?.Identity?.Name;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return null;
+            }
+
+            return _playerRepository.GetPlayerByUsername(username);
+        }
+
+        private bool IsCurrentPlayerAdmin()
+        {
+            return GetCurrentPlayer()?.IsAdmin == true;
+        }
+
         private List<Player> BuildPlayerCards(string? query)
         {
+            var current = GetCurrentPlayer();
             var players = _playerRepository.GetAllPlayers()
+                .Where(player => current == null || current.IsAdmin || player.PlayerId == current.PlayerId)
                 .Select(player =>
                 {
                     player.CharacterList = _characterRepository.GetCharactersByPlayerId(player.PlayerId)

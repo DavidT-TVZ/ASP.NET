@@ -1,0 +1,40 @@
+@model DnD_Character_Sheet_Creator.Web.ViewModels.PlayerSignInViewModel
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<section class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">Gate of Names</p>
+    <h1 class="h3 mb-1">Choose a player to enter the ledger</h1>
+    <p class="text-muted mb-0">This switches the active player for the current browser session.</p>
+</section>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-7">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <form asp-action="SignIn" asp-controller="Account" method="post">
+                    <input type="hidden" asp-for="ReturnUrl" />
+
+                    <div class="mb-4">
+                        <label asp-for="PlayerId" class="form-label"></label>
+                        <select asp-for="PlayerId" asp-items="Model.Players" class="form-select">
+                            <option value="">Select a player</option>
+                        </select>
+                        <span asp-validation-for="PlayerId" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-ink">Enter Ledger</button>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-ink">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,11 +1,13 @@
 using DnD_Character_Sheet_Creator.Repositories;
 using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [Route("Adventurers")]
     public class CharactersController : Controller
@@ -65,6 +67,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Create")]
         public IActionResult Create(int? playerId)
         {
+            var current = GetCurrentPlayer();
+            if (current != null && !current.IsAdmin)
+            {
+                playerId = current.PlayerId;
+            }
+
             var viewModel = new CharacterFormViewModel
             {
                 PlayerId = playerId ?? 0,
@@ -78,6 +86,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Create")]
         public IActionResult Create(CharacterFormViewModel viewModel)
         {
+            var current = GetCurrentPlayer();
+            if (current != null && !current.IsAdmin)
+            {
+                viewModel.PlayerId = current.PlayerId;
+            }
+
             if (!ModelState.IsValid)
             {
                 viewModel.AvailablePlayers = GetPlayerOptions();
@@ -115,6 +129,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             if (character == null)
             {
                 return NotFound();
+            }
+
+            if (!CanAccessPlayer(character.PlayerId))
+            {
+                return Forbid();
             }
 
             var viewModel = new CharacterFormViewModel
@@ -157,6 +176,17 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
+            if (!CanAccessPlayer(character.PlayerId))
+            {
+                return Forbid();
+            }
+
+            var current = GetCurrentPlayer();
+            if (current != null && !current.IsAdmin)
+            {
+                viewModel.PlayerId = current.PlayerId;
+            }
+
             character.PlayerId = viewModel.PlayerId;
             character.CharacterName = viewModel.CharacterName;
             character.Race = viewModel.Race!.Value;
@@ -189,6 +219,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
+            if (!CanAccessPlayer(owner.Player.PlayerId))
+            {
+                return Forbid();
+            }
+
             return View(new CharacterWithPlayerViewModel
             {
                 Character = character,
@@ -205,6 +240,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             if (character == null)
             {
                 return NotFound();
+            }
+
+            if (!CanAccessPlayer(character.PlayerId))
+            {
+                return Forbid();
             }
 
             var player = _playerRepository.GetPlayerById(character.PlayerId);
@@ -227,6 +267,17 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Remove/{id?}")]
         public IActionResult RemoveConfirmed(int id)
         {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanAccessPlayer(character.PlayerId))
+            {
+                return Forbid();
+            }
+
             _characterRepository.DeleteCharacter(id);
 
             return RedirectToAction("Index");
@@ -270,7 +321,9 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
         private List<CharacterWithPlayerViewModel> BuildCharacterCards(string? query)
         {
+            var current = GetCurrentPlayer();
             var cards = _playerRepository.GetAllPlayers()
+                .Where(player => current == null || current.IsAdmin || player.PlayerId == current.PlayerId)
                 .SelectMany(player => _characterRepository.GetCharactersByPlayerId(player.PlayerId)
                     .Select(character => new CharacterWithPlayerViewModel
                     {
@@ -336,9 +389,29 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                    equipment.Weight.ToString().Contains(normalizedTerm, StringComparison.OrdinalIgnoreCase);
         }
 
+        private Player? GetCurrentPlayer()
+        {
+            var username = HttpContext?.User?.Identity?.Name;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return null;
+            }
+
+            return _playerRepository.GetPlayerByUsername(username);
+        }
+
+        private bool CanAccessPlayer(int playerId)
+        {
+            var current = GetCurrentPlayer();
+            return current != null && (current.IsAdmin || current.PlayerId == playerId);
+        }
+
         private List<SelectListItem> GetPlayerOptions()
         {
+            var current = GetCurrentPlayer();
+
             return _playerRepository.GetAllPlayers()
+                .Where(player => current == null || current.IsAdmin || player.PlayerId == current.PlayerId)
                 .Select(player => new SelectListItem
                 {
                     Value = player.PlayerId.ToString(),
@@ -369,6 +442,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var character = _characterRepository.GetCharacterById(id);
             if (character == null) return NotFound();
+            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
 
             var vm = new ViewModels.EquipmentFormViewModel
             {
@@ -390,6 +464,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var character = _characterRepository.GetCharacterById(vm.CharacterId);
             if (character == null) return NotFound();
+            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
 
             var equipment = new Models.Equipment
             {
@@ -412,6 +487,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
+            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
@@ -441,6 +517,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var character = _characterRepository.GetCharacterById(vm.CharacterId);
             if (character == null) return NotFound();
+            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == vm.EquipmentId);
             if (equipment == null) return NotFound();
@@ -461,6 +538,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
+            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
@@ -475,6 +553,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
+            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
