@@ -17,9 +17,11 @@
 | `/Players/Info/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
 | `/Actors/Details/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
 | `/Actors/Info/{id}` | `PlayersController.Details(int id)` | `Views/Players/Details.cshtml` | DnD-themed custom route for details |
+| `/Players/Edit/{id}` | `PlayersController.Edit(int id)` | `Views/Players/Edit.cshtml` | Edit player form; returns `NotFound()` when the player is missing |
 | `/Characters` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | Also available through `/Characters/Index` |
 | `/Characters/Index` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | Default route alias |
 | `/Adventurers` | `CharactersController.Index()` | `Views/Characters/Index.cshtml` | DnD-themed custom route |
+| `/Characters/Create` | `CharactersController.Create()` | `Views/Characters/Create.cshtml` | Create new character form |
 | `/Characters/Details/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | Returns `NotFound()` when the character does not exist |
 | `/Characters/Info/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |
 | `/Adventurers/Details/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |

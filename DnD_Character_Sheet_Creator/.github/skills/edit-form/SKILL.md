@@ -1,11 +1,17 @@
+> UI note: Use `btn-edit` for Edit/Update actions. Add the `btn-edit` styles to `wwwroot/css/site.css` to produce a purple button with a glowing, rotating border effect on hover.
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-edit">Save</button>
+                    <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
+                </div>
 ---
 name: edit-form
-description: "Use when: creating or updating a Create/Edit form page for ASP.NET Core Models. Includes ViewModel, controller actions, and Razor view with validation."
+description: "Use when: creating or updating a Create/Edit form page for ASP.NET Core Models. Includes ViewModel, controller actions, Razor view with validation, and the parchment-paper UI conventions from UI_Web_agent."
 ---
 
 # Edit/Create Form Page Builder
 
-Creates a complete Create/Edit form workflow for D&D Character Sheet entities (Players, Characters). Produces: ViewModel, controller actions (GET/POST), and form view with client/server validation.
+Creates a complete Create/Edit form workflow for D&D Character Sheet entities (Players, Characters). Produces: ViewModel, controller actions (GET/POST), and form view with client/server validation and the paper/parchment visual style used across the app.
 
 ## Workflow
 
@@ -16,6 +22,7 @@ Creates a complete Create/Edit form workflow for D&D Character Sheet entities (P
 - Add `[Required]`, `[Range]`, `[StringLength]` validation attributes
 - Include nested collections (e.g., list of available options for dropdowns)
 - Example: `PlayerFormViewModel` with Name, Surname, and list of available Classes
+- Style the form to match UI_Web_agent: parchment background, earthy palette, ink-like text, decorative medieval headings, and card-like sheet sections
 
 **Checklist:**
 - [ ] Properties match entity fields
@@ -231,8 +238,8 @@ private List<SelectListItem> GetClassOptions()
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Create</button>
-                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-ink">Create</button>
+                    <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
                 </div>
             </form>
         </div>
@@ -257,6 +264,16 @@ private List<SelectListItem> GetClassOptions()
 - [ ] Form tested with valid data → saves ✓
 - [ ] Form tested with invalid data → shows errors ✓
 - [ ] Form tested with missing entity (Edit) → NotFound ✓
+ - [ ] Sitemap updated when new views/pages are added
+
+## When adding views/pages
+- Remember to update `sitemap.md` (or the project navigation file) with any new controller routes and their link text so the site index remains accurate.
+
+Example entry:
+
+```
+- [Players — Edit](/Players/Edit/{id})
+```
 
 ## Related Skills
 - Character equipment management (nested forms)

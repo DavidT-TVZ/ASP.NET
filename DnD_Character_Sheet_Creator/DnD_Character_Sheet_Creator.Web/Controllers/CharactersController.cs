@@ -1,6 +1,8 @@
 using DnD_Character_Sheet_Creator.Repositories;
+using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
@@ -35,6 +37,51 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         }
 
         [HttpGet]
+        [Route("Create")]
+        public IActionResult Create()
+        {
+            var viewModel = new CharacterFormViewModel
+            {
+                AvailablePlayers = GetPlayerOptions()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Create(CharacterFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.AvailablePlayers = GetPlayerOptions();
+                return View(viewModel);
+            }
+
+            var character = new Character
+            {
+                PlayerId = viewModel.PlayerId,
+                CharacterName = viewModel.CharacterName,
+                Race = viewModel.Race!.Value,
+                Background = viewModel.Background!.Value,
+                Alignment = viewModel.Alignment!.Value,
+                Class = viewModel.Class!.Value,
+                Level = new CharacterLevel
+                {
+                    Level = 1,
+                    CurrentExperiencePoints = 0,
+                    ExperiencePointsToNextLevel = 300,
+                    ProficiencyBonus = 2,
+                    DateOfLastLevelUp = DateTime.UtcNow
+                }
+            };
+
+            _characterRepository.AddCharacter(character);
+
+            return RedirectToAction("Details", new { id = character.CharacterId });
+        }
+
+        [HttpGet]
         [Route("Details/{id?}")]
         [Route("Info/{id?}")]
         public IActionResult Details(int id)
@@ -59,6 +106,17 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 PlayerId = owner.Player.PlayerId,
                 PlayerName = $"{owner.Player.Name} {owner.Player.Surname}"
             });
+        }
+
+        private List<SelectListItem> GetPlayerOptions()
+        {
+            return _playerRepository.GetAllPlayers()
+                .Select(player => new SelectListItem
+                {
+                    Value = player.PlayerId.ToString(),
+                    Text = $"{player.Name} {player.Surname}"
+                })
+                .ToList();
         }
     }
 }
