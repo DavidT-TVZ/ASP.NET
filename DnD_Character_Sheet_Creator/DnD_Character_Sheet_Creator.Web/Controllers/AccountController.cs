@@ -51,6 +51,9 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return View(viewModel);
             }
 
+            player.LastLogin = DateTime.UtcNow;
+            _playerRepository.UpdatePlayer(player);
+
             var claims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier, player.PlayerId.ToString()),
