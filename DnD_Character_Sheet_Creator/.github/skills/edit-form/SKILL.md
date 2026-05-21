@@ -1,9 +1,18 @@
-> UI note: Use `btn-edit` for Edit/Update actions. Add the `btn-edit` styles to `wwwroot/css/site.css` to produce a purple button with a glowing, rotating border effect on hover.
+> UI note: Use `btn-edit` for Edit/Update actions. The repository contains a `btn-edit` CSS pattern that renders a thin purple rotating ring around the button edge (inspired by the reference). When scaffolding Edit/Update forms, prefer `btn-edit` for primary save actions so the site UI remains consistent.
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-edit">Save</button>
-                    <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
-                </div>
+Example (form snippet):
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-edit">Save</button>
+        <a asp-action="Index" class="btn btn-outline-ink">Cancel</a>
+    </div>
+
+Mobile guidance:
+
+- The CSS includes a responsive tweak which reduces the size and blur of the rotating ring on narrow viewports (phones). After generating the view, test it in a mobile emulator to ensure the ring does not overflow and that the button remains easily tappable (aim for ~44px minimum height).
+- If the generated form uses stacked/vertical buttons on mobile, prefer `w-100` on the primary `btn-edit` for a comfortable full-width touch target.
+
+When you run the skill to generate an Edit page, the README or the generated file header will include this note reminding you to test the page at narrow widths.
 ---
 name: edit-form
 description: "Use when: creating or updating a Create/Edit form page for ASP.NET Core Models. Includes ViewModel, controller actions, Razor view with validation, and the parchment-paper UI conventions from UI_Web_agent."

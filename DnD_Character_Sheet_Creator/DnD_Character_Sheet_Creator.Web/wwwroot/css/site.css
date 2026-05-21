@@ -64,7 +64,7 @@
 	z-index: 0;
   color: #fff !important;
   /* border: 0.5px solid rgba(147, 102, 233, 0.96); */
-  border-radius: 0.55rem;
+  border-radius: 0.45rem;
 	overflow: hidden;
 	display: flex;
 
@@ -115,7 +115,7 @@
 		top: 2px;
 		width: calc(100% - 4px);
 		height: calc(100% - 4px);
-		border-radius: 0.55rem;
+		border-radius: 0.45rem;
 	}
 }
 
@@ -405,5 +405,25 @@ a:focus-visible {
 
   .chronicle-footer .container-lg {
     text-align: center;
+  }
+
+  /* Keep full animations on mobile, but ensure buttons meet touch-size/readability */
+
+  .btn-create:hover,
+  .btn-create:focus-visible {
+    box-shadow:
+      0 0 0 1px rgba(246, 253, 255, 0.95),
+      0 0 22px rgba(214, 247, 255, 0.9),
+      0 0 44px rgba(176, 236, 255, 0.6),
+      0 8px 20px rgba(145, 224, 255, 0.16);
+    animation: create-pulse 1.8s ease-in-out infinite !important;
+  }
+
+  /* Ensure tappable target and readable text on small screens */
+  .btn-create,
+  .btn-edit {
+    min-height: 44px;
+    padding: 0.55rem 0.9rem;
+    font-size: 1rem;
   }
 }
