@@ -6,6 +6,13 @@ namespace DnD_Character_Sheet_Creator.Web.ViewModels
 {
     public class CharacterFormViewModel
     {
+        public int? CharacterId { get; set; }
+
+        [Display(Name = "Level")]
+        public int? LevelId { get; set; }
+
+        public List<SelectListItem> LevelOptions { get; set; } = new();
+
         [Range(1, int.MaxValue, ErrorMessage = "A player must be selected")]
         [Display(Name = "Player")]
         public int PlayerId { get; set; }

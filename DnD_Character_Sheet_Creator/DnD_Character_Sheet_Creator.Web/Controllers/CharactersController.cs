@@ -107,6 +107,69 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         }
 
         [HttpGet]
+        [Route("Edit/{id?}")]
+        public IActionResult Edit(int id)
+        {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new CharacterFormViewModel
+            {
+                CharacterId = character.CharacterId,
+                PlayerId = character.PlayerId,
+                CharacterName = character.CharacterName,
+                Race = character.Race,
+                Background = character.Background,
+                Alignment = character.Alignment,
+                Class = character.Class,
+                LevelId = character.Level?.LevelId,
+                AvailablePlayers = GetPlayerOptions(),
+                LevelOptions = GetLevelOptions()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Edit/{id?}")]
+        public IActionResult Edit(CharacterFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.AvailablePlayers = GetPlayerOptions();
+                viewModel.LevelOptions = GetLevelOptions();
+                return View(viewModel);
+            }
+
+            if (viewModel.CharacterId == null)
+            {
+                return BadRequest();
+            }
+
+            var character = _characterRepository.GetCharacterById(viewModel.CharacterId.Value);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            character.PlayerId = viewModel.PlayerId;
+            character.CharacterName = viewModel.CharacterName;
+            character.Race = viewModel.Race!.Value;
+            character.Background = viewModel.Background!.Value;
+            character.Alignment = viewModel.Alignment!.Value;
+            character.Class = viewModel.Class!.Value;
+            character.LevelId = viewModel.LevelId;
+
+            _characterRepository.UpdateCharacter(character);
+
+            return RedirectToAction("Details", new { id = character.CharacterId });
+        }
+
+        [HttpGet]
         [Route("Details/{id?}")]
         [Route("Info/{id?}")]
         public IActionResult Details(int id)
@@ -253,6 +316,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var normalizedTerm = query?.Trim();
             var equipmentList = character.EquipmentList
+                .Where(equipment => equipment.DeletedAt == null)
                 .Where(equipment => string.IsNullOrWhiteSpace(normalizedTerm) || EquipmentMatchesSearch(equipment, normalizedTerm))
                 .OrderBy(equipment => equipment.Name)
                 .ThenBy(equipment => equipment.EquipmentId)
@@ -280,6 +344,145 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                     Text = $"{player.Name} {player.Surname}"
                 })
                 .ToList();
+        }
+
+        private List<SelectListItem> GetLevelOptions()
+        {
+            return _characterRepository.GetAllCharacters()
+                .Select(c => c.Level)
+                .Where(l => l != null)
+                .Select(l => new SelectListItem
+                {
+                    Value = l!.LevelId.ToString(),
+                    Text = $"Level {l!.Level}"
+                })
+                .GroupBy(item => item.Value)
+                .Select(g => g.First())
+                .OrderBy(item => item.Text)
+                .ToList();
+        }
+
+        [HttpGet]
+        [Route("{id:int}/equipment/create-form")]
+        public IActionResult EquipmentCreateForm(int id)
+        {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null) return NotFound();
+
+            var vm = new ViewModels.EquipmentFormViewModel
+            {
+                CharacterId = id
+            };
+
+            return View("CreateEquipment", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{id:int}/equipment/create")]
+        public IActionResult CreateEquipment(ViewModels.EquipmentFormViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("CreateEquipment", vm);
+            }
+
+            var character = _characterRepository.GetCharacterById(vm.CharacterId);
+            if (character == null) return NotFound();
+
+            var equipment = new Models.Equipment
+            {
+                CharacterId = vm.CharacterId,
+                Type = vm.Type,
+                Name = vm.Name,
+                Cost = vm.Cost,
+                Weight = vm.Weight
+            };
+
+            character.EquipmentList.Add(equipment);
+            _characterRepository.UpdateCharacter(character);
+
+            return RedirectToAction("Details", new { id = vm.CharacterId });
+        }
+
+        [HttpGet]
+        [Route("{characterId:int}/equipment/{equipmentId:int}/edit-form")]
+        public IActionResult EquipmentEditForm(int characterId, int equipmentId)
+        {
+            var character = _characterRepository.GetCharacterById(characterId);
+            if (character == null) return NotFound();
+
+            var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
+            if (equipment == null) return NotFound();
+
+            var vm = new ViewModels.EquipmentFormViewModel
+            {
+                EquipmentId = equipment.EquipmentId,
+                CharacterId = characterId,
+                Type = equipment.Type,
+                Name = equipment.Name,
+                Cost = equipment.Cost,
+                Weight = equipment.Weight
+            };
+
+            return View("EditEquipment", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{characterId:int}/equipment/{equipmentId:int}/edit")]
+        public IActionResult EditEquipment(ViewModels.EquipmentFormViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("EditEquipment", vm);
+            }
+
+            var character = _characterRepository.GetCharacterById(vm.CharacterId);
+            if (character == null) return NotFound();
+
+            var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == vm.EquipmentId);
+            if (equipment == null) return NotFound();
+
+            equipment.Type = vm.Type;
+            equipment.Name = vm.Name;
+            equipment.Cost = vm.Cost;
+            equipment.Weight = vm.Weight;
+
+            _characterRepository.UpdateCharacter(character);
+
+            return RedirectToAction("Details", new { id = vm.CharacterId });
+        }
+
+        [HttpGet]
+        [Route("{characterId:int}/equipment/{equipmentId:int}/remove-form")]
+        public IActionResult EquipmentRemoveForm(int characterId, int equipmentId)
+        {
+            var character = _characterRepository.GetCharacterById(characterId);
+            if (character == null) return NotFound();
+
+            var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
+            if (equipment == null) return NotFound();
+
+            return View("RemoveEquipment", equipment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{characterId:int}/equipment/{equipmentId:int}/remove")]
+        public IActionResult RemoveEquipment(int characterId, int equipmentId)
+        {
+            var character = _characterRepository.GetCharacterById(characterId);
+            if (character == null) return NotFound();
+
+            var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
+            if (equipment == null) return NotFound();
+
+            // Soft-delete the equipment unless otherwise specified
+            equipment.DeletedAt = DateTime.UtcNow;
+            _characterRepository.UpdateCharacter(character);
+
+            return RedirectToAction("Details", new { id = characterId });
         }
     }
 }

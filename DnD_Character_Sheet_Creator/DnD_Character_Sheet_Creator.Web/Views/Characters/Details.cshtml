@@ -15,6 +15,7 @@
 <div class="mb-4">
     <div class="d-flex flex-wrap gap-2">
         <a class="btn btn-outline-ink" asp-controller="Characters" asp-action="Index">Back to all characters</a>
+        <a class="btn btn-edit" asp-controller="Characters" asp-action="Edit" asp-route-id="@Model.Character.CharacterId">Edit character</a>
         <a class="btn btn-outline-danger" asp-controller="Characters" asp-action="Remove" asp-route-id="@Model.Character.CharacterId">Remove character</a>
     </div>
 </div>
@@ -58,6 +59,9 @@
 </div>
 
 <h2 class="h4 mb-3">Equipment</h2>
+<div class="mb-3">
+    <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add equipment</a>
+</div>
 <div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("EquipmentSearch", "Characters", new { id = Model.Character.CharacterId })" data-autocomplete-url="@Url.Action("EquipmentAutocomplete", "Characters", new { id = Model.Character.CharacterId })" data-count-badge="#equipmentCountBadge">
     <div class="row g-3 align-items-end">
         <div class="col-12 col-lg-8 position-relative ajax-list-search-field">
@@ -76,5 +80,5 @@
 </div>
 
 <div id="equipmentListRegion" class="ajax-list-search-region">
-    @await Html.PartialAsync("_EquipmentCards", Model.Character.EquipmentList)
+    @await Html.PartialAsync("_EquipmentCards", Model.Character.EquipmentList.Where(e => e.DeletedAt == null))
 </div>
