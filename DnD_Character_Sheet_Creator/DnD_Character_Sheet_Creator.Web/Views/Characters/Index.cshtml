@@ -31,7 +31,10 @@
                     <p class="card-text mb-0"><strong>Alignment:</strong> @character.Character.Alignment</p>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
-                    <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@character.Character.CharacterId">View details</a>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@character.Character.CharacterId">View details</a>
+                        <a class="btn btn-outline-danger btn-sm" asp-action="Remove" asp-route-id="@character.Character.CharacterId">Remove</a>
+                    </div>
                 </div>
             </div>
         </div>

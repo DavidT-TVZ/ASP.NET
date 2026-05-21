@@ -1,3 +1,4 @@
+using System;
 using DnD_Character_Sheet_Creator.Models;
 
 namespace DnD_Character_Sheet_Creator.Repositories
@@ -15,13 +16,16 @@ namespace DnD_Character_Sheet_Creator.Repositories
 
         public IEnumerable<Character> GetAllCharacters()
         {
-            return _charactersByPlayerId.Values.SelectMany(characters => characters).ToList();
+            return _charactersByPlayerId.Values
+                .SelectMany(characters => characters)
+                .Where(character => character.DeletedAt == null)
+                .ToList();
         }
 
         public IEnumerable<Character> GetCharactersByPlayerId(int playerId)
         {
             return _charactersByPlayerId.TryGetValue(playerId, out var characters)
-                ? characters.AsReadOnly()
+                ? characters.Where(character => character.DeletedAt == null).ToList()
                 : Enumerable.Empty<Character>();
         }
 
@@ -29,7 +33,7 @@ namespace DnD_Character_Sheet_Creator.Repositories
         {
             foreach (var characterList in _charactersByPlayerId.Values)
             {
-                var character = characterList.FirstOrDefault(existingCharacter => existingCharacter.CharacterId == characterId);
+                var character = characterList.FirstOrDefault(existingCharacter => existingCharacter.CharacterId == characterId && existingCharacter.DeletedAt == null);
                 if (character != null)
                 {
                     return character;
@@ -68,10 +72,10 @@ namespace DnD_Character_Sheet_Creator.Repositories
         {
             foreach (var characterList in _charactersByPlayerId.Values)
             {
-                var character = characterList.FirstOrDefault(c => c.CharacterId == characterId);
+                var character = characterList.FirstOrDefault(c => c.CharacterId == characterId && c.DeletedAt == null);
                 if (character != null)
                 {
-                    characterList.Remove(character);
+                    character.DeletedAt = DateTime.UtcNow;
                     return;
                 }
             }

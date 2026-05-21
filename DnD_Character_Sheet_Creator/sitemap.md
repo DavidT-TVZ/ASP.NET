@@ -26,6 +26,8 @@
 | `/Characters/Info/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |
 | `/Adventurers/Details/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |
 | `/Adventurers/Info/{id}` | `CharactersController.Details(int id)` | `Views/Characters/Details.cshtml` | DnD-themed custom route for details |
+| `/Characters/Remove/{id}` | `CharactersController.Remove(int id)` | `Views/Characters/Remove.cshtml` | Soft-delete confirmation page for characters |
+| `/Adventurers/Remove/{id}` | `CharactersController.Remove(int id)` | `Views/Characters/Remove.cshtml` | DnD-themed custom route for removal |
 
 ## View model and data passed to views
 

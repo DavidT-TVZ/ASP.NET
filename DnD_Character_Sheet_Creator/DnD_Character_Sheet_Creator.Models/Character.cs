@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,6 +24,8 @@ namespace DnD_Character_Sheet_Creator.Models
         public AlignmentEnum Alignment { get; set; }
 
         public ClassEnum Class { get; set; }
+
+        public DateTime? DeletedAt { get; set; }
 
         public virtual CharacterLevel? Level { get; set; }
 

@@ -1,0 +1,44 @@
+@model DnD_Character_Sheet_Creator.Web.ViewModels.CharacterWithPlayerViewModel
+
+@{
+    ViewData["Title"] = "Remove Character";
+}
+
+<section class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">Confirm Removal</p>
+    <h1 class="h3 mb-1">@ViewData["Title"]</h1>
+    <p class="text-muted mb-0">This will hide the character from normal lists.</p>
+</section>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <dl class="row mb-4">
+                    <dt class="col-sm-4">Name</dt>
+                    <dd class="col-sm-8">@Model.Character.CharacterName</dd>
+
+                    <dt class="col-sm-4">Player</dt>
+                    <dd class="col-sm-8"><a asp-controller="Players" asp-action="Details" asp-route-id="@Model.PlayerId">@Model.PlayerName</a></dd>
+
+                    <dt class="col-sm-4">Class</dt>
+                    <dd class="col-sm-8">@Model.Character.Class</dd>
+
+                    <dt class="col-sm-4">Level</dt>
+                    <dd class="col-sm-8">@Model.Character.Level?.Level</dd>
+                </dl>
+
+                <form asp-action="Remove" asp-route-id="@Model.Character.CharacterId" method="post">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-danger">Remove Character</button>
+                        <a asp-action="Details" asp-route-id="@Model.Character.CharacterId" class="btn btn-outline-ink">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

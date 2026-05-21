@@ -108,6 +108,41 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("Remove/{id?}")]
+        public IActionResult Remove(int id)
+        {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            var player = _playerRepository.GetPlayerById(character.PlayerId);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(new CharacterWithPlayerViewModel
+            {
+                Character = character,
+                PlayerId = player.PlayerId,
+                PlayerName = $"{player.Name} {player.Surname}"
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Remove")]
+        [Route("Remove/{id?}")]
+        public IActionResult RemoveConfirmed(int id)
+        {
+            _characterRepository.DeleteCharacter(id);
+
+            return RedirectToAction("Index");
+        }
+
         private List<SelectListItem> GetPlayerOptions()
         {
             return _playerRepository.GetAllPlayers()
