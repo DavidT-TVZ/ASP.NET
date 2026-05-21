@@ -355,11 +355,18 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
         private static bool PlayerMatchesSearch(Player player, string searchTerm)
         {
-            return player.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-                || player.Surname.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-                || player.Username.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-                || player.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-                || player.PlayerId.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
+            var terms = searchTerm.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (terms.Length == 0)
+            {
+                return false;
+            }
+
+            return terms.All(term =>
+                player.Name.Contains(term, StringComparison.OrdinalIgnoreCase)
+                || player.Surname.Contains(term, StringComparison.OrdinalIgnoreCase)
+                || player.Username.Contains(term, StringComparison.OrdinalIgnoreCase)
+                || player.Email.Contains(term, StringComparison.OrdinalIgnoreCase)
+                || player.PlayerId.ToString().Contains(term, StringComparison.OrdinalIgnoreCase));
         }
 
         private List<CharacterWithPlayerViewModel> BuildPlayerCharacterCards(Player player, string? query)
