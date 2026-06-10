@@ -13,7 +13,7 @@
     <div class="col-12 col-lg-6">
         <div class="card sheet-card reveal mb-4">
             <div class="card-body">
-                <form asp-action="CreateEquipment" asp-controller="Characters" method="post">
+                <form asp-action="CreateEquipment" asp-controller="Characters" asp-route-id="@Model.CharacterId" method="post">
                     <input asp-for="CharacterId" type="hidden" />
 
                     <div class="mb-3">
