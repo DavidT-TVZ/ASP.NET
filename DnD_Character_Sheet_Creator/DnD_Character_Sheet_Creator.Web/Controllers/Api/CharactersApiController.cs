@@ -71,7 +71,7 @@ public class CharactersApiController : ControllerBase
         var player = await _context.Players.FirstOrDefaultAsync(item => item.PlayerId == dto.PlayerId && item.DeletedAt == null);
         if (player == null)
         {
-            return NotFound($"Player {dto.PlayerId} was not found.");
+            return BadRequest($"Player {dto.PlayerId} was not found.");
         }
 
         CharacterLevel? level = null;
@@ -82,12 +82,7 @@ public class CharactersApiController : ControllerBase
             {
                 return NotFound($"Character level {dto.LevelId.Value} was not found.");
             }
-
-            var levelInUse = await _context.Characters.AnyAsync(item => item.LevelId == level.LevelId);
-            if (levelInUse)
-            {
-                return Conflict($"Character level {level.LevelId} is already assigned to a character.");
-            }
+            // Note: allow assigning existing levels to multiple characters on create
         }
         else
         {

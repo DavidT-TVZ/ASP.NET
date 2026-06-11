@@ -47,12 +47,9 @@ namespace DnD_Character_Sheet_Creator.Tests
 
         public void SeedDatabase(DnDDbContext context)
         {
-            // Clear existing data
-            context.Players.RemoveRange(context.Players);
-            context.Characters.RemoveRange(context.Characters);
-            context.Equipment.RemoveRange(context.Equipment);
-            context.CharacterLevels.RemoveRange(context.CharacterLevels);
-            context.SaveChanges();
+            // Reset the in-memory database to a clean state
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
             // Seed test data
             var player = new Player
@@ -99,6 +96,9 @@ namespace DnD_Character_Sheet_Creator.Tests
                 WeaponProperties = new List<WeaponPropertiesEnum> { WeaponPropertiesEnum.Finesse },
                 Weight = 2
             };
+            // Associate equipment with the created character so tests can find it
+            weapon.CharacterId = character.CharacterId;
+            weapon.Character = character;
             context.Equipment.Add(weapon);
             context.SaveChanges();
         }

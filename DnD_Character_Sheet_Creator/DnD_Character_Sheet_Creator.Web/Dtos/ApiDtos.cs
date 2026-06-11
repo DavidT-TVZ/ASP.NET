@@ -26,7 +26,6 @@ public class PlayerUpsertDto
     [StringLength(200)]
     public string Password { get; set; } = string.Empty;
 
-    [StringLength(20)]
     public RoleEnum Role { get; set; } = RoleEnum.User;
 }
 

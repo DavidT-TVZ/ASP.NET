@@ -55,6 +55,12 @@ public class CharacterLevelsApiController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CharacterLevelDto>> Create([FromBody] CharacterLevelUpsertDto dto)
     {
+        // Prevent creating duplicate level values
+        if (await _context.CharacterLevels.AnyAsync(cl => cl.Level == dto.Level))
+        {
+            return BadRequest($"Level {dto.Level} already exists.");
+        }
+
         var level = new CharacterLevel
         {
             Level = dto.Level,
@@ -77,6 +83,12 @@ public class CharacterLevelsApiController : ControllerBase
         if (level == null)
         {
             return NotFound();
+        }
+
+        // Prevent updating to a Level value that already exists on another record
+        if (await _context.CharacterLevels.AnyAsync(cl => cl.Level == dto.Level && cl.LevelId != id))
+        {
+            return BadRequest($"Level {dto.Level} already exists.");
         }
 
         level.Level = dto.Level;
@@ -121,7 +133,7 @@ public class CharacterLevelsApiController : ControllerBase
             || level.CurrentExperiencePoints.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             || level.ExperiencePointsToNextLevel.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             || level.ProficiencyBonus.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-            || level.DateOfLastLevelUp.ToString("O").Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
+            ;
     }
 
     private static CharacterLevelDto ToDto(CharacterLevel level)
