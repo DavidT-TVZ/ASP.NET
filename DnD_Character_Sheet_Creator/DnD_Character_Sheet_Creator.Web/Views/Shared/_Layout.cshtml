@@ -51,7 +51,10 @@
                         }
                         else
                         {
-                            <a class="btn btn-ink btn-sm" asp-controller="Account" asp-action="SignIn">Sign in</a>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a class="btn btn-ink btn-sm" asp-controller="Account" asp-action="SignIn">Sign in</a>
+                                <a class="btn btn-outline-ink btn-sm" asp-controller="Account" asp-action="Register">Register</a>
+                            </div>
                         }
                     </div>
                 </div>

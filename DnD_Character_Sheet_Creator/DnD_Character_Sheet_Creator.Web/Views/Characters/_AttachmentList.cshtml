@@ -1,0 +1,36 @@
+@model IEnumerable<DnD_Character_Sheet_Creator.Models.Attachment>
+
+@if (!Model.Any())
+{
+    <p class="text-muted mb-0">No files have been uploaded yet.</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-sm align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Size</th>
+                    <th>Uploaded</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var attachment in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@attachment.FilePath" target="_blank" rel="noopener">@attachment.FileName</a>
+                        </td>
+                        <td>@(Math.Round(attachment.FileSize / 1024.0, 1)) KB</td>
+                        <td>@await Html.PartialAsync("_DateTimeControl", new DnD_Character_Sheet_Creator.Web.ViewModels.DateTimeControlViewModel { Value = attachment.CreatedAt })</td>
+                        <td class="text-end">
+                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteAttachment(@attachment.AttachmentId)">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

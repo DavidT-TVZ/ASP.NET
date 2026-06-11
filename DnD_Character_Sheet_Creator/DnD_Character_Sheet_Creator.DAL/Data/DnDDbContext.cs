@@ -1,9 +1,10 @@
 using DnD_Character_Sheet_Creator.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnD_Character_Sheet_Creator.Data
 {
-    public class DnDDbContext : DbContext
+    public class DnDDbContext : IdentityDbContext<AppUser>
     {
         public DnDDbContext(DbContextOptions<DnDDbContext> options) : base(options)
         {
@@ -12,6 +13,7 @@ namespace DnD_Character_Sheet_Creator.Data
         public DbSet<Player> Players { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<CharacterLevel> CharacterLevels { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -54,11 +56,23 @@ namespace DnD_Character_Sheet_Creator.Data
                     .WithOne(e => e.Character)
                     .HasForeignKey(e => e.CharacterId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(c => c.Attachments)
+                    .WithOne(a => a.Character)
+                    .HasForeignKey(a => a.CharacterId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<CharacterLevel>(entity =>
             {
                 entity.HasKey(cl => cl.LevelId);
+            });
+
+            modelBuilder.Entity<Attachment>(entity =>
+            {
+                entity.HasKey(a => a.AttachmentId);
+                entity.Property(a => a.FileName).IsRequired();
+                entity.Property(a => a.FilePath).IsRequired();
             });
 
             modelBuilder.Entity<Equipment>(entity =>

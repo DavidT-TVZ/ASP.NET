@@ -2,8 +2,9 @@
 
 @{
     ViewData["Title"] = "Character Details";
-    var xpCurrent = Model.Character.Level.CurrentExperiencePoints;
-    var xpNext = Model.Character.Level.ExperiencePointsToNextLevel;
+    var characterLevel = Model.Character.Level;
+    var xpCurrent = characterLevel?.CurrentExperiencePoints ?? 0;
+    var xpNext = characterLevel?.ExperiencePointsToNextLevel ?? 0;
     var xpPercent = xpNext <= 0 ? 0 : Math.Clamp((int)Math.Round((double)xpCurrent / xpNext * 100), 0, 100);
 }
 
@@ -42,7 +43,7 @@
             <dd class="col-sm-9">@Model.Character.Alignment</dd>
 
             <dt class="col-sm-3">Level</dt>
-            <dd class="col-sm-9">@Model.Character.Level.Level</dd>
+            <dd class="col-sm-9">@(characterLevel?.Level.ToString() ?? "N/A")</dd>
 
             <dt class="col-sm-3">Experience</dt>
             <dd class="col-sm-9">
@@ -53,10 +54,14 @@
             </dd>
 
             <dt class="col-sm-3">Proficiency Bonus</dt>
-            <dd class="col-sm-9">+@Model.Character.Level.ProficiencyBonus</dd>
+            <dd class="col-sm-9">@(characterLevel == null ? "N/A" : $"+{characterLevel.ProficiencyBonus}")</dd>
 
             <dt class="col-sm-3">Last Level Up</dt>
-            <dd class="col-sm-9">@await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = Model.Character.Level.DateOfLastLevelUp })</dd>
+            <dd class="col-sm-9">
+                @(characterLevel == null
+                    ? "N/A"
+                    : await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = characterLevel.DateOfLastLevelUp }))
+            </dd>
         </dl>
     </div>
 </div>
@@ -85,3 +90,81 @@
 <div id="equipmentListRegion" class="ajax-list-search-region">
     @await Html.PartialAsync("_EquipmentCards", Model.Character.EquipmentList.Where(e => e.DeletedAt == null))
 </div>
+
+<h2 class="h4 mt-5 mb-3">Attachments</h2>
+<div class="row g-4">
+    <div class="col-12 col-xl-6">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <p class="text-muted mb-3">Upload documents, references, or reference images for this character.</p>
+                <form id="characterAttachmentDropzone"
+                      asp-controller="Characters"
+                      asp-action="UploadAttachment"
+                      asp-route-id="@Model.Character.CharacterId"
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="dropzone chronicle-dropzone">
+                    @Html.AntiForgeryToken()
+                    <div class="dz-message" data-dz-message>
+                        <span>Drop files here or click to upload</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-xl-6">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="h5 mb-0">Uploaded files</h3>
+                    <button type="button" class="btn btn-outline-ink btn-sm" id="reloadAttachmentsButton">Reload</button>
+                </div>
+                <div id="attachmentListRegion">Loading attachments...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" integrity="sha512-7g0vKx0Qe0R6p2w9mJwqv8zqK0wQ2k3pS9Y4lP8M8m0kO1VdGq4z7vO1F0gWgq0M7h7z0J5V3x5fN7M4QvVw5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-HYhdN+5z2wz7XK8NnM8i7r0VgV6m7QmXx2xv6N0n2u5Xy+W0m9fYzQWj3mTq3RkQeP9mS8o4nR8s3p1mQ2u0yQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        Dropzone.autoDiscover = false;
+
+        function loadAttachments() {
+            $("#attachmentListRegion").load("@Url.Action("Attachments", "Characters", new { id = Model.Character.CharacterId })");
+        }
+
+        function deleteAttachment(id) {
+            $.ajax({
+                url: "@Url.Action("DeleteAttachment", "Characters")/" + id,
+                method: "POST",
+                headers: {
+                    "RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+                }
+            }).done(function () {
+                loadAttachments();
+            });
+        }
+
+        $(function () {
+            loadAttachments();
+
+            new Dropzone("#characterAttachmentDropzone", {
+                paramName: "file",
+                maxFilesize: 25,
+                timeout: 0,
+                init: function () {
+                    this.on("success", function () {
+                        loadAttachments();
+                        this.removeAllFiles(true);
+                    });
+                }
+            });
+
+            $("#reloadAttachmentsButton").on("click", function () {
+                loadAttachments();
+            });
+        });
+    </script>
+}

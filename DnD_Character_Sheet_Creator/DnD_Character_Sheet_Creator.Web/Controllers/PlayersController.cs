@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
-    [Authorize]
     [Route("[controller]")]
     [Route("Actors")]
     public class PlayersController : Controller
@@ -21,6 +20,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             _characterRepository = characterRepository;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("")]
         public IActionResult Index(string? query)
@@ -42,6 +42,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(BuildPlayerCards(query));
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Search")]
         public IActionResult Search(string? query)
@@ -51,6 +52,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return PartialView("_PlayerCards", BuildPlayerCards(query));
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Autocomplete")]
         public IActionResult Autocomplete(string term)
@@ -74,6 +76,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return Json(suggestions);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("Create")]
         public IActionResult Create(int? playerId)
@@ -93,6 +96,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             });
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [Route("Create")]
         public IActionResult Create(PlayerFormViewModel viewModel)
@@ -129,6 +133,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = player.PlayerId });
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Details/{id?}")]
         [Route("Info/{id?}")]
@@ -194,6 +199,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return Json(suggestions);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("Edit/{id?}")]
         public IActionResult Edit(int id)
@@ -225,6 +231,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [Route("Edit/{id?}")]
         public IActionResult Edit(int id, PlayerFormViewModel viewModel)
@@ -257,6 +264,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = player.PlayerId });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Remove/{id?}")]
         public IActionResult Remove(int id)
@@ -283,6 +291,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(player);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Remove")]

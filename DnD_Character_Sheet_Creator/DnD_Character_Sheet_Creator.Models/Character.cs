@@ -29,6 +29,8 @@ namespace DnD_Character_Sheet_Creator.Models
 
         public virtual CharacterLevel? Level { get; set; }
 
+        public virtual ICollection<Attachment> Attachments { get; set; } = new List<Attachment>();
+
         public virtual ICollection<Equipment> EquipmentList { get; set; } = new List<Equipment>();
 
         public virtual Player? Player { get; set; }

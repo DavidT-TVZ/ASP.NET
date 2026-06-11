@@ -1,6 +1,7 @@
 using DnD_Character_Sheet_Creator.Data;
+using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Repositories;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -12,14 +13,37 @@ builder.Services.AddDbContext<DnDDbContext>(options =>
         sql => sql.MigrationsAssembly("DnD_Character_Sheet_Creator.DAL")));
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+
+builder.Services
+    .AddIdentity<AppUser, IdentityRole>(options =>
     {
-        options.LoginPath = "/Account/SignIn";
-        options.LogoutPath = "/Account/SignOut";
-        options.AccessDeniedPath = "/Account/SignIn";
-        options.Cookie.Name = "AdventurerLedger.Auth";
+        options.SignIn.RequireConfirmedAccount = false;
+        options.User.RequireUniqueEmail = true;
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequiredLength = 6;
+    })
+    .AddEntityFrameworkStores<DnDDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/SignIn";
+    options.LogoutPath = "/Account/SignOut";
+    options.AccessDeniedPath = "/Account/SignIn";
+    options.Cookie.Name = "AdventurerLedger.Auth";
+});
+
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"] ?? string.Empty;
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"] ?? string.Empty;
+        options.CallbackPath = "/signin-google";
     });
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IPlayerRepository, EFPlayerRepository>();
@@ -68,6 +92,8 @@ using (var scope = app.Services.CreateScope())
         context.Players.AddRange(players);
         context.SaveChanges();
     }
+
+    await SeedIdentityAsync(app.Services);
 }
 
 if (!app.Environment.IsDevelopment())
@@ -82,6 +108,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",
@@ -89,3 +116,50 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 app.Run();
+
+static async Task SeedIdentityAsync(IServiceProvider services)
+{
+    using var scope = services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    foreach (var role in new[] { "Admin", "Manager" })
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+
+    var players = context.Players.Where(player => player.DeletedAt == null).ToList();
+    foreach (var player in players)
+    {
+        var user = await userManager.FindByNameAsync(player.Username);
+        if (user == null)
+        {
+            user = new AppUser
+            {
+                UserName = player.Username,
+                Email = player.Email,
+                PlayerId = player.PlayerId,
+                OIB = player.PlayerId.ToString().PadLeft(11, '0'),
+                JMBG = player.PlayerId.ToString().PadLeft(13, '0')
+            };
+
+            var createResult = await userManager.CreateAsync(user, string.IsNullOrWhiteSpace(player.Password) ? "changeme" : player.Password);
+            if (!createResult.Succeeded)
+            {
+                continue;
+            }
+        }
+
+        var roleName = player.IsAdmin ? "Admin" : "Manager";
+        if (!await userManager.IsInRoleAsync(user, roleName))
+        {
+            await userManager.AddToRoleAsync(user, roleName);
+        }
+    }
+}
+
+public partial class Program { }

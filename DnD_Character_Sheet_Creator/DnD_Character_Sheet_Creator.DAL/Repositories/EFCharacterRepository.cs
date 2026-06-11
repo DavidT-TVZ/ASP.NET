@@ -79,6 +79,13 @@ namespace DnD_Character_Sheet_Creator.Repositories
             }
 
             character.DeletedAt = DateTime.UtcNow;
+
+            var attachments = _context.Attachments.Where(a => a.CharacterId == characterId && a.DeletedAt == null).ToList();
+            foreach (var attachment in attachments)
+            {
+                attachment.DeletedAt = DateTime.UtcNow;
+            }
+
             _context.SaveChanges();
         }
     }
