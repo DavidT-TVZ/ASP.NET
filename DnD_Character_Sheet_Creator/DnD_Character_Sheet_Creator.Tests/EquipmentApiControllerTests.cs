@@ -4,6 +4,7 @@ using DnD_Character_Sheet_Creator.Web.Dtos;
 using System;
 using System.Net;
 using System.Net.Http.Json;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace DnD_Character_Sheet_Creator.Tests
@@ -175,7 +176,9 @@ namespace DnD_Character_Sheet_Creator.Tests
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
                 // Verify soft-deleted
-                var deletedEquipment = context.Equipment.FirstOrDefault(e => e.EquipmentId == equipmentId);
+                using var verifyScope = _factory.Services.CreateScope();
+                var verifyContext = verifyScope.ServiceProvider.GetRequiredService<DnDDbContext>();
+                var deletedEquipment = verifyContext.Equipment.AsNoTracking().FirstOrDefault(e => e.EquipmentId == equipmentId);
                 Assert.NotNull(deletedEquipment);
                 Assert.NotNull(deletedEquipment.DeletedAt);
             }

@@ -10,6 +10,8 @@ namespace DnD_Character_Sheet_Creator.Tests
 {
     public class DnDTestApplicationFactory : WebApplicationFactory<Program>
     {
+        private readonly string _databaseName = $"DnDTestDb_{Guid.NewGuid():N}";
+
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             // Ensure the application picks up the Testing environment during builder creation
@@ -37,7 +39,7 @@ namespace DnD_Character_Sheet_Creator.Tests
                 // Add DbContext configured for in-memory database
                 services.AddDbContext<DnDDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase("DnDTestDb");
+                    options.UseInMemoryDatabase(_databaseName);
                     options.UseLazyLoadingProxies();
                 });
             });

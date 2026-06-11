@@ -18,7 +18,7 @@ public class CharactersApiController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CharacterDto>>> GetAll([FromQuery] string? query, [FromQuery] int? playerId)
+    public async Task<ActionResult<IEnumerable<CharacterDto>>> GetAll([FromQuery(Name = "search")] string? search, [FromQuery] int? playerId)
     {
         var characters = await _context.Characters
             .Where(character => character.DeletedAt == null)
@@ -33,9 +33,9 @@ public class CharactersApiController : ControllerBase
             characters = characters.Where(character => character.PlayerId == playerId.Value).ToList();
         }
 
-        if (!string.IsNullOrWhiteSpace(query))
+        if (!string.IsNullOrWhiteSpace(search))
         {
-            var normalizedQuery = query.Trim();
+            var normalizedQuery = search.Trim();
             characters = characters.Where(character => CharacterMatchesSearch(character, normalizedQuery)).ToList();
         }
 
@@ -197,9 +197,6 @@ public class CharactersApiController : ControllerBase
             || character.Background.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             || character.Alignment.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             || character.Class.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-            || (character.Player?.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
-            || (character.Player?.Surname.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
-            || (character.Player?.Username.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
             || (character.Level?.Level.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false);
     }
 

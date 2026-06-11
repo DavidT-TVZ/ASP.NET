@@ -1,334 +1,292 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TestRun id="1949ee82-c999-40fe-9a71-ff0d51eb9035" name="David Laptop@DESKTOP-27SVNEK 2026-06-11 17:20:14" runUser="DESKTOP-27SVNEK\David Laptop" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <Times creation="2026-06-11T17:20:14.4537642+02:00" queuing="2026-06-11T17:20:14.4537656+02:00" start="2026-06-11T17:20:12.6150131+02:00" finish="2026-06-11T17:20:14.6810332+02:00" />
-  <TestSettings name="default" id="5523c960-4e11-4d40-a351-0b14f6f8b246">
-    <Deployment runDeploymentRoot="David_Laptop_DESKTOP-27SVNEK_2026-06-11_17_20_14" />
+<TestRun id="543aec05-1fd9-4028-9462-1b668aba971f" name="David Laptop@DESKTOP-27SVNEK 2026-06-11 17:34:23" runUser="DESKTOP-27SVNEK\David Laptop" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-06-11T17:34:23.8619120+02:00" queuing="2026-06-11T17:34:23.8619125+02:00" start="2026-06-11T17:34:22.3709730+02:00" finish="2026-06-11T17:34:24.0482835+02:00" />
+  <TestSettings name="default" id="28718699-6a20-4c15-b36e-f99a4297fd2a">
+    <Deployment runDeploymentRoot="David_Laptop_DESKTOP-27SVNEK_2026-06-11_17_34_23" />
   </TestSettings>
   <Results>
-    <UnitTestResult executionId="1d396565-1b69-4c09-a8f4-cecffab3e8bb" testId="538864d3-15a6-babb-7a40-7c6b6bf07cbc" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Search_ShouldReturnFilteredPlayers" computerName="DESKTOP-27SVNEK" duration="00:00:01.1226518" startTime="2026-06-11T17:20:14.4134724+02:00" endTime="2026-06-11T17:20:14.4134725+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d396565-1b69-4c09-a8f4-cecffab3e8bb" />
-    <UnitTestResult executionId="80e7d1d7-1b39-4712-9549-8263291e7b0c" testId="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment" computerName="DESKTOP-27SVNEK" duration="00:00:00.0055296" startTime="2026-06-11T17:20:14.5140437+02:00" endTime="2026-06-11T17:20:14.5140439+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="80e7d1d7-1b39-4712-9549-8263291e7b0c" />
-    <UnitTestResult executionId="1b0dd6a0-5f68-4de9-a7ab-4994fdeb4883" testId="c41e2427-ade3-3f73-204b-7cd20cba1c5b" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment" computerName="DESKTOP-27SVNEK" duration="00:00:00.0466476" startTime="2026-06-11T17:20:14.4701716+02:00" endTime="2026-06-11T17:20:14.4701718+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1b0dd6a0-5f68-4de9-a7ab-4994fdeb4883" />
-    <UnitTestResult executionId="814b15dd-5fdd-4acc-9c44-ec279ec322c9" testId="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest" computerName="DESKTOP-27SVNEK" duration="00:00:00.0035254" startTime="2026-06-11T17:20:14.5885184+02:00" endTime="2026-06-11T17:20:14.5885186+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="814b15dd-5fdd-4acc-9c44-ec279ec322c9" />
-    <UnitTestResult executionId="5451ed59-5303-4874-b071-fa4db50d52b4" testId="9404eae5-e853-c69b-21ef-887522f704cc" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0240770" startTime="2026-06-11T17:20:14.4953454+02:00" endTime="2026-06-11T17:20:14.4953458+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5451ed59-5303-4874-b071-fa4db50d52b4">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.NotNull() Failure: Value of type 'Nullable&lt;DateTime&gt;' does not have a value</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 180&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="1114d46f-679d-4459-a206-0c2675f6bffd" testId="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0068981" startTime="2026-06-11T17:20:14.4239478+02:00" endTime="2026-06-11T17:20:14.4239480+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1114d46f-679d-4459-a206-0c2675f6bffd">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.Equal() Failure: Values differ&#xD;
-Expected: OK&#xD;
-Actual:   NotFound</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 58&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="7615f967-1579-476e-b1c1-38ded11cfda3" testId="8e724d77-95dd-86b6-7ae6-689f5b87d158" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0388760" startTime="2026-06-11T17:20:14.4158469+02:00" endTime="2026-06-11T17:20:14.4158472+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7615f967-1579-476e-b1c1-38ded11cfda3" />
-    <UnitTestResult executionId="dae47851-33d5-42d8-8453-3d9ee2b5fcee" testId="078cfacd-46be-5756-89c4-3e25958bc18f" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0079072" startTime="2026-06-11T17:20:14.5092608+02:00" endTime="2026-06-11T17:20:14.5092610+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dae47851-33d5-42d8-8453-3d9ee2b5fcee">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.Equal() Failure: Values differ&#xD;
-Expected: Created&#xD;
-Actual:   NotFound</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 99&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="67bb4bbb-c6d8-4fd2-a21b-a8c28ec34fd9" testId="93db83ee-53e1-538c-41a0-dbefa546efe9" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0218667" startTime="2026-06-11T17:20:14.5063956+02:00" endTime="2026-06-11T17:20:14.5063958+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="67bb4bbb-c6d8-4fd2-a21b-a8c28ec34fd9" />
-    <UnitTestResult executionId="3487dce1-300a-42cf-8688-0030741f3632" testId="a704018c-87d8-3875-2763-b7b6e2f710a0" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0155804" startTime="2026-06-11T17:20:14.6042243+02:00" endTime="2026-06-11T17:20:14.6042245+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3487dce1-300a-42cf-8688-0030741f3632" />
-    <UnitTestResult executionId="4f3fb7cd-d123-4a73-9a72-48f57dc79bcd" testId="ed173f7f-4407-3635-94b1-19deff0c1adf" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetAll_ShouldReturnOkWithPlayers" computerName="DESKTOP-27SVNEK" duration="00:00:00.0056983" startTime="2026-06-11T17:20:14.4844492+02:00" endTime="2026-06-11T17:20:14.4844493+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f3fb7cd-d123-4a73-9a72-48f57dc79bcd" />
-    <UnitTestResult executionId="b2fa991c-182d-49f1-b324-a83512794ab5" testId="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0284037" startTime="2026-06-11T17:20:14.5349092+02:00" endTime="2026-06-11T17:20:14.5349094+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b2fa991c-182d-49f1-b324-a83512794ab5" />
-    <UnitTestResult executionId="12617715-e261-4f82-a4ec-870484a2e2bd" testId="e2999306-a712-53ed-6d80-199f88010bf9" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0325555" startTime="2026-06-11T17:20:14.4134301+02:00" endTime="2026-06-11T17:20:14.4134301+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="12617715-e261-4f82-a4ec-870484a2e2bd" />
-    <UnitTestResult executionId="161157a1-7ac3-4ea3-8a22-2c1e2dbf81a8" testId="fd1acf38-9b78-92ed-da10-103478f1a5b6" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0019884" startTime="2026-06-11T17:20:14.5479790+02:00" endTime="2026-06-11T17:20:14.5479792+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="161157a1-7ac3-4ea3-8a22-2c1e2dbf81a8" />
-    <UnitTestResult executionId="a08fb5e2-8301-4dad-977e-d1b6c339f2ab" testId="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0052538" startTime="2026-06-11T17:20:14.6133627+02:00" endTime="2026-06-11T17:20:14.6133629+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a08fb5e2-8301-4dad-977e-d1b6c339f2ab" />
-    <UnitTestResult executionId="b7638de1-d441-4274-866f-70086f25535b" testId="6c08da1f-f9db-a683-7410-e05afa648424" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0026156" startTime="2026-06-11T17:20:14.4976072+02:00" endTime="2026-06-11T17:20:14.4976077+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7638de1-d441-4274-866f-70086f25535b" />
-    <UnitTestResult executionId="4f073d8c-649a-478e-906f-81d7bfb631b3" testId="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0436220" startTime="2026-06-11T17:20:14.4544056+02:00" endTime="2026-06-11T17:20:14.4544058+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f073d8c-649a-478e-906f-81d7bfb631b3">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.NotNull() Failure: Value of type 'Nullable&lt;DateTime&gt;' does not have a value</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs:line 177&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="d92d6109-3e94-4dee-a529-21835e0c460a" testId="ee88633f-af91-d8b3-efbe-2d2a9a1bb992" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetAll_ShouldReturnOkWithLevels" computerName="DESKTOP-27SVNEK" duration="00:00:00.0237923" startTime="2026-06-11T17:20:14.3620975+02:00" endTime="2026-06-11T17:20:14.3620979+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d92d6109-3e94-4dee-a529-21835e0c460a" />
-    <UnitTestResult executionId="72f92260-6146-44b3-8862-0194a8234ced" testId="6971ec2a-3888-6f68-7b87-fd3bb1589fcd" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0088461" startTime="2026-06-11T17:20:14.5438772+02:00" endTime="2026-06-11T17:20:14.5438774+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="72f92260-6146-44b3-8862-0194a8234ced" />
-    <UnitTestResult executionId="f10d7668-22d4-4f3a-8822-cb70ff0950db" testId="fca3d598-3453-c2d7-12bb-cdbb4116bd03" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetAll_ShouldReturnOkWithCharacters" computerName="DESKTOP-27SVNEK" duration="00:00:00.0036912" startTime="2026-06-11T17:20:14.6080037+02:00" endTime="2026-06-11T17:20:14.6080038+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f10d7668-22d4-4f3a-8822-cb70ff0950db" />
-    <UnitTestResult executionId="d7b22fce-5672-45f3-bc2f-aae3f65d6608" testId="e2e28516-12f6-1abc-b297-6974cceffa02" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:01.0813330" startTime="2026-06-11T17:20:14.3820586+02:00" endTime="2026-06-11T17:20:14.3820589+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d7b22fce-5672-45f3-bc2f-aae3f65d6608">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.NotNull() Failure: Value of type 'Nullable&lt;DateTime&gt;' does not have a value</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs:line 224&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="b8c5652d-722e-4e26-a1f1-0996bda2059d" testId="b021d359-fd04-1adb-05ea-7dc6a2cfca7e" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest" computerName="DESKTOP-27SVNEK" duration="00:00:00.0049065" startTime="2026-06-11T17:20:14.4199789+02:00" endTime="2026-06-11T17:20:14.4199792+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b8c5652d-722e-4e26-a1f1-0996bda2059d" />
-    <UnitTestResult executionId="9c05eff6-30a7-462f-af66-a166d8bf159f" testId="4c512e64-2adc-8896-db39-2d3e294d3e63" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0498992" startTime="2026-06-11T17:20:14.3244613+02:00" endTime="2026-06-11T17:20:14.3244615+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c05eff6-30a7-462f-af66-a166d8bf159f" />
-    <UnitTestResult executionId="27cd3fc7-8656-4f52-9a90-538e7a45fed7" testId="395a43d0-9912-ce00-56b6-d30349733ff2" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0081093" startTime="2026-06-11T17:20:14.4641439+02:00" endTime="2026-06-11T17:20:14.4641443+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27cd3fc7-8656-4f52-9a90-538e7a45fed7" />
-    <UnitTestResult executionId="23cc724f-cdef-4681-81f5-7f60acab2c52" testId="1bebf161-3df6-a803-246c-ec9b109fb37e" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0022456" startTime="2026-06-11T17:20:14.4999545+02:00" endTime="2026-06-11T17:20:14.4999547+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23cc724f-cdef-4681-81f5-7f60acab2c52" />
-    <UnitTestResult executionId="738504a8-35ef-4e2e-8961-4593ecd8a7fa" testId="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0358228" startTime="2026-06-11T17:20:14.4558980+02:00" endTime="2026-06-11T17:20:14.4558982+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="738504a8-35ef-4e2e-8961-4593ecd8a7fa" />
-    <UnitTestResult executionId="9a8988cf-a7b3-4754-b389-c8e4363a1870" testId="146a96e5-083d-3152-2965-a9d31ed71361" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0016462" startTime="2026-06-11T17:20:14.5068498+02:00" endTime="2026-06-11T17:20:14.5068500+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a8988cf-a7b3-4754-b389-c8e4363a1870" />
-    <UnitTestResult executionId="4310af72-086e-4975-a7f6-ff3919ef1147" testId="4638fd82-7515-ecf3-50e8-89234ac26bfa" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0742189" startTime="2026-06-11T17:20:14.5051223+02:00" endTime="2026-06-11T17:20:14.5051225+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4310af72-086e-4975-a7f6-ff3919ef1147" />
-    <UnitTestResult executionId="f665e3fc-3c51-4240-8397-720e8ea2d7d7" testId="a51e3c89-3189-bea1-a410-feece8933f6b" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0433283" startTime="2026-06-11T17:20:14.5502780+02:00" endTime="2026-06-11T17:20:14.5502782+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f665e3fc-3c51-4240-8397-720e8ea2d7d7" />
-    <UnitTestResult executionId="3c26f84f-6dc3-44f7-bc0f-2b75e760eab5" testId="9752e162-5d90-89ce-7074-a03142868009" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels" computerName="DESKTOP-27SVNEK" duration="00:00:00.0098358" startTime="2026-06-11T17:20:14.4154378+02:00" endTime="2026-06-11T17:20:14.4154380+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3c26f84f-6dc3-44f7-bc0f-2b75e760eab5">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.Single() Failure: The collection contained 2 items&#xD;
-Collection: [CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:20:14.4063973Z, ExperiencePointsToNextLevel = 0, Level = 1, LevelId = 1, ··· }, CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:20:14.4073007Z, ExperiencePointsToNextLevel = 300, Level = 2, LevelId = 2, ··· }]</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs:line 238&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="de9c1279-d752-4643-bbcf-04b6ae71f3d3" testId="cbf00851-f7a7-718c-5517-5dea5885f9b5" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0019086" startTime="2026-06-11T17:20:14.5458925+02:00" endTime="2026-06-11T17:20:14.5458926+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="de9c1279-d752-4643-bbcf-04b6ae71f3d3" />
-    <UnitTestResult executionId="6896a9ed-708a-4ece-88e3-99848eff2b46" testId="222710ac-dba7-d268-30e9-e178f93f2dfa" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0096930" startTime="2026-06-11T17:20:14.3719118+02:00" endTime="2026-06-11T17:20:14.3719120+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6896a9ed-708a-4ece-88e3-99848eff2b46" />
-    <UnitTestResult executionId="fd512f7d-e9ea-422d-969c-ad28c6f119a8" testId="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0542098" startTime="2026-06-11T17:20:14.4307543+02:00" endTime="2026-06-11T17:20:14.4307545+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fd512f7d-e9ea-422d-969c-ad28c6f119a8" />
-    <UnitTestResult executionId="047704e5-ffdb-476d-83c2-8bbd593fb878" testId="b0d2bf9b-1af8-4196-be74-67da039fcf79" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0136260" startTime="2026-06-11T17:20:14.3381529+02:00" endTime="2026-06-11T17:20:14.3381531+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="047704e5-ffdb-476d-83c2-8bbd593fb878" />
-    <UnitTestResult executionId="bcd73706-6728-4414-a47e-03b3cb228c8e" testId="6c1a4c86-5663-e150-1692-8ff3432e00ad" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0243285" startTime="2026-06-11T17:20:14.4792235+02:00" endTime="2026-06-11T17:20:14.4792237+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bcd73706-6728-4414-a47e-03b3cb228c8e">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.NotNull() Failure: Value is null</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs:line 101&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="35f9ba07-c914-4b01-9520-1f41ab89fc28" testId="44fa029f-0ce6-b431-7609-5786f6f7b080" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.9823857" startTime="2026-06-11T17:20:14.2739284+02:00" endTime="2026-06-11T17:20:14.2739453+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="35f9ba07-c914-4b01-9520-1f41ab89fc28" />
-    <UnitTestResult executionId="895c63a7-b584-461c-850b-b655023a0ca3" testId="8b342a26-5260-8148-b43a-62f8fa25c5db" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters" computerName="DESKTOP-27SVNEK" duration="00:00:00.0342941" startTime="2026-06-11T17:20:14.5854348+02:00" endTime="2026-06-11T17:20:14.5854350+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="895c63a7-b584-461c-850b-b655023a0ca3">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.Single() Failure: The collection contained 2 items&#xD;
-Collection: [CharacterDto { Alignment = NeutralGood, Background = Soldier, CharacterId = 2, CharacterName = "Another Character", Class = Cleric, ··· }, CharacterDto { Alignment = ChaoticEvil, Background = Acolyte, CharacterId = 1, CharacterName = "Test Character", Class = Barbarian, ··· }]</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs:line 271&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
-    <UnitTestResult executionId="c5508b54-a948-48a3-b852-aae22ed9cd23" testId="b83d77f3-fd88-8ab7-d0f2-c60211255a20" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:01.0893390" startTime="2026-06-11T17:20:14.4131987+02:00" endTime="2026-06-11T17:20:14.4131989+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5508b54-a948-48a3-b852-aae22ed9cd23">
-      <Output>
-        <ErrorInfo>
-          <Message>Assert.Equal() Failure: Values differ&#xD;
-Expected: OK&#xD;
-Actual:   NotFound</Message>
-          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 133&#xD;
---- End of stack trace from previous location ---</StackTrace>
-        </ErrorInfo>
-      </Output>
-    </UnitTestResult>
+    <UnitTestResult executionId="b6d05dc7-00b0-4a8e-981a-ca141fc0fa54" testId="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment" computerName="DESKTOP-27SVNEK" duration="00:00:00.0033033" startTime="2026-06-11T17:34:23.9362905+02:00" endTime="2026-06-11T17:34:23.9362906+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6d05dc7-00b0-4a8e-981a-ca141fc0fa54" />
+    <UnitTestResult executionId="c95e7f58-c142-4dd2-85ef-91c75b1328f3" testId="395a43d0-9912-ce00-56b6-d30349733ff2" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0057877" startTime="2026-06-11T17:34:23.8722149+02:00" endTime="2026-06-11T17:34:23.8722150+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c95e7f58-c142-4dd2-85ef-91c75b1328f3" />
+    <UnitTestResult executionId="95112d73-f835-4311-8404-057960f72ab9" testId="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0267912" startTime="2026-06-11T17:34:23.8663495+02:00" endTime="2026-06-11T17:34:23.8663496+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95112d73-f835-4311-8404-057960f72ab9" />
+    <UnitTestResult executionId="b9ef74e5-f676-4502-9b91-ed3f95105332" testId="222710ac-dba7-d268-30e9-e178f93f2dfa" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0077552" startTime="2026-06-11T17:34:23.8056434+02:00" endTime="2026-06-11T17:34:23.8056435+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9ef74e5-f676-4502-9b91-ed3f95105332" />
+    <UnitTestResult executionId="240d48b6-d71d-4fb2-8f03-fbf4b1487635" testId="8b342a26-5260-8148-b43a-62f8fa25c5db" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters" computerName="DESKTOP-27SVNEK" duration="00:00:00.0297772" startTime="2026-06-11T17:34:23.9659155+02:00" endTime="2026-06-11T17:34:23.9659156+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="240d48b6-d71d-4fb2-8f03-fbf4b1487635" />
+    <UnitTestResult executionId="d7f100d4-65b4-4c37-b5ca-f357000bca37" testId="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0316276" startTime="2026-06-11T17:34:23.8649859+02:00" endTime="2026-06-11T17:34:23.8649861+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d7f100d4-65b4-4c37-b5ca-f357000bca37" />
+    <UnitTestResult executionId="c4a9ed61-9a54-4eab-9dbb-b755910e1ce3" testId="a704018c-87d8-3875-2763-b7b6e2f710a0" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0130832" startTime="2026-06-11T17:34:23.9822867+02:00" endTime="2026-06-11T17:34:23.9822868+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4a9ed61-9a54-4eab-9dbb-b755910e1ce3" />
+    <UnitTestResult executionId="573b7bbe-b326-40e4-b7b5-1d383b3dc2f4" testId="538864d3-15a6-babb-7a40-7c6b6bf07cbc" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Search_ShouldReturnFilteredPlayers" computerName="DESKTOP-27SVNEK" duration="00:00:00.8917988" startTime="2026-06-11T17:34:23.8332517+02:00" endTime="2026-06-11T17:34:23.8332518+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="573b7bbe-b326-40e4-b7b5-1d383b3dc2f4" />
+    <UnitTestResult executionId="e9705d32-2565-45cc-8413-4595a5a382c4" testId="a51e3c89-3189-bea1-a410-feece8933f6b" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0361021" startTime="2026-06-11T17:34:23.9360358+02:00" endTime="2026-06-11T17:34:23.9360360+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9705d32-2565-45cc-8413-4595a5a382c4" />
+    <UnitTestResult executionId="45036399-00f0-4d93-8829-873f40026122" testId="fd1acf38-9b78-92ed-da10-103478f1a5b6" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0016363" startTime="2026-06-11T17:34:23.9405699+02:00" endTime="2026-06-11T17:34:23.9405700+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45036399-00f0-4d93-8829-873f40026122" />
+    <UnitTestResult executionId="e2cd52de-9298-416b-819b-9c1c5b09a368" testId="cbf00851-f7a7-718c-5517-5dea5885f9b5" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0014342" startTime="2026-06-11T17:34:23.9388501+02:00" endTime="2026-06-11T17:34:23.9388502+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e2cd52de-9298-416b-819b-9c1c5b09a368" />
+    <UnitTestResult executionId="2186a466-7ecc-401e-8fc3-79830108b4d5" testId="6c1a4c86-5663-e150-1692-8ff3432e00ad" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0196638" startTime="2026-06-11T17:34:23.8847525+02:00" endTime="2026-06-11T17:34:23.8847530+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2186a466-7ecc-401e-8fc3-79830108b4d5" />
+    <UnitTestResult executionId="1255f697-67cc-4b60-8689-c4ca01493326" testId="1bebf161-3df6-a803-246c-ec9b109fb37e" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0015493" startTime="2026-06-11T17:34:23.9186275+02:00" endTime="2026-06-11T17:34:23.9186276+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1255f697-67cc-4b60-8689-c4ca01493326" />
+    <UnitTestResult executionId="ee3c5bcf-3ef1-4027-81d4-425e2e4468c5" testId="b0d2bf9b-1af8-4196-be74-67da039fcf79" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0121564" startTime="2026-06-11T17:34:23.7782540+02:00" endTime="2026-06-11T17:34:23.7782541+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ee3c5bcf-3ef1-4027-81d4-425e2e4468c5" />
+    <UnitTestResult executionId="f07e1234-cc52-498a-ad61-c3d3fdb9ede2" testId="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0043577" startTime="2026-06-11T17:34:23.9899724+02:00" endTime="2026-06-11T17:34:23.9899725+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f07e1234-cc52-498a-ad61-c3d3fdb9ede2" />
+    <UnitTestResult executionId="c09071b4-ac27-4943-9932-c3bfaf8c1103" testId="8e724d77-95dd-86b6-7ae6-689f5b87d158" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0323318" startTime="2026-06-11T17:34:23.8655121+02:00" endTime="2026-06-11T17:34:23.8655122+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c09071b4-ac27-4943-9932-c3bfaf8c1103" />
+    <UnitTestResult executionId="99aeda65-f643-4c80-9924-d54c3097caf2" testId="6971ec2a-3888-6f68-7b87-fd3bb1589fcd" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0081096" startTime="2026-06-11T17:34:23.9373439+02:00" endTime="2026-06-11T17:34:23.9373440+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="99aeda65-f643-4c80-9924-d54c3097caf2" />
+    <UnitTestResult executionId="a1d1f93d-eb5c-4d31-af86-296661aca6bc" testId="ed173f7f-4407-3635-94b1-19deff0c1adf" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetAll_ShouldReturnOkWithPlayers" computerName="DESKTOP-27SVNEK" duration="00:00:00.0035270" startTime="2026-06-11T17:34:23.8883893+02:00" endTime="2026-06-11T17:34:23.8883894+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a1d1f93d-eb5c-4d31-af86-296661aca6bc" />
+    <UnitTestResult executionId="220904c3-0c6b-4206-bee0-e210b1d0381c" testId="93db83ee-53e1-538c-41a0-dbefa546efe9" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0162047" startTime="2026-06-11T17:34:23.9046910+02:00" endTime="2026-06-11T17:34:23.9046911+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="220904c3-0c6b-4206-bee0-e210b1d0381c" />
+    <UnitTestResult executionId="f890241f-7f28-4e35-8e4c-eed34c39483a" testId="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0056559" startTime="2026-06-11T17:34:23.8712679+02:00" endTime="2026-06-11T17:34:23.8712682+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f890241f-7f28-4e35-8e4c-eed34c39483a" />
+    <UnitTestResult executionId="06eae9d9-f500-49a1-949e-e3c2e9ce366e" testId="b021d359-fd04-1adb-05ea-7dc6a2cfca7e" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest" computerName="DESKTOP-27SVNEK" duration="00:00:00.0045720" startTime="2026-06-11T17:34:23.8394590+02:00" endTime="2026-06-11T17:34:23.8394591+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="06eae9d9-f500-49a1-949e-e3c2e9ce366e" />
+    <UnitTestResult executionId="e39409c2-62f8-4102-9428-62d83fbf6432" testId="e2e28516-12f6-1abc-b297-6974cceffa02" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.8658240" startTime="2026-06-11T17:34:23.8073179+02:00" endTime="2026-06-11T17:34:23.8073182+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e39409c2-62f8-4102-9428-62d83fbf6432" />
+    <UnitTestResult executionId="00abd42f-40cd-49b5-83aa-64868a166e0e" testId="9404eae5-e853-c69b-21ef-887522f704cc" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0159818" startTime="2026-06-11T17:34:23.9154102+02:00" endTime="2026-06-11T17:34:23.9154104+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="00abd42f-40cd-49b5-83aa-64868a166e0e" />
+    <UnitTestResult executionId="467fb834-63cc-48c6-935d-07198039884b" testId="078cfacd-46be-5756-89c4-3e25958bc18f" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0142070" startTime="2026-06-11T17:34:23.9329346+02:00" endTime="2026-06-11T17:34:23.9329347+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="467fb834-63cc-48c6-935d-07198039884b" />
+    <UnitTestResult executionId="9b590a86-8a9a-457a-b665-95d87a34987a" testId="e2999306-a712-53ed-6d80-199f88010bf9" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0241101" startTime="2026-06-11T17:34:23.8298622+02:00" endTime="2026-06-11T17:34:23.8298623+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b590a86-8a9a-457a-b665-95d87a34987a" />
+    <UnitTestResult executionId="decea6f6-7bed-45cd-969d-4386d178858a" testId="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest" computerName="DESKTOP-27SVNEK" duration="00:00:00.0030764" startTime="2026-06-11T17:34:23.9690819+02:00" endTime="2026-06-11T17:34:23.9690820+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="decea6f6-7bed-45cd-969d-4386d178858a" />
+    <UnitTestResult executionId="016679c0-41c4-4d37-8ab0-b5f0909ad78f" testId="6c08da1f-f9db-a683-7410-e05afa648424" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0015289" startTime="2026-06-11T17:34:23.9170058+02:00" endTime="2026-06-11T17:34:23.9170059+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="016679c0-41c4-4d37-8ab0-b5f0909ad78f" />
+    <UnitTestResult executionId="18a4ab9b-8433-4e08-bf05-86c9996a928b" testId="b83d77f3-fd88-8ab7-d0f2-c60211255a20" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.8915752" startTime="2026-06-11T17:34:23.8330910+02:00" endTime="2026-06-11T17:34:23.8330913+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="18a4ab9b-8433-4e08-bf05-86c9996a928b" />
+    <UnitTestResult executionId="8a76a4e7-7ff0-451e-a7e7-2d598b23bc19" testId="c41e2427-ade3-3f73-204b-7cd20cba1c5b" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment" computerName="DESKTOP-27SVNEK" duration="00:00:00.0279425" startTime="2026-06-11T17:34:23.8992900+02:00" endTime="2026-06-11T17:34:23.8992901+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8a76a4e7-7ff0-451e-a7e7-2d598b23bc19" />
+    <UnitTestResult executionId="2ff5453b-9ab3-4373-b2c0-087f5eab7536" testId="4c512e64-2adc-8896-db39-2d3e294d3e63" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0384394" startTime="2026-06-11T17:34:23.7660316+02:00" endTime="2026-06-11T17:34:23.7660317+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ff5453b-9ab3-4373-b2c0-087f5eab7536" />
+    <UnitTestResult executionId="2dd88a3d-9173-4042-afaf-02888a3c7b15" testId="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0371063" startTime="2026-06-11T17:34:23.8445351+02:00" endTime="2026-06-11T17:34:23.8445352+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2dd88a3d-9173-4042-afaf-02888a3c7b15" />
+    <UnitTestResult executionId="613760ea-ea22-494e-b059-518a70d96f82" testId="44fa029f-0ce6-b431-7609-5786f6f7b080" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.7805200" startTime="2026-06-11T17:34:23.7267308+02:00" endTime="2026-06-11T17:34:23.7267562+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="613760ea-ea22-494e-b059-518a70d96f82" />
+    <UnitTestResult executionId="ef58844c-cf8e-4d90-abb8-a079287e32df" testId="9752e162-5d90-89ce-7074-a03142868009" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels" computerName="DESKTOP-27SVNEK" duration="00:00:00.0047731" startTime="2026-06-11T17:34:23.8347562+02:00" endTime="2026-06-11T17:34:23.8347563+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef58844c-cf8e-4d90-abb8-a079287e32df" />
+    <UnitTestResult executionId="dd0bdb00-28b4-4409-a45a-d17025115756" testId="146a96e5-083d-3152-2965-a9d31ed71361" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0016297" startTime="2026-06-11T17:34:23.8998388+02:00" endTime="2026-06-11T17:34:23.8998389+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd0bdb00-28b4-4409-a45a-d17025115756" />
+    <UnitTestResult executionId="5b836c5c-2b59-4829-9404-980ede692681" testId="4638fd82-7515-ecf3-50e8-89234ac26bfa" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0534737" startTime="2026-06-11T17:34:23.8981334+02:00" endTime="2026-06-11T17:34:23.8981335+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b836c5c-2b59-4829-9404-980ede692681" />
+    <UnitTestResult executionId="3312cb32-cab6-4941-8ac2-70361bf693fd" testId="fca3d598-3453-c2d7-12bb-cdbb4116bd03" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetAll_ShouldReturnOkWithCharacters" computerName="DESKTOP-27SVNEK" duration="00:00:00.0031872" startTime="2026-06-11T17:34:23.9855374+02:00" endTime="2026-06-11T17:34:23.9855375+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3312cb32-cab6-4941-8ac2-70361bf693fd" />
+    <UnitTestResult executionId="8cc1b00c-e859-4d6c-a773-947fc1e4533c" testId="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0243423" startTime="2026-06-11T17:34:23.9291562+02:00" endTime="2026-06-11T17:34:23.9291565+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8cc1b00c-e859-4d6c-a773-947fc1e4533c" />
+    <UnitTestResult executionId="35abe536-0361-497d-ada6-39183f030401" testId="ee88633f-af91-d8b3-efbe-2d2a9a1bb992" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetAll_ShouldReturnOkWithLevels" computerName="DESKTOP-27SVNEK" duration="00:00:00.0193866" startTime="2026-06-11T17:34:23.7977881+02:00" endTime="2026-06-11T17:34:23.7977884+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="35abe536-0361-497d-ada6-39183f030401" />
   </Results>
   <TestDefinitions>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="4638fd82-7515-ecf3-50e8-89234ac26bfa">
-      <Execution id="4310af72-086e-4975-a7f6-ff3919ef1147" />
+      <Execution id="5b836c5c-2b59-4829-9404-980ede692681" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="b83d77f3-fd88-8ab7-d0f2-c60211255a20">
-      <Execution id="c5508b54-a948-48a3-b852-aae22ed9cd23" />
+      <Execution id="18a4ab9b-8433-4e08-bf05-86c9996a928b" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6c1a4c86-5663-e150-1692-8ff3432e00ad">
-      <Execution id="bcd73706-6728-4414-a47e-03b3cb228c8e" />
+      <Execution id="2186a466-7ecc-401e-8fc3-79830108b4d5" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb">
-      <Execution id="1114d46f-679d-4459-a206-0c2675f6bffd" />
+      <Execution id="f890241f-7f28-4e35-8e4c-eed34c39483a" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="1bebf161-3df6-a803-246c-ec9b109fb37e">
-      <Execution id="23cc724f-cdef-4681-81f5-7f60acab2c52" />
+      <Execution id="1255f697-67cc-4b60-8689-c4ca01493326" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6971ec2a-3888-6f68-7b87-fd3bb1589fcd">
-      <Execution id="72f92260-6146-44b3-8862-0194a8234ced" />
+      <Execution id="99aeda65-f643-4c80-9924-d54c3097caf2" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="8e724d77-95dd-86b6-7ae6-689f5b87d158">
-      <Execution id="7615f967-1579-476e-b1c1-38ded11cfda3" />
+      <Execution id="c09071b4-ac27-4943-9932-c3bfaf8c1103" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="222710ac-dba7-d268-30e9-e178f93f2dfa">
-      <Execution id="6896a9ed-708a-4ece-88e3-99848eff2b46" />
+      <Execution id="b9ef74e5-f676-4502-9b91-ed3f95105332" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d">
-      <Execution id="738504a8-35ef-4e2e-8961-4593ecd8a7fa" />
+      <Execution id="95112d73-f835-4311-8404-057960f72ab9" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="93db83ee-53e1-538c-41a0-dbefa546efe9">
-      <Execution id="67bb4bbb-c6d8-4fd2-a21b-a8c28ec34fd9" />
+      <Execution id="220904c3-0c6b-4206-bee0-e210b1d0381c" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc">
-      <Execution id="80e7d1d7-1b39-4712-9549-8263291e7b0c" />
+      <Execution id="b6d05dc7-00b0-4a8e-981a-ca141fc0fa54" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="GetAll_ShouldReturnOkWithEquipment" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="b0d2bf9b-1af8-4196-be74-67da039fcf79">
-      <Execution id="047704e5-ffdb-476d-83c2-8bbd593fb878" />
+      <Execution id="ee3c5bcf-3ef1-4027-81d4-425e2e4468c5" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="e2999306-a712-53ed-6d80-199f88010bf9">
-      <Execution id="12617715-e261-4f82-a4ec-870484a2e2bd" />
+      <Execution id="9b590a86-8a9a-457a-b665-95d87a34987a" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="078cfacd-46be-5756-89c4-3e25958bc18f">
-      <Execution id="dae47851-33d5-42d8-8453-3d9ee2b5fcee" />
+      <Execution id="467fb834-63cc-48c6-935d-07198039884b" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9">
-      <Execution id="fd512f7d-e9ea-422d-969c-ad28c6f119a8" />
+      <Execution id="2dd88a3d-9173-4042-afaf-02888a3c7b15" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966">
-      <Execution id="4f073d8c-649a-478e-906f-81d7bfb631b3" />
+      <Execution id="d7f100d4-65b4-4c37-b5ca-f357000bca37" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="e2e28516-12f6-1abc-b297-6974cceffa02">
-      <Execution id="d7b22fce-5672-45f3-bc2f-aae3f65d6608" />
+      <Execution id="e39409c2-62f8-4102-9428-62d83fbf6432" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="8b342a26-5260-8148-b43a-62f8fa25c5db">
-      <Execution id="895c63a7-b584-461c-850b-b655023a0ca3" />
+      <Execution id="240d48b6-d71d-4fb2-8f03-fbf4b1487635" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Search_ShouldReturnFilteredCharacters" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="a51e3c89-3189-bea1-a410-feece8933f6b">
-      <Execution id="f665e3fc-3c51-4240-8397-720e8ea2d7d7" />
+      <Execution id="e9705d32-2565-45cc-8413-4595a5a382c4" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetAll_ShouldReturnOkWithLevels" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="ee88633f-af91-d8b3-efbe-2d2a9a1bb992">
-      <Execution id="d92d6109-3e94-4dee-a529-21835e0c460a" />
+      <Execution id="35abe536-0361-497d-ada6-39183f030401" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="GetAll_ShouldReturnOkWithLevels" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6c08da1f-f9db-a683-7410-e05afa648424">
-      <Execution id="b7638de1-d441-4274-866f-70086f25535b" />
+      <Execution id="016679c0-41c4-4d37-8ab0-b5f0909ad78f" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="4c512e64-2adc-8896-db39-2d3e294d3e63">
-      <Execution id="9c05eff6-30a7-462f-af66-a166d8bf159f" />
+      <Execution id="2ff5453b-9ab3-4373-b2c0-087f5eab7536" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Search_ShouldReturnFilteredPlayers" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="538864d3-15a6-babb-7a40-7c6b6bf07cbc">
-      <Execution id="1d396565-1b69-4c09-a8f4-cecffab3e8bb" />
+      <Execution id="573b7bbe-b326-40e4-b7b5-1d383b3dc2f4" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Search_ShouldReturnFilteredPlayers" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="a704018c-87d8-3875-2763-b7b6e2f710a0">
-      <Execution id="3487dce1-300a-42cf-8688-0030741f3632" />
+      <Execution id="c4a9ed61-9a54-4eab-9dbb-b755910e1ce3" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="395a43d0-9912-ce00-56b6-d30349733ff2">
-      <Execution id="27cd3fc7-8656-4f52-9a90-538e7a45fed7" />
+      <Execution id="c95e7f58-c142-4dd2-85ef-91c75b1328f3" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="9752e162-5d90-89ce-7074-a03142868009">
-      <Execution id="3c26f84f-6dc3-44f7-bc0f-2b75e760eab5" />
+      <Execution id="ef58844c-cf8e-4d90-abb8-a079287e32df" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Search_ShouldReturnFilteredLevels" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a">
-      <Execution id="a08fb5e2-8301-4dad-977e-d1b6c339f2ab" />
+      <Execution id="f07e1234-cc52-498a-ad61-c3d3fdb9ede2" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="c41e2427-ade3-3f73-204b-7cd20cba1c5b">
-      <Execution id="1b0dd6a0-5f68-4de9-a7ab-4994fdeb4883" />
+      <Execution id="8a76a4e7-7ff0-451e-a7e7-2d598b23bc19" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Search_ShouldReturnFilteredEquipment" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetAll_ShouldReturnOkWithCharacters" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="fca3d598-3453-c2d7-12bb-cdbb4116bd03">
-      <Execution id="f10d7668-22d4-4f3a-8822-cb70ff0950db" />
+      <Execution id="3312cb32-cab6-4941-8ac2-70361bf693fd" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="GetAll_ShouldReturnOkWithCharacters" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="9404eae5-e853-c69b-21ef-887522f704cc">
-      <Execution id="5451ed59-5303-4874-b071-fa4db50d52b4" />
+      <Execution id="00abd42f-40cd-49b5-83aa-64868a166e0e" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetAll_ShouldReturnOkWithPlayers" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="ed173f7f-4407-3635-94b1-19deff0c1adf">
-      <Execution id="4f3fb7cd-d123-4a73-9a72-48f57dc79bcd" />
+      <Execution id="a1d1f93d-eb5c-4d31-af86-296661aca6bc" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="GetAll_ShouldReturnOkWithPlayers" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="cbf00851-f7a7-718c-5517-5dea5885f9b5">
-      <Execution id="de9c1279-d752-4643-bbcf-04b6ae71f3d3" />
+      <Execution id="e2cd52de-9298-416b-819b-9c1c5b09a368" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="44fa029f-0ce6-b431-7609-5786f6f7b080">
-      <Execution id="35f9ba07-c914-4b01-9520-1f41ab89fc28" />
+      <Execution id="613760ea-ea22-494e-b059-518a70d96f82" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="b021d359-fd04-1adb-05ea-7dc6a2cfca7e">
-      <Execution id="b8c5652d-722e-4e26-a1f1-0996bda2059d" />
+      <Execution id="06eae9d9-f500-49a1-949e-e3c2e9ce366e" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Create_WithDuplicateLevel_ShouldReturnBadRequest" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15">
-      <Execution id="b2fa991c-182d-49f1-b324-a83512794ab5" />
+      <Execution id="8cc1b00c-e859-4d6c-a773-947fc1e4533c" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="fd1acf38-9b78-92ed-da10-103478f1a5b6">
-      <Execution id="161157a1-7ac3-4ea3-8a22-2c1e2dbf81a8" />
+      <Execution id="45036399-00f0-4d93-8829-873f40026122" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f">
-      <Execution id="814b15dd-5fdd-4acc-9c44-ec279ec322c9" />
+      <Execution id="decea6f6-7bed-45cd-969d-4386d178858a" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Create_WithInvalidPlayerId_ShouldReturnBadRequest" />
     </UnitTest>
     <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="146a96e5-083d-3152-2965-a9d31ed71361">
-      <Execution id="9a8988cf-a7b3-4754-b389-c8e4363a1870" />
+      <Execution id="dd0bdb00-28b4-4409-a45a-d17025115756" />
       <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
     </UnitTest>
   </TestDefinitions>
   <TestEntries>
-    <TestEntry testId="538864d3-15a6-babb-7a40-7c6b6bf07cbc" executionId="1d396565-1b69-4c09-a8f4-cecffab3e8bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc" executionId="80e7d1d7-1b39-4712-9549-8263291e7b0c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="c41e2427-ade3-3f73-204b-7cd20cba1c5b" executionId="1b0dd6a0-5f68-4de9-a7ab-4994fdeb4883" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f" executionId="814b15dd-5fdd-4acc-9c44-ec279ec322c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="9404eae5-e853-c69b-21ef-887522f704cc" executionId="5451ed59-5303-4874-b071-fa4db50d52b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb" executionId="1114d46f-679d-4459-a206-0c2675f6bffd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="8e724d77-95dd-86b6-7ae6-689f5b87d158" executionId="7615f967-1579-476e-b1c1-38ded11cfda3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="078cfacd-46be-5756-89c4-3e25958bc18f" executionId="dae47851-33d5-42d8-8453-3d9ee2b5fcee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="93db83ee-53e1-538c-41a0-dbefa546efe9" executionId="67bb4bbb-c6d8-4fd2-a21b-a8c28ec34fd9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="a704018c-87d8-3875-2763-b7b6e2f710a0" executionId="3487dce1-300a-42cf-8688-0030741f3632" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="ed173f7f-4407-3635-94b1-19deff0c1adf" executionId="4f3fb7cd-d123-4a73-9a72-48f57dc79bcd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15" executionId="b2fa991c-182d-49f1-b324-a83512794ab5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="e2999306-a712-53ed-6d80-199f88010bf9" executionId="12617715-e261-4f82-a4ec-870484a2e2bd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="fd1acf38-9b78-92ed-da10-103478f1a5b6" executionId="161157a1-7ac3-4ea3-8a22-2c1e2dbf81a8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a" executionId="a08fb5e2-8301-4dad-977e-d1b6c339f2ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="6c08da1f-f9db-a683-7410-e05afa648424" executionId="b7638de1-d441-4274-866f-70086f25535b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966" executionId="4f073d8c-649a-478e-906f-81d7bfb631b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="ee88633f-af91-d8b3-efbe-2d2a9a1bb992" executionId="d92d6109-3e94-4dee-a529-21835e0c460a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="6971ec2a-3888-6f68-7b87-fd3bb1589fcd" executionId="72f92260-6146-44b3-8862-0194a8234ced" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="fca3d598-3453-c2d7-12bb-cdbb4116bd03" executionId="f10d7668-22d4-4f3a-8822-cb70ff0950db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="e2e28516-12f6-1abc-b297-6974cceffa02" executionId="d7b22fce-5672-45f3-bc2f-aae3f65d6608" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="b021d359-fd04-1adb-05ea-7dc6a2cfca7e" executionId="b8c5652d-722e-4e26-a1f1-0996bda2059d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="4c512e64-2adc-8896-db39-2d3e294d3e63" executionId="9c05eff6-30a7-462f-af66-a166d8bf159f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="395a43d0-9912-ce00-56b6-d30349733ff2" executionId="27cd3fc7-8656-4f52-9a90-538e7a45fed7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="1bebf161-3df6-a803-246c-ec9b109fb37e" executionId="23cc724f-cdef-4681-81f5-7f60acab2c52" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d" executionId="738504a8-35ef-4e2e-8961-4593ecd8a7fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="146a96e5-083d-3152-2965-a9d31ed71361" executionId="9a8988cf-a7b3-4754-b389-c8e4363a1870" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="4638fd82-7515-ecf3-50e8-89234ac26bfa" executionId="4310af72-086e-4975-a7f6-ff3919ef1147" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="a51e3c89-3189-bea1-a410-feece8933f6b" executionId="f665e3fc-3c51-4240-8397-720e8ea2d7d7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="9752e162-5d90-89ce-7074-a03142868009" executionId="3c26f84f-6dc3-44f7-bc0f-2b75e760eab5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="cbf00851-f7a7-718c-5517-5dea5885f9b5" executionId="de9c1279-d752-4643-bbcf-04b6ae71f3d3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="222710ac-dba7-d268-30e9-e178f93f2dfa" executionId="6896a9ed-708a-4ece-88e3-99848eff2b46" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9" executionId="fd512f7d-e9ea-422d-969c-ad28c6f119a8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="b0d2bf9b-1af8-4196-be74-67da039fcf79" executionId="047704e5-ffdb-476d-83c2-8bbd593fb878" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="6c1a4c86-5663-e150-1692-8ff3432e00ad" executionId="bcd73706-6728-4414-a47e-03b3cb228c8e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="44fa029f-0ce6-b431-7609-5786f6f7b080" executionId="35f9ba07-c914-4b01-9520-1f41ab89fc28" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="8b342a26-5260-8148-b43a-62f8fa25c5db" executionId="895c63a7-b584-461c-850b-b655023a0ca3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="b83d77f3-fd88-8ab7-d0f2-c60211255a20" executionId="c5508b54-a948-48a3-b852-aae22ed9cd23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc" executionId="b6d05dc7-00b0-4a8e-981a-ca141fc0fa54" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="395a43d0-9912-ce00-56b6-d30349733ff2" executionId="c95e7f58-c142-4dd2-85ef-91c75b1328f3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d" executionId="95112d73-f835-4311-8404-057960f72ab9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="222710ac-dba7-d268-30e9-e178f93f2dfa" executionId="b9ef74e5-f676-4502-9b91-ed3f95105332" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b342a26-5260-8148-b43a-62f8fa25c5db" executionId="240d48b6-d71d-4fb2-8f03-fbf4b1487635" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966" executionId="d7f100d4-65b4-4c37-b5ca-f357000bca37" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a704018c-87d8-3875-2763-b7b6e2f710a0" executionId="c4a9ed61-9a54-4eab-9dbb-b755910e1ce3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="538864d3-15a6-babb-7a40-7c6b6bf07cbc" executionId="573b7bbe-b326-40e4-b7b5-1d383b3dc2f4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a51e3c89-3189-bea1-a410-feece8933f6b" executionId="e9705d32-2565-45cc-8413-4595a5a382c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd1acf38-9b78-92ed-da10-103478f1a5b6" executionId="45036399-00f0-4d93-8829-873f40026122" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cbf00851-f7a7-718c-5517-5dea5885f9b5" executionId="e2cd52de-9298-416b-819b-9c1c5b09a368" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c1a4c86-5663-e150-1692-8ff3432e00ad" executionId="2186a466-7ecc-401e-8fc3-79830108b4d5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bebf161-3df6-a803-246c-ec9b109fb37e" executionId="1255f697-67cc-4b60-8689-c4ca01493326" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b0d2bf9b-1af8-4196-be74-67da039fcf79" executionId="ee3c5bcf-3ef1-4027-81d4-425e2e4468c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a" executionId="f07e1234-cc52-498a-ad61-c3d3fdb9ede2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8e724d77-95dd-86b6-7ae6-689f5b87d158" executionId="c09071b4-ac27-4943-9932-c3bfaf8c1103" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6971ec2a-3888-6f68-7b87-fd3bb1589fcd" executionId="99aeda65-f643-4c80-9924-d54c3097caf2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ed173f7f-4407-3635-94b1-19deff0c1adf" executionId="a1d1f93d-eb5c-4d31-af86-296661aca6bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="93db83ee-53e1-538c-41a0-dbefa546efe9" executionId="220904c3-0c6b-4206-bee0-e210b1d0381c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb" executionId="f890241f-7f28-4e35-8e4c-eed34c39483a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b021d359-fd04-1adb-05ea-7dc6a2cfca7e" executionId="06eae9d9-f500-49a1-949e-e3c2e9ce366e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2e28516-12f6-1abc-b297-6974cceffa02" executionId="e39409c2-62f8-4102-9428-62d83fbf6432" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9404eae5-e853-c69b-21ef-887522f704cc" executionId="00abd42f-40cd-49b5-83aa-64868a166e0e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="078cfacd-46be-5756-89c4-3e25958bc18f" executionId="467fb834-63cc-48c6-935d-07198039884b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2999306-a712-53ed-6d80-199f88010bf9" executionId="9b590a86-8a9a-457a-b665-95d87a34987a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f" executionId="decea6f6-7bed-45cd-969d-4386d178858a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c08da1f-f9db-a683-7410-e05afa648424" executionId="016679c0-41c4-4d37-8ab0-b5f0909ad78f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b83d77f3-fd88-8ab7-d0f2-c60211255a20" executionId="18a4ab9b-8433-4e08-bf05-86c9996a928b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c41e2427-ade3-3f73-204b-7cd20cba1c5b" executionId="8a76a4e7-7ff0-451e-a7e7-2d598b23bc19" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4c512e64-2adc-8896-db39-2d3e294d3e63" executionId="2ff5453b-9ab3-4373-b2c0-087f5eab7536" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9" executionId="2dd88a3d-9173-4042-afaf-02888a3c7b15" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44fa029f-0ce6-b431-7609-5786f6f7b080" executionId="613760ea-ea22-494e-b059-518a70d96f82" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9752e162-5d90-89ce-7074-a03142868009" executionId="ef58844c-cf8e-4d90-abb8-a079287e32df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="146a96e5-083d-3152-2965-a9d31ed71361" executionId="dd0bdb00-28b4-4409-a45a-d17025115756" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4638fd82-7515-ecf3-50e8-89234ac26bfa" executionId="5b836c5c-2b59-4829-9404-980ede692681" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fca3d598-3453-c2d7-12bb-cdbb4116bd03" executionId="3312cb32-cab6-4941-8ac2-70361bf693fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15" executionId="8cc1b00c-e859-4d6c-a773-947fc1e4533c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ee88633f-af91-d8b3-efbe-2d2a9a1bb992" executionId="35abe536-0361-497d-ada6-39183f030401" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
   </TestEntries>
   <TestLists>
     <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
     <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
   </TestLists>
-  <ResultSummary outcome="Failed">
-    <Counters total="38" executed="38" passed="29" failed="9" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  <ResultSummary outcome="Completed">
+    <Counters total="38" executed="38" passed="38" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
     <Output>
       <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.4.1+b9eacec401 (64-bit .NET 9.0.14)&#xD;
-[xUnit.net 00:00:00.22]   Discovering: DnD_Character_Sheet_Creator.Tests&#xD;
-[xUnit.net 00:00:00.25]   Discovered:  DnD_Character_Sheet_Creator.Tests&#xD;
-[xUnit.net 00:00:00.25]   Starting:    DnD_Character_Sheet_Creator.Tests&#xD;
+[xUnit.net 00:00:00.19]   Discovering: DnD_Character_Sheet_Creator.Tests&#xD;
+[xUnit.net 00:00:00.21]   Discovered:  DnD_Character_Sheet_Creator.Tests&#xD;
+[xUnit.net 00:00:00.22]   Starting:    DnD_Character_Sheet_Creator.Tests&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
 warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
       Failed to determine the https port for redirect.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
@@ -341,157 +299,8 @@ info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
-      Failed to determine the https port for redirect.&#xD;
-warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
-      Failed to determine the https port for redirect.&#xD;
-warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
-      Failed to determine the https port for redirect.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.39]       Assert.NotNull() Failure: Value of type 'Nullable&lt;DateTime&gt;' does not have a value&#xD;
-[xUnit.net 00:00:01.39]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.39]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs(224,0): at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent()&#xD;
-[xUnit.net 00:00:01.39]         --- End of stack trace from previous location ---&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.42]       Assert.Equal() Failure: Values differ&#xD;
-[xUnit.net 00:00:01.42]       Expected: OK&#xD;
-[xUnit.net 00:00:01.42]       Actual:   NotFound&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.42]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.42]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(133,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk()&#xD;
-[xUnit.net 00:00:01.42]         --- End of stack trace from previous location ---&#xD;
-[xUnit.net 00:00:01.42]       Assert.Single() Failure: The collection contained 2 items&#xD;
-[xUnit.net 00:00:01.42]       Collection: [CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:20:14.4063973Z, ExperiencePointsToNextLevel = 0, Level = 1, LevelId = 1, ··· }, CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:20:14.4073007Z, ExperiencePointsToNextLevel = 300, Level = 2, LevelId = 2, ··· }]&#xD;
-[xUnit.net 00:00:01.42]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.42]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs(238,0): at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels()&#xD;
-[xUnit.net 00:00:01.42]         --- End of stack trace from previous location ---&#xD;
-[xUnit.net 00:00:01.43]       Assert.Equal() Failure: Values differ&#xD;
-[xUnit.net 00:00:01.43]       Expected: OK&#xD;
-[xUnit.net 00:00:01.43]       Actual:   NotFound&#xD;
-[xUnit.net 00:00:01.43]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.43]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(58,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk()&#xD;
-[xUnit.net 00:00:01.43]         --- End of stack trace from previous location ---&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 2 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.46]       Assert.NotNull() Failure: Value of type 'Nullable&lt;DateTime&gt;' does not have a value&#xD;
-[xUnit.net 00:00:01.46]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.46]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs(177,0): at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent()&#xD;
-[xUnit.net 00:00:01.46]         --- End of stack trace from previous location ---&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 0 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
@@ -516,26 +325,8 @@ info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.49]       Assert.NotNull() Failure: Value is null&#xD;
-[xUnit.net 00:00:01.49]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.49]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs(101,0): at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated()&#xD;
-[xUnit.net 00:00:01.49]         --- End of stack trace from previous location ---&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 0 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
-      Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.50]       Assert.NotNull() Failure: Value of type 'Nullable&lt;DateTime&gt;' does not have a value&#xD;
-[xUnit.net 00:00:01.50]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.50]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(180,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent()&#xD;
-[xUnit.net 00:00:01.50]         --- End of stack trace from previous location ---&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 0 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
@@ -553,6 +344,10 @@ info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 0 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
@@ -562,14 +357,24 @@ info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.52]       Assert.Equal() Failure: Values differ&#xD;
-[xUnit.net 00:00:01.52]       Expected: Created&#xD;
-[xUnit.net 00:00:01.52]       Actual:   NotFound&#xD;
-[xUnit.net 00:00:01.52]       Stack Trace:&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.52]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(99,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated()&#xD;
-[xUnit.net 00:00:01.52]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
@@ -578,6 +383,90 @@ info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
@@ -608,11 +497,6 @@ info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 2 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.59]       Assert.Single() Failure: The collection contained 2 items&#xD;
-[xUnit.net 00:00:01.59]       Collection: [CharacterDto { Alignment = NeutralGood, Background = Soldier, CharacterId = 2, CharacterName = "Another Character", Class = Cleric, ··· }, CharacterDto { Alignment = ChaoticEvil, Background = Acolyte, CharacterId = 1, CharacterName = "Test Character", Class = Barbarian, ··· }]&#xD;
-[xUnit.net 00:00:01.59]       Stack Trace:&#xD;
-[xUnit.net 00:00:01.59]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs(271,0): at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters()&#xD;
-[xUnit.net 00:00:01.59]         --- End of stack trace from previous location ---&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 0 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
@@ -655,37 +539,8 @@ info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
 info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
       Saved 1 entities to in-memory store.&#xD;
-[xUnit.net 00:00:01.62]   Finished:    DnD_Character_Sheet_Creator.Tests&#xD;
+[xUnit.net 00:00:01.30]   Finished:    DnD_Character_Sheet_Creator.Tests&#xD;
 </StdOut>
     </Output>
-    <RunInfos>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.3801047+02:00">
-        <Text>[xUnit.net 00:00:01.39]     DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.4746523+02:00">
-        <Text>[xUnit.net 00:00:01.42]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.4750349+02:00">
-        <Text>[xUnit.net 00:00:01.42]     DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.4753632+02:00">
-        <Text>[xUnit.net 00:00:01.43]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.4787986+02:00">
-        <Text>[xUnit.net 00:00:01.46]     DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.4810133+02:00">
-        <Text>[xUnit.net 00:00:01.49]     DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.4953609+02:00">
-        <Text>[xUnit.net 00:00:01.50]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.5088564+02:00">
-        <Text>[xUnit.net 00:00:01.52]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated [FAIL]</Text>
-      </RunInfo>
-      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:20:14.5853599+02:00">
-        <Text>[xUnit.net 00:00:01.59]     DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters [FAIL]</Text>
-      </RunInfo>
-    </RunInfos>
   </ResultSummary>
 </TestRun>

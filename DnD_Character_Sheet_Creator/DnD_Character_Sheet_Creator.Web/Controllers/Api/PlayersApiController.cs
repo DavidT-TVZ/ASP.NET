@@ -18,7 +18,7 @@ public class PlayersApiController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<PlayerDto>>> GetAll([FromQuery] string? query)
+    public async Task<ActionResult<IEnumerable<PlayerDto>>> GetAll([FromQuery(Name = "search")] string? search)
     {
         var players = await _context.Players
             .Where(player => player.DeletedAt == null)
@@ -27,9 +27,9 @@ public class PlayersApiController : ControllerBase
             .AsNoTracking()
             .ToListAsync();
 
-        if (!string.IsNullOrWhiteSpace(query))
+        if (!string.IsNullOrWhiteSpace(search))
         {
-            var normalizedQuery = query.Trim();
+            var normalizedQuery = search.Trim();
             players = players.Where(player => PlayerMatchesSearch(player, normalizedQuery)).ToList();
         }
 

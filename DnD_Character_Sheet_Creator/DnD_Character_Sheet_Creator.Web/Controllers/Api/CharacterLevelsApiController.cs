@@ -18,15 +18,15 @@ public class CharacterLevelsApiController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CharacterLevelDto>>> GetAll([FromQuery] string? query)
+    public async Task<ActionResult<IEnumerable<CharacterLevelDto>>> GetAll([FromQuery(Name = "search")] string? search)
     {
         var levels = await _context.CharacterLevels
             .AsNoTracking()
             .ToListAsync();
 
-        if (!string.IsNullOrWhiteSpace(query))
+        if (!string.IsNullOrWhiteSpace(search))
         {
-            var normalizedQuery = query.Trim();
+            var normalizedQuery = search.Trim();
             levels = levels.Where(level => LevelMatchesSearch(level, normalizedQuery)).ToList();
         }
 

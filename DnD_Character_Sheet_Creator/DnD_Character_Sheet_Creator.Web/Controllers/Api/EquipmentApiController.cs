@@ -18,7 +18,7 @@ public class EquipmentApiController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<EquipmentDto>>> GetAll([FromQuery] string? query, [FromQuery] int? characterId)
+    public async Task<ActionResult<IEnumerable<EquipmentDto>>> GetAll([FromQuery(Name = "search")] string? search, [FromQuery] int? characterId)
     {
         var equipment = await _context.Equipment
             .Where(item => item.DeletedAt == null)
@@ -32,9 +32,9 @@ public class EquipmentApiController : ControllerBase
             equipment = equipment.Where(item => item.CharacterId == characterId.Value).ToList();
         }
 
-        if (!string.IsNullOrWhiteSpace(query))
+        if (!string.IsNullOrWhiteSpace(search))
         {
-            var normalizedQuery = query.Trim();
+            var normalizedQuery = search.Trim();
             equipment = equipment.Where(item => EquipmentMatchesSearch(item, normalizedQuery)).ToList();
         }
 
