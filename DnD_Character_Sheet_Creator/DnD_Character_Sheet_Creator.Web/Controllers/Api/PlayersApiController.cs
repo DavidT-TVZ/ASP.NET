@@ -70,7 +70,7 @@ public class PlayersApiController : ControllerBase
             Email = dto.Email.Trim(),
             Password = dto.Password,
             LastLogin = DateTime.UtcNow,
-            IsAdmin = dto.IsAdmin
+            Role = dto.Role
         };
 
         _context.Players.Add(player);
@@ -97,7 +97,7 @@ public class PlayersApiController : ControllerBase
         player.Username = dto.Username.Trim();
         player.Email = dto.Email.Trim();
         player.Password = dto.Password;
-        player.IsAdmin = dto.IsAdmin;
+        player.Role = dto.Role;
 
         await _context.SaveChangesAsync();
 
@@ -137,7 +137,7 @@ public class PlayersApiController : ControllerBase
             Surname = player.Surname,
             Username = player.Username,
             Email = player.Email,
-            IsAdmin = player.IsAdmin,
+            Role = player.Role,
             Characters = player.CharacterList
                 .Where(character => character.DeletedAt == null)
                 .OrderBy(character => character.CharacterName)

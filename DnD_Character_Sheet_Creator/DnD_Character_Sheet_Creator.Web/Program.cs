@@ -124,7 +124,7 @@ static async Task SeedIdentityAsync(IServiceProvider services)
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    foreach (var role in new[] { "Admin", "Manager" })
+    foreach (var role in new[] { "Admin", "Manager", "User" })
     {
         if (!await roleManager.RoleExistsAsync(role))
         {
@@ -154,11 +154,28 @@ static async Task SeedIdentityAsync(IServiceProvider services)
             }
         }
 
-        var roleName = player.IsAdmin ? "Admin" : "Manager";
-        if (!await userManager.IsInRoleAsync(user, roleName))
-        {
-            await userManager.AddToRoleAsync(user, roleName);
-        }
+        await SyncManagedRoleAsync(userManager, user, player.Role);
+    }
+}
+
+static async Task SyncManagedRoleAsync(UserManager<AppUser> userManager, AppUser user, RoleEnum targetRoleEnum)
+{
+    var managedRoles = new[] { "Admin", "Manager", "User" };
+    var targetRole = targetRoleEnum.ToString();
+    var currentRoles = await userManager.GetRolesAsync(user);
+
+    var rolesToRemove = currentRoles
+        .Where(r => managedRoles.Contains(r) && r != targetRole)
+        .ToList();
+
+    if (rolesToRemove.Count > 0)
+    {
+        await userManager.RemoveFromRolesAsync(user, rolesToRemove);
+    }
+
+    if (!currentRoles.Contains(targetRole))
+    {
+        await userManager.AddToRoleAsync(user, targetRole);
     }
 }
 

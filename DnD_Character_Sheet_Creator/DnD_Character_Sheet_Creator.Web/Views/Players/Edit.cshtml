@@ -41,11 +41,17 @@
                         <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
                     </div>
 
-                    @if (ViewBag.CanSetAdmin == true)
+                    @if (ViewBag.CanSetRole == true)
                     {
-                        <div class="mb-4 form-check">
-                            <input asp-for="IsAdmin" class="form-check-input" />
-                            <label asp-for="IsAdmin" class="form-check-label"></label>
+                        <div class="mb-4">
+                            <label asp-for="Role" class="form-label"></label>
+                            <select asp-for="Role" class="form-control">
+                                @foreach (var role in (List<RoleEnum>)ViewBag.AvailableRoles)
+                                {
+                                    <option value="@role" selected="@(Model.Role == role)">@role</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger small d-block mt-1"></span>
                         </div>
                     }
 

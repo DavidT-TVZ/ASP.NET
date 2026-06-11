@@ -44,6 +44,8 @@
 			});
 		}
 
+		window.formatDateTimeControls = formatDateTimeControls;
+
 		var scrollOpenings = document.querySelectorAll("[data-scroll-opening]");
 
 		if (scrollOpenings.length) {

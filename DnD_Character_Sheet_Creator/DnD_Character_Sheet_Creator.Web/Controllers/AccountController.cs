@@ -111,7 +111,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 Email = viewModel.Email,
                 Password = viewModel.Password,
                 LastLogin = DateTime.UtcNow,
-                IsAdmin = false,
+                Role = RoleEnum.User,
                 CharacterList = new List<Character>()
             };
 
@@ -138,7 +138,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return View(viewModel);
             }
 
-            await _userManager.AddToRoleAsync(user, "Manager");
+            await _userManager.AddToRoleAsync(user, RoleEnum.User.ToString());
             await _signInManager.SignInAsync(user, isPersistent: true);
 
             if (!string.IsNullOrWhiteSpace(viewModel.ReturnUrl) && Url.IsLocalUrl(viewModel.ReturnUrl))
@@ -206,7 +206,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 Email = email,
                 Password = string.Empty,
                 LastLogin = DateTime.UtcNow,
-                IsAdmin = false,
+                Role = RoleEnum.User,
                 CharacterList = new List<Character>()
             };
 
@@ -233,7 +233,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             await _userManager.AddLoginAsync(user, info);
-            await _userManager.AddToRoleAsync(user, "Manager");
+            await _userManager.AddToRoleAsync(user, RoleEnum.User.ToString());
             await _signInManager.SignInAsync(user, isPersistent: true);
 
             if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))

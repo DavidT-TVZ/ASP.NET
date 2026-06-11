@@ -40,9 +40,16 @@
                     <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
                         @if (User?.Identity?.IsAuthenticated == true)
                         {
+                            var roleNames = User.Claims
+                                .Where(claim => claim.Type == System.Security.Claims.ClaimTypes.Role)
+                                .Select(claim => claim.Value)
+                                .Distinct()
+                                .ToList();
+                            var roleLabel = roleNames.Count == 0 ? "User" : string.Join(", ", roleNames);
+
                             <div class="text-end small">
                                 <div class="fw-bold">@((User.FindFirst("FullName")?.Value) ?? User.Identity?.Name)</div>
-                                <div class="text-muted">@((User.IsInRole("Admin") ? "Admin" : "User"))</div>
+                                <div class="text-muted">@roleLabel</div>
                             </div>
                             <form asp-controller="Account" asp-action="SignOut" method="post" class="m-0">
                                 @Html.AntiForgeryToken()

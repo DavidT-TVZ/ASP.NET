@@ -1,5 +1,9 @@
 @model IEnumerable<DnD_Character_Sheet_Creator.Models.Attachment>
 
+@{
+    var canManageCharacters = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
+}
+
 @if (!Model.Any())
 {
     <p class="text-muted mb-0">No files have been uploaded yet.</p>
@@ -7,7 +11,7 @@
 else
 {
     <div class="table-responsive">
-        <table class="table table-sm align-middle mb-0">
+        <table class="table table-sm table-borderless align-middle mb-0 chronicle-attachment-table">
             <thead>
                 <tr>
                     <th>File</th>
@@ -24,9 +28,12 @@ else
                             <a href="@attachment.FilePath" target="_blank" rel="noopener">@attachment.FileName</a>
                         </td>
                         <td>@(Math.Round(attachment.FileSize / 1024.0, 1)) KB</td>
-                        <td>@await Html.PartialAsync("_DateTimeControl", new DnD_Character_Sheet_Creator.Web.ViewModels.DateTimeControlViewModel { Value = attachment.CreatedAt })</td>
+                        <td>@await Html.PartialAsync("_DateTimeControl", new DnD_Character_Sheet_Creator.Web.ViewModels.DateTimeControlViewModel { Value = attachment.CreatedAt, CssClass = "attachment-timestamp" })</td>
                         <td class="text-end">
-                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteAttachment(@attachment.AttachmentId)">Delete</button>
+                            @if (canManageCharacters)
+                            {
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteAttachment(@attachment.AttachmentId)">Delete</button>
+                            }
                         </td>
                     </tr>
                 }

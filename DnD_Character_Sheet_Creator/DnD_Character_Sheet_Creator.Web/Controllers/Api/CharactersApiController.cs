@@ -238,7 +238,7 @@ public class CharactersApiController : ControllerBase
                 Surname = character.Player.Surname,
                 Username = character.Player.Username,
                 Email = character.Player.Email,
-                IsAdmin = character.Player.IsAdmin
+                Role = character.Player.Role
             },
             Level = character.Level == null ? null : new CharacterLevelDto
             {

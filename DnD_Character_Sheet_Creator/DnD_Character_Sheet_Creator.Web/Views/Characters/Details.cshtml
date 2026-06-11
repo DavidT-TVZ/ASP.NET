@@ -6,6 +6,7 @@
     var xpCurrent = characterLevel?.CurrentExperiencePoints ?? 0;
     var xpNext = characterLevel?.ExperiencePointsToNextLevel ?? 0;
     var xpPercent = xpNext <= 0 ? 0 : Math.Clamp((int)Math.Round((double)xpCurrent / xpNext * 100), 0, 100);
+    var canManageCharacters = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
 }
 
 <section class="sheet-card mb-4 reveal">
@@ -16,8 +17,11 @@
 <div class="mb-4">
     <div class="d-flex flex-wrap gap-2">
         <a class="btn btn-outline-ink" asp-controller="Characters" asp-action="Index">Back to all characters</a>
-        <a class="btn btn-edit" asp-controller="Characters" asp-action="Edit" asp-route-id="@Model.Character.CharacterId">Edit character</a>
-        <a class="btn btn-outline-danger" asp-controller="Characters" asp-action="Remove" asp-route-id="@Model.Character.CharacterId">Remove character</a>
+        @if (canManageCharacters)
+        {
+            <a class="btn btn-edit" asp-controller="Characters" asp-action="Edit" asp-route-id="@Model.Character.CharacterId">Edit character</a>
+            <a class="btn btn-outline-danger" asp-controller="Characters" asp-action="Remove" asp-route-id="@Model.Character.CharacterId">Remove character</a>
+        }
     </div>
 </div>
 
@@ -68,7 +72,10 @@
 
 <h2 class="h4 mb-3">Equipment</h2>
 <div class="mb-3">
-    <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add equipment</a>
+    @if (canManageCharacters)
+    {
+        <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add equipment</a>
+    }
 </div>
 <div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("EquipmentSearch", "Characters", new { id = Model.Character.CharacterId })" data-autocomplete-url="@Url.Action("EquipmentAutocomplete", "Characters", new { id = Model.Character.CharacterId })" data-count-badge="#equipmentCountBadge">
     <div class="row g-3 align-items-end">
@@ -103,12 +110,18 @@
                       asp-route-id="@Model.Character.CharacterId"
                       method="post"
                       enctype="multipart/form-data"
-                      class="dropzone chronicle-dropzone">
+                      class="chronicle-dropzone"
+                      role="button"
+                      tabindex="0">
                     @Html.AntiForgeryToken()
+                    <input id="attachmentFileInput" type="file" name="file" class="d-none" multiple />
                     <div class="dz-message" data-dz-message>
+                        <span class="chronicle-dropzone__eyebrow">File attachment</span>
                         <span>Drop files here or click to upload</span>
+                        <small>Accepted by the same attachment endpoint used elsewhere in the app.</small>
                     </div>
                 </form>
+                <div id="attachmentUploadStatus" class="alert d-none mt-3 mb-0" role="alert"></div>
             </div>
         </div>
     </div>
@@ -117,7 +130,10 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3 class="h5 mb-0">Uploaded files</h3>
-                    <button type="button" class="btn btn-outline-ink btn-sm" id="reloadAttachmentsButton">Reload</button>
+                    @if (canManageCharacters)
+                    {
+                        <button type="button" class="btn btn-outline-ink btn-sm" id="reloadAttachmentsButton">Reload</button>
+                    }
                 </div>
                 <div id="attachmentListRegion">Loading attachments...</div>
             </div>
@@ -126,13 +142,64 @@
 </div>
 
 @section Scripts {
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" integrity="sha512-7g0vKx0Qe0R6p2w9mJwqv8zqK0wQ2k3pS9Y4lP8M8m0kO1VdGq4z7vO1F0gWgq0M7h7z0J5V3x5fN7M4QvVw5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-HYhdN+5z2wz7XK8NnM8i7r0VgV6m7QmXx2xv6N0n2u5Xy+W0m9fYzQWj3mTq3RkQeP9mS8o4nR8s3p1mQ2u0yQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
-        Dropzone.autoDiscover = false;
-
         function loadAttachments() {
-            $("#attachmentListRegion").load("@Url.Action("Attachments", "Characters", new { id = Model.Character.CharacterId })");
+            $("#attachmentListRegion").load("@Url.Action("Attachments", "Characters", new { id = Model.Character.CharacterId })", function () {
+                if (window.formatDateTimeControls) {
+                    window.formatDateTimeControls(this);
+                }
+            });
+        }
+
+        function setUploadStatus(message, variant) {
+            var $status = $("#attachmentUploadStatus");
+            var alertClass = variant ? "alert-" + variant : "alert-info";
+
+            $status
+                .removeClass("d-none alert-info alert-success alert-warning alert-danger")
+                .addClass(alertClass)
+                .text(message);
+        }
+
+        function clearUploadStatus() {
+            $("#attachmentUploadStatus")
+                .addClass("d-none")
+                .removeClass("alert-info alert-success alert-warning alert-danger")
+                .text("");
+        }
+
+        async function uploadAttachment(file) {
+            var formData = new FormData();
+            formData.append("file", file);
+            formData.append("__RequestVerificationToken", $("input[name='__RequestVerificationToken']").val());
+
+            return $.ajax({
+                url: "@Url.Action("UploadAttachment", "Characters", new { id = Model.Character.CharacterId })",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false
+            });
+        }
+
+        async function uploadAttachments(files) {
+            var fileList = Array.from(files || []);
+
+            if (!fileList.length) {
+                setUploadStatus("Choose at least one file to upload.", "warning");
+                return;
+            }
+
+            clearUploadStatus();
+            setUploadStatus("Uploading " + fileList.length + " file(s)...", "info");
+
+            for (const file of fileList) {
+                await uploadAttachment(file);
+            }
+
+            loadAttachments();
+            setUploadStatus("Upload complete.", "success");
+            $("#attachmentFileInput").val("");
         }
 
         function deleteAttachment(id) {
@@ -150,16 +217,48 @@
         $(function () {
             loadAttachments();
 
-            new Dropzone("#characterAttachmentDropzone", {
-                paramName: "file",
-                maxFilesize: 25,
-                timeout: 0,
-                init: function () {
-                    this.on("success", function () {
-                        loadAttachments();
-                        this.removeAllFiles(true);
+            var $dropzone = $("#characterAttachmentDropzone");
+            var $fileInput = $("#attachmentFileInput");
+
+            $dropzone.on("click", function () {
+                $fileInput[0].click();
+            });
+
+            $dropzone.on("keydown", function (event) {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    $fileInput[0].click();
+                }
+            });
+
+            $dropzone.on("dragenter dragover", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                $dropzone.addClass("is-dragover");
+            });
+
+            $dropzone.on("dragleave dragend drop", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                $dropzone.removeClass("is-dragover");
+            });
+
+            $dropzone.on("drop", function (event) {
+                var files = event.originalEvent.dataTransfer.files;
+
+                if (files && files.length) {
+                    uploadAttachments(files).catch(function (error) {
+                        var message = error && error.responseText ? error.responseText : "Upload failed.";
+                        setUploadStatus(message, "danger");
                     });
                 }
+            });
+
+            $fileInput.on("change", function () {
+                uploadAttachments(this.files).catch(function (error) {
+                    var message = error && error.responseText ? error.responseText : "Upload failed.";
+                    setUploadStatus(message, "danger");
+                });
             });
 
             $("#reloadAttachmentsButton").on("click", function () {

@@ -75,7 +75,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         public IActionResult Create(int? playerId)
         {
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin)
+            if (current != null && current.Role != RoleEnum.Admin)
             {
                 playerId = current.PlayerId;
             }
@@ -95,7 +95,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         public IActionResult Create(CharacterFormViewModel viewModel)
         {
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin)
+            if (current != null && current.Role != RoleEnum.Admin)
             {
                 viewModel.PlayerId = current.PlayerId;
             }
@@ -192,7 +192,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin)
+            if (current != null && current.Role != RoleEnum.Admin)
             {
                 viewModel.PlayerId = current.PlayerId;
             }
@@ -231,7 +231,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin && current.PlayerId != owner.Player.PlayerId)
+            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != owner.Player.PlayerId)
             {
                 return Forbid();
             }
@@ -395,7 +395,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin && current.PlayerId != character.PlayerId)
+            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != character.PlayerId)
             {
                 return Forbid();
             }
@@ -462,7 +462,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var current = GetCurrentPlayer();
             var cards = _playerRepository.GetAllPlayers()
-                .Where(player => current == null || current.IsAdmin || player.PlayerId == current.PlayerId)
+                .Where(player => current == null || current.Role == RoleEnum.Admin || player.PlayerId == current.PlayerId)
                 .SelectMany(player => _characterRepository.GetCharactersByPlayerId(player.PlayerId)
                     .Select(character => new CharacterWithPlayerViewModel
                     {
@@ -542,7 +542,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         private bool CanAccessPlayer(int playerId)
         {
             var current = GetCurrentPlayer();
-            return current == null || current.IsAdmin || current.PlayerId == playerId;
+            return current == null || current.Role == RoleEnum.Admin || current.PlayerId == playerId;
         }
 
         private List<SelectListItem> GetPlayerOptions()
@@ -550,7 +550,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var current = GetCurrentPlayer();
 
             return _playerRepository.GetAllPlayers()
-                .Where(player => current == null || current.IsAdmin || player.PlayerId == current.PlayerId)
+                .Where(player => current == null || current.Role == RoleEnum.Admin || player.PlayerId == current.PlayerId)
                 .Select(player => new SelectListItem
                 {
                     Value = player.PlayerId.ToString(),

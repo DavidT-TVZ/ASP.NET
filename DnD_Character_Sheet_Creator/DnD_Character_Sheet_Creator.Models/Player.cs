@@ -22,7 +22,7 @@ namespace DnD_Character_Sheet_Creator.Models
 
         public DateTime? DeletedAt { get; set; }
 
-        public bool IsAdmin { get; set; } = false;
+        public RoleEnum Role { get; set; } = RoleEnum.User;
 
         public virtual ICollection<Character> CharacterList { get; set; } = new List<Character>();
     }

@@ -1,5 +1,10 @@
 @model IEnumerable<DnD_Character_Sheet_Creator.Models.Player>
 
+@{
+    var currentUsername = User?.Identity?.Name;
+    var isAdmin = User?.IsInRole("Admin") == true;
+}
+
 @if (!Model.Any())
 {
     <div class="alert parchment-alert" role="status">No players match your search.</div>
@@ -21,8 +26,14 @@ else
                     <div class="card-footer bg-transparent border-top-0">
                         <div class="d-flex flex-wrap gap-2">
                             <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@player.PlayerId">View details</a>
-                            <a class="btn btn-edit btn-sm" asp-action="Edit" asp-route-id="@player.PlayerId">Edit</a>
-                            <a class="btn btn-outline-danger btn-sm" asp-action="Remove" asp-route-id="@player.PlayerId">Remove</a>
+                            @if (isAdmin || string.Equals(currentUsername, player.Username, StringComparison.OrdinalIgnoreCase))
+                            {
+                                <a class="btn btn-edit btn-sm" asp-action="Edit" asp-route-id="@player.PlayerId">Edit</a>
+                            }
+                            @if (isAdmin)
+                            {
+                                <a class="btn btn-outline-danger btn-sm" asp-action="Remove" asp-route-id="@player.PlayerId">Remove</a>
+                            }
                         </div>
                     </div>
                 </div>

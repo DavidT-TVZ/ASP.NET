@@ -26,7 +26,8 @@ public class PlayerUpsertDto
     [StringLength(200)]
     public string Password { get; set; } = string.Empty;
 
-    public bool IsAdmin { get; set; }
+    [StringLength(20)]
+    public RoleEnum Role { get; set; } = RoleEnum.User;
 }
 
 public class CharacterUpsertDto
@@ -101,7 +102,7 @@ public class PlayerSummaryDto
 
     public string Email { get; set; } = string.Empty;
 
-    public bool IsAdmin { get; set; }
+    public RoleEnum Role { get; set; } = RoleEnum.User;
 }
 
 public class CharacterLevelDto

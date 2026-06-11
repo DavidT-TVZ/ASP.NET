@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using DnD_Character_Sheet_Creator.Models;
 
 namespace DnD_Character_Sheet_Creator.Web.ViewModels
 {
@@ -27,7 +28,7 @@ namespace DnD_Character_Sheet_Creator.Web.ViewModels
         [Display(Name = "Email Address")]
         public required string Email { get; set; }
 
-        [Display(Name = "Is Admin")]
-        public bool IsAdmin { get; set; } = false;
+        [Display(Name = "Role")]
+        public RoleEnum Role { get; set; } = RoleEnum.User;
     }
 }
