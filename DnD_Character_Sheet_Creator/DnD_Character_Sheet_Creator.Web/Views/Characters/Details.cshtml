@@ -91,7 +91,7 @@
 </div>
 
 <div class="mb-3 d-flex justify-content-between align-items-center gap-2">
-    <span id="equipmentCountBadge" class="badge chronicle-badge rounded-pill px-3 py-2">@Model.Character.EquipmentList.Count shown</span>
+    <span id="equipmentCountBadge" class="badge chronicle-badge rounded-pill px-3 py-2">@Model.Character.EquipmentList.Count(equipment => equipment.DeletedAt == null) shown</span>
 </div>
 
 <div id="equipmentListRegion" class="ajax-list-search-region">
