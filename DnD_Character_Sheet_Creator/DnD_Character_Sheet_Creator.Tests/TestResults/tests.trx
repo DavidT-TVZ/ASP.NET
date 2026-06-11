@@ -1,0 +1,943 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="93ad9f86-1cd2-4d28-9aee-f5168a7f3495" name="David Laptop@DESKTOP-27SVNEK 2026-06-11 17:10:07" runUser="DESKTOP-27SVNEK\David Laptop" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-06-11T17:10:07.3946555+02:00" queuing="2026-06-11T17:10:07.3946582+02:00" start="2026-06-11T17:10:05.6303678+02:00" finish="2026-06-11T17:10:07.6046526+02:00" />
+  <TestSettings name="default" id="a2fb8dec-6f76-4641-b5a2-5f0244696604">
+    <Deployment runDeploymentRoot="David_Laptop_DESKTOP-27SVNEK_2026-06-11_17_10_07" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4cc6107a-e0f6-45e4-9214-64e1d12fc3f9" testId="395a43d0-9912-ce00-56b6-d30349733ff2" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0053149" startTime="2026-06-11T17:10:07.4294310+02:00" endTime="2026-06-11T17:10:07.4294311+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4cc6107a-e0f6-45e4-9214-64e1d12fc3f9" />
+    <UnitTestResult executionId="c164065f-93a2-4485-97ef-012256407589" testId="e2999306-a712-53ed-6d80-199f88010bf9" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0243107" startTime="2026-06-11T17:10:07.3574948+02:00" endTime="2026-06-11T17:10:07.3574949+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c164065f-93a2-4485-97ef-012256407589" />
+    <UnitTestResult executionId="d8d5c40a-466b-4644-9ae7-4bbe0c2c254d" testId="9752e162-5d90-89ce-7074-a03142868009" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels" computerName="DESKTOP-27SVNEK" duration="00:00:00.0093899" startTime="2026-06-11T17:10:07.3616223+02:00" endTime="2026-06-11T17:10:07.3616225+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d8d5c40a-466b-4644-9ae7-4bbe0c2c254d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection contained 2 items&#xD;
+Collection: [CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:10:07.3536858Z, ExperiencePointsToNextLevel = 0, Level = 1, LevelId = 7, ··· }, CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:10:07.3541283Z, ExperiencePointsToNextLevel = 300, Level = 2, LevelId = 8, ··· }]</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs:line 238&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="cf7e2f3a-5dbf-4bd1-9285-0160445b257c" testId="1bebf161-3df6-a803-246c-ec9b109fb37e" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0245909" startTime="2026-06-11T17:10:07.4597364+02:00" endTime="2026-06-11T17:10:07.4597365+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cf7e2f3a-5dbf-4bd1-9285-0160445b257c" />
+    <UnitTestResult executionId="1d6c9da9-6cc4-457c-85d7-f07fd32b1ecd" testId="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0052381" startTime="2026-06-11T17:10:07.5439977+02:00" endTime="2026-06-11T17:10:07.5439979+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d6c9da9-6cc4-457c-85d7-f07fd32b1ecd" />
+    <UnitTestResult executionId="84b0ccde-fa9a-4abc-9f19-11956a656d9e" testId="9404eae5-e853-c69b-21ef-887522f704cc" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0254438" startTime="2026-06-11T17:10:07.4331821+02:00" endTime="2026-06-11T17:10:07.4331825+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="84b0ccde-fa9a-4abc-9f19-11956a656d9e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotNull() Failure: Value is null</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 179&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="543c1487-5f38-43db-bcb7-c762199da004" testId="8e724d77-95dd-86b6-7ae6-689f5b87d158" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0370124" startTime="2026-06-11T17:10:07.3646745+02:00" endTime="2026-06-11T17:10:07.3646747+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="543c1487-5f38-43db-bcb7-c762199da004" />
+    <UnitTestResult executionId="2dd97494-2c5a-4772-bfa6-8b07e713cda7" testId="e2e28516-12f6-1abc-b297-6974cceffa02" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:01.0969296" startTime="2026-06-11T17:10:07.3572719+02:00" endTime="2026-06-11T17:10:07.3572721+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2dd97494-2c5a-4772-bfa6-8b07e713cda7">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: NoContent&#xD;
+Actual:   NotFound</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs:line 219&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7e512297-6c55-4494-9b71-8eeebbdd77f0" testId="078cfacd-46be-5756-89c4-3e25958bc18f" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0017780" startTime="2026-06-11T17:10:07.4634679+02:00" endTime="2026-06-11T17:10:07.4634681+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e512297-6c55-4494-9b71-8eeebbdd77f0">
+      <Output>
+        <ErrorInfo>
+          <Message>Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException : Attempted to update or delete an entity that does not exist in the store.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryTable`1.Delete(IUpdateEntry entry, IDiagnosticsLogger`1 updateLogger)&#xD;
+   at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryStore.ExecuteTransaction(IList`1 entries, IDiagnosticsLogger`1 updateLogger)&#xD;
+   at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryDatabase.SaveChanges(IList`1 entries)&#xD;
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)&#xD;
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)&#xD;
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.&lt;&gt;c.&lt;SaveChanges&gt;b__112_0(DbContext _, ValueTuple`2 t)&#xD;
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)&#xD;
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)&#xD;
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)&#xD;
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()&#xD;
+   at DnD_Character_Sheet_Creator.Tests.DnDTestApplicationFactory.SeedDatabase(DnDDbContext context) in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\DnDTestApplicationFactory.cs:line 55&#xD;
+   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 83&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="aa199ec7-02d3-4474-b032-3b0916523209" testId="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0572879" startTime="2026-06-11T17:10:07.4244529+02:00" endTime="2026-06-11T17:10:07.4244533+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa199ec7-02d3-4474-b032-3b0916523209">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: NoContent&#xD;
+Actual:   MethodNotAllowed</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs:line 191&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5b2361b8-c51b-4c78-9db2-6999d499ce95" testId="93db83ee-53e1-538c-41a0-dbefa546efe9" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0164214" startTime="2026-06-11T17:10:07.4807328+02:00" endTime="2026-06-11T17:10:07.4807329+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b2361b8-c51b-4c78-9db2-6999d499ce95" />
+    <UnitTestResult executionId="2bd27a84-3d79-409a-8302-be69868b7862" testId="b021d359-fd04-1adb-05ea-7dc6a2cfca7e" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest" computerName="DESKTOP-27SVNEK" duration="00:00:00.0048329" startTime="2026-06-11T17:10:07.3667475+02:00" endTime="2026-06-11T17:10:07.3667477+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2bd27a84-3d79-409a-8302-be69868b7862">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: BadRequest&#xD;
+Actual:   Created</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs:line 121&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="05905fff-b4c1-4876-97eb-1c4a0a7590a3" testId="44fa029f-0ce6-b431-7609-5786f6f7b080" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.8901671" startTime="2026-06-11T17:10:07.1305269+02:00" endTime="2026-06-11T17:10:07.1305420+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05905fff-b4c1-4876-97eb-1c4a0a7590a3" />
+    <UnitTestResult executionId="3085df06-2b9c-4bb1-8358-dad525743cd3" testId="6971ec2a-3888-6f68-7b87-fd3bb1589fcd" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0089482" startTime="2026-06-11T17:10:07.5013652+02:00" endTime="2026-06-11T17:10:07.5013653+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3085df06-2b9c-4bb1-8358-dad525743cd3" />
+    <UnitTestResult executionId="ad084cba-9df0-4597-ab35-6ab07ccfde53" testId="a704018c-87d8-3875-2763-b7b6e2f710a0" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0197913" startTime="2026-06-11T17:10:07.5346087+02:00" endTime="2026-06-11T17:10:07.5346089+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad084cba-9df0-4597-ab35-6ab07ccfde53" />
+    <UnitTestResult executionId="8cb39376-83bb-4c84-ae5f-69a9ed18d0e1" testId="fca3d598-3453-c2d7-12bb-cdbb4116bd03" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetAll_ShouldReturnOkWithCharacters" computerName="DESKTOP-27SVNEK" duration="00:00:00.0039556" startTime="2026-06-11T17:10:07.5386534+02:00" endTime="2026-06-11T17:10:07.5386536+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8cb39376-83bb-4c84-ae5f-69a9ed18d0e1" />
+    <UnitTestResult executionId="44f41132-bb8d-4977-bc33-4ffd6d6e9f3d" testId="a51e3c89-3189-bea1-a410-feece8933f6b" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0218375" startTime="2026-06-11T17:10:07.4677048+02:00" endTime="2026-06-11T17:10:07.4677050+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44f41132-bb8d-4977-bc33-4ffd6d6e9f3d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: Created&#xD;
+Actual:   NotFound</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs:line 102&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="185d5617-ca08-48d9-beac-991791e04aed" testId="fd1acf38-9b78-92ed-da10-103478f1a5b6" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0024131" startTime="2026-06-11T17:10:07.5064418+02:00" endTime="2026-06-11T17:10:07.5064420+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="185d5617-ca08-48d9-beac-991791e04aed">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: NotFound&#xD;
+Actual:   MethodNotAllowed</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs:line 154&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0da92e30-3f5e-442e-96ef-538b7a4e9880" testId="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0112097" startTime="2026-06-11T17:10:07.4927002+02:00" endTime="2026-06-11T17:10:07.4927004+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0da92e30-3f5e-442e-96ef-538b7a4e9880">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: OK&#xD;
+Actual:   MethodNotAllowed</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs:line 129&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7af918b3-89da-4c85-845d-720c0e3b1208" testId="ee88633f-af91-d8b3-efbe-2d2a9a1bb992" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetAll_ShouldReturnOkWithLevels" computerName="DESKTOP-27SVNEK" duration="00:00:00.1160169" startTime="2026-06-11T17:10:07.3126087+02:00" endTime="2026-06-11T17:10:07.3126088+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7af918b3-89da-4c85-845d-720c0e3b1208" />
+    <UnitTestResult executionId="67d0695e-2917-4817-8a84-27bc8f75ff88" testId="146a96e5-083d-3152-2965-a9d31ed71361" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0018666" startTime="2026-06-11T17:10:07.4450995+02:00" endTime="2026-06-11T17:10:07.4450997+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="67d0695e-2917-4817-8a84-27bc8f75ff88" />
+    <UnitTestResult executionId="4ed13935-f270-43a2-8e22-d2d114434c4c" testId="4638fd82-7515-ecf3-50e8-89234ac26bfa" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0680117" startTime="2026-06-11T17:10:07.4431277+02:00" endTime="2026-06-11T17:10:07.4431279+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ed13935-f270-43a2-8e22-d2d114434c4c" />
+    <UnitTestResult executionId="363c135f-9f10-4d26-a41b-a77d95615a4a" testId="4c512e64-2adc-8896-db39-2d3e294d3e63" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0456132" startTime="2026-06-11T17:10:07.1766021+02:00" endTime="2026-06-11T17:10:07.1766023+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="363c135f-9f10-4d26-a41b-a77d95615a4a" />
+    <UnitTestResult executionId="ac7d9acd-b312-46a1-8b61-7b0162d76ec9" testId="8b342a26-5260-8148-b43a-62f8fa25c5db" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters" computerName="DESKTOP-27SVNEK" duration="00:00:00.0426100" startTime="2026-06-11T17:10:07.5099829+02:00" endTime="2026-06-11T17:10:07.5099831+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac7d9acd-b312-46a1-8b61-7b0162d76ec9" />
+    <UnitTestResult executionId="7af04c6b-f628-42b6-b785-f5c705f8d44d" testId="6c1a4c86-5663-e150-1692-8ff3432e00ad" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated" computerName="DESKTOP-27SVNEK" duration="00:00:00.0348772" startTime="2026-06-11T17:10:07.4596659+02:00" endTime="2026-06-11T17:10:07.4596661+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7af04c6b-f628-42b6-b785-f5c705f8d44d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: Created&#xD;
+Actual:   MethodNotAllowed</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs:line 90&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9e3d6802-030f-4c4f-b0bd-e3b27d4ed492" testId="538864d3-15a6-babb-7a40-7c6b6bf07cbc" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Search_ShouldReturnFilteredPlayers" computerName="DESKTOP-27SVNEK" duration="00:00:01.1619354" startTime="2026-06-11T17:10:07.3984861+02:00" endTime="2026-06-11T17:10:07.3984864+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e3d6802-030f-4c4f-b0bd-e3b27d4ed492" />
+    <UnitTestResult executionId="e4b30477-e72c-4235-9c06-242f4735c81b" testId="cbf00851-f7a7-718c-5517-5dea5885f9b5" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0015465" startTime="2026-06-11T17:10:07.5029889+02:00" endTime="2026-06-11T17:10:07.5029890+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e4b30477-e72c-4235-9c06-242f4735c81b" />
+    <UnitTestResult executionId="0858520a-5665-4a79-a78e-03b5b7037327" testId="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest" computerName="DESKTOP-27SVNEK" duration="00:00:00.0044294" startTime="2026-06-11T17:10:07.5150484+02:00" endTime="2026-06-11T17:10:07.5150486+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0858520a-5665-4a79-a78e-03b5b7037327">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: BadRequest&#xD;
+Actual:   NotFound</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs:line 134&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ad03148f-5216-491c-888e-e050958dec35" testId="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" computerName="DESKTOP-27SVNEK" duration="00:00:00.0249740" startTime="2026-06-11T17:10:07.4248522+02:00" endTime="2026-06-11T17:10:07.4248525+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad03148f-5216-491c-888e-e050958dec35">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: NoContent&#xD;
+Actual:   NotFound</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs:line 172&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="379e1a3c-bd44-4e5d-94b7-9c43aed07513" testId="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9" testName="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0410863" startTime="2026-06-11T17:10:07.3749673+02:00" endTime="2026-06-11T17:10:07.3749675+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="379e1a3c-bd44-4e5d-94b7-9c43aed07513" />
+    <UnitTestResult executionId="a37ca69f-a4fb-4f6b-a3c0-9dcecbe2835c" testId="b83d77f3-fd88-8ab7-d0f2-c60211255a20" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:01.0816584" startTime="2026-06-11T17:10:07.3325653+02:00" endTime="2026-06-11T17:10:07.3325655+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a37ca69f-a4fb-4f6b-a3c0-9dcecbe2835c">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: OK&#xD;
+Actual:   BadRequest</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 133&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="85718a5a-17d1-4dba-ab52-e1408f4e36f3" testId="ed173f7f-4407-3635-94b1-19deff0c1adf" testName="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetAll_ShouldReturnOkWithPlayers" computerName="DESKTOP-27SVNEK" duration="00:00:00.0048962" startTime="2026-06-11T17:10:07.4642108+02:00" endTime="2026-06-11T17:10:07.4642109+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="85718a5a-17d1-4dba-ab52-e1408f4e36f3" />
+    <UnitTestResult executionId="0c970991-0af2-43a3-b89d-c27f810e80db" testId="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0063367" startTime="2026-06-11T17:10:07.3718710+02:00" endTime="2026-06-11T17:10:07.3718712+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c970991-0af2-43a3-b89d-c27f810e80db">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ&#xD;
+Expected: OK&#xD;
+Actual:   NotFound</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 58&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1955152c-a6f6-4050-93dc-7e4c267c5128" testId="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment" computerName="DESKTOP-27SVNEK" duration="00:00:00.0039894" startTime="2026-06-11T17:10:07.4669484+02:00" endTime="2026-06-11T17:10:07.4669486+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1955152c-a6f6-4050-93dc-7e4c267c5128">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 39&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="84eb0e06-391d-4915-810f-c8fe7339e1e2" testId="b0d2bf9b-1af8-4196-be74-67da039fcf79" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0198078" startTime="2026-06-11T17:10:07.1964593+02:00" endTime="2026-06-11T17:10:07.1964595+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="84eb0e06-391d-4915-810f-c8fe7339e1e2" />
+    <UnitTestResult executionId="67418109-dfba-439f-8529-7791f5e72cf6" testId="6c08da1f-f9db-a683-7410-e05afa648424" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" computerName="DESKTOP-27SVNEK" duration="00:00:00.0019059" startTime="2026-06-11T17:10:07.4348658+02:00" endTime="2026-06-11T17:10:07.4348661+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="67418109-dfba-439f-8529-7791f5e72cf6" />
+    <UnitTestResult executionId="fb7df5ee-485a-4d3c-937a-1bbfd47e6a66" testId="c41e2427-ade3-3f73-204b-7cd20cba1c5b" testName="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment" computerName="DESKTOP-27SVNEK" duration="00:00:00.0352136" startTime="2026-06-11T17:10:07.4076729+02:00" endTime="2026-06-11T17:10:07.4076732+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb7df5ee-485a-4d3c-937a-1bbfd47e6a66">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment() in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs:line 223&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="356676ad-f77f-4289-9d66-a6fd9851db00" testId="222710ac-dba7-d268-30e9-e178f93f2dfa" testName="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithValidId_ShouldReturnOk" computerName="DESKTOP-27SVNEK" duration="00:00:00.0141651" startTime="2026-06-11T17:10:07.3268653+02:00" endTime="2026-06-11T17:10:07.3268658+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="356676ad-f77f-4289-9d66-a6fd9851db00" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="4638fd82-7515-ecf3-50e8-89234ac26bfa">
+      <Execution id="4ed13935-f270-43a2-8e22-d2d114434c4c" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="b83d77f3-fd88-8ab7-d0f2-c60211255a20">
+      <Execution id="a37ca69f-a4fb-4f6b-a3c0-9dcecbe2835c" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6c1a4c86-5663-e150-1692-8ff3432e00ad">
+      <Execution id="7af04c6b-f628-42b6-b785-f5c705f8d44d" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb">
+      <Execution id="0c970991-0af2-43a3-b89d-c27f810e80db" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="1bebf161-3df6-a803-246c-ec9b109fb37e">
+      <Execution id="cf7e2f3a-5dbf-4bd1-9285-0160445b257c" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6971ec2a-3888-6f68-7b87-fd3bb1589fcd">
+      <Execution id="3085df06-2b9c-4bb1-8358-dad525743cd3" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="8e724d77-95dd-86b6-7ae6-689f5b87d158">
+      <Execution id="543c1487-5f38-43db-bcb7-c762199da004" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="222710ac-dba7-d268-30e9-e178f93f2dfa">
+      <Execution id="356676ad-f77f-4289-9d66-a6fd9851db00" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d">
+      <Execution id="aa199ec7-02d3-4474-b032-3b0916523209" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="93db83ee-53e1-538c-41a0-dbefa546efe9">
+      <Execution id="5b2361b8-c51b-4c78-9db2-6999d499ce95" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc">
+      <Execution id="1955152c-a6f6-4050-93dc-7e4c267c5128" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="GetAll_ShouldReturnOkWithEquipment" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="b0d2bf9b-1af8-4196-be74-67da039fcf79">
+      <Execution id="84eb0e06-391d-4915-810f-c8fe7339e1e2" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="e2999306-a712-53ed-6d80-199f88010bf9">
+      <Execution id="c164065f-93a2-4485-97ef-012256407589" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="078cfacd-46be-5756-89c4-3e25958bc18f">
+      <Execution id="7e512297-6c55-4494-9b71-8eeebbdd77f0" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9">
+      <Execution id="379e1a3c-bd44-4e5d-94b7-9c43aed07513" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="GetById_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966">
+      <Execution id="ad03148f-5216-491c-888e-e050958dec35" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="e2e28516-12f6-1abc-b297-6974cceffa02">
+      <Execution id="2dd97494-2c5a-4772-bfa6-8b07e713cda7" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Search_ShouldReturnFilteredCharacters" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="8b342a26-5260-8148-b43a-62f8fa25c5db">
+      <Execution id="ac7d9acd-b312-46a1-8b61-7b0162d76ec9" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Search_ShouldReturnFilteredCharacters" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="a51e3c89-3189-bea1-a410-feece8933f6b">
+      <Execution id="44f41132-bb8d-4977-bc33-4ffd6d6e9f3d" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Create_WithValidData_ShouldReturnCreated" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.GetAll_ShouldReturnOkWithLevels" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="ee88633f-af91-d8b3-efbe-2d2a9a1bb992">
+      <Execution id="7af918b3-89da-4c85-845d-720c0e3b1208" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="GetAll_ShouldReturnOkWithLevels" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="6c08da1f-f9db-a683-7410-e05afa648424">
+      <Execution id="67418109-dfba-439f-8529-7791f5e72cf6" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="4c512e64-2adc-8896-db39-2d3e294d3e63">
+      <Execution id="363c135f-9f10-4d26-a41b-a77d95615a4a" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Search_ShouldReturnFilteredPlayers" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="538864d3-15a6-babb-7a40-7c6b6bf07cbc">
+      <Execution id="9e3d6802-030f-4c4f-b0bd-e3b27d4ed492" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Search_ShouldReturnFilteredPlayers" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="a704018c-87d8-3875-2763-b7b6e2f710a0">
+      <Execution id="ad084cba-9df0-4597-ab35-6ab07ccfde53" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="395a43d0-9912-ce00-56b6-d30349733ff2">
+      <Execution id="4cc6107a-e0f6-45e4-9214-64e1d12fc3f9" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="9752e162-5d90-89ce-7074-a03142868009">
+      <Execution id="d8d5c40a-466b-4644-9ae7-4bbe0c2c254d" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Search_ShouldReturnFilteredLevels" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetById_WithValidId_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a">
+      <Execution id="1d6c9da9-6cc4-457c-85d7-f07fd32b1ecd" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="GetById_WithValidId_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="c41e2427-ade3-3f73-204b-7cd20cba1c5b">
+      <Execution id="fb7df5ee-485a-4d3c-937a-1bbfd47e6a66" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Search_ShouldReturnFilteredEquipment" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.GetAll_ShouldReturnOkWithCharacters" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="fca3d598-3453-c2d7-12bb-cdbb4116bd03">
+      <Execution id="8cb39376-83bb-4c84-ae5f-69a9ed18d0e1" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="GetAll_ShouldReturnOkWithCharacters" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="9404eae5-e853-c69b-21ef-887522f704cc">
+      <Execution id="84b0ccde-fa9a-4abc-9f19-11956a656d9e" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests" name="Delete_WithValidId_ShouldReturnNoContent" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.GetAll_ShouldReturnOkWithPlayers" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="ed173f7f-4407-3635-94b1-19deff0c1adf">
+      <Execution id="85718a5a-17d1-4dba-ab52-e1408f4e36f3" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="GetAll_ShouldReturnOkWithPlayers" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="cbf00851-f7a7-718c-5517-5dea5885f9b5">
+      <Execution id="e4b30477-e72c-4235-9c06-242f4735c81b" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="44fa029f-0ce6-b431-7609-5786f6f7b080">
+      <Execution id="05905fff-b4c1-4876-97eb-1c4a0a7590a3" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="b021d359-fd04-1adb-05ea-7dc6a2cfca7e">
+      <Execution id="2bd27a84-3d79-409a-8302-be69868b7862" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests" name="Create_WithDuplicateLevel_ShouldReturnBadRequest" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15">
+      <Execution id="0da92e30-3f5e-442e-96ef-538b7a4e9880" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Update_WithValidData_ShouldReturnOk" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="fd1acf38-9b78-92ed-da10-103478f1a5b6">
+      <Execution id="185d5617-ca08-48d9-beac-991791e04aed" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests" name="Update_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f">
+      <Execution id="0858520a-5665-4a79-a78e-03b5b7037327" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Create_WithInvalidPlayerId_ShouldReturnBadRequest" />
+    </UnitTest>
+    <UnitTest name="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithInvalidId_ShouldReturnNotFound" storage="c:\tvz\druga_apsolventska\asp_net\projekt\dnd_character_sheet_creator\dnd_character_sheet_creator.tests\bin\debug\net9.0\dnd_character_sheet_creator.tests.dll" id="146a96e5-083d-3152-2965-a9d31ed71361">
+      <Execution id="67d0695e-2917-4817-8a84-27bc8f75ff88" />
+      <TestMethod codeBase="C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\bin\Debug\net9.0\DnD_Character_Sheet_Creator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests" name="Delete_WithInvalidId_ShouldReturnNotFound" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="395a43d0-9912-ce00-56b6-d30349733ff2" executionId="4cc6107a-e0f6-45e4-9214-64e1d12fc3f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2999306-a712-53ed-6d80-199f88010bf9" executionId="c164065f-93a2-4485-97ef-012256407589" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9752e162-5d90-89ce-7074-a03142868009" executionId="d8d5c40a-466b-4644-9ae7-4bbe0c2c254d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bebf161-3df6-a803-246c-ec9b109fb37e" executionId="cf7e2f3a-5dbf-4bd1-9285-0160445b257c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7a4f2c7d-b88f-ecf8-b116-ede13e9f502a" executionId="1d6c9da9-6cc4-457c-85d7-f07fd32b1ecd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9404eae5-e853-c69b-21ef-887522f704cc" executionId="84b0ccde-fa9a-4abc-9f19-11956a656d9e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8e724d77-95dd-86b6-7ae6-689f5b87d158" executionId="543c1487-5f38-43db-bcb7-c762199da004" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2e28516-12f6-1abc-b297-6974cceffa02" executionId="2dd97494-2c5a-4772-bfa6-8b07e713cda7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="078cfacd-46be-5756-89c4-3e25958bc18f" executionId="7e512297-6c55-4494-9b71-8eeebbdd77f0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e9dbe6eb-f1f5-193b-cd5d-0b031726a09d" executionId="aa199ec7-02d3-4474-b032-3b0916523209" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="93db83ee-53e1-538c-41a0-dbefa546efe9" executionId="5b2361b8-c51b-4c78-9db2-6999d499ce95" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b021d359-fd04-1adb-05ea-7dc6a2cfca7e" executionId="2bd27a84-3d79-409a-8302-be69868b7862" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44fa029f-0ce6-b431-7609-5786f6f7b080" executionId="05905fff-b4c1-4876-97eb-1c4a0a7590a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6971ec2a-3888-6f68-7b87-fd3bb1589fcd" executionId="3085df06-2b9c-4bb1-8358-dad525743cd3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a704018c-87d8-3875-2763-b7b6e2f710a0" executionId="ad084cba-9df0-4597-ab35-6ab07ccfde53" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fca3d598-3453-c2d7-12bb-cdbb4116bd03" executionId="8cb39376-83bb-4c84-ae5f-69a9ed18d0e1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a51e3c89-3189-bea1-a410-feece8933f6b" executionId="44f41132-bb8d-4977-bc33-4ffd6d6e9f3d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd1acf38-9b78-92ed-da10-103478f1a5b6" executionId="185d5617-ca08-48d9-beac-991791e04aed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a4bbf57-12ad-0cda-cd17-5a8c53e80e15" executionId="0da92e30-3f5e-442e-96ef-538b7a4e9880" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ee88633f-af91-d8b3-efbe-2d2a9a1bb992" executionId="7af918b3-89da-4c85-845d-720c0e3b1208" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="146a96e5-083d-3152-2965-a9d31ed71361" executionId="67d0695e-2917-4817-8a84-27bc8f75ff88" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4638fd82-7515-ecf3-50e8-89234ac26bfa" executionId="4ed13935-f270-43a2-8e22-d2d114434c4c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4c512e64-2adc-8896-db39-2d3e294d3e63" executionId="363c135f-9f10-4d26-a41b-a77d95615a4a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b342a26-5260-8148-b43a-62f8fa25c5db" executionId="ac7d9acd-b312-46a1-8b61-7b0162d76ec9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c1a4c86-5663-e150-1692-8ff3432e00ad" executionId="7af04c6b-f628-42b6-b785-f5c705f8d44d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="538864d3-15a6-babb-7a40-7c6b6bf07cbc" executionId="9e3d6802-030f-4c4f-b0bd-e3b27d4ed492" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cbf00851-f7a7-718c-5517-5dea5885f9b5" executionId="e4b30477-e72c-4235-9c06-242f4735c81b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12a3c219-5d5f-01a8-d5ab-66fbdcbe035f" executionId="0858520a-5665-4a79-a78e-03b5b7037327" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2fcf9262-5e50-7fa9-07ef-5ee3a67e6966" executionId="ad03148f-5216-491c-888e-e050958dec35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="34cf8a6d-c0e4-5759-f7e0-7f7a1108a5f9" executionId="379e1a3c-bd44-4e5d-94b7-9c43aed07513" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b83d77f3-fd88-8ab7-d0f2-c60211255a20" executionId="a37ca69f-a4fb-4f6b-a3c0-9dcecbe2835c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ed173f7f-4407-3635-94b1-19deff0c1adf" executionId="85718a5a-17d1-4dba-ab52-e1408f4e36f3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f3bda6a-91c7-eecb-3d89-19b7f59e5ceb" executionId="0c970991-0af2-43a3-b89d-c27f810e80db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c6998f57-4f9a-fe06-7b45-b75e7c7bffdc" executionId="1955152c-a6f6-4050-93dc-7e4c267c5128" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b0d2bf9b-1af8-4196-be74-67da039fcf79" executionId="84eb0e06-391d-4915-810f-c8fe7339e1e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c08da1f-f9db-a683-7410-e05afa648424" executionId="67418109-dfba-439f-8529-7791f5e72cf6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c41e2427-ade3-3f73-204b-7cd20cba1c5b" executionId="fb7df5ee-485a-4d3c-937a-1bbfd47e6a66" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="222710ac-dba7-d268-30e9-e178f93f2dfa" executionId="356676ad-f77f-4289-9d66-a6fd9851db00" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="38" executed="38" passed="22" failed="16" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.4.1+b9eacec401 (64-bit .NET 9.0.14)&#xD;
+[xUnit.net 00:00:00.20]   Discovering: DnD_Character_Sheet_Creator.Tests&#xD;
+[xUnit.net 00:00:00.23]   Discovered:  DnD_Character_Sheet_Creator.Tests&#xD;
+[xUnit.net 00:00:00.23]   Starting:    DnD_Character_Sheet_Creator.Tests&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 6 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 11 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.36]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.36]       Expected: OK&#xD;
+[xUnit.net 00:00:01.36]       Actual:   BadRequest&#xD;
+[xUnit.net 00:00:01.36]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.36]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(133,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk()&#xD;
+[xUnit.net 00:00:01.36]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 5 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 5 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 5 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 5 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.39]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.39]       Expected: NoContent&#xD;
+[xUnit.net 00:00:01.39]       Actual:   NotFound&#xD;
+[xUnit.net 00:00:01.39]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.39]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs(219,0): at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent()&#xD;
+[xUnit.net 00:00:01.39]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.39]       Assert.Single() Failure: The collection contained 2 items&#xD;
+[xUnit.net 00:00:01.39]       Collection: [CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:10:07.3536858Z, ExperiencePointsToNextLevel = 0, Level = 1, LevelId = 7, ··· }, CharacterLevelDto { CurrentExperiencePoints = 0, DateOfLastLevelUp = 2026-06-11T15:10:07.3541283Z, ExperiencePointsToNextLevel = 300, Level = 2, LevelId = 8, ··· }]&#xD;
+[xUnit.net 00:00:01.39]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.39]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs(238,0): at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels()&#xD;
+[xUnit.net 00:00:01.39]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.40]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.40]       Expected: BadRequest&#xD;
+[xUnit.net 00:00:01.40]       Actual:   Created&#xD;
+[xUnit.net 00:00:01.40]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.40]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs(121,0): at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest()&#xD;
+[xUnit.net 00:00:01.40]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.40]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.40]       Expected: OK&#xD;
+[xUnit.net 00:00:01.40]       Actual:   NotFound&#xD;
+[xUnit.net 00:00:01.40]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.40]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(58,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk()&#xD;
+[xUnit.net 00:00:01.40]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.44]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:01.44]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.44]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(223,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment()&#xD;
+[xUnit.net 00:00:01.44]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]&#xD;
+      An unhandled exception has occurred while executing the request.&#xD;
+      Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: Attempted to update or delete an entity that does not exist in the store.&#xD;
+         at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryTable`1.Delete(IUpdateEntry entry, IDiagnosticsLogger`1 updateLogger)&#xD;
+         at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryStore.ExecuteTransaction(IList`1 entries, IDiagnosticsLogger`1 updateLogger)&#xD;
+         at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)&#xD;
+         at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)&#xD;
+         at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)&#xD;
+         at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)&#xD;
+         at DnD_Character_Sheet_Creator.Web.Controllers.CharacterLevelsApiController.Delete(Int32 id) in C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Web\Controllers\Api\CharacterLevelsApiController.cs:line 112&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeActionMethodAsync&gt;g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeNextActionFilterAsync&gt;g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.&lt;Invoke&gt;g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)&#xD;
+[xUnit.net 00:00:01.45]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.45]       Expected: NoContent&#xD;
+[xUnit.net 00:00:01.45]       Actual:   MethodNotAllowed&#xD;
+[xUnit.net 00:00:01.45]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.45]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharacterLevelsApiControllerTests.cs(191,0): at DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent()&#xD;
+[xUnit.net 00:00:01.45]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.45]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.45]       Expected: NoContent&#xD;
+[xUnit.net 00:00:01.45]       Actual:   NotFound&#xD;
+[xUnit.net 00:00:01.45]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.45]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs(172,0): at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent()&#xD;
+[xUnit.net 00:00:01.45]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.46]       Assert.NotNull() Failure: Value is null&#xD;
+[xUnit.net 00:00:01.46]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.46]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(179,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent()&#xD;
+[xUnit.net 00:00:01.46]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]&#xD;
+      An unhandled exception has occurred while executing the request.&#xD;
+      System.InvalidCastException: Unable to cast object of type 'DnD_Character_Sheet_Creator.Models.RoleEnum' to type 'System.String'.&#xD;
+         at System.ComponentModel.DataAnnotations.StringLengthAttribute.IsValid(Object value)&#xD;
+         at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)&#xD;
+         at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)&#xD;
+         at Microsoft.AspNetCore.Mvc.DataAnnotations.DataAnnotationsModelValidator.Validate(ModelValidationContext validationContext)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.ValidateNode()&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitImplementation(ModelMetadata&amp; metadata, String&amp; key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.Visit(ModelMetadata metadata, String key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitChildren(IValidationStrategy strategy)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitComplexType(IValidationStrategy defaultStrategy)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitImplementation(ModelMetadata&amp; metadata, String&amp; key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.Visit(ModelMetadata metadata, String key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ObjectModelValidator.Validate(ActionContext actionContext, ValidationStateDictionary validationState, String prefix, Object model, ModelMetadata metadata, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.EnforceBindRequiredAndValidate(ObjectModelValidator baseObjectValidator, ActionContext actionContext, ParameterDescriptor parameter, ModelMetadata metadata, ModelBindingContext modelBindingContext, ModelBindingResult modelBindingResult, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.BindModelAsync(ActionContext actionContext, IModelBinder modelBinder, IValueProvider valueProvider, ParameterDescriptor parameter, ModelMetadata metadata, Object value, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.&lt;&gt;c__DisplayClass0_0.&lt;&lt;CreateBinderDelegate&gt;g__Bind|0&gt;d.MoveNext()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeInnerFilterAsync&gt;g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.&lt;Invoke&gt;g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)&#xD;
+[xUnit.net 00:00:01.49]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.49]       Expected: Created&#xD;
+[xUnit.net 00:00:01.49]       Actual:   MethodNotAllowed&#xD;
+[xUnit.net 00:00:01.49]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.49]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs(90,0): at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated()&#xD;
+[xUnit.net 00:00:01.49]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.49]       Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException : Attempted to update or delete an entity that does not exist in the store.&#xD;
+[xUnit.net 00:00:01.49]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryTable`1.Delete(IUpdateEntry entry, IDiagnosticsLogger`1 updateLogger)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryStore.ExecuteTransaction(IList`1 entries, IDiagnosticsLogger`1 updateLogger)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.InMemory.Storage.Internal.InMemoryDatabase.SaveChanges(IList`1 entries)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.&lt;&gt;c.&lt;SaveChanges&gt;b__112_0(DbContext _, ValueTuple`2 t)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)&#xD;
+[xUnit.net 00:00:01.49]            at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()&#xD;
+[xUnit.net 00:00:01.49]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\DnDTestApplicationFactory.cs(55,0): at DnD_Character_Sheet_Creator.Tests.DnDTestApplicationFactory.SeedDatabase(DnDDbContext context)&#xD;
+[xUnit.net 00:00:01.49]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(83,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated()&#xD;
+[xUnit.net 00:00:01.49]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.50]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:01.50]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.50]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\EquipmentApiControllerTests.cs(39,0): at DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment()&#xD;
+[xUnit.net 00:00:01.50]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.50]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.50]       Expected: Created&#xD;
+[xUnit.net 00:00:01.50]       Actual:   NotFound&#xD;
+[xUnit.net 00:00:01.50]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.50]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs(102,0): at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated()&#xD;
+[xUnit.net 00:00:01.50]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 5 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]&#xD;
+      An unhandled exception has occurred while executing the request.&#xD;
+      System.InvalidCastException: Unable to cast object of type 'DnD_Character_Sheet_Creator.Models.RoleEnum' to type 'System.String'.&#xD;
+         at System.ComponentModel.DataAnnotations.StringLengthAttribute.IsValid(Object value)&#xD;
+         at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)&#xD;
+         at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)&#xD;
+         at Microsoft.AspNetCore.Mvc.DataAnnotations.DataAnnotationsModelValidator.Validate(ModelValidationContext validationContext)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.ValidateNode()&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitImplementation(ModelMetadata&amp; metadata, String&amp; key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.Visit(ModelMetadata metadata, String key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitChildren(IValidationStrategy strategy)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitComplexType(IValidationStrategy defaultStrategy)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitImplementation(ModelMetadata&amp; metadata, String&amp; key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.Visit(ModelMetadata metadata, String key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ObjectModelValidator.Validate(ActionContext actionContext, ValidationStateDictionary validationState, String prefix, Object model, ModelMetadata metadata, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.EnforceBindRequiredAndValidate(ObjectModelValidator baseObjectValidator, ActionContext actionContext, ParameterDescriptor parameter, ModelMetadata metadata, ModelBindingContext modelBindingContext, ModelBindingResult modelBindingResult, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.BindModelAsync(ActionContext actionContext, IModelBinder modelBinder, IValueProvider valueProvider, ParameterDescriptor parameter, ModelMetadata metadata, Object value, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.&lt;&gt;c__DisplayClass0_0.&lt;&lt;CreateBinderDelegate&gt;g__Bind|0&gt;d.MoveNext()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeInnerFilterAsync&gt;g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.&lt;Invoke&gt;g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)&#xD;
+[xUnit.net 00:00:01.52]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.52]       Expected: OK&#xD;
+[xUnit.net 00:00:01.52]       Actual:   MethodNotAllowed&#xD;
+[xUnit.net 00:00:01.52]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.52]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs(129,0): at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk()&#xD;
+[xUnit.net 00:00:01.52]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]&#xD;
+      An unhandled exception has occurred while executing the request.&#xD;
+      System.InvalidCastException: Unable to cast object of type 'DnD_Character_Sheet_Creator.Models.RoleEnum' to type 'System.String'.&#xD;
+         at System.ComponentModel.DataAnnotations.StringLengthAttribute.IsValid(Object value)&#xD;
+         at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)&#xD;
+         at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)&#xD;
+         at Microsoft.AspNetCore.Mvc.DataAnnotations.DataAnnotationsModelValidator.Validate(ModelValidationContext validationContext)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.ValidateNode()&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitImplementation(ModelMetadata&amp; metadata, String&amp; key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.Visit(ModelMetadata metadata, String key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitChildren(IValidationStrategy strategy)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitComplexType(IValidationStrategy defaultStrategy)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.VisitImplementation(ModelMetadata&amp; metadata, String&amp; key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor.Visit(ModelMetadata metadata, String key, Object model)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ObjectModelValidator.Validate(ActionContext actionContext, ValidationStateDictionary validationState, String prefix, Object model, ModelMetadata metadata, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.EnforceBindRequiredAndValidate(ObjectModelValidator baseObjectValidator, ActionContext actionContext, ParameterDescriptor parameter, ModelMetadata metadata, ModelBindingContext modelBindingContext, ModelBindingResult modelBindingResult, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.BindModelAsync(ActionContext actionContext, IModelBinder modelBinder, IValueProvider valueProvider, ParameterDescriptor parameter, ModelMetadata metadata, Object value, Object container)&#xD;
+         at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.&lt;&gt;c__DisplayClass0_0.&lt;&lt;CreateBinderDelegate&gt;g__Bind|0&gt;d.MoveNext()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeInnerFilterAsync&gt;g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.&lt;Invoke&gt;g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)&#xD;
+[xUnit.net 00:00:01.54]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.54]       Expected: NotFound&#xD;
+[xUnit.net 00:00:01.54]       Actual:   MethodNotAllowed&#xD;
+[xUnit.net 00:00:01.54]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.54]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\PlayersApiControllerTests.cs(154,0): at DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound()&#xD;
+[xUnit.net 00:00:01.54]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.54]       Assert.Equal() Failure: Values differ&#xD;
+[xUnit.net 00:00:01.54]       Expected: BadRequest&#xD;
+[xUnit.net 00:00:01.54]       Actual:   NotFound&#xD;
+[xUnit.net 00:00:01.54]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.54]         C:\TVZ\Druga_apsolventska\ASP_Net\Projekt\DnD_Character_Sheet_Creator\DnD_Character_Sheet_Creator.Tests\CharactersApiControllerTests.cs(134,0): at DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest()&#xD;
+[xUnit.net 00:00:01.54]         --- End of stack trace from previous location ---&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+[xUnit.net 00:00:01.58]   Finished:    DnD_Character_Sheet_Creator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.3305967+02:00">
+        <Text>[xUnit.net 00:00:01.36]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Update_WithValidData_ShouldReturnOk [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4139449+02:00">
+        <Text>[xUnit.net 00:00:01.39]     DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4142310+02:00">
+        <Text>[xUnit.net 00:00:01.39]     DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Search_ShouldReturnFilteredLevels [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4145197+02:00">
+        <Text>[xUnit.net 00:00:01.40]     DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Create_WithDuplicateLevel_ShouldReturnBadRequest [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4147944+02:00">
+        <Text>[xUnit.net 00:00:01.40]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetById_WithValidId_ShouldReturnOk [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4170256+02:00">
+        <Text>[xUnit.net 00:00:01.44]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Search_ShouldReturnFilteredEquipment [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4244568+02:00">
+        <Text>[xUnit.net 00:00:01.45]     DnD_Character_Sheet_Creator.Tests.CharacterLevelsApiControllerTests.Delete_WithValidId_ShouldReturnNoContent [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4246996+02:00">
+        <Text>[xUnit.net 00:00:01.45]     DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Delete_WithValidId_ShouldReturnNoContent [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4332441+02:00">
+        <Text>[xUnit.net 00:00:01.46]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Delete_WithValidId_ShouldReturnNoContent [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4596168+02:00">
+        <Text>[xUnit.net 00:00:01.49]     DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Create_WithValidData_ShouldReturnCreated [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4626958+02:00">
+        <Text>[xUnit.net 00:00:01.49]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.Create_WithValidData_ShouldReturnCreated [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4669996+02:00">
+        <Text>[xUnit.net 00:00:01.50]     DnD_Character_Sheet_Creator.Tests.EquipmentApiControllerTests.GetAll_ShouldReturnOkWithEquipment [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4674528+02:00">
+        <Text>[xUnit.net 00:00:01.50]     DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithValidData_ShouldReturnCreated [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.4927414+02:00">
+        <Text>[xUnit.net 00:00:01.52]     DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithValidData_ShouldReturnOk [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.5062028+02:00">
+        <Text>[xUnit.net 00:00:01.54]     DnD_Character_Sheet_Creator.Tests.PlayersApiControllerTests.Update_WithInvalidId_ShouldReturnNotFound [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-27SVNEK" outcome="Error" timestamp="2026-06-11T17:10:07.5150261+02:00">
+        <Text>[xUnit.net 00:00:01.54]     DnD_Character_Sheet_Creator.Tests.CharactersApiControllerTests.Create_WithInvalidPlayerId_ShouldReturnBadRequest [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

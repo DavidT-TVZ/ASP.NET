@@ -77,23 +77,33 @@ namespace DnD_Character_Sheet_Creator.Tests
         public async Task Create_WithValidData_ShouldReturnCreated()
         {
             // Arrange
-            var newEquipment = new EquipmentUpsertDto
+            using (var scope = _factory.Services.CreateScope())
             {
-                Name = "New Armor",
-                Type = "Armor",
-                ArmorClass = 14,
-                Weight = 50.0
-            };
+                var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
+                _factory.SeedDatabase(context);
+                var character = context.Characters.First();
 
-            // Act
-            var response = await _client.PostAsJsonAsync("/api/equipment", newEquipment);
+                var newEquipment = new EquipmentUpsertDto
+                {
+                    CharacterId = character.CharacterId,
+                    Name = "New Armor",
+                    Type = "Armor",
+                    Cost = 100,
+                    Weight = 50
+                };
 
-            // Assert
-            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-            var result = await response.Content.ReadFromJsonAsync<EquipmentDto>();
-            Assert.NotNull(result);
-            Assert.Equal("New Armor", result.Name);
-            Assert.Equal("Armor", result.Type);
+                // Act
+                var response = await _client.PostAsJsonAsync("/api/equipment", newEquipment);
+
+                // Assert
+                Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+                var result = await response.Content.ReadFromJsonAsync<EquipmentDto>();
+                Assert.NotNull(result);
+                Assert.Equal("New Armor", result.Name);
+                Assert.Equal("Armor", result.Type);
+
+                return;
+            }
         }
 
         [Fact]
@@ -109,9 +119,11 @@ namespace DnD_Character_Sheet_Creator.Tests
 
                 var updateDto = new EquipmentUpsertDto
                 {
+                    CharacterId = equipment.CharacterId,
                     Name = "Updated Sword",
                     Type = "Melee Weapon",
-                    Weight = 3.0
+                    Cost = 0,
+                    Weight = 3
                 };
 
                 // Act
@@ -132,8 +144,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             var updateDto = new EquipmentUpsertDto
             {
                 Name = "Updated Equipment",
+                CharacterId = 1,
                 Type = "Test",
-                Weight = 5.0
+                Cost = 0,
+                Weight = 5
             };
 
             // Act
@@ -191,8 +205,9 @@ namespace DnD_Character_Sheet_Creator.Tests
                 {
                     Name = "Test Shield",
                     Type = "Armor",
-                    ArmorClass = 1,
-                    Weight = 6.0
+                    ArmourClass = 1,
+                    Cost = 0,
+                    Weight = 6
                 };
                 context.Equipment.Add(shield);
                 context.SaveChanges();

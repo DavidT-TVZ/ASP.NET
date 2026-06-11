@@ -37,7 +37,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             var characters = await response.Content.ReadFromJsonAsync<IEnumerable<CharacterDto>>();
             Assert.NotNull(characters);
             Assert.Single(characters);
-            Assert.Equal("Test Character", characters.First().Name);
+            Assert.Equal("Test Character", characters.First().CharacterName);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace DnD_Character_Sheet_Creator.Tests
                 var result = await response.Content.ReadFromJsonAsync<CharacterDto>();
                 Assert.NotNull(result);
                 Assert.Equal(characterId, result.CharacterId);
-                Assert.Equal("Test Character", result.Name);
+                Assert.Equal("Test Character", result.CharacterName);
             }
         }
 
@@ -86,15 +86,13 @@ namespace DnD_Character_Sheet_Creator.Tests
 
                 var newCharacter = new CharacterUpsertDto
                 {
-                    Name = "New Character",
+                    CharacterName = "New Character",
                     PlayerId = player.PlayerId,
                     Class = ClassEnum.Barbarian,
                     Race = RaceEnum.Human,
                     Background = BackgroundEnum.Acolyte,
                     Alignment = AlignmentEnum.ChaoticEvil,
-                    LevelId = level.LevelId,
-                    Health = 15,
-                    ExperiencePoints = 100
+                    LevelId = level.LevelId
                 };
 
                 // Act
@@ -104,7 +102,7 @@ namespace DnD_Character_Sheet_Creator.Tests
                 Assert.Equal(HttpStatusCode.Created, response.StatusCode);
                 var result = await response.Content.ReadFromJsonAsync<CharacterDto>();
                 Assert.NotNull(result);
-                Assert.Equal("New Character", result.Name);
+                Assert.Equal("New Character", result.CharacterName);
             }
         }
 
@@ -120,15 +118,13 @@ namespace DnD_Character_Sheet_Creator.Tests
 
                 var newCharacter = new CharacterUpsertDto
                 {
-                    Name = "New Character",
+                    CharacterName = "New Character",
                     PlayerId = 99999,
                     Class = ClassEnum.Barbarian,
                     Race = RaceEnum.Human,
                     Background = BackgroundEnum.Acolyte,
                     Alignment = AlignmentEnum.ChaoticEvil,
-                    LevelId = level.LevelId,
-                    Health = 15,
-                    ExperiencePoints = 100
+                    LevelId = level.LevelId
                 };
 
                 // Act
@@ -154,15 +150,13 @@ namespace DnD_Character_Sheet_Creator.Tests
 
                 var updateDto = new CharacterUpsertDto
                 {
-                    Name = "Updated Character",
+                    CharacterName = "Updated Character",
                     PlayerId = player.PlayerId,
                     Class = ClassEnum.Bard,
                     Race = RaceEnum.Elf,
                     Background = BackgroundEnum.Acolyte,
                     Alignment = AlignmentEnum.ChaoticEvil,
-                    LevelId = level.LevelId,
-                    Health = 20,
-                    ExperiencePoints = 200
+                    LevelId = level.LevelId
                 };
 
                 // Act
@@ -172,7 +166,7 @@ namespace DnD_Character_Sheet_Creator.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 var result = await response.Content.ReadFromJsonAsync<CharacterDto>();
                 Assert.NotNull(result);
-                Assert.Equal("Updated Character", result.Name);
+                Assert.Equal("Updated Character", result.CharacterName);
                 Assert.Equal(ClassEnum.Bard, result.Class);
             }
         }
@@ -190,15 +184,13 @@ namespace DnD_Character_Sheet_Creator.Tests
 
                 var updateDto = new CharacterUpsertDto
                 {
-                    Name = "Updated Character",
+                    CharacterName = "Updated Character",
                     PlayerId = player.PlayerId,
                     Class = ClassEnum.Barbarian,
                     Race = RaceEnum.Human,
                     Background = BackgroundEnum.Acolyte,
                     Alignment = AlignmentEnum.ChaoticEvil,
-                    LevelId = level.LevelId,
-                    Health = 20,
-                    ExperiencePoints = 200
+                    LevelId = level.LevelId
                 };
 
                 // Act
@@ -258,14 +250,12 @@ namespace DnD_Character_Sheet_Creator.Tests
                 var character2 = new Character
                 {
                     PlayerId = player.PlayerId,
-                    Name = "Another Character",
+                    CharacterName = "Another Character",
                     Class = ClassEnum.Cleric,
                     Race = RaceEnum.Dwarf,
                     Background = BackgroundEnum.Soldier,
                     Alignment = AlignmentEnum.NeutralGood,
-                    LevelId = level.LevelId,
-                    Health = 12,
-                    ExperiencePoints = 0
+                    LevelId = level.LevelId
                 };
                 context.Characters.Add(character2);
                 context.SaveChanges();
@@ -279,7 +269,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             var characters = await response.Content.ReadFromJsonAsync<IEnumerable<CharacterDto>>();
             Assert.NotNull(characters);
             Assert.Single(characters);
-            Assert.Equal("Test Character", characters.First().Name);
+            Assert.Equal("Test Character", characters.First().CharacterName);
         }
     }
 }

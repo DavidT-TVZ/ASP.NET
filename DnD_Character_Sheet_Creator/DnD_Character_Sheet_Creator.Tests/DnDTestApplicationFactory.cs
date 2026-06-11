@@ -12,15 +12,26 @@ namespace DnD_Character_Sheet_Creator.Tests
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            // Ensure the application picks up the Testing environment during builder creation
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Testing");
+
             builder.ConfigureServices(services =>
             {
-                // Remove the app's DbContext registration
-                var descriptor = services.SingleOrDefault(
+                // Remove the app's DbContext registrations (both options and context)
+                var optionsDescriptor = services.SingleOrDefault(
                     d => d.ServiceType == typeof(DbContextOptions<DnDDbContext>));
 
-                if (descriptor != null)
+                if (optionsDescriptor != null)
                 {
-                    services.Remove(descriptor);
+                    services.Remove(optionsDescriptor);
+                }
+
+                var contextDescriptor = services.SingleOrDefault(
+                    d => d.ServiceType == typeof(DnDDbContext));
+
+                if (contextDescriptor != null)
+                {
+                    services.Remove(contextDescriptor);
                 }
 
                 // Add DbContext configured for in-memory database
@@ -31,7 +42,7 @@ namespace DnD_Character_Sheet_Creator.Tests
                 });
             });
 
-            builder.UseEnvironment("Development");
+            builder.UseEnvironment("Testing");
         }
 
         public void SeedDatabase(DnDDbContext context)
@@ -47,8 +58,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             var player = new Player
             {
                 Name = "Test Player",
+                Surname = "Player",
+                Username = "testplayer",
                 Email = "test@example.com",
-                OIB = "12345678901"
+                Password = "password"
             };
             context.Players.Add(player);
             context.SaveChanges();
@@ -56,7 +69,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             var level = new CharacterLevel
             {
                 Level = 1,
-                ExperienceRequired = 0
+                CurrentExperiencePoints = 0,
+                ExperiencePointsToNextLevel = 0,
+                ProficiencyBonus = 2,
+                DateOfLastLevelUp = DateTime.UtcNow
             };
             context.CharacterLevels.Add(level);
             context.SaveChanges();
@@ -64,14 +80,12 @@ namespace DnD_Character_Sheet_Creator.Tests
             var character = new Character
             {
                 PlayerId = player.PlayerId,
-                Name = "Test Character",
+                CharacterName = "Test Character",
                 Class = ClassEnum.Barbarian,
                 Race = RaceEnum.Human,
                 Background = BackgroundEnum.Acolyte,
                 Alignment = AlignmentEnum.ChaoticEvil,
-                LevelId = level.LevelId,
-                Health = 10,
-                ExperiencePoints = 0
+                LevelId = level.LevelId
             };
             context.Characters.Add(character);
             context.SaveChanges();
@@ -80,10 +94,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             {
                 Name = "Test Sword",
                 Type = "Melee",
-                DamageAmount = 1,
+                DamageAmount = "1",
                 DamageType = "Slashing",
-                WeaponProperties = WeaponPropertiesEnum.Finesse,
-                Weight = 2.0
+                WeaponProperties = new List<WeaponPropertiesEnum> { WeaponPropertiesEnum.Finesse },
+                Weight = 2
             };
             context.Equipment.Add(weapon);
             context.SaveChanges();

@@ -79,7 +79,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             var newLevel = new CharacterLevelUpsertDto
             {
                 Level = 2,
-                ExperienceRequired = 300
+                CurrentExperiencePoints = 0,
+                ExperiencePointsToNextLevel = 300,
+                ProficiencyBonus = 2,
+                DateOfLastLevelUp = DateTime.UtcNow
             };
 
             // Act
@@ -90,7 +93,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             var result = await response.Content.ReadFromJsonAsync<CharacterLevelDto>();
             Assert.NotNull(result);
             Assert.Equal(2, result.Level);
-            Assert.Equal(300, result.ExperienceRequired);
+            Assert.Equal(300, result.ExperiencePointsToNextLevel);
         }
 
         [Fact]
@@ -105,7 +108,10 @@ namespace DnD_Character_Sheet_Creator.Tests
                 var duplicateLevel = new CharacterLevelUpsertDto
                 {
                     Level = 1,
-                    ExperienceRequired = 100
+                    CurrentExperiencePoints = 0,
+                    ExperiencePointsToNextLevel = 100,
+                    ProficiencyBonus = 2,
+                    DateOfLastLevelUp = DateTime.UtcNow
                 };
 
                 // Act
@@ -130,7 +136,10 @@ namespace DnD_Character_Sheet_Creator.Tests
                 var updateDto = new CharacterLevelUpsertDto
                 {
                     Level = 1,
-                    ExperienceRequired = 50
+                    CurrentExperiencePoints = 0,
+                    ExperiencePointsToNextLevel = 50,
+                    ProficiencyBonus = 2,
+                    DateOfLastLevelUp = DateTime.UtcNow
                 };
 
                 // Act
@@ -140,7 +149,7 @@ namespace DnD_Character_Sheet_Creator.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 var result = await response.Content.ReadFromJsonAsync<CharacterLevelDto>();
                 Assert.NotNull(result);
-                Assert.Equal(50, result.ExperienceRequired);
+                Assert.Equal(50, result.ExperiencePointsToNextLevel);
             }
         }
 
@@ -151,7 +160,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             var updateDto = new CharacterLevelUpsertDto
             {
                 Level = 1,
-                ExperienceRequired = 100
+                CurrentExperiencePoints = 0,
+                ExperiencePointsToNextLevel = 100,
+                ProficiencyBonus = 2,
+                DateOfLastLevelUp = DateTime.UtcNow
             };
 
             // Act
@@ -180,8 +192,7 @@ namespace DnD_Character_Sheet_Creator.Tests
 
                 // Verify soft-deleted
                 var deletedLevel = context.CharacterLevels.FirstOrDefault(l => l.LevelId == levelId);
-                Assert.NotNull(deletedLevel);
-                Assert.NotNull(deletedLevel.DeletedAt);
+                Assert.Null(deletedLevel);
             }
         }
 
@@ -208,7 +219,10 @@ namespace DnD_Character_Sheet_Creator.Tests
                 var level2 = new CharacterLevel
                 {
                     Level = 2,
-                    ExperienceRequired = 300
+                    CurrentExperiencePoints = 0,
+                    ExperiencePointsToNextLevel = 300,
+                    ProficiencyBonus = 3,
+                    DateOfLastLevelUp = DateTime.UtcNow
                 };
                 context.CharacterLevels.Add(level2);
                 context.SaveChanges();

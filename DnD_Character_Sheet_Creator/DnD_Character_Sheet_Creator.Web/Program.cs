@@ -7,10 +7,21 @@ using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<DnDDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        sql => sql.MigrationsAssembly("DnD_Character_Sheet_Creator.DAL")));
+if (!builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddDbContext<DnDDbContext>(options =>
+        options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection"),
+            sql => sql.MigrationsAssembly("DnD_Character_Sheet_Creator.DAL")));
+}
+else
+{
+    builder.Services.AddDbContext<DnDDbContext>(options =>
+    {
+        options.UseInMemoryDatabase("DnDTestDb");
+        options.UseLazyLoadingProxies();
+    });
+}
 
 builder.Services.AddControllersWithViews();
 
@@ -36,13 +47,16 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.Name = "AdventurerLedger.Auth";
 });
 
-builder.Services.AddAuthentication()
-    .AddGoogle(options =>
-    {
-        options.ClientId = builder.Configuration["Authentication:Google:ClientId"] ?? string.Empty;
-        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"] ?? string.Empty;
-        options.CallbackPath = "/signin-google";
-    });
+if (!builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            options.ClientId = builder.Configuration["Authentication:Google:ClientId"] ?? string.Empty;
+            options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"] ?? string.Empty;
+            options.CallbackPath = "/signin-google";
+        });
+}
 
 builder.Services.AddAuthorization();
 
@@ -51,49 +65,59 @@ builder.Services.AddScoped<ICharacterRepository, EFCharacterRepository>();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+if (!app.Environment.IsEnvironment("Testing"))
 {
-    var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
-    context.Database.Migrate();
-    // Seed database from mock repositories if empty
-    if (!context.Players.Any())
+    try
     {
-        var players = MockRepositorySeed.CreatePlayers();
-        var charactersByPlayer = MockRepositorySeed.CreateCharactersByPlayerId();
-
-        foreach (var player in players)
+        using (var scope = app.Services.CreateScope())
         {
-            // preserve original id for lookup, then clear identity so SQL Server assigns one
-            var originalPlayerId = player.PlayerId;
-            player.PlayerId = 0;
-
-            if (charactersByPlayer.TryGetValue(originalPlayerId, out var chars))
+            var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
+            context.Database.Migrate();
+            // Seed database from mock repositories if empty
+            if (!context.Players.Any())
             {
-                foreach (var ch in chars)
+                var players = MockRepositorySeed.CreatePlayers();
+                var charactersByPlayer = MockRepositorySeed.CreateCharactersByPlayerId();
+
+                foreach (var player in players)
                 {
-                    ch.CharacterId = 0;
-                    if (ch.Level != null)
-                    {
-                        ch.Level.LevelId = 0;
-                    }
+                    // preserve original id for lookup, then clear identity so SQL Server assigns one
+                    var originalPlayerId = player.PlayerId;
+                    player.PlayerId = 0;
 
-                    foreach (var eq in ch.EquipmentList)
+                    if (charactersByPlayer.TryGetValue(originalPlayerId, out var chars))
                     {
-                        eq.EquipmentId = 0;
-                    }
+                        foreach (var ch in chars)
+                        {
+                            ch.CharacterId = 0;
+                            if (ch.Level != null)
+                            {
+                                ch.Level.LevelId = 0;
+                            }
 
-                    // ensure FK will be set by relationship
-                    ch.Player = player;
-                    player.CharacterList.Add(ch);
+                            foreach (var eq in ch.EquipmentList)
+                            {
+                                eq.EquipmentId = 0;
+                            }
+
+                            // ensure FK will be set by relationship
+                            ch.Player = player;
+                            player.CharacterList.Add(ch);
+                        }
+                    }
                 }
+
+                context.Players.AddRange(players);
+                context.SaveChanges();
             }
+
+            await SeedIdentityAsync(app.Services);
         }
-
-        context.Players.AddRange(players);
-        context.SaveChanges();
     }
-
-    await SeedIdentityAsync(app.Services);
+    catch (InvalidOperationException ex)
+    {
+        Console.WriteLine("Skipping DB migration/seed during startup: " + ex.Message);
+    }
 }
 
 if (!app.Environment.IsDevelopment())

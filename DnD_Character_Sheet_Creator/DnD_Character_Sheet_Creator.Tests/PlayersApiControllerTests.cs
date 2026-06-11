@@ -77,8 +77,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             var newPlayer = new PlayerUpsertDto
             {
                 Name = "New Player",
+                Surname = "Player",
+                Username = "newplayer",
                 Email = "newplayer@example.com",
-                OIB = "98765432109"
+                Password = "password"
             };
 
             // Act
@@ -114,8 +116,10 @@ namespace DnD_Character_Sheet_Creator.Tests
                 var updateDto = new PlayerUpsertDto
                 {
                     Name = "Updated Player",
+                    Surname = "Player",
+                    Username = "updatedplayer",
                     Email = "updated@example.com",
-                    OIB = "11111111111"
+                    Password = "newpass"
                 };
 
                 // Act
@@ -137,8 +141,10 @@ namespace DnD_Character_Sheet_Creator.Tests
             var updateDto = new PlayerUpsertDto
             {
                 Name = "Updated Player",
+                Surname = "Player",
+                Username = "updatedplayer",
                 Email = "updated@example.com",
-                OIB = "11111111111"
+                Password = "newpass"
             };
 
             // Act
@@ -195,8 +201,10 @@ namespace DnD_Character_Sheet_Creator.Tests
                 var player2 = new Player
                 {
                     Name = "Another Player",
+                    Surname = "Player",
+                    Username = "another",
                     Email = "another@example.com",
-                    OIB = "11111111112"
+                    Password = "password"
                 };
                 context.Players.Add(player2);
                 context.SaveChanges();
