@@ -5,6 +5,10 @@
 @{
     ViewData["Title"] = "Player Details";
     var characters = ViewBag.Characters as IEnumerable<CharacterWithPlayerViewModel> ?? Enumerable.Empty<CharacterWithPlayerViewModel>();
+    var currentUsername = User?.Identity?.Name;
+    var isAdmin = User?.IsInRole("Admin") == true;
+    var canEditPlayer = isAdmin || string.Equals(currentUsername, Model.Username, StringComparison.OrdinalIgnoreCase);
+    var canCreateCharacter = isAdmin || string.Equals(currentUsername, Model.Username, StringComparison.OrdinalIgnoreCase);
 }
 
 <section class="sheet-card mb-4 reveal">
@@ -15,8 +19,14 @@
 <div class="mb-4">
     <div class="d-flex gap-2">
         <a class="btn btn-outline-ink" asp-controller="Players" asp-action="Index">Back to all players</a>
-        <a class="btn btn-edit" asp-controller="Players" asp-action="Edit" asp-route-id="@Model.PlayerId">Edit Player</a>
-        <a class="btn btn-outline-danger" asp-controller="Players" asp-action="Remove" asp-route-id="@Model.PlayerId">Remove Player</a>
+        @if (canEditPlayer)
+        {
+            <a class="btn btn-edit" asp-controller="Players" asp-action="Edit" asp-route-id="@Model.PlayerId">Edit Player</a>
+        }
+        @if (isAdmin)
+        {
+            <a class="btn btn-outline-danger" asp-controller="Players" asp-action="Remove" asp-route-id="@Model.PlayerId">Remove Player</a>
+        }
     </div>
 </div>
 
@@ -40,7 +50,10 @@
 
 <h2 class="h4 mb-3">Characters</h2>
 <div class="mb-3">
-    <a class="btn btn-create" asp-controller="Characters" asp-action="Create" asp-route-playerId="@Model.PlayerId">Create Character</a>
+    @if (canCreateCharacter)
+    {
+        <a class="btn btn-create" asp-controller="Characters" asp-action="Create" asp-route-playerId="@Model.PlayerId">Create Character</a>
+    }
 </div>
 <div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("CharactersSearch", "Players", new { id = Model.PlayerId })" data-autocomplete-url="@Url.Action("CharactersAutocomplete", "Players", new { id = Model.PlayerId })" data-count-badge="#playerCharacterCountBadge">
     <div class="row g-3 align-items-end">

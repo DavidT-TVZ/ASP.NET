@@ -1,26 +1,30 @@
 using DnD_Character_Sheet_Creator.Repositories;
+using DnD_Character_Sheet_Creator.Data;
 using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
-    [Authorize]
     [Route("[controller]")]
     [Route("Adventurers")]
     public class CharactersController : Controller
     {
         private readonly ICharacterRepository _characterRepository;
         private readonly IPlayerRepository _playerRepository;
+        private readonly DnDDbContext _dbContext;
 
-        public CharactersController(ICharacterRepository characterRepository, IPlayerRepository playerRepository)
+        public CharactersController(ICharacterRepository characterRepository, IPlayerRepository playerRepository, DnDDbContext dbContext)
         {
             _characterRepository = characterRepository;
             _playerRepository = playerRepository;
+            _dbContext = dbContext;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("")]
         public IActionResult Index(string? query)
@@ -30,6 +34,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(BuildCharacterCards(query));
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Search")]
         public IActionResult Search(string? query)
@@ -39,6 +44,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return PartialView("_CharacterCards", BuildCharacterCards(query));
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Autocomplete")]
         public IActionResult Autocomplete(string term)
@@ -63,12 +69,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return Json(suggestions);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("Create")]
         public IActionResult Create(int? playerId)
         {
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin)
+            if (current != null && current.Role != RoleEnum.Admin)
             {
                 playerId = current.PlayerId;
             }
@@ -82,12 +89,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [Route("Create")]
         public IActionResult Create(CharacterFormViewModel viewModel)
         {
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin)
+            if (current != null && current.Role != RoleEnum.Admin)
             {
                 viewModel.PlayerId = current.PlayerId;
             }
@@ -121,6 +129,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = character.CharacterId });
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Edit/{id?}")]
         public IActionResult Edit(int id)
@@ -153,6 +162,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Edit/{id?}")]
@@ -182,7 +192,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             var current = GetCurrentPlayer();
-            if (current != null && !current.IsAdmin)
+            if (current != null && current.Role != RoleEnum.Admin)
             {
                 viewModel.PlayerId = current.PlayerId;
             }
@@ -200,6 +210,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = character.CharacterId });
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Details/{id?}")]
         [Route("Info/{id?}")]
@@ -219,7 +230,8 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(owner.Player.PlayerId))
+            var current = GetCurrentPlayer();
+            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != owner.Player.PlayerId)
             {
                 return Forbid();
             }
@@ -232,6 +244,114 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             });
         }
 
+        [Authorize(Roles = "Admin,Manager")]
+        [HttpGet]
+        [Route("{id:int}/Attachments")]
+        public IActionResult Attachments(int id)
+        {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanAccessPlayer(character.PlayerId))
+            {
+                return Forbid();
+            }
+
+            var attachments = _dbContext.Attachments
+                .AsNoTracking()
+                .Where(attachment => attachment.CharacterId == id && attachment.DeletedAt == null)
+                .OrderByDescending(attachment => attachment.CreatedAt)
+                .ToList();
+
+            return PartialView("_AttachmentList", attachments);
+        }
+
+        [Authorize(Roles = "Admin,Manager")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{id:int}/UploadAttachment")]
+        public async Task<IActionResult> UploadAttachment(int id, IFormFile file)
+        {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanAccessPlayer(character.PlayerId))
+            {
+                return Forbid();
+            }
+
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file was uploaded.");
+            }
+
+            var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "characters", id.ToString());
+            Directory.CreateDirectory(uploadsRoot);
+
+            var storedFileName = $"{Guid.NewGuid():N}{Path.GetExtension(file.FileName)}";
+            var storedRelativePath = Path.Combine("/uploads/characters", id.ToString(), storedFileName).Replace("\\", "/");
+            var storedPhysicalPath = Path.Combine(uploadsRoot, storedFileName);
+
+            await using (var stream = new FileStream(storedPhysicalPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, useAsync: true))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var attachment = new Attachment
+            {
+                CharacterId = id,
+                FileName = Path.GetFileName(file.FileName),
+                FilePath = storedRelativePath,
+                ContentType = file.ContentType,
+                FileSize = file.Length,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _dbContext.Attachments.Add(attachment);
+            await _dbContext.SaveChangesAsync();
+
+            return Json(new { success = true });
+        }
+
+        [Authorize(Roles = "Admin,Manager")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("DeleteAttachment/{id:int}")]
+        public async Task<IActionResult> DeleteAttachment(int id)
+        {
+            var attachment = await _dbContext.Attachments
+                .Include(item => item.Character)
+                .FirstOrDefaultAsync(item => item.AttachmentId == id && item.DeletedAt == null);
+
+            if (attachment == null)
+            {
+                return NotFound();
+            }
+
+            if (attachment.Character == null || !CanAccessPlayer(attachment.Character.PlayerId))
+            {
+                return Forbid();
+            }
+
+            var physicalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", attachment.FilePath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+            if (System.IO.File.Exists(physicalPath))
+            {
+                System.IO.File.Delete(physicalPath);
+            }
+
+            attachment.DeletedAt = DateTime.UtcNow;
+            await _dbContext.SaveChangesAsync();
+
+            return Json(new { success = true });
+        }
+
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("Remove/{id?}")]
         public IActionResult Remove(int id)
@@ -261,6 +381,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             });
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Remove")]
@@ -273,10 +394,28 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            var current = GetCurrentPlayer();
+            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != character.PlayerId)
             {
                 return Forbid();
             }
+
+            var attachments = _dbContext.Attachments
+                .Where(attachment => attachment.CharacterId == id && attachment.DeletedAt == null)
+                .ToList();
+
+            foreach (var attachment in attachments)
+            {
+                var physicalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", attachment.FilePath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+                if (System.IO.File.Exists(physicalPath))
+                {
+                    System.IO.File.Delete(physicalPath);
+                }
+
+                attachment.DeletedAt = DateTime.UtcNow;
+            }
+
+            _dbContext.SaveChanges();
 
             _characterRepository.DeleteCharacter(id);
 
@@ -323,7 +462,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var current = GetCurrentPlayer();
             var cards = _playerRepository.GetAllPlayers()
-                .Where(player => current == null || current.IsAdmin || player.PlayerId == current.PlayerId)
+                .Where(player => current == null || current.Role == RoleEnum.Admin || player.PlayerId == current.PlayerId)
                 .SelectMany(player => _characterRepository.GetCharactersByPlayerId(player.PlayerId)
                     .Select(character => new CharacterWithPlayerViewModel
                     {
@@ -403,7 +542,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         private bool CanAccessPlayer(int playerId)
         {
             var current = GetCurrentPlayer();
-            return current != null && (current.IsAdmin || current.PlayerId == playerId);
+            return current == null || current.Role == RoleEnum.Admin || current.PlayerId == playerId;
         }
 
         private List<SelectListItem> GetPlayerOptions()
@@ -411,7 +550,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var current = GetCurrentPlayer();
 
             return _playerRepository.GetAllPlayers()
-                .Where(player => current == null || current.IsAdmin || player.PlayerId == current.PlayerId)
+                .Where(player => current == null || current.Role == RoleEnum.Admin || player.PlayerId == current.PlayerId)
                 .Select(player => new SelectListItem
                 {
                     Value = player.PlayerId.ToString(),
@@ -436,6 +575,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 .ToList();
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("{id:int}/equipment/create-form")]
         public IActionResult EquipmentCreateForm(int id)
@@ -452,6 +592,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View("CreateEquipment", vm);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{id:int}/equipment/create")]
@@ -481,6 +622,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("{characterId:int}/equipment/{equipmentId:int}/edit-form")]
         public IActionResult EquipmentEditForm(int characterId, int equipmentId)
@@ -505,6 +647,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View("EditEquipment", vm);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{characterId:int}/equipment/{equipmentId:int}/edit")]
@@ -532,6 +675,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         [Route("{characterId:int}/equipment/{equipmentId:int}/remove-form")]
         public IActionResult EquipmentRemoveForm(int characterId, int equipmentId)
@@ -546,6 +690,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View("RemoveEquipment", equipment);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{characterId:int}/equipment/{equipmentId:int}/remove")]

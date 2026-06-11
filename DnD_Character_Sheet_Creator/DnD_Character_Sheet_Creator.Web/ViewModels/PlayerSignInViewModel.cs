@@ -1,15 +1,19 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DnD_Character_Sheet_Creator.Web.ViewModels
 {
-    public class PlayerSignInViewModel
+    public class AccountSignInViewModel
     {
-        [Required(ErrorMessage = "Please choose a player")]
-        [Display(Name = "Player")]
-        public int PlayerId { get; set; }
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; } = string.Empty;
 
-        public IEnumerable<SelectListItem> Players { get; set; } = Enumerable.Empty<SelectListItem>();
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = string.Empty;
+
+        [Display(Name = "Remember me")]
+        public bool RememberMe { get; set; }
 
         public string? ReturnUrl { get; set; }
     }

@@ -2,9 +2,11 @@
 
 @{
     ViewData["Title"] = "Character Details";
-    var xpCurrent = Model.Character.Level.CurrentExperiencePoints;
-    var xpNext = Model.Character.Level.ExperiencePointsToNextLevel;
+    var characterLevel = Model.Character.Level;
+    var xpCurrent = characterLevel?.CurrentExperiencePoints ?? 0;
+    var xpNext = characterLevel?.ExperiencePointsToNextLevel ?? 0;
     var xpPercent = xpNext <= 0 ? 0 : Math.Clamp((int)Math.Round((double)xpCurrent / xpNext * 100), 0, 100);
+    var canManageCharacters = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
 }
 
 <section class="sheet-card mb-4 reveal">
@@ -15,8 +17,11 @@
 <div class="mb-4">
     <div class="d-flex flex-wrap gap-2">
         <a class="btn btn-outline-ink" asp-controller="Characters" asp-action="Index">Back to all characters</a>
-        <a class="btn btn-edit" asp-controller="Characters" asp-action="Edit" asp-route-id="@Model.Character.CharacterId">Edit character</a>
-        <a class="btn btn-outline-danger" asp-controller="Characters" asp-action="Remove" asp-route-id="@Model.Character.CharacterId">Remove character</a>
+        @if (canManageCharacters)
+        {
+            <a class="btn btn-edit" asp-controller="Characters" asp-action="Edit" asp-route-id="@Model.Character.CharacterId">Edit character</a>
+            <a class="btn btn-outline-danger" asp-controller="Characters" asp-action="Remove" asp-route-id="@Model.Character.CharacterId">Remove character</a>
+        }
     </div>
 </div>
 
@@ -42,7 +47,7 @@
             <dd class="col-sm-9">@Model.Character.Alignment</dd>
 
             <dt class="col-sm-3">Level</dt>
-            <dd class="col-sm-9">@Model.Character.Level.Level</dd>
+            <dd class="col-sm-9">@(characterLevel?.Level.ToString() ?? "N/A")</dd>
 
             <dt class="col-sm-3">Experience</dt>
             <dd class="col-sm-9">
@@ -53,17 +58,24 @@
             </dd>
 
             <dt class="col-sm-3">Proficiency Bonus</dt>
-            <dd class="col-sm-9">+@Model.Character.Level.ProficiencyBonus</dd>
+            <dd class="col-sm-9">@(characterLevel == null ? "N/A" : $"+{characterLevel.ProficiencyBonus}")</dd>
 
             <dt class="col-sm-3">Last Level Up</dt>
-            <dd class="col-sm-9">@await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = Model.Character.Level.DateOfLastLevelUp })</dd>
+            <dd class="col-sm-9">
+                @(characterLevel == null
+                    ? "N/A"
+                    : await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = characterLevel.DateOfLastLevelUp }))
+            </dd>
         </dl>
     </div>
 </div>
 
 <h2 class="h4 mb-3">Equipment</h2>
 <div class="mb-3">
-    <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add equipment</a>
+    @if (canManageCharacters)
+    {
+        <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add equipment</a>
+    }
 </div>
 <div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("EquipmentSearch", "Characters", new { id = Model.Character.CharacterId })" data-autocomplete-url="@Url.Action("EquipmentAutocomplete", "Characters", new { id = Model.Character.CharacterId })" data-count-badge="#equipmentCountBadge">
     <div class="row g-3 align-items-end">
@@ -85,3 +97,173 @@
 <div id="equipmentListRegion" class="ajax-list-search-region">
     @await Html.PartialAsync("_EquipmentCards", Model.Character.EquipmentList.Where(e => e.DeletedAt == null))
 </div>
+
+<h2 class="h4 mt-5 mb-3">Attachments</h2>
+<div class="row g-4">
+    <div class="col-12 col-xl-6">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <p class="text-muted mb-3">Upload documents, references, or reference images for this character.</p>
+                <form id="characterAttachmentDropzone"
+                      asp-controller="Characters"
+                      asp-action="UploadAttachment"
+                      asp-route-id="@Model.Character.CharacterId"
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="chronicle-dropzone"
+                      role="button"
+                      tabindex="0">
+                    @Html.AntiForgeryToken()
+                    <input id="attachmentFileInput" type="file" name="file" class="d-none" multiple />
+                    <div class="dz-message" data-dz-message>
+                        <span class="chronicle-dropzone__eyebrow">File attachment</span>
+                        <span>Drop files here or click to upload</span>
+                        <small>Accepted by the same attachment endpoint used elsewhere in the app.</small>
+                    </div>
+                </form>
+                <div id="attachmentUploadStatus" class="alert d-none mt-3 mb-0" role="alert"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-xl-6">
+        <div class="card sheet-card reveal mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="h5 mb-0">Uploaded files</h3>
+                    @if (canManageCharacters)
+                    {
+                        <button type="button" class="btn btn-outline-ink btn-sm" id="reloadAttachmentsButton">Reload</button>
+                    }
+                </div>
+                <div id="attachmentListRegion">Loading attachments...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function loadAttachments() {
+            $("#attachmentListRegion").load("@Url.Action("Attachments", "Characters", new { id = Model.Character.CharacterId })", function () {
+                if (window.formatDateTimeControls) {
+                    window.formatDateTimeControls(this);
+                }
+            });
+        }
+
+        function setUploadStatus(message, variant) {
+            var $status = $("#attachmentUploadStatus");
+            var alertClass = variant ? "alert-" + variant : "alert-info";
+
+            $status
+                .removeClass("d-none alert-info alert-success alert-warning alert-danger")
+                .addClass(alertClass)
+                .text(message);
+        }
+
+        function clearUploadStatus() {
+            $("#attachmentUploadStatus")
+                .addClass("d-none")
+                .removeClass("alert-info alert-success alert-warning alert-danger")
+                .text("");
+        }
+
+        async function uploadAttachment(file) {
+            var formData = new FormData();
+            formData.append("file", file);
+            formData.append("__RequestVerificationToken", $("input[name='__RequestVerificationToken']").val());
+
+            return $.ajax({
+                url: "@Url.Action("UploadAttachment", "Characters", new { id = Model.Character.CharacterId })",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false
+            });
+        }
+
+        async function uploadAttachments(files) {
+            var fileList = Array.from(files || []);
+
+            if (!fileList.length) {
+                setUploadStatus("Choose at least one file to upload.", "warning");
+                return;
+            }
+
+            clearUploadStatus();
+            setUploadStatus("Uploading " + fileList.length + " file(s)...", "info");
+
+            for (const file of fileList) {
+                await uploadAttachment(file);
+            }
+
+            loadAttachments();
+            setUploadStatus("Upload complete.", "success");
+            $("#attachmentFileInput").val("");
+        }
+
+        function deleteAttachment(id) {
+            $.ajax({
+                url: "@Url.Action("DeleteAttachment", "Characters")/" + id,
+                method: "POST",
+                headers: {
+                    "RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+                }
+            }).done(function () {
+                loadAttachments();
+            });
+        }
+
+        $(function () {
+            loadAttachments();
+
+            var $dropzone = $("#characterAttachmentDropzone");
+            var $fileInput = $("#attachmentFileInput");
+
+            $dropzone.on("click", function () {
+                $fileInput[0].click();
+            });
+
+            $dropzone.on("keydown", function (event) {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    $fileInput[0].click();
+                }
+            });
+
+            $dropzone.on("dragenter dragover", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                $dropzone.addClass("is-dragover");
+            });
+
+            $dropzone.on("dragleave dragend drop", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                $dropzone.removeClass("is-dragover");
+            });
+
+            $dropzone.on("drop", function (event) {
+                var files = event.originalEvent.dataTransfer.files;
+
+                if (files && files.length) {
+                    uploadAttachments(files).catch(function (error) {
+                        var message = error && error.responseText ? error.responseText : "Upload failed.";
+                        setUploadStatus(message, "danger");
+                    });
+                }
+            });
+
+            $fileInput.on("change", function () {
+                uploadAttachments(this.files).catch(function (error) {
+                    var message = error && error.responseText ? error.responseText : "Upload failed.";
+                    setUploadStatus(message, "danger");
+                });
+            });
+
+            $("#reloadAttachmentsButton").on("click", function () {
+                loadAttachments();
+            });
+        });
+    </script>
+}
