@@ -1,0 +1,14 @@
+/* /Views/Shared/_Layout.cshtml.rz.scp.css */
+.chronicle-nav .navbar-nav[b-xhkiv9o7hh] {
+  gap: 0.2rem;
+}
+
+.chronicle-footer a[b-xhkiv9o7hh] {
+  color: #4e2f13;
+  font-weight: 700;
+}
+
+.chronicle-footer a:hover[b-xhkiv9o7hh],
+.chronicle-footer a:focus-visible[b-xhkiv9o7hh] {
+  color: #2e1b09;
+}

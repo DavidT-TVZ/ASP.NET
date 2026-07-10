@@ -13,11 +13,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly ICharacterRepository _characterRepository;
+        private readonly ILogger<PlayersController> _logger;
 
-        public PlayersController(IPlayerRepository playerRepository, ICharacterRepository characterRepository)
+        public PlayersController(IPlayerRepository playerRepository, ICharacterRepository characterRepository, ILogger<PlayersController> logger)
         {
             _playerRepository = playerRepository;
             _characterRepository = characterRepository;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -125,6 +127,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             player.Role = viewModel.Role;
 
             _playerRepository.AddPlayer(player);
+            _logger.LogInformation("Created player {PlayerId} {PlayerName} ({Username})", player.PlayerId, $"{player.Name} {player.Surname}", player.Username);
 
             return RedirectToAction("Details", new { id = player.PlayerId });
         }
@@ -138,6 +141,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var player = _playerRepository.GetPlayerById(id);
             if (player == null)
             {
+                _logger.LogWarning("Edit requested for missing player {PlayerId}", id);
                 return NotFound();
             }
             var current = GetCurrentPlayer();
@@ -265,6 +269,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             _playerRepository.UpdatePlayer(player);
+            _logger.LogInformation("Updated player {PlayerId} {PlayerName} ({Username})", player.PlayerId, $"{player.Name} {player.Surname}", player.Username);
 
             return RedirectToAction("Details", new { id = player.PlayerId });
         }
@@ -282,6 +287,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var player = _playerRepository.GetPlayerById(id);
             if (player == null)
             {
+                _logger.LogWarning("Remove requested for missing player {PlayerId}", id);
                 return NotFound();
             }
 
@@ -314,7 +320,15 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return Forbid();
             }
 
+            var player = _playerRepository.GetPlayerById(id);
+            if (player == null)
+            {
+                _logger.LogWarning("Remove requested for missing player {PlayerId}", id);
+                return NotFound();
+            }
+
             _playerRepository.DeletePlayer(id);
+            _logger.LogInformation("Removed player {PlayerId} {PlayerName} ({Username})", player.PlayerId, $"{player.Name} {player.Surname}", player.Username);
 
             return RedirectToAction("Index");
         }

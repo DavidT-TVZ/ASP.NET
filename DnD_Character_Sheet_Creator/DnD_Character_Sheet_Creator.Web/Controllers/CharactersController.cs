@@ -16,12 +16,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         private readonly ICharacterRepository _characterRepository;
         private readonly IPlayerRepository _playerRepository;
         private readonly DnDDbContext _dbContext;
+        private readonly ILogger<CharactersController> _logger;
 
-        public CharactersController(ICharacterRepository characterRepository, IPlayerRepository playerRepository, DnDDbContext dbContext)
+        public CharactersController(ICharacterRepository characterRepository, IPlayerRepository playerRepository, DnDDbContext dbContext, ILogger<CharactersController> logger)
         {
             _characterRepository = characterRepository;
             _playerRepository = playerRepository;
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -157,6 +159,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             };
 
             _characterRepository.AddCharacter(character);
+            _logger.LogInformation("Created character {CharacterId} {CharacterName} for player {PlayerId}", character.CharacterId, character.CharacterName, character.PlayerId);
 
             return RedirectToAction("Details", new { id = character.CharacterId });
         }
@@ -169,6 +172,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var character = _characterRepository.GetCharacterById(id);
             if (character == null)
             {
+                _logger.LogWarning("Edit requested for missing character {CharacterId}", id);
                 return NotFound();
             }
 
@@ -270,6 +274,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             character.LevelId = viewModel.LevelId;
 
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Updated character {CharacterId} {CharacterName} for player {PlayerId}", character.CharacterId, character.CharacterName, character.PlayerId);
 
             return RedirectToAction("Details", new { id = character.CharacterId });
         }
@@ -380,6 +385,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             _dbContext.Attachments.Add(attachment);
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation("Uploaded attachment {AttachmentId} {FileName} for character {CharacterId}", attachment.AttachmentId, attachment.FileName, id);
 
             return Json(new { success = true });
         }
@@ -396,6 +402,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             if (attachment == null)
             {
+                _logger.LogWarning("Delete requested for missing attachment {AttachmentId}", id);
                 return NotFound();
             }
 
@@ -412,6 +419,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             attachment.DeletedAt = DateTime.UtcNow;
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation("Deleted attachment {AttachmentId} {FileName} for character {CharacterId}", attachment.AttachmentId, attachment.FileName, attachment.CharacterId);
 
             return Json(new { success = true });
         }
@@ -424,6 +432,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var character = _characterRepository.GetCharacterById(id);
             if (character == null)
             {
+                _logger.LogWarning("Remove requested for missing character {CharacterId}", id);
                 return NotFound();
             }
 
@@ -483,6 +492,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             _dbContext.SaveChanges();
 
             _characterRepository.DeleteCharacter(id);
+            _logger.LogInformation("Removed character {CharacterId} {CharacterName} for player {PlayerId}", character.CharacterId, character.CharacterName, character.PlayerId);
 
             return RedirectToAction("Index");
         }
@@ -707,6 +717,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             equipment.CharacterId = vm.CharacterId;
             character.EquipmentList.Add(equipment);
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Created equipment {EquipmentId} {EquipmentName} for character {CharacterId}", equipment.EquipmentId, equipment.Name, vm.CharacterId);
 
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
@@ -762,6 +773,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             equipment.Weight = vm.Weight;
 
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Updated equipment {EquipmentId} {EquipmentName} for character {CharacterId}", equipment.EquipmentId, equipment.Name, vm.CharacterId);
 
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
@@ -804,6 +816,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Removed equipment {EquipmentId} {EquipmentName} from character {CharacterId}", equipment.EquipmentId, equipment.Name, characterId);
 
             return RedirectToAction("Details", new { id = characterId });
         }

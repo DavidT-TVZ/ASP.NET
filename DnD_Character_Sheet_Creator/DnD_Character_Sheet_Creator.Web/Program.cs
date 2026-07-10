@@ -1,11 +1,21 @@
 using DnD_Character_Sheet_Creator.Data;
 using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Repositories;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Security.Claims;
+using System.Text.Encodings.Web;
+using Microsoft.Extensions.Options;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext());
 
 if (!builder.Environment.IsEnvironment("Testing"))
 {
@@ -57,6 +67,14 @@ if (!builder.Environment.IsEnvironment("Testing"))
             options.CallbackPath = "/signin-google";
         });
 }
+else
+{
+    builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = TestAuthHandler.Scheme;
+        options.DefaultChallengeScheme = TestAuthHandler.Scheme;
+    }).AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(TestAuthHandler.Scheme, _ => { });
+}
 
 builder.Services.AddAuthorization();
 
@@ -65,17 +83,67 @@ builder.Services.AddScoped<ICharacterRepository, EFCharacterRepository>();
 
 var app = builder.Build();
 
-if (!app.Environment.IsEnvironment("Testing"))
+var startupLogger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Startup");
+startupLogger.LogInformation("Application booting in {Environment}", app.Environment.EnvironmentName);
+
+if (app.Environment.IsEnvironment("Testing"))
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
+        context.Database.EnsureCreated();
+
+        if (!context.Players.Any())
+        {
+            var players = MockRepositorySeed.CreatePlayers();
+            var charactersByPlayer = MockRepositorySeed.CreateCharactersByPlayerId();
+
+            foreach (var player in players)
+            {
+                var originalPlayerId = player.PlayerId;
+                player.PlayerId = 0;
+
+                if (charactersByPlayer.TryGetValue(originalPlayerId, out var chars))
+                {
+                    foreach (var ch in chars)
+                    {
+                        ch.CharacterId = 0;
+                        if (ch.Level != null)
+                        {
+                            ch.Level.LevelId = 0;
+                        }
+
+                        foreach (var eq in ch.EquipmentList)
+                        {
+                            eq.EquipmentId = 0;
+                        }
+
+                        ch.Player = player;
+                        player.CharacterList.Add(ch);
+                    }
+                }
+            }
+
+            context.Players.AddRange(players);
+            context.SaveChanges();
+        }
+
+        await SeedIdentityAsync(app.Services);
+    }
+}
+else
 {
     try
     {
         using (var scope = app.Services.CreateScope())
         {
+            startupLogger.LogInformation("Applying database migrations and seed data");
             var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
             context.Database.Migrate();
             // Seed database from mock repositories if empty
             if (!context.Players.Any())
             {
+                startupLogger.LogInformation("Database empty, seeding mock players and characters");
                 var players = MockRepositorySeed.CreatePlayers();
                 var charactersByPlayer = MockRepositorySeed.CreateCharactersByPlayerId();
 
@@ -112,23 +180,44 @@ if (!app.Environment.IsEnvironment("Testing"))
             }
 
             await SeedIdentityAsync(app.Services);
+            startupLogger.LogInformation("Startup migration and identity seed completed");
         }
     }
     catch (InvalidOperationException ex)
     {
-        Console.WriteLine("Skipping DB migration/seed during startup: " + ex.Message);
+        startupLogger.LogWarning(ex, "Skipping DB migration/seed during startup");
     }
 }
 
-if (!app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Testing"))
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    app.UseHttpsRedirection();
+}
 app.UseRouting();
 app.UseAuthentication();
+
+if (app.Environment.IsEnvironment("Testing"))
+{
+    app.Use(async (context, next) =>
+    {
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.Name, "john.smith"),
+            new Claim(ClaimTypes.Role, RoleEnum.Admin.ToString()),
+            new Claim("FullName", "John Smith")
+        };
+
+        context.User = new ClaimsPrincipal(new ClaimsIdentity(claims, "TestRequest", ClaimTypes.Name, ClaimTypes.Role));
+        await next();
+    });
+}
+
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -204,3 +293,32 @@ static async Task SyncManagedRoleAsync(UserManager<AppUser> userManager, AppUser
 }
 
 public partial class Program { }
+
+public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+{
+    public new const string Scheme = "TestAuth";
+
+    public TestAuthHandler(
+        IOptionsMonitor<AuthenticationSchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder)
+        : base(options, logger, encoder)
+    {
+    }
+
+    protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+    {
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.Name, "john.smith"),
+            new Claim(ClaimTypes.Role, RoleEnum.Admin.ToString()),
+            new Claim("FullName", "John Smith")
+        };
+
+        var identity = new ClaimsIdentity(claims, Scheme, ClaimTypes.Name, ClaimTypes.Role);
+        var principal = new ClaimsPrincipal(identity);
+        var ticket = new AuthenticationTicket(principal, Scheme);
+
+        return Task.FromResult(AuthenticateResult.Success(ticket));
+    }
+}

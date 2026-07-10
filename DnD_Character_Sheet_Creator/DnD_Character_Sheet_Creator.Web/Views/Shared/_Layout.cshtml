@@ -22,10 +22,13 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-lg-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Codex" asp-action="Index">Codex</a>
                         </li>
                         @if (User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager")))
                         {
@@ -40,7 +43,7 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                    <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                    <div class="d-flex flex-wrap align-items-center gap-2 gap-lg-3 mt-3 mt-lg-0 navbar-user-shell">
                         @if (User?.Identity?.IsAuthenticated == true)
                         {
                             var roleNames = User.Claims
@@ -80,7 +83,7 @@
     <footer class="chronicle-footer text-muted">
         <div class="container-lg">
             <span>&copy; @DateTime.UtcNow.Year Adventurer Ledger</span>
-            <span class="mx-2" aria-hidden="true">|</span>
+            <span class="mx-2 chronicle-footer-separator" aria-hidden="true">|</span>
             <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Codex</a>
         </div>
     </footer>

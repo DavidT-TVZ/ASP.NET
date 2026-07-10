@@ -42,12 +42,6 @@ namespace DnD_Character_Sheet_Creator.Tests
                     services.Remove(contextDescriptor);
                 }
 
-                services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = TestAuthHandler.Scheme;
-                    options.DefaultChallengeScheme = TestAuthHandler.Scheme;
-                }).AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(TestAuthHandler.Scheme, _ => { });
-
                 // Add DbContext configured for in-memory database
                 services.AddDbContext<DnDDbContext>(options =>
                 {
@@ -70,7 +64,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             {
                 Name = "Test Player",
                 Surname = "Player",
-                Username = "testplayer",
+                Username = "john.smith",
                 Email = "test@example.com",
                 Password = "password",
                 Role = RoleEnum.Admin
@@ -125,7 +119,7 @@ namespace DnD_Character_Sheet_Creator.Tests
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, "testplayer"),
+                new Claim(ClaimTypes.Name, "john.smith"),
                 new Claim(ClaimTypes.Role, RoleEnum.Admin.ToString()),
                 new Claim("FullName", "Test Player")
             };
