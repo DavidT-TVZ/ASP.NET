@@ -22,14 +22,14 @@ public class EquipmentApiController : ControllerBase
     {
         var equipment = await _context.Equipment
             .Where(item => item.DeletedAt == null)
-            .Include(item => item.Character)
-                .ThenInclude(character => character!.Level)
+            .Include(item => item.Characters)
+                .ThenInclude(character => character.Level)
             .AsNoTracking()
             .ToListAsync();
 
         if (characterId.HasValue)
         {
-            equipment = equipment.Where(item => item.CharacterId == characterId.Value).ToList();
+            equipment = equipment.Where(item => item.Characters.Any(character => character.CharacterId == characterId.Value)).ToList();
         }
 
         if (!string.IsNullOrWhiteSpace(search))
@@ -50,8 +50,8 @@ public class EquipmentApiController : ControllerBase
     {
         var equipment = await _context.Equipment
             .Where(item => item.EquipmentId == id && item.DeletedAt == null)
-            .Include(item => item.Character)
-                .ThenInclude(character => character!.Level)
+            .Include(item => item.Characters)
+                .ThenInclude(character => character.Level)
             .AsNoTracking()
             .FirstOrDefaultAsync();
 
@@ -74,7 +74,6 @@ public class EquipmentApiController : ControllerBase
 
         var equipment = new Equipment
         {
-            CharacterId = dto.CharacterId,
             Type = dto.Type?.Trim(),
             Name = dto.Name.Trim(),
             Cost = dto.Cost,
@@ -82,12 +81,13 @@ public class EquipmentApiController : ControllerBase
         };
 
         _context.Equipment.Add(equipment);
+        character.EquipmentList.Add(equipment);
         await _context.SaveChangesAsync();
 
-        await _context.Entry(equipment).Reference(item => item.Character).LoadAsync();
-        if (equipment.Character != null)
+        await _context.Entry(equipment).Collection(item => item.Characters).LoadAsync();
+        if (equipment.Characters.Count > 0)
         {
-            await _context.Entry(equipment.Character).Reference(item => item.Level).LoadAsync();
+            await _context.Entry(equipment.Characters.First()).Reference(item => item.Level).LoadAsync();
         }
 
         return CreatedAtAction(nameof(GetById), new { id = equipment.EquipmentId }, ToDto(equipment));
@@ -97,8 +97,8 @@ public class EquipmentApiController : ControllerBase
     public async Task<ActionResult<EquipmentDto>> Update(int id, [FromBody] EquipmentUpsertDto dto)
     {
         var equipment = await _context.Equipment
-            .Include(item => item.Character)
-                .ThenInclude(character => character!.Level)
+            .Include(item => item.Characters)
+                .ThenInclude(character => character.Level)
             .FirstOrDefaultAsync(item => item.EquipmentId == id && item.DeletedAt == null);
 
         if (equipment == null)
@@ -118,12 +118,17 @@ public class EquipmentApiController : ControllerBase
         equipment.Cost = dto.Cost;
         equipment.Weight = dto.Weight;
 
+        if (!equipment.Characters.Any(item => item.CharacterId == character.CharacterId))
+        {
+            equipment.Characters.Add(character);
+        }
+
         await _context.SaveChangesAsync();
 
-        await _context.Entry(equipment).Reference(item => item.Character).LoadAsync();
-        if (equipment.Character != null)
+        await _context.Entry(equipment).Collection(item => item.Characters).LoadAsync();
+        if (equipment.Characters.Count > 0)
         {
-            await _context.Entry(equipment.Character).Reference(item => item.Level).LoadAsync();
+            await _context.Entry(equipment.Characters.First()).Reference(item => item.Level).LoadAsync();
         }
 
         return Ok(ToDto(equipment));
@@ -147,41 +152,74 @@ public class EquipmentApiController : ControllerBase
     private static bool EquipmentMatchesSearch(Equipment equipment, string searchTerm)
     {
         return equipment.EquipmentId.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-            || equipment.CharacterId.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             || equipment.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             || (equipment.Type?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
             || equipment.Cost.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             || equipment.Weight.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-            || (equipment.Character?.CharacterName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false);
+            || equipment.Characters.Any(character => character.CharacterName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
     }
 
     private static EquipmentDto ToDto(Equipment equipment)
     {
+        var linkedCharacter = equipment.Characters.FirstOrDefault();
+
         return new EquipmentDto
         {
             EquipmentId = equipment.EquipmentId,
-            CharacterId = equipment.CharacterId,
+            CharacterId = linkedCharacter?.CharacterId ?? equipment.CharacterId ?? 0,
             Type = equipment.Type,
             Name = equipment.Name,
             Cost = equipment.Cost,
             Weight = equipment.Weight,
-            Character = equipment.Character == null ? null : new CharacterSummaryDto
+            Character = linkedCharacter == null ? null : new CharacterSummaryDto
             {
-                CharacterId = equipment.Character.CharacterId,
-                PlayerId = equipment.Character.PlayerId,
-                CharacterName = equipment.Character.CharacterName,
-                Race = equipment.Character.Race,
-                Background = equipment.Character.Background,
-                Alignment = equipment.Character.Alignment,
-                Class = equipment.Character.Class,
-                Level = equipment.Character.Level == null ? null : new CharacterLevelDto
+                CharacterId = linkedCharacter.CharacterId,
+                PlayerId = linkedCharacter.PlayerId,
+                CharacterName = linkedCharacter.CharacterName,
+                Race = linkedCharacter.Race,
+                Background = linkedCharacter.Background,
+                Alignment = linkedCharacter.Alignment,
+                Class = linkedCharacter.Class,
+                CurrentExperiencePoints = linkedCharacter.CurrentExperiencePoints,
+                DateOfLastLevelUp = linkedCharacter.DateOfLastLevelUp,
+                Strength = linkedCharacter.Strength,
+                Dexterity = linkedCharacter.Dexterity,
+                Constitution = linkedCharacter.Constitution,
+                Intelligence = linkedCharacter.Intelligence,
+                Wisdom = linkedCharacter.Wisdom,
+                Charisma = linkedCharacter.Charisma,
+                StrengthSaveProficient = linkedCharacter.StrengthSaveProficient,
+                DexteritySaveProficient = linkedCharacter.DexteritySaveProficient,
+                ConstitutionSaveProficient = linkedCharacter.ConstitutionSaveProficient,
+                IntelligenceSaveProficient = linkedCharacter.IntelligenceSaveProficient,
+                WisdomSaveProficient = linkedCharacter.WisdomSaveProficient,
+                CharismaSaveProficient = linkedCharacter.CharismaSaveProficient,
+                AcrobaticsProficient = linkedCharacter.AcrobaticsProficient,
+                AnimalHandlingProficient = linkedCharacter.AnimalHandlingProficient,
+                ArcanaProficient = linkedCharacter.ArcanaProficient,
+                AthleticsProficient = linkedCharacter.AthleticsProficient,
+                DeceptionProficient = linkedCharacter.DeceptionProficient,
+                HistoryProficient = linkedCharacter.HistoryProficient,
+                InsightProficient = linkedCharacter.InsightProficient,
+                IntimidationProficient = linkedCharacter.IntimidationProficient,
+                InvestigationProficient = linkedCharacter.InvestigationProficient,
+                MedicineProficient = linkedCharacter.MedicineProficient,
+                NatureProficient = linkedCharacter.NatureProficient,
+                PerceptionProficient = linkedCharacter.PerceptionProficient,
+                PerformanceProficient = linkedCharacter.PerformanceProficient,
+                PersuasionProficient = linkedCharacter.PersuasionProficient,
+                ReligionProficient = linkedCharacter.ReligionProficient,
+                SleightOfHandProficient = linkedCharacter.SleightOfHandProficient,
+                StealthProficient = linkedCharacter.StealthProficient,
+                SurvivalProficient = linkedCharacter.SurvivalProficient,
+                Level = linkedCharacter.Level == null ? null : new CharacterLevelDto
                 {
-                    LevelId = equipment.Character.Level.LevelId,
-                    Level = equipment.Character.Level.Level,
-                    CurrentExperiencePoints = equipment.Character.Level.CurrentExperiencePoints,
-                    ExperiencePointsToNextLevel = equipment.Character.Level.ExperiencePointsToNextLevel,
-                    ProficiencyBonus = equipment.Character.Level.ProficiencyBonus,
-                    DateOfLastLevelUp = equipment.Character.Level.DateOfLastLevelUp
+                    LevelId = linkedCharacter.Level.LevelId,
+                    Level = linkedCharacter.Level.Level,
+                    CurrentExperiencePoints = linkedCharacter.Level.CurrentExperiencePoints,
+                    ExperiencePointsToNextLevel = linkedCharacter.Level.ExperiencePointsToNextLevel,
+                    ProficiencyBonus = linkedCharacter.Level.ProficiencyBonus,
+                    DateOfLastLevelUp = linkedCharacter.Level.DateOfLastLevelUp
                 }
             }
         };

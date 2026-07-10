@@ -3,10 +3,16 @@
 @{
     ViewData["Title"] = "Character Details";
     var characterLevel = Model.Character.Level;
-    var xpCurrent = characterLevel?.CurrentExperiencePoints ?? 0;
+    var xpCurrent = Model.Character.CurrentExperiencePoints;
     var xpNext = characterLevel?.ExperiencePointsToNextLevel ?? 0;
     var xpPercent = xpNext <= 0 ? 0 : Math.Clamp((int)Math.Round((double)xpCurrent / xpNext * 100), 0, 100);
-    var canManageCharacters = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
+    var lastLevelUp = Model.Character.DateOfLastLevelUp ?? characterLevel?.DateOfLastLevelUp;
+    var currentUsername = User?.Identity?.Name;
+    var canEditCharacter = User?.Identity?.IsAuthenticated == true && (
+        User.IsInRole("Admin") ||
+        string.Equals(currentUsername, Model.OwnerUsername, StringComparison.OrdinalIgnoreCase));
+    var canManageAttachments = canEditCharacter;
+    int AbilityModifier(int score) => (score - 10) / 2;
 }
 
 <section class="sheet-card mb-4 reveal">
@@ -17,7 +23,7 @@
 <div class="mb-4">
     <div class="d-flex flex-wrap gap-2">
         <a class="btn btn-outline-ink" asp-controller="Characters" asp-action="Index">Back to all characters</a>
-        @if (canManageCharacters)
+        @if (canEditCharacter)
         {
             <a class="btn btn-edit" asp-controller="Characters" asp-action="Edit" asp-route-id="@Model.Character.CharacterId">Edit character</a>
             <a class="btn btn-outline-danger" asp-controller="Characters" asp-action="Remove" asp-route-id="@Model.Character.CharacterId">Remove character</a>
@@ -62,19 +68,79 @@
 
             <dt class="col-sm-3">Last Level Up</dt>
             <dd class="col-sm-9">
-                @(characterLevel == null
+                @(lastLevelUp == null
                     ? "N/A"
-                    : await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = characterLevel.DateOfLastLevelUp }))
+                    : await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = lastLevelUp }))
             </dd>
         </dl>
     </div>
 </div>
 
+<div class="row g-4 mb-4">
+    <div class="col-12 col-lg-4">
+        <div class="card sheet-card h-100 reveal">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Ability Scores</h2>
+                <dl class="row mb-0">
+                    <dt class="col-7">Strength</dt><dd class="col-5">@Model.Character.Strength (@(AbilityModifier(Model.Character.Strength) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Strength))</dd>
+                    <dt class="col-7">Dexterity</dt><dd class="col-5">@Model.Character.Dexterity (@(AbilityModifier(Model.Character.Dexterity) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Dexterity))</dd>
+                    <dt class="col-7">Constitution</dt><dd class="col-5">@Model.Character.Constitution (@(AbilityModifier(Model.Character.Constitution) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Constitution))</dd>
+                    <dt class="col-7">Intelligence</dt><dd class="col-5">@Model.Character.Intelligence (@(AbilityModifier(Model.Character.Intelligence) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Intelligence))</dd>
+                    <dt class="col-7">Wisdom</dt><dd class="col-5">@Model.Character.Wisdom (@(AbilityModifier(Model.Character.Wisdom) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Wisdom))</dd>
+                    <dt class="col-7">Charisma</dt><dd class="col-5">@Model.Character.Charisma (@(AbilityModifier(Model.Character.Charisma) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Charisma))</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card sheet-card h-100 reveal">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Saving Throws</h2>
+                <ul class="list-unstyled mb-0">
+                    <li>Strength: @(Model.Character.StrengthSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Dexterity: @(Model.Character.DexteritySaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Constitution: @(Model.Character.ConstitutionSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Intelligence: @(Model.Character.IntelligenceSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Wisdom: @(Model.Character.WisdomSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Charisma: @(Model.Character.CharismaSaveProficient ? "Proficient" : "Not proficient")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card sheet-card h-100 reveal">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Skills</h2>
+                <ul class="list-unstyled mb-0">
+                    <li>Acrobatics: @(Model.Character.AcrobaticsProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Animal Handling: @(Model.Character.AnimalHandlingProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Arcana: @(Model.Character.ArcanaProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Athletics: @(Model.Character.AthleticsProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Deception: @(Model.Character.DeceptionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>History: @(Model.Character.HistoryProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Insight: @(Model.Character.InsightProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Intimidation: @(Model.Character.IntimidationProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Investigation: @(Model.Character.InvestigationProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Medicine: @(Model.Character.MedicineProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Nature: @(Model.Character.NatureProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Perception: @(Model.Character.PerceptionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Performance: @(Model.Character.PerformanceProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Persuasion: @(Model.Character.PersuasionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Religion: @(Model.Character.ReligionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Sleight of Hand: @(Model.Character.SleightOfHandProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Stealth: @(Model.Character.StealthProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Survival: @(Model.Character.SurvivalProficient ? "Proficient" : "Not proficient")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h2 class="h4 mb-3">Equipment</h2>
 <div class="mb-3">
-    @if (canManageCharacters)
+    @if (canEditCharacter)
     {
-        <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add equipment</a>
+        <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add existing equipment</a>
     }
 </div>
 <div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("EquipmentSearch", "Characters", new { id = Model.Character.CharacterId })" data-autocomplete-url="@Url.Action("EquipmentAutocomplete", "Characters", new { id = Model.Character.CharacterId })" data-count-badge="#equipmentCountBadge">
@@ -95,6 +161,7 @@
 </div>
 
 <div id="equipmentListRegion" class="ajax-list-search-region">
+    @{ ViewData["CharacterId"] = Model.Character.CharacterId; }
     @await Html.PartialAsync("_EquipmentCards", Model.Character.EquipmentList.Where(e => e.DeletedAt == null))
 </div>
 
@@ -130,7 +197,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3 class="h5 mb-0">Uploaded files</h3>
-                    @if (canManageCharacters)
+                    @if (canManageAttachments)
                     {
                         <button type="button" class="btn btn-outline-ink btn-sm" id="reloadAttachmentsButton">Reload</button>
                     }

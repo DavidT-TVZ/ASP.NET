@@ -1,174 +1,169 @@
 ﻿# DnD Character Sheet Creator - Semantic Model
 
-## Database Schema & Domain Model
+## Domain Model
 
-### Core Entities
-
-#### Player
-Represents a user/player account in the system.
+### Player
+Represents a player account and the owner of one or more characters.
 
 | Property | Type | Notes |
 |----------|------|-------|
-| PlayerId | int | Primary Key |
-| PlayerName | string | Required |
-| PlayerEmail | string | Required, Unique |
-| OIB | string | Croatian ID number |
+| PlayerId | int | Primary key |
+| Name | string | Required |
+| Surname | string | Required |
+| Username | string | Required, unique in practice |
+| Email | string | Required |
+| Password | string | Stored by the app and mirrored in API payloads |
+| LastLogin | DateTime | Updated on sign-in |
+| Role | RoleEnum | Admin, Manager, User |
 | DeletedAt | DateTime? | Soft-delete marker |
 
 **Relationships:**
-- One Player → Many Characters
-- One Player → One AppUser (Identity)
+- One Player -> Many Characters
+- One Player -> One AppUser through `PlayerId`
 
----
-
-#### AppUser (Identity)
-ASP.NET Core Identity user mapping for authentication.
+### AppUser (Identity)
+ASP.NET Core Identity user for authentication.
 
 | Property | Type | Notes |
 |----------|------|-------|
-| Id | string | Primary Key (Identity) |
-| UserName | string | Required |
-| Email | string | Required, Unique |
-| PlayerId | int? | Foreign Key to Player |
-| OIB | string | Croatian ID |
+| Id | string | Identity primary key |
+| UserName | string | Login name |
+| Email | string | Login email |
+| PlayerId | int? | Links Identity to Player |
+| OIB | string | National identifier |
 | JMBG | string | Birth number |
 
-**Roles:** 
-- Admin (full access)
-- Manager (can manage players/characters)
-
----
-
-#### Character
-Represents a D&D character created by a player.
+### Character
+Represents a D&D character sheet owned by a player.
 
 | Property | Type | Notes |
 |----------|------|-------|
-| CharacterId | int | Primary Key |
+| CharacterId | int | Primary key |
+| PlayerId | int | Foreign key to Player |
+| LevelId | int? | Foreign key to CharacterLevel |
 | CharacterName | string | Required |
-| PlayerId | int | Foreign Key |
-| Class | ClassEnum | Barbarian, Bard, Cleric, etc. |
-| Race | RaceEnum | Human, Elf, Dwarf, etc. |
-| Background | BackgroundEnum | Acolyte, Criminal, etc. |
-| Alignment | AlignmentEnum | LawfulGood, ChaoticEvil, etc. |
-| LevelId | int? | Foreign Key to CharacterLevel |
+| Race | RaceEnum | Character race |
+| Background | BackgroundEnum | Character background |
+| Alignment | AlignmentEnum | Character alignment |
+| Class | ClassEnum | Character class |
+| CurrentExperiencePoints | int | Current XP total |
+| DateOfLastLevelUp | DateTime? | Last level-up timestamp |
+| Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma | int | Ability scores |
+| Skill/save booleans | bool | Proficiency flags for saves and skills |
 | DeletedAt | DateTime? | Soft-delete marker |
 
 **Relationships:**
-- Many Characters → One Player
-- Many Characters → One CharacterLevel
-- One Character → Many Equipment
-- One Character → Many Attachments
+- Many Characters -> One Player
+- Many Characters -> One CharacterLevel
+- One Character -> Many Equipment entries
+- One Character -> Many Attachments
 
----
-
-#### CharacterLevel
-Represents experience and level progression for a character.
+### CharacterLevel
+Represents the level progression snapshot linked to a character.
 
 | Property | Type | Notes |
 |----------|------|-------|
-| LevelId | int | Primary Key |
-| LevelNumber | int | 1-20 |
-| Experience | int | XP total |
-| HitPoints | int | Max HP |
+| LevelId | int | Primary key |
+| Level | int | Character level number |
+| CurrentExperiencePoints | int | Current XP |
+| ExperiencePointsToNextLevel | int | XP threshold |
+| ProficiencyBonus | int | Proficiency bonus |
+| DateOfLastLevelUp | DateTime | Timestamp |
 
-**Relationships:**
-- Many CharacterLevels ← Many Characters
-
----
-
-#### Equipment
-Represents items carried by a character (weapons, armor, gear).
+### Equipment
+Represents an item that can be cataloged globally and linked to characters.
 
 | Property | Type | Notes |
 |----------|------|-------|
-| EquipmentId | int | Primary Key |
-| CharacterId | int | Foreign Key |
-| Equipment_Type | EquipmentType | Weapon, Armour, AdventuringGear, Tools |
-| Equipment_Name | string | Item name |
-| Cost | decimal | Gold pieces |
-| Weight | decimal | Pounds |
-| DeletedAt | DateTime? | Soft-delete marker |
-
-**Derived/Domain Classes:**
-- Weapon (extends Equipment with DamageAmount, DamageType, WeaponPropertiesEnum)
-- Armour (extends Equipment with armor class info)
-- Tools, AdventuringGear (specialized equipment types)
-
----
-
-#### Attachment
-File attachments uploaded to a character (images, documents, notes).
-
-| Property | Type | Notes |
-|----------|------|-------|
-| AttachmentId | int | Primary Key |
-| CharacterId | int | Foreign Key |
-| FileName | string | Original filename |
-| FilePath | string | Server path (wwwroot/uploads/characters/{id}/) |
-| DateUploaded | DateTime | Upload timestamp |
+| EquipmentId | int | Primary key |
+| CharacterId | int? | UI/model helper for character-linked workflows |
+| Type | string? | Equipment category label |
+| Name | string | Required |
+| Cost | int | Gold pieces |
+| Weight | int | Weight value |
 | DeletedAt | DateTime? | Soft-delete marker |
 
 **Relationships:**
-- Many Attachments ← One Character
+- Many Characters <-> Many Equipment entries through the character equipment list
+- Equipment rows can be managed globally on `/Equipment`
 
----
+### Attachment
+Represents a file uploaded for a character.
 
-### Supporting Enums
+| Property | Type | Notes |
+|----------|------|-------|
+| AttachmentId | int | Primary key |
+| CharacterId | int | Foreign key to Character |
+| FileName | string | Original file name |
+| FilePath | string | Stored path under `wwwroot/uploads/characters/{id}/` |
+| ContentType | string? | MIME type |
+| FileSize | long | Size in bytes |
+| CreatedAt | DateTime | Upload timestamp |
+| DeletedAt | DateTime? | Soft-delete marker |
+
+## Supporting Enums
 
 | Enum | Values |
 |------|--------|
+| RoleEnum | Admin, Manager, User |
 | ClassEnum | Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard |
 | RaceEnum | Human, Elf, Dwarf, Halfling, Tiefling, Dragonborn, Gnome |
 | BackgroundEnum | Acolyte, Charlatan, Criminal, Entertainer, Folk Hero, Guild Artisan, Hermit, Noble, Outlander, Sage, Sailor, Soldier, Urchin |
 | AlignmentEnum | LawfulGood, NeutralGood, ChaoticGood, LawfulNeutral, TrueNeutral, ChaoticNeutral, LawfulEvil, NeutralEvil, ChaoticEvil |
 | WeaponPropertiesEnum | Ammunition, Finesse, Heavy, Light, Loading, Range, Reach, Special, Thrown, TwoHanded, Versatile |
 
----
+## MVC Surface
 
-## Authentication & Authorization
+### Account and Identity
+- Sign in and register use ASP.NET Core Identity with `AccountController`.
+- External login is supported through Google.
+- `Profile` shows the current player and their active characters.
 
-### Authentication Flow
-1. User registers via /Account/Register with username/email/password
-2. AppUser created in Identity, linked to Player record
-3. User can sign in with credentials or via Google OAuth
-4. ASP.NET Core Identity handles session/cookies
-5. Claims-based authorization enforces role access
+### Players and Characters
+- `PlayersController` serves player browse, search, autocomplete, create, edit, details, and remove flows.
+- `CharactersController` serves character browse, search, autocomplete, create, edit, details, remove, attachment upload/delete, and equipment linking flows.
+- Anonymous users can browse lists, but character details and edit flows are role- and ownership-aware.
 
-### Authorization Rules
+### Equipment and Codex
+- `EquipmentController` manages the global equipment catalog for Admin and Manager users.
+- `CodexController` provides a combined search page over players, characters, and equipment.
 
-| Resource | Anon | Auth | Manager | Admin |
-|----------|------|------|---------|-------|
-| Browse Players | ✓ | ✓ | ✓ | ✓ |
-| View Own Player | ✓ | ✓ | ✓ | ✓ |
-| Create/Edit/Delete Player | ✗ | ✗ | ✓ | ✓ |
-| Browse Characters | ✓ | ✓ | ✓ | ✓ |
-| View Character Details | ✗ | ✓ | ✓ | ✓ |
-| Create/Edit/Delete Character | ✗ | ✗ | ✓ | ✓ |
-| Manage Attachments | ✗ | ✗ | ✓ | ✓ |
+## Authorization Rules
 
----
+| Resource | Anonymous | Authenticated | Manager | Admin |
+|----------|-----------|---------------|---------|-------|
+| Players list/search | Yes | Yes | Yes | Yes |
+| Player details | No | Yes | Yes | Yes |
+| Player create/edit | No | No | Yes | Yes |
+| Player delete | No | No | No | Yes |
+| Characters list/search | Yes | Yes | Yes | Yes |
+| Character details | No | Yes | Yes | Yes |
+| Character create/edit/delete | No | Yes | Ownership-aware | Ownership-aware |
+| Attachment upload/delete | No | Yes | Ownership-aware | Ownership-aware |
+| Global equipment catalog | No | No | Yes | Yes |
+| Codex search | Yes | Yes | Yes | Yes |
 
 ## API DTOs
 
-The Web API returns Data Transfer Objects (DTOs) to clients rather than raw entities:
+The Web API uses DTOs instead of exposing entities directly:
 
-- **PlayerUpsertDto** - for POST/PUT player operations
-- **PlayerDto** - full player details with characters
-- **PlayerSummaryDto** - lightweight player info
-- **CharacterUpsertDto** - for POST/PUT character operations
-- **CharacterDto** - full character with level, equipment, attachments
-- **CharacterSummaryDto** - lightweight character info
-- **EquipmentUpsertDto** - for POST/PUT equipment operations
-- **EquipmentDto** - full equipment details
-- **CharacterLevelDto** - level progression info
+- PlayerUpsertDto
+- PlayerSummaryDto
+- PlayerDto
+- CharacterUpsertDto
+- CharacterSummaryDto
+- CharacterDto
+- CharacterLevelUpsertDto
+- CharacterLevelDto
+- EquipmentUpsertDto
+- EquipmentSummaryDto
+- EquipmentDto
 
----
+## Soft Delete
 
-## Soft-Delete Pattern
+Soft delete is used for Player, Character, Equipment, and Attachment rows:
 
-Entities with DeletedAt field (Player, Character, Equipment, Attachment) are soft-deleted:
-- Record retained in database
-- DeletedAt timestamp set to current time
-- Queries exclude deleted records by convention
-- EF Core configurations filter automatically
+- Records stay in the database.
+- `DeletedAt` is set instead of physically removing the row.
+- Queries and UI lists filter out deleted records.
+- Character deletion also marks linked equipment rows as deleted in the API layer.

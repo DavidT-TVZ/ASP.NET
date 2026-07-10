@@ -12,15 +12,18 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly ICharacterRepository _characterRepository;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
         public AccountController(
             IPlayerRepository playerRepository,
+            ICharacterRepository characterRepository,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager)
         {
             _playerRepository = playerRepository;
+            _characterRepository = characterRepository;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -253,6 +256,43 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("Profile")]
+        public IActionResult Profile()
+        {
+            var player = GetCurrentPlayer();
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Characters = _characterRepository.GetCharactersByPlayerId(player.PlayerId)
+                .Where(character => character.DeletedAt == null)
+                .Select(character => new CharacterWithPlayerViewModel
+                {
+                    Character = character,
+                    PlayerId = player.PlayerId,
+                    PlayerName = $"{player.Name} {player.Surname}"
+                })
+                .OrderBy(character => character.Character.CharacterName)
+                .ThenBy(character => character.Character.CharacterId)
+                .ToList();
+
+            return View(player);
+        }
+
+        private Player? GetCurrentPlayer()
+        {
+            var username = HttpContext?.User?.Identity?.Name;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return null;
+            }
+
+            return _playerRepository.GetPlayerByUsername(username);
         }
     }
 }

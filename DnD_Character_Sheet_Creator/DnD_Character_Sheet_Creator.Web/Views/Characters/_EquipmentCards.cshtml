@@ -2,6 +2,7 @@
 
 @{
     var canManageCharacters = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
+    var characterId = ViewData["CharacterId"] as int? ?? 0;
 }
 
 @if (!Model.Any())
@@ -23,10 +24,9 @@ else
                     </div>
                     <div class="card-footer bg-transparent border-top-0">
                         <div class="d-flex flex-wrap gap-2">
-                            @if (canManageCharacters)
+                            @if (canManageCharacters && characterId > 0)
                             {
-                                <a class="btn btn-edit btn-sm" asp-action="EquipmentEditForm" asp-route-characterId="@equipment.CharacterId" asp-route-equipmentId="@equipment.EquipmentId">Edit</a>
-                                <a class="btn btn-outline-danger btn-sm" asp-action="EquipmentRemoveForm" asp-route-characterId="@equipment.CharacterId" asp-route-equipmentId="@equipment.EquipmentId">Remove</a>
+                                <a class="btn btn-outline-danger btn-sm" asp-action="EquipmentRemoveForm" asp-route-characterId="@characterId" asp-route-equipmentId="@equipment.EquipmentId">Remove</a>
                             }
                         </div>
                     </div>

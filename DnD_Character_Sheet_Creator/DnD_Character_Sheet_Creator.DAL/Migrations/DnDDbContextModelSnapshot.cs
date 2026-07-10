@@ -25,6 +25,21 @@ namespace DnD_Character_Sheet_Creator.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CharacterEquipment", b =>
+                {
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CharacterId", "EquipmentId");
+
+                    b.HasIndex("EquipmentId");
+
+                    b.ToTable("CharacterEquipment");
+                });
+
             modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -149,8 +164,20 @@ namespace DnD_Character_Sheet_Creator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CharacterId"));
 
+                    b.Property<bool>("AcrobaticsProficient")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Alignment")
                         .HasColumnType("int");
+
+                    b.Property<bool>("AnimalHandlingProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ArcanaProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("AthleticsProficient")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Background")
                         .HasColumnType("int");
@@ -159,20 +186,104 @@ namespace DnD_Character_Sheet_Creator.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Charisma")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("CharismaSaveProficient")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Class")
                         .HasColumnType("int");
+
+                    b.Property<int>("Constitution")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ConstitutionSaveProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("CurrentExperiencePoints")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateOfLastLevelUp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("DeceptionProficient")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Dexterity")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("DexteritySaveProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HistoryProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("InsightProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Intelligence")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IntelligenceSaveProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IntimidationProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("InvestigationProficient")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("LevelId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("MedicineProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NatureProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PerceptionProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PerformanceProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PersuasionProficient")
+                        .HasColumnType("bit");
 
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
                     b.Property<int>("Race")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ReligionProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SleightOfHandProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("StealthProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Strength")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("StrengthSaveProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SurvivalProficient")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Wisdom")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("WisdomSaveProficient")
+                        .HasColumnType("bit");
 
                     b.HasKey("CharacterId");
 
@@ -211,6 +322,188 @@ namespace DnD_Character_Sheet_Creator.Migrations
                     b.HasKey("LevelId");
 
                     b.ToTable("CharacterLevels");
+
+                    b.HasData(
+                        new
+                        {
+                            LevelId = 1,
+                            CurrentExperiencePoints = 0,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6141),
+                            ExperiencePointsToNextLevel = 300,
+                            Level = 1,
+                            ProficiencyBonus = 2
+                        },
+                        new
+                        {
+                            LevelId = 2,
+                            CurrentExperiencePoints = 300,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6562),
+                            ExperiencePointsToNextLevel = 900,
+                            Level = 2,
+                            ProficiencyBonus = 2
+                        },
+                        new
+                        {
+                            LevelId = 3,
+                            CurrentExperiencePoints = 900,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6563),
+                            ExperiencePointsToNextLevel = 2700,
+                            Level = 3,
+                            ProficiencyBonus = 2
+                        },
+                        new
+                        {
+                            LevelId = 4,
+                            CurrentExperiencePoints = 2700,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6565),
+                            ExperiencePointsToNextLevel = 6500,
+                            Level = 4,
+                            ProficiencyBonus = 2
+                        },
+                        new
+                        {
+                            LevelId = 5,
+                            CurrentExperiencePoints = 6500,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6567),
+                            ExperiencePointsToNextLevel = 14000,
+                            Level = 5,
+                            ProficiencyBonus = 3
+                        },
+                        new
+                        {
+                            LevelId = 6,
+                            CurrentExperiencePoints = 14000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6568),
+                            ExperiencePointsToNextLevel = 23000,
+                            Level = 6,
+                            ProficiencyBonus = 3
+                        },
+                        new
+                        {
+                            LevelId = 7,
+                            CurrentExperiencePoints = 23000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6569),
+                            ExperiencePointsToNextLevel = 34000,
+                            Level = 7,
+                            ProficiencyBonus = 3
+                        },
+                        new
+                        {
+                            LevelId = 8,
+                            CurrentExperiencePoints = 34000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6571),
+                            ExperiencePointsToNextLevel = 48000,
+                            Level = 8,
+                            ProficiencyBonus = 3
+                        },
+                        new
+                        {
+                            LevelId = 9,
+                            CurrentExperiencePoints = 48000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6572),
+                            ExperiencePointsToNextLevel = 64000,
+                            Level = 9,
+                            ProficiencyBonus = 4
+                        },
+                        new
+                        {
+                            LevelId = 10,
+                            CurrentExperiencePoints = 64000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6574),
+                            ExperiencePointsToNextLevel = 85000,
+                            Level = 10,
+                            ProficiencyBonus = 4
+                        },
+                        new
+                        {
+                            LevelId = 11,
+                            CurrentExperiencePoints = 85000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6575),
+                            ExperiencePointsToNextLevel = 100000,
+                            Level = 11,
+                            ProficiencyBonus = 4
+                        },
+                        new
+                        {
+                            LevelId = 12,
+                            CurrentExperiencePoints = 100000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6576),
+                            ExperiencePointsToNextLevel = 120000,
+                            Level = 12,
+                            ProficiencyBonus = 4
+                        },
+                        new
+                        {
+                            LevelId = 13,
+                            CurrentExperiencePoints = 120000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6578),
+                            ExperiencePointsToNextLevel = 140000,
+                            Level = 13,
+                            ProficiencyBonus = 5
+                        },
+                        new
+                        {
+                            LevelId = 14,
+                            CurrentExperiencePoints = 140000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6579),
+                            ExperiencePointsToNextLevel = 165000,
+                            Level = 14,
+                            ProficiencyBonus = 5
+                        },
+                        new
+                        {
+                            LevelId = 15,
+                            CurrentExperiencePoints = 165000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6581),
+                            ExperiencePointsToNextLevel = 195000,
+                            Level = 15,
+                            ProficiencyBonus = 5
+                        },
+                        new
+                        {
+                            LevelId = 16,
+                            CurrentExperiencePoints = 195000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6582),
+                            ExperiencePointsToNextLevel = 225000,
+                            Level = 16,
+                            ProficiencyBonus = 5
+                        },
+                        new
+                        {
+                            LevelId = 17,
+                            CurrentExperiencePoints = 225000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6584),
+                            ExperiencePointsToNextLevel = 265000,
+                            Level = 17,
+                            ProficiencyBonus = 6
+                        },
+                        new
+                        {
+                            LevelId = 18,
+                            CurrentExperiencePoints = 265000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6585),
+                            ExperiencePointsToNextLevel = 305000,
+                            Level = 18,
+                            ProficiencyBonus = 6
+                        },
+                        new
+                        {
+                            LevelId = 19,
+                            CurrentExperiencePoints = 305000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6587),
+                            ExperiencePointsToNextLevel = 355000,
+                            Level = 19,
+                            ProficiencyBonus = 6
+                        },
+                        new
+                        {
+                            LevelId = 20,
+                            CurrentExperiencePoints = 355000,
+                            DateOfLastLevelUp = new DateTime(2026, 7, 10, 2, 39, 32, 199, DateTimeKind.Utc).AddTicks(6588),
+                            ExperiencePointsToNextLevel = 0,
+                            Level = 20,
+                            ProficiencyBonus = 6
+                        });
                 });
 
             modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Equipment", b =>
@@ -221,14 +514,16 @@ namespace DnD_Character_Sheet_Creator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EquipmentId"));
 
-                    b.Property<int>("CharacterId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Cost")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -242,9 +537,11 @@ namespace DnD_Character_Sheet_Creator.Migrations
 
                     b.HasKey("EquipmentId");
 
-                    b.HasIndex("CharacterId");
-
                     b.ToTable("Equipment");
+
+                    b.HasDiscriminator().HasValue("Equipment");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Player", b =>
@@ -422,6 +719,928 @@ namespace DnD_Character_Sheet_Creator.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.AdventuringGear", b =>
+                {
+                    b.HasBaseType("DnD_Character_Sheet_Creator.Models.Equipment");
+
+                    b.HasDiscriminator().HasValue("AdventuringGear");
+
+                    b.HasData(
+                        new
+                        {
+                            EquipmentId = 1201,
+                            Cost = 2,
+                            Name = "Backpack",
+                            Type = "Gear",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1202,
+                            Cost = 1,
+                            Name = "Bedroll",
+                            Type = "Gear",
+                            Weight = 7
+                        },
+                        new
+                        {
+                            EquipmentId = 1203,
+                            Cost = 2,
+                            Name = "Mess Kit",
+                            Type = "Gear",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            EquipmentId = 1204,
+                            Cost = 5,
+                            Name = "Rations (1 day)",
+                            Type = "Gear",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1205,
+                            Cost = 2,
+                            Name = "Waterskin",
+                            Type = "Gear",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1206,
+                            Cost = 1,
+                            Name = "Hempen Rope (50 ft)",
+                            Type = "Gear",
+                            Weight = 10
+                        },
+                        new
+                        {
+                            EquipmentId = 1207,
+                            Cost = 2,
+                            Name = "Crowbar",
+                            Type = "Gear",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1208,
+                            Cost = 1,
+                            Name = "Hammer",
+                            Type = "Gear",
+                            Weight = 3
+                        },
+                        new
+                        {
+                            EquipmentId = 1209,
+                            Cost = 5,
+                            Name = "Pitons (10)",
+                            Type = "Gear",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1210,
+                            Cost = 5,
+                            Name = "Tinderbox",
+                            Type = "Gear",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            EquipmentId = 1211,
+                            Cost = 1,
+                            Name = "Torches (10)",
+                            Type = "Gear",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            EquipmentId = 1212,
+                            Cost = 5,
+                            Name = "Hooded Lantern",
+                            Type = "Gear",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1213,
+                            Cost = 2,
+                            Name = "Grappling Hook",
+                            Type = "Gear",
+                            Weight = 4
+                        },
+                        new
+                        {
+                            EquipmentId = 1214,
+                            Cost = 5,
+                            Name = "Mirror (steel)",
+                            Type = "Gear",
+                            Weight = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1215,
+                            Cost = 0,
+                            Name = "Chalk (1 piece)",
+                            Type = "Gear",
+                            Weight = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1216,
+                            Cost = 10,
+                            Name = "Lantern (bullseye)",
+                            Type = "Gear",
+                            Weight = 3
+                        },
+                        new
+                        {
+                            EquipmentId = 1217,
+                            Cost = 1,
+                            Name = "Candles (10)",
+                            Type = "Gear",
+                            Weight = 0
+                        });
+                });
+
+            modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Armour", b =>
+                {
+                    b.HasBaseType("DnD_Character_Sheet_Creator.Models.Equipment");
+
+                    b.Property<int>("ArmourClass")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("StealthDisadvantage")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StrenghtRequierment")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Armour");
+
+                    b.HasData(
+                        new
+                        {
+                            EquipmentId = 1101,
+                            Cost = 5,
+                            Name = "Padded",
+                            Type = "Light Armour",
+                            Weight = 8,
+                            ArmourClass = 11,
+                            StealthDisadvantage = false,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1102,
+                            Cost = 10,
+                            Name = "Leather",
+                            Type = "Light Armour",
+                            Weight = 10,
+                            ArmourClass = 11,
+                            StealthDisadvantage = false,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1103,
+                            Cost = 45,
+                            Name = "Studded Leather",
+                            Type = "Light Armour",
+                            Weight = 13,
+                            ArmourClass = 12,
+                            StealthDisadvantage = false,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1104,
+                            Cost = 10,
+                            Name = "Hide",
+                            Type = "Medium Armour",
+                            Weight = 12,
+                            ArmourClass = 12,
+                            StealthDisadvantage = false,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1105,
+                            Cost = 50,
+                            Name = "Chain Shirt",
+                            Type = "Medium Armour",
+                            Weight = 20,
+                            ArmourClass = 13,
+                            StealthDisadvantage = false,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1106,
+                            Cost = 50,
+                            Name = "Scale Mail",
+                            Type = "Medium Armour",
+                            Weight = 45,
+                            ArmourClass = 14,
+                            StealthDisadvantage = true,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1107,
+                            Cost = 400,
+                            Name = "Breastplate",
+                            Type = "Medium Armour",
+                            Weight = 20,
+                            ArmourClass = 14,
+                            StealthDisadvantage = false,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1108,
+                            Cost = 750,
+                            Name = "Half Plate",
+                            Type = "Medium Armour",
+                            Weight = 40,
+                            ArmourClass = 15,
+                            StealthDisadvantage = true,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1109,
+                            Cost = 30,
+                            Name = "Ring Mail",
+                            Type = "Heavy Armour",
+                            Weight = 40,
+                            ArmourClass = 14,
+                            StealthDisadvantage = true,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1110,
+                            Cost = 75,
+                            Name = "Chain Mail",
+                            Type = "Heavy Armour",
+                            Weight = 55,
+                            ArmourClass = 16,
+                            StealthDisadvantage = true,
+                            StrenghtRequierment = 13
+                        },
+                        new
+                        {
+                            EquipmentId = 1111,
+                            Cost = 200,
+                            Name = "Splint",
+                            Type = "Heavy Armour",
+                            Weight = 60,
+                            ArmourClass = 17,
+                            StealthDisadvantage = true,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1112,
+                            Cost = 1500,
+                            Name = "Plate",
+                            Type = "Heavy Armour",
+                            Weight = 65,
+                            ArmourClass = 18,
+                            StealthDisadvantage = true,
+                            StrenghtRequierment = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1113,
+                            Cost = 10,
+                            Name = "Shield",
+                            Type = "Shield",
+                            Weight = 6,
+                            ArmourClass = 2,
+                            StealthDisadvantage = false,
+                            StrenghtRequierment = 0
+                        });
+                });
+
+            modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Tools", b =>
+                {
+                    b.HasBaseType("DnD_Character_Sheet_Creator.Models.Equipment");
+
+                    b.HasDiscriminator().HasValue("Tools");
+
+                    b.HasData(
+                        new
+                        {
+                            EquipmentId = 1301,
+                            Cost = 50,
+                            Name = "Alchemist's Supplies",
+                            Type = "Artisan's Tools",
+                            Weight = 8
+                        },
+                        new
+                        {
+                            EquipmentId = 1302,
+                            Cost = 20,
+                            Name = "Brewer's Supplies",
+                            Type = "Artisan's Tools",
+                            Weight = 9
+                        },
+                        new
+                        {
+                            EquipmentId = 1303,
+                            Cost = 10,
+                            Name = "Calligrapher's Supplies",
+                            Type = "Artisan's Tools",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1304,
+                            Cost = 8,
+                            Name = "Carpenter's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 6
+                        },
+                        new
+                        {
+                            EquipmentId = 1305,
+                            Cost = 15,
+                            Name = "Cartographer's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 6
+                        },
+                        new
+                        {
+                            EquipmentId = 1306,
+                            Cost = 5,
+                            Name = "Cobbler's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1307,
+                            Cost = 1,
+                            Name = "Cook's Utensils",
+                            Type = "Artisan's Tools",
+                            Weight = 8
+                        },
+                        new
+                        {
+                            EquipmentId = 1308,
+                            Cost = 30,
+                            Name = "Glassblower's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1309,
+                            Cost = 25,
+                            Name = "Jeweler's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1310,
+                            Cost = 5,
+                            Name = "Leatherworker's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1311,
+                            Cost = 10,
+                            Name = "Mason's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 8
+                        },
+                        new
+                        {
+                            EquipmentId = 1312,
+                            Cost = 10,
+                            Name = "Painter's Supplies",
+                            Type = "Artisan's Tools",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1313,
+                            Cost = 10,
+                            Name = "Potter's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 3
+                        },
+                        new
+                        {
+                            EquipmentId = 1314,
+                            Cost = 20,
+                            Name = "Smith's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 8
+                        },
+                        new
+                        {
+                            EquipmentId = 1315,
+                            Cost = 50,
+                            Name = "Tinker's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 10
+                        },
+                        new
+                        {
+                            EquipmentId = 1316,
+                            Cost = 1,
+                            Name = "Weaver's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1317,
+                            Cost = 1,
+                            Name = "Woodcarver's Tools",
+                            Type = "Artisan's Tools",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1318,
+                            Cost = 1,
+                            Name = "Dice Set",
+                            Type = "Gaming Set",
+                            Weight = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1319,
+                            Cost = 1,
+                            Name = "Dragonchess Set",
+                            Type = "Gaming Set",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            EquipmentId = 1320,
+                            Cost = 5,
+                            Name = "Playing Card Set",
+                            Type = "Gaming Set",
+                            Weight = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1321,
+                            Cost = 1,
+                            Name = "Three-Dragon Ante Set",
+                            Type = "Gaming Set",
+                            Weight = 0
+                        },
+                        new
+                        {
+                            EquipmentId = 1322,
+                            Cost = 30,
+                            Name = "Bagpipes",
+                            Type = "Musical Instrument",
+                            Weight = 6
+                        },
+                        new
+                        {
+                            EquipmentId = 1323,
+                            Cost = 6,
+                            Name = "Drum",
+                            Type = "Musical Instrument",
+                            Weight = 3
+                        },
+                        new
+                        {
+                            EquipmentId = 1324,
+                            Cost = 25,
+                            Name = "Dulcimer",
+                            Type = "Musical Instrument",
+                            Weight = 10
+                        },
+                        new
+                        {
+                            EquipmentId = 1325,
+                            Cost = 2,
+                            Name = "Flute",
+                            Type = "Musical Instrument",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            EquipmentId = 1326,
+                            Cost = 35,
+                            Name = "Lute",
+                            Type = "Musical Instrument",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1327,
+                            Cost = 30,
+                            Name = "Lyre",
+                            Type = "Musical Instrument",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1328,
+                            Cost = 3,
+                            Name = "Horn",
+                            Type = "Musical Instrument",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1329,
+                            Cost = 12,
+                            Name = "Pan Flute",
+                            Type = "Musical Instrument",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1330,
+                            Cost = 2,
+                            Name = "Shawm",
+                            Type = "Musical Instrument",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            EquipmentId = 1331,
+                            Cost = 30,
+                            Name = "Viol",
+                            Type = "Musical Instrument",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            EquipmentId = 1332,
+                            Cost = 25,
+                            Name = "Disguise Kit",
+                            Type = "Tool Kit",
+                            Weight = 3
+                        },
+                        new
+                        {
+                            EquipmentId = 1333,
+                            Cost = 15,
+                            Name = "Forgery Kit",
+                            Type = "Tool Kit",
+                            Weight = 5
+                        },
+                        new
+                        {
+                            EquipmentId = 1334,
+                            Cost = 5,
+                            Name = "Herbalism Kit",
+                            Type = "Tool Kit",
+                            Weight = 3
+                        },
+                        new
+                        {
+                            EquipmentId = 1335,
+                            Cost = 25,
+                            Name = "Navigator's Tools",
+                            Type = "Tool Kit",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1336,
+                            Cost = 50,
+                            Name = "Poisoner's Kit",
+                            Type = "Tool Kit",
+                            Weight = 2
+                        },
+                        new
+                        {
+                            EquipmentId = 1337,
+                            Cost = 25,
+                            Name = "Thieves' Tools",
+                            Type = "Tool Kit",
+                            Weight = 1
+                        });
+                });
+
+            modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Weapon", b =>
+                {
+                    b.HasBaseType("DnD_Character_Sheet_Creator.Models.Equipment");
+
+                    b.Property<string>("DamageAmount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DamageType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.PrimitiveCollection<string>("WeaponProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Weapon");
+
+                    b.HasData(
+                        new
+                        {
+                            EquipmentId = 1001,
+                            Cost = 0,
+                            Name = "Club",
+                            Type = "Simple Melee Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d4",
+                            DamageType = "Bludgeoning",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1002,
+                            Cost = 2,
+                            Name = "Dagger",
+                            Type = "Simple Melee Weapon",
+                            Weight = 1,
+                            DamageAmount = "1d4",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1003,
+                            Cost = 0,
+                            Name = "Greatclub",
+                            Type = "Simple Melee Weapon",
+                            Weight = 10,
+                            DamageAmount = "1d8",
+                            DamageType = "Bludgeoning",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1004,
+                            Cost = 5,
+                            Name = "Handaxe",
+                            Type = "Simple Melee Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d6",
+                            DamageType = "Slashing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1005,
+                            Cost = 5,
+                            Name = "Javelin",
+                            Type = "Simple Melee Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d6",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1006,
+                            Cost = 2,
+                            Name = "Light Hammer",
+                            Type = "Simple Melee Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d4",
+                            DamageType = "Bludgeoning",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1007,
+                            Cost = 5,
+                            Name = "Mace",
+                            Type = "Simple Melee Weapon",
+                            Weight = 4,
+                            DamageAmount = "1d6",
+                            DamageType = "Bludgeoning",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1008,
+                            Cost = 0,
+                            Name = "Quarterstaff",
+                            Type = "Simple Melee Weapon",
+                            Weight = 4,
+                            DamageAmount = "1d6",
+                            DamageType = "Bludgeoning",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1009,
+                            Cost = 1,
+                            Name = "Sickle",
+                            Type = "Simple Melee Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d4",
+                            DamageType = "Slashing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1010,
+                            Cost = 1,
+                            Name = "Spear",
+                            Type = "Simple Melee Weapon",
+                            Weight = 3,
+                            DamageAmount = "1d6",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1011,
+                            Cost = 25,
+                            Name = "Light Crossbow",
+                            Type = "Simple Ranged Weapon",
+                            Weight = 5,
+                            DamageAmount = "1d8",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1012,
+                            Cost = 25,
+                            Name = "Shortbow",
+                            Type = "Simple Ranged Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d6",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1013,
+                            Cost = 15,
+                            Name = "Longsword",
+                            Type = "Martial Melee Weapon",
+                            Weight = 3,
+                            DamageAmount = "1d8",
+                            DamageType = "Slashing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1014,
+                            Cost = 10,
+                            Name = "Shortsword",
+                            Type = "Martial Melee Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d6",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1015,
+                            Cost = 25,
+                            Name = "Scimitar",
+                            Type = "Martial Melee Weapon",
+                            Weight = 3,
+                            DamageAmount = "1d6",
+                            DamageType = "Slashing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1016,
+                            Cost = 15,
+                            Name = "Warhammer",
+                            Type = "Martial Melee Weapon",
+                            Weight = 5,
+                            DamageAmount = "1d8",
+                            DamageType = "Bludgeoning",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1017,
+                            Cost = 10,
+                            Name = "Battleaxe",
+                            Type = "Martial Melee Weapon",
+                            Weight = 4,
+                            DamageAmount = "1d8",
+                            DamageType = "Slashing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1018,
+                            Cost = 50,
+                            Name = "Greatsword",
+                            Type = "Martial Melee Weapon",
+                            Weight = 6,
+                            DamageAmount = "2d6",
+                            DamageType = "Slashing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1019,
+                            Cost = 20,
+                            Name = "Halberd",
+                            Type = "Martial Melee Weapon",
+                            Weight = 6,
+                            DamageAmount = "1d10",
+                            DamageType = "Slashing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1020,
+                            Cost = 5,
+                            Name = "Pike",
+                            Type = "Martial Melee Weapon",
+                            Weight = 18,
+                            DamageAmount = "1d10",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1021,
+                            Cost = 10,
+                            Name = "Maul",
+                            Type = "Martial Melee Weapon",
+                            Weight = 10,
+                            DamageAmount = "2d6",
+                            DamageType = "Bludgeoning",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1022,
+                            Cost = 25,
+                            Name = "Rapier",
+                            Type = "Martial Melee Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d8",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1023,
+                            Cost = 50,
+                            Name = "Longbow",
+                            Type = "Martial Ranged Weapon",
+                            Weight = 2,
+                            DamageAmount = "1d8",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1024,
+                            Cost = 50,
+                            Name = "Heavy Crossbow",
+                            Type = "Martial Ranged Weapon",
+                            Weight = 18,
+                            DamageAmount = "1d10",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        },
+                        new
+                        {
+                            EquipmentId = 1025,
+                            Cost = 2,
+                            Name = "Throwing Dagger",
+                            Type = "Simple Melee Weapon",
+                            Weight = 1,
+                            DamageAmount = "1d4",
+                            DamageType = "Piercing",
+                            WeaponProperties = "[]"
+                        });
+                });
+
+            modelBuilder.Entity("CharacterEquipment", b =>
+                {
+                    b.HasOne("DnD_Character_Sheet_Creator.Models.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DnD_Character_Sheet_Creator.Models.Equipment", null)
+                        .WithMany()
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Attachment", b =>
                 {
                     b.HasOne("DnD_Character_Sheet_Creator.Models.Character", "Character")
@@ -449,17 +1668,6 @@ namespace DnD_Character_Sheet_Creator.Migrations
                     b.Navigation("Level");
 
                     b.Navigation("Player");
-                });
-
-            modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Equipment", b =>
-                {
-                    b.HasOne("DnD_Character_Sheet_Creator.Models.Character", "Character")
-                        .WithMany("EquipmentList")
-                        .HasForeignKey("CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Character");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -516,8 +1724,6 @@ namespace DnD_Character_Sheet_Creator.Migrations
             modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Character", b =>
                 {
                     b.Navigation("Attachments");
-
-                    b.Navigation("EquipmentList");
                 });
 
             modelBuilder.Entity("DnD_Character_Sheet_Creator.Models.Player", b =>

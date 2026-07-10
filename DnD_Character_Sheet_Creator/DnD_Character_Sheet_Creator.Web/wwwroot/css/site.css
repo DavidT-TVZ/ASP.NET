@@ -15,6 +15,9 @@
 .btn-create {
   --create-top: #d7f5ff;
   --create-bottom: #a9ecff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #052033;
   background: linear-gradient(180deg, var(--create-top), var(--create-bottom));
   border: 1px solid rgba(201, 244, 255, 0.96);
@@ -229,6 +232,36 @@ a:hover {
   border-radius: 0.85rem;
   box-shadow: 0 16px 28px -20px rgba(48, 30, 13, 0.85), inset 0 0 0 1px rgba(255, 245, 223, 0.5);
   padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+body.theme-parchment select.form-select,
+body.theme-parchment select.form-control {
+  background-color: rgba(255, 248, 231, 0.72);
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%), linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(1em + 1px), calc(100% - 12px) calc(1em + 1px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  border-color: rgba(105, 72, 37, 0.42);
+  color: var(--ink-main);
+  box-shadow: inset 0 1px 2px rgba(48, 30, 13, 0.05);
+}
+
+body.theme-parchment select.form-select:focus,
+body.theme-parchment select.form-control:focus {
+  background-color: rgba(255, 250, 236, 0.95);
+  border-color: rgba(125, 79, 34, 0.68);
+  box-shadow: 0 0 0 0.2rem rgba(125, 79, 34, 0.16);
+}
+
+.codex-results .list-group-item {
+  background-color: transparent;
+  border-color: rgba(105, 72, 37, 0.18);
+  color: var(--ink-main);
+}
+
+.codex-results .list-group-item-action:hover,
+.codex-results .list-group-item-action:focus-visible {
+  background-color: rgba(125, 79, 34, 0.08);
 }
 
 .chronicle-dropzone {
@@ -617,6 +650,17 @@ dd {
 .chronicle-footer .container-lg {
   padding-top: 0.9rem;
   padding-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.player-card .card-text,
+.character-card .card-text,
+.list-group-item .small {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .reveal {
@@ -675,6 +719,11 @@ a:focus-visible {
 
   .chronicle-footer .container-lg {
     text-align: center;
+    justify-content: center;
+  }
+
+  .chronicle-footer-separator {
+    display: none;
   }
 
   /* Keep full animations on mobile, but ensure buttons meet touch-size/readability */
@@ -695,6 +744,25 @@ a:focus-visible {
     min-height: 44px;
     padding: 0.55rem 0.9rem;
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .chronicle-nav .navbar-collapse {
+    padding-top: 0.75rem;
+  }
+
+  .chronicle-nav .navbar-nav {
+    gap: 0.1rem;
+  }
+
+  .chronicle-nav .navbar-user-shell {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .chronicle-nav .navbar-user-shell .text-end {
+    text-align: left !important;
   }
 }
 

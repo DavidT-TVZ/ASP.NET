@@ -37,8 +37,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var equipment = await response.Content.ReadFromJsonAsync<IEnumerable<EquipmentDto>>();
             Assert.NotNull(equipment);
-            Assert.Single(equipment);
-            Assert.Equal("Test Sword", equipment.First().Name);
+            Assert.Contains(equipment, e => e.Name == "Test Sword");
         }
 
         [Fact]
@@ -49,7 +48,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             {
                 var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
                 _factory.SeedDatabase(context);
-                var equipment = context.Equipment.First();
+                var equipment = context.Equipment.First(e => e.Name == "Test Sword");
                 var equipmentId = equipment.EquipmentId;
 
                 // Act
@@ -115,12 +114,13 @@ namespace DnD_Character_Sheet_Creator.Tests
             {
                 var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
                 _factory.SeedDatabase(context);
-                var equipment = context.Equipment.First();
+                var equipment = context.Equipment.First(e => e.Name == "Test Sword");
                 var equipmentId = equipment.EquipmentId;
+                var linkedCharacterId = equipment.CharacterId ?? equipment.Characters.First().CharacterId;
 
                 var updateDto = new EquipmentUpsertDto
                 {
-                    CharacterId = equipment.CharacterId,
+                    CharacterId = linkedCharacterId,
                     Name = "Updated Sword",
                     Type = "Melee Weapon",
                     Cost = 0,
@@ -166,7 +166,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             {
                 var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
                 _factory.SeedDatabase(context);
-                var equipment = context.Equipment.First();
+                var equipment = context.Equipment.First(e => e.Name == "Test Sword");
                 var equipmentId = equipment.EquipmentId;
 
                 // Act
@@ -217,7 +217,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             }
 
             // Act
-            var response = await _client.GetAsync("/api/equipment?search=Sword");
+            var response = await _client.GetAsync("/api/equipment?search=Test Sword");
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);

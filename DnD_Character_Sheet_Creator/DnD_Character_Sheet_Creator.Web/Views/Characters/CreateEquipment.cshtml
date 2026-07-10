@@ -1,12 +1,13 @@
-@model DnD_Character_Sheet_Creator.Web.ViewModels.EquipmentFormViewModel
+@model DnD_Character_Sheet_Creator.Web.ViewModels.CharacterEquipmentSelectionViewModel
 
 @{
-    ViewData["Title"] = "Add Equipment";
+    ViewData["Title"] = "Add Existing Equipment";
 }
 
 <section class="sheet-card mb-4 reveal">
-    <p class="sheet-kicker mb-1">New Gear</p>
+    <p class="sheet-kicker mb-1">Shared Gear</p>
     <h1 class="h3 mb-1">@ViewData["Title"]</h1>
+    <p class="text-muted mb-0">Select an existing equipment item to attach it to this character.</p>
 </section>
 
 <div class="row justify-content-center">
@@ -17,28 +18,15 @@
                     <input asp-for="CharacterId" type="hidden" />
 
                     <div class="mb-3">
-                        <label asp-for="Name" class="form-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Type" class="form-label"></label>
-                        <input asp-for="Type" class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Cost" class="form-label"></label>
-                        <input asp-for="Cost" class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Weight" class="form-label"></label>
-                        <input asp-for="Weight" class="form-control" />
+                        <label asp-for="SelectedEquipmentId" class="form-label"></label>
+                        <select asp-for="SelectedEquipmentId" asp-items="Model.AvailableEquipment" class="form-select">
+                            <option value="">Choose an equipment item</option>
+                        </select>
+                        <span asp-validation-for="SelectedEquipmentId" class="text-danger small d-block mt-1"></span>
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-create">Add equipment</button>
+                        <button type="submit" class="btn btn-create">Add existing equipment</button>
                         <a asp-action="Details" asp-route-id="@Model.CharacterId" class="btn btn-outline-ink">Cancel</a>
                     </div>
                 </form>

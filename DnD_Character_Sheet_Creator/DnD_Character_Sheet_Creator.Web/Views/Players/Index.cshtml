@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Players";
     var searchQuery = ViewData["SearchQuery"] as string ?? string.Empty;
-    var canCreatePlayer = User?.Identity?.IsAuthenticated == true && User.IsInRole("Admin");
+    var canCreatePlayer = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
 }
 
 <div class="sheet-card mb-4 reveal d-flex flex-wrap justify-content-between align-items-center gap-3">

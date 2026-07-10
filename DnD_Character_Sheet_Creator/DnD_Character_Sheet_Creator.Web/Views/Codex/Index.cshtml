@@ -1,0 +1,102 @@
+@model DnD_Character_Sheet_Creator.Web.ViewModels.CodexSearchViewModel
+
+@{
+    ViewData["Title"] = "Codex";
+}
+
+<section class="sheet-card mb-4 reveal">
+    <p class="sheet-kicker mb-1">Grand Codex</p>
+    <h1 class="h3 mb-1">The Codex</h1>
+    <p class="text-muted mb-0">Search players, characters, and equipment in one archive of the realm.</p>
+</section>
+
+<div class="sheet-card mb-4 reveal">
+    <form asp-action="Index" asp-controller="Codex" method="get">
+        <div class="row g-3 align-items-end">
+            <div class="col-12 col-lg-9">
+                <label for="query" class="form-label">Search the codex</label>
+                <input id="query" name="query" value="@Model.Query" class="form-control" type="search" placeholder="Search by name, class, race, level, equipment, or username" autocomplete="off" />
+            </div>
+            <div class="col-12 col-lg-3 d-grid">
+                <button type="submit" class="btn btn-ink">Search Codex</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row g-4 codex-results">
+    <div class="col-12 col-lg-4">
+        <section class="sheet-card reveal h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h5 mb-0">Players</h2>
+                <span class="badge chronicle-badge rounded-pill">@Model.Players.Count</span>
+            </div>
+            @if (!Model.Players.Any())
+            {
+                <p class="text-muted mb-0">No players match this search.</p>
+            }
+            else
+            {
+                <div class="list-group list-group-flush">
+                    @foreach (var player in Model.Players)
+                    {
+                        <a class="list-group-item list-group-item-action px-0" asp-controller="Players" asp-action="Details" asp-route-id="@player.PlayerId">
+                            <div class="fw-bold">@player.Name @player.Surname</div>
+                            <div class="small text-muted">@player.Username · @player.Email</div>
+                        </a>
+                    }
+                </div>
+            }
+        </section>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <section class="sheet-card reveal h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h5 mb-0">Characters</h2>
+                <span class="badge chronicle-badge rounded-pill">@Model.Characters.Count</span>
+            </div>
+            @if (!Model.Characters.Any())
+            {
+                <p class="text-muted mb-0">No characters match this search.</p>
+            }
+            else
+            {
+                <div class="list-group list-group-flush">
+                    @foreach (var character in Model.Characters)
+                    {
+                        <a class="list-group-item list-group-item-action px-0" asp-controller="Characters" asp-action="Details" asp-route-id="@character.CharacterId">
+                            <div class="fw-bold">@character.CharacterName</div>
+                            <div class="small text-muted">@character.Class · @character.Race · Level @character.Level?.Level</div>
+                        </a>
+                    }
+                </div>
+            }
+        </section>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <section class="sheet-card reveal h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h5 mb-0">Equipment</h2>
+                <span class="badge chronicle-badge rounded-pill">@Model.Equipment.Count</span>
+            </div>
+            @if (!Model.Equipment.Any())
+            {
+                <p class="text-muted mb-0">No equipment matches this search.</p>
+            }
+            else
+            {
+                <div class="list-group list-group-flush">
+                    @foreach (var item in Model.Equipment)
+                    {
+                        <div class="list-group-item px-0">
+                            <div class="fw-bold">@item.Name</div>
+                            <div class="small text-muted">@item.Type · @item.Cost gp · @item.Weight wt</div>
+                        </div>
+                    }
+                </div>
+            }
+        </section>
+    </div>
+</div>

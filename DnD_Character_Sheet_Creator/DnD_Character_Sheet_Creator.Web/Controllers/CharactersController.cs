@@ -16,12 +16,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         private readonly ICharacterRepository _characterRepository;
         private readonly IPlayerRepository _playerRepository;
         private readonly DnDDbContext _dbContext;
+        private readonly ILogger<CharactersController> _logger;
 
-        public CharactersController(ICharacterRepository characterRepository, IPlayerRepository playerRepository, DnDDbContext dbContext)
+        public CharactersController(ICharacterRepository characterRepository, IPlayerRepository playerRepository, DnDDbContext dbContext, ILogger<CharactersController> logger)
         {
             _characterRepository = characterRepository;
             _playerRepository = playerRepository;
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -69,7 +71,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return Json(suggestions);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("Create")]
         public IActionResult Create(int? playerId)
@@ -89,7 +91,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [Route("Create")]
         public IActionResult Create(CharacterFormViewModel viewModel)
@@ -114,6 +116,38 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 Background = viewModel.Background!.Value,
                 Alignment = viewModel.Alignment!.Value,
                 Class = viewModel.Class!.Value,
+                CurrentExperiencePoints = viewModel.CurrentExperiencePoints,
+                DateOfLastLevelUp = viewModel.DateOfLastLevelUp,
+                Strength = viewModel.Strength,
+                Dexterity = viewModel.Dexterity,
+                Constitution = viewModel.Constitution,
+                Intelligence = viewModel.Intelligence,
+                Wisdom = viewModel.Wisdom,
+                Charisma = viewModel.Charisma,
+                StrengthSaveProficient = viewModel.StrengthSaveProficient,
+                DexteritySaveProficient = viewModel.DexteritySaveProficient,
+                ConstitutionSaveProficient = viewModel.ConstitutionSaveProficient,
+                IntelligenceSaveProficient = viewModel.IntelligenceSaveProficient,
+                WisdomSaveProficient = viewModel.WisdomSaveProficient,
+                CharismaSaveProficient = viewModel.CharismaSaveProficient,
+                AcrobaticsProficient = viewModel.AcrobaticsProficient,
+                AnimalHandlingProficient = viewModel.AnimalHandlingProficient,
+                ArcanaProficient = viewModel.ArcanaProficient,
+                AthleticsProficient = viewModel.AthleticsProficient,
+                DeceptionProficient = viewModel.DeceptionProficient,
+                HistoryProficient = viewModel.HistoryProficient,
+                InsightProficient = viewModel.InsightProficient,
+                IntimidationProficient = viewModel.IntimidationProficient,
+                InvestigationProficient = viewModel.InvestigationProficient,
+                MedicineProficient = viewModel.MedicineProficient,
+                NatureProficient = viewModel.NatureProficient,
+                PerceptionProficient = viewModel.PerceptionProficient,
+                PerformanceProficient = viewModel.PerformanceProficient,
+                PersuasionProficient = viewModel.PersuasionProficient,
+                ReligionProficient = viewModel.ReligionProficient,
+                SleightOfHandProficient = viewModel.SleightOfHandProficient,
+                StealthProficient = viewModel.StealthProficient,
+                SurvivalProficient = viewModel.SurvivalProficient,
                 Level = new CharacterLevel
                 {
                     Level = 1,
@@ -125,6 +159,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             };
 
             _characterRepository.AddCharacter(character);
+            _logger.LogInformation("Created character {CharacterId} {CharacterName} for player {PlayerId}", character.CharacterId, character.CharacterName, character.PlayerId);
 
             return RedirectToAction("Details", new { id = character.CharacterId });
         }
@@ -137,10 +172,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var character = _characterRepository.GetCharacterById(id);
             if (character == null)
             {
+                _logger.LogWarning("Edit requested for missing character {CharacterId}", id);
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -162,7 +198,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Edit/{id?}")]
@@ -186,7 +222,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -203,9 +239,42 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             character.Background = viewModel.Background!.Value;
             character.Alignment = viewModel.Alignment!.Value;
             character.Class = viewModel.Class!.Value;
+            character.CurrentExperiencePoints = viewModel.CurrentExperiencePoints;
+            character.DateOfLastLevelUp = viewModel.DateOfLastLevelUp;
+            character.Strength = viewModel.Strength;
+            character.Dexterity = viewModel.Dexterity;
+            character.Constitution = viewModel.Constitution;
+            character.Intelligence = viewModel.Intelligence;
+            character.Wisdom = viewModel.Wisdom;
+            character.Charisma = viewModel.Charisma;
+            character.StrengthSaveProficient = viewModel.StrengthSaveProficient;
+            character.DexteritySaveProficient = viewModel.DexteritySaveProficient;
+            character.ConstitutionSaveProficient = viewModel.ConstitutionSaveProficient;
+            character.IntelligenceSaveProficient = viewModel.IntelligenceSaveProficient;
+            character.WisdomSaveProficient = viewModel.WisdomSaveProficient;
+            character.CharismaSaveProficient = viewModel.CharismaSaveProficient;
+            character.AcrobaticsProficient = viewModel.AcrobaticsProficient;
+            character.AnimalHandlingProficient = viewModel.AnimalHandlingProficient;
+            character.ArcanaProficient = viewModel.ArcanaProficient;
+            character.AthleticsProficient = viewModel.AthleticsProficient;
+            character.DeceptionProficient = viewModel.DeceptionProficient;
+            character.HistoryProficient = viewModel.HistoryProficient;
+            character.InsightProficient = viewModel.InsightProficient;
+            character.IntimidationProficient = viewModel.IntimidationProficient;
+            character.InvestigationProficient = viewModel.InvestigationProficient;
+            character.MedicineProficient = viewModel.MedicineProficient;
+            character.NatureProficient = viewModel.NatureProficient;
+            character.PerceptionProficient = viewModel.PerceptionProficient;
+            character.PerformanceProficient = viewModel.PerformanceProficient;
+            character.PersuasionProficient = viewModel.PersuasionProficient;
+            character.ReligionProficient = viewModel.ReligionProficient;
+            character.SleightOfHandProficient = viewModel.SleightOfHandProficient;
+            character.StealthProficient = viewModel.StealthProficient;
+            character.SurvivalProficient = viewModel.SurvivalProficient;
             character.LevelId = viewModel.LevelId;
 
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Updated character {CharacterId} {CharacterName} for player {PlayerId}", character.CharacterId, character.CharacterName, character.PlayerId);
 
             return RedirectToAction("Details", new { id = character.CharacterId });
         }
@@ -231,7 +300,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             var current = GetCurrentPlayer();
-            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != owner.Player.PlayerId)
+            if (!CanViewCharacter(owner.Player.PlayerId))
             {
                 return Forbid();
             }
@@ -240,11 +309,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             {
                 Character = character,
                 PlayerId = owner.Player.PlayerId,
-                PlayerName = $"{owner.Player.Name} {owner.Player.Surname}"
+                PlayerName = $"{owner.Player.Name} {owner.Player.Surname}",
+                OwnerUsername = owner.Player.Username
             });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("{id:int}/Attachments")]
         public IActionResult Attachments(int id)
@@ -255,7 +325,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanViewCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -269,7 +339,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return PartialView("_AttachmentList", attachments);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{id:int}/UploadAttachment")]
@@ -281,7 +351,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -315,11 +385,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             _dbContext.Attachments.Add(attachment);
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation("Uploaded attachment {AttachmentId} {FileName} for character {CharacterId}", attachment.AttachmentId, attachment.FileName, id);
 
             return Json(new { success = true });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("DeleteAttachment/{id:int}")]
@@ -331,10 +402,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             if (attachment == null)
             {
+                _logger.LogWarning("Delete requested for missing attachment {AttachmentId}", id);
                 return NotFound();
             }
 
-            if (attachment.Character == null || !CanAccessPlayer(attachment.Character.PlayerId))
+            if (attachment.Character == null || !CanModifyCharacter(attachment.Character.PlayerId))
             {
                 return Forbid();
             }
@@ -347,11 +419,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             attachment.DeletedAt = DateTime.UtcNow;
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation("Deleted attachment {AttachmentId} {FileName} for character {CharacterId}", attachment.AttachmentId, attachment.FileName, attachment.CharacterId);
 
             return Json(new { success = true });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("Remove/{id?}")]
         public IActionResult Remove(int id)
@@ -359,10 +432,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var character = _characterRepository.GetCharacterById(id);
             if (character == null)
             {
+                _logger.LogWarning("Remove requested for missing character {CharacterId}", id);
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -377,11 +451,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             {
                 Character = character,
                 PlayerId = player.PlayerId,
-                PlayerName = $"{player.Name} {player.Surname}"
+                PlayerName = $"{player.Name} {player.Surname}",
+                OwnerUsername = player.Username
             });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Remove")]
@@ -394,8 +469,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            var current = GetCurrentPlayer();
-            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != character.PlayerId)
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -418,6 +492,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             _dbContext.SaveChanges();
 
             _characterRepository.DeleteCharacter(id);
+            _logger.LogInformation("Removed character {CharacterId} {CharacterName} for player {PlayerId}", character.CharacterId, character.CharacterName, character.PlayerId);
 
             return RedirectToAction("Index");
         }
@@ -426,12 +501,19 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("{id:int}/EquipmentSearch")]
         public IActionResult EquipmentSearch(int id, string? query)
         {
-            var equipment = BuildEquipmentCards(id, query);
-
-            if (!equipment.Any() && _characterRepository.GetCharacterById(id) == null)
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
             {
                 return NotFound();
             }
+
+            if (!CanViewCharacter(character.PlayerId))
+            {
+                return Forbid();
+            }
+
+            ViewData["CharacterId"] = id;
+            var equipment = BuildEquipmentCards(id, query);
 
             return PartialView("_EquipmentCards", equipment);
         }
@@ -440,6 +522,17 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("{id:int}/EquipmentAutocomplete")]
         public IActionResult EquipmentAutocomplete(int id, string term)
         {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanViewCharacter(character.PlayerId))
+            {
+                return Forbid();
+            }
+
             var normalizedTerm = term?.Trim();
             if (string.IsNullOrWhiteSpace(normalizedTerm) || normalizedTerm.Length < 2)
             {
@@ -462,13 +555,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var current = GetCurrentPlayer();
             var cards = _playerRepository.GetAllPlayers()
-                .Where(player => current == null || current.Role == RoleEnum.Admin || player.PlayerId == current.PlayerId)
+                .Where(player => current == null || current.Role is RoleEnum.Admin or RoleEnum.Manager || player.PlayerId == current.PlayerId)
                 .SelectMany(player => _characterRepository.GetCharactersByPlayerId(player.PlayerId)
                     .Select(character => new CharacterWithPlayerViewModel
                     {
                         Character = character,
                         PlayerId = player.PlayerId,
-                        PlayerName = $"{player.Name} {player.Surname}"
+                        PlayerName = $"{player.Name} {player.Surname}",
+                        OwnerUsername = player.Username
                     }))
                 .ToList();
 
@@ -539,7 +633,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return _playerRepository.GetPlayerByUsername(username);
         }
 
-        private bool CanAccessPlayer(int playerId)
+        private bool CanViewCharacter(int playerId)
+        {
+            var current = GetCurrentPlayer();
+            return current == null || current.Role is RoleEnum.Admin or RoleEnum.Manager || current.PlayerId == playerId;
+        }
+
+        private bool CanModifyCharacter(int playerId)
         {
             var current = GetCurrentPlayer();
             return current == null || current.Role == RoleEnum.Admin || current.PlayerId == playerId;
@@ -575,64 +675,103 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 .ToList();
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        private List<SelectListItem> GetAvailableEquipmentOptions(int characterId, int? selectedEquipmentId = null)
+        {
+            var character = _characterRepository.GetCharacterById(characterId);
+            if (character == null)
+            {
+                return new List<SelectListItem>();
+            }
+
+            var linkedEquipmentIds = character.EquipmentList
+                .Where(equipment => equipment.DeletedAt == null)
+                .Select(equipment => equipment.EquipmentId)
+                .ToHashSet();
+
+            return _dbContext.Equipment
+                .Where(item => item.DeletedAt == null && !linkedEquipmentIds.Contains(item.EquipmentId))
+                .AsNoTracking()
+                .OrderBy(item => item.Name)
+                .ThenBy(item => item.EquipmentId)
+                .ToList()
+                .Select(item => new SelectListItem
+                {
+                    Value = item.EquipmentId.ToString(),
+                    Text = $"{item.Name} - {(item.Type ?? "Equipment")} - {item.Cost} gp - {item.Weight} wt",
+                    Selected = selectedEquipmentId.HasValue && selectedEquipmentId.Value == item.EquipmentId
+                })
+                .ToList();
+        }
+
+        [Authorize]
         [HttpGet]
         [Route("{id:int}/equipment/create-form")]
         public IActionResult EquipmentCreateForm(int id)
         {
             var character = _characterRepository.GetCharacterById(id);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
-            var vm = new ViewModels.EquipmentFormViewModel
+            var vm = new ViewModels.CharacterEquipmentSelectionViewModel
             {
-                CharacterId = id
+                CharacterId = id,
+                AvailableEquipment = GetAvailableEquipmentOptions(id)
             };
 
             return View("CreateEquipment", vm);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{id:int}/equipment/create")]
-        public IActionResult CreateEquipment(ViewModels.EquipmentFormViewModel vm)
+        public IActionResult CreateEquipment(ViewModels.CharacterEquipmentSelectionViewModel vm)
         {
+            var character = _characterRepository.GetCharacterById(vm.CharacterId);
+            if (character == null) return NotFound();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
+
             if (!ModelState.IsValid)
             {
+                vm.AvailableEquipment = GetAvailableEquipmentOptions(vm.CharacterId, vm.SelectedEquipmentId);
                 return View("CreateEquipment", vm);
             }
 
-            var character = _characterRepository.GetCharacterById(vm.CharacterId);
-            if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
-
-            var equipment = new Models.Equipment
+            var selectedEquipmentId = vm.SelectedEquipmentId.GetValueOrDefault();
+            var equipment = _dbContext.Equipment.FirstOrDefault(item => item.EquipmentId == selectedEquipmentId && item.DeletedAt == null);
+            if (equipment == null)
             {
-                CharacterId = vm.CharacterId,
-                Type = vm.Type,
-                Name = vm.Name,
-                Cost = vm.Cost,
-                Weight = vm.Weight
-            };
+                ModelState.AddModelError(nameof(vm.SelectedEquipmentId), "Selected equipment was not found.");
+                vm.AvailableEquipment = GetAvailableEquipmentOptions(vm.CharacterId, vm.SelectedEquipmentId);
+                return View("CreateEquipment", vm);
+            }
+
+            if (character.EquipmentList.Any(item => item.EquipmentId == equipment.EquipmentId && item.DeletedAt == null))
+            {
+                ModelState.AddModelError(nameof(vm.SelectedEquipmentId), "That equipment is already added to this character.");
+                vm.AvailableEquipment = GetAvailableEquipmentOptions(vm.CharacterId, vm.SelectedEquipmentId);
+                return View("CreateEquipment", vm);
+            }
 
             character.EquipmentList.Add(equipment);
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Added existing equipment {EquipmentId} {EquipmentName} to character {CharacterId}", equipment.EquipmentId, equipment.Name, vm.CharacterId);
 
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("{characterId:int}/equipment/{equipmentId:int}/edit-form")]
         public IActionResult EquipmentEditForm(int characterId, int equipmentId)
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
+            equipment.CharacterId = characterId;
 
             var vm = new ViewModels.EquipmentFormViewModel
             {
@@ -647,7 +786,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View("EditEquipment", vm);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{characterId:int}/equipment/{equipmentId:int}/edit")]
@@ -660,37 +799,41 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var character = _characterRepository.GetCharacterById(vm.CharacterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == vm.EquipmentId);
             if (equipment == null) return NotFound();
 
+            equipment.CharacterId = vm.CharacterId;
             equipment.Type = vm.Type;
             equipment.Name = vm.Name;
             equipment.Cost = vm.Cost;
             equipment.Weight = vm.Weight;
 
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Updated equipment {EquipmentId} {EquipmentName} for character {CharacterId}", equipment.EquipmentId, equipment.Name, vm.CharacterId);
 
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("{characterId:int}/equipment/{equipmentId:int}/remove-form")]
         public IActionResult EquipmentRemoveForm(int characterId, int equipmentId)
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
 
+            equipment.CharacterId = characterId;
+
             return View("RemoveEquipment", equipment);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{characterId:int}/equipment/{equipmentId:int}/remove")]
@@ -698,14 +841,15 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
 
-            // Soft-delete the equipment unless otherwise specified
-            equipment.DeletedAt = DateTime.UtcNow;
+            character.EquipmentList.Remove(equipment);
+
             _characterRepository.UpdateCharacter(character);
+            _logger.LogInformation("Removed equipment {EquipmentId} {EquipmentName} from character {CharacterId}", equipment.EquipmentId, equipment.Name, characterId);
 
             return RedirectToAction("Details", new { id = characterId });
         }

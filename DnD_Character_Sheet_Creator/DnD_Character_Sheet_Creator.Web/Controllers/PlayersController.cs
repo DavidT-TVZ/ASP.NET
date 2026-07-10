@@ -13,11 +13,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly ICharacterRepository _characterRepository;
+        private readonly ILogger<PlayersController> _logger;
 
-        public PlayersController(IPlayerRepository playerRepository, ICharacterRepository characterRepository)
+        public PlayersController(IPlayerRepository playerRepository, ICharacterRepository characterRepository, ILogger<PlayersController> logger)
         {
             _playerRepository = playerRepository;
             _characterRepository = characterRepository;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -26,18 +28,6 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         public IActionResult Index(string? query)
         {
             ViewData["SearchQuery"] = query ?? string.Empty;
-
-            var current = GetCurrentPlayer();
-
-            if (current != null && current.Role != RoleEnum.Admin)
-            {
-                // Non-admins only see their own data
-                current.CharacterList = _characterRepository.GetCharactersByPlayerId(current.PlayerId)
-                    .Where(character => character.DeletedAt == null)
-                    .ToList();
-                ViewBag.Characters = BuildPlayerCharacterCards(current, null);
-                return View(new List<Player> { current });
-            }
 
             return View(BuildPlayerCards(query));
         }
@@ -81,12 +71,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Create")]
         public IActionResult Create(int? playerId)
         {
-            if (!IsCurrentPlayerAdmin())
+            var current = GetCurrentPlayer();
+            if (current == null || current.Role == RoleEnum.User)
             {
                 return Forbid();
             }
 
-            ViewBag.CanSetRole = GetCurrentPlayer()?.Role == RoleEnum.Admin;
+            ViewBag.CanSetRole = current.Role is RoleEnum.Admin or RoleEnum.Manager;
+            ViewBag.AvailableRoles = GetRoleOptions(current);
             return View(new PlayerFormViewModel
             {
                 Name = string.Empty,
@@ -101,13 +93,24 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Create")]
         public IActionResult Create(PlayerFormViewModel viewModel)
         {
-            if (!IsCurrentPlayerAdmin())
+            var current = GetCurrentPlayer();
+            if (current == null || current.Role == RoleEnum.User)
             {
                 return Forbid();
             }
 
             if (!ModelState.IsValid)
             {
+                ViewBag.CanSetRole = current.Role is RoleEnum.Admin or RoleEnum.Manager;
+                ViewBag.AvailableRoles = GetRoleOptions(current);
+                return View(viewModel);
+            }
+
+            if (current.Role == RoleEnum.Manager && viewModel.Role == RoleEnum.Admin)
+            {
+                ModelState.AddModelError(nameof(viewModel.Role), "Managers cannot assign the Admin role.");
+                ViewBag.CanSetRole = true;
+                ViewBag.AvailableRoles = GetRoleOptions(current);
                 return View(viewModel);
             }
 
@@ -121,14 +124,10 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 LastLogin = DateTime.UtcNow
             };
 
-            // Only an admin can set a role for other users
-            var current = GetCurrentPlayer();
-            if (current != null && current.Role == RoleEnum.Admin)
-            {
-                player.Role = viewModel.Role;
-            }
+            player.Role = viewModel.Role;
 
             _playerRepository.AddPlayer(player);
+            _logger.LogInformation("Created player {PlayerId} {PlayerName} ({Username})", player.PlayerId, $"{player.Name} {player.Surname}", player.Username);
 
             return RedirectToAction("Details", new { id = player.PlayerId });
         }
@@ -142,10 +141,11 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var player = _playerRepository.GetPlayerById(id);
             if (player == null)
             {
+                _logger.LogWarning("Edit requested for missing player {PlayerId}", id);
                 return NotFound();
             }
             var current = GetCurrentPlayer();
-            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != id)
+            if (current != null && current.Role == RoleEnum.User && current.PlayerId != id)
             {
                 return Forbid();
             }
@@ -226,8 +226,8 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             };
 
             viewModel.Role = player.Role;
-            ViewBag.CanSetRole = GetCurrentPlayer()?.Role == RoleEnum.Admin;
-            ViewBag.AvailableRoles = new List<RoleEnum> { RoleEnum.Admin, RoleEnum.Manager, RoleEnum.User };
+            ViewBag.CanSetRole = current?.Role == RoleEnum.Admin;
+            ViewBag.AvailableRoles = GetRoleOptions(current);
 
             return View(viewModel);
         }
@@ -237,8 +237,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("Edit/{id?}")]
         public IActionResult Edit(int id, PlayerFormViewModel viewModel)
         {
+            var current = GetCurrentPlayer();
+
             if (!ModelState.IsValid)
             {
+                ViewBag.CanSetRole = current?.Role == RoleEnum.Admin;
+                ViewBag.AvailableRoles = GetRoleOptions(current);
                 return View(viewModel);
             }
 
@@ -247,20 +251,25 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             {
                 return NotFound();
             }
+
+            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != id)
+            {
+                return Forbid();
+            }
+
             // Update player properties from viewModel
             player.Name = viewModel.Name;
             player.Surname = viewModel.Surname;
             player.Username = viewModel.Username;
             player.Email = viewModel.Email;
 
-            // Only admins may change the role
-            var current = GetCurrentPlayer();
-            if (current != null && current.Role == RoleEnum.Admin)
+            if (current?.Role == RoleEnum.Admin)
             {
                 player.Role = viewModel.Role;
             }
 
             _playerRepository.UpdatePlayer(player);
+            _logger.LogInformation("Updated player {PlayerId} {PlayerName} ({Username})", player.PlayerId, $"{player.Name} {player.Surname}", player.Username);
 
             return RedirectToAction("Details", new { id = player.PlayerId });
         }
@@ -278,6 +287,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var player = _playerRepository.GetPlayerById(id);
             if (player == null)
             {
+                _logger.LogWarning("Remove requested for missing player {PlayerId}", id);
                 return NotFound();
             }
 
@@ -310,7 +320,15 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return Forbid();
             }
 
+            var player = _playerRepository.GetPlayerById(id);
+            if (player == null)
+            {
+                _logger.LogWarning("Remove requested for missing player {PlayerId}", id);
+                return NotFound();
+            }
+
             _playerRepository.DeletePlayer(id);
+            _logger.LogInformation("Removed player {PlayerId} {PlayerName} ({Username})", player.PlayerId, $"{player.Name} {player.Surname}", player.Username);
 
             return RedirectToAction("Index");
         }
@@ -331,11 +349,18 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return GetCurrentPlayer()?.Role == RoleEnum.Admin;
         }
 
+        private static List<RoleEnum> GetRoleOptions(Player? current)
+        {
+            return current?.Role == RoleEnum.Admin
+                ? new List<RoleEnum> { RoleEnum.Admin, RoleEnum.Manager, RoleEnum.User }
+                : new List<RoleEnum> { RoleEnum.Manager, RoleEnum.User };
+        }
+
         private List<Player> BuildPlayerCards(string? query)
         {
             var current = GetCurrentPlayer();
             var players = _playerRepository.GetAllPlayers()
-                .Where(player => current == null || current.Role == RoleEnum.Admin || player.PlayerId == current.PlayerId)
+                .Where(player => current == null || current.Role is RoleEnum.Admin or RoleEnum.Manager || player.PlayerId == current.PlayerId)
                 .Select(player =>
                 {
                     player.CharacterList = _characterRepository.GetCharactersByPlayerId(player.PlayerId)
