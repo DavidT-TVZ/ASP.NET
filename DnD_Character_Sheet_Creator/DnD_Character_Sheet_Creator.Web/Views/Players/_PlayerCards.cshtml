@@ -14,6 +14,11 @@ else
     <div class="row g-4">
         @foreach (var player in Model)
         {
+            if (!string.IsNullOrWhiteSpace(currentUsername) && string.Equals(currentUsername, player.Username, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
             <div class="col-12 col-md-6 col-xl-4 player-card" data-player-id="@player.PlayerId">
                 <div class="card sheet-card card-hover h-100 reveal">
                     <div class="card-body">

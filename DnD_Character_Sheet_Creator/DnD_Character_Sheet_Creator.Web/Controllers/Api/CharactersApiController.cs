@@ -1,12 +1,14 @@
 using DnD_Character_Sheet_Creator.Data;
 using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Web.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/characters")]
 public class CharactersApiController : ControllerBase
 {
@@ -20,6 +22,8 @@ public class CharactersApiController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CharacterDto>>> GetAll([FromQuery(Name = "search")] string? search, [FromQuery] int? playerId)
     {
+        var current = await GetCurrentPlayerAsync();
+
         var characters = await _context.Characters
             .Where(character => character.DeletedAt == null)
             .Include(character => character.Player)
@@ -27,6 +31,15 @@ public class CharactersApiController : ControllerBase
             .Include(character => character.EquipmentList)
             .AsNoTracking()
             .ToListAsync();
+
+        if (current != null && current.Role == RoleEnum.User)
+        {
+            characters = characters.Where(character => character.PlayerId == current.PlayerId).ToList();
+        }
+        else if (current != null && current.Role == RoleEnum.Manager)
+        {
+            // Managers can see all players/characters per the requested rules.
+        }
 
         if (playerId.HasValue)
         {
@@ -49,6 +62,8 @@ public class CharactersApiController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<CharacterDto>> GetById(int id)
     {
+        var current = await GetCurrentPlayerAsync();
+
         var character = await _context.Characters
             .Where(item => item.CharacterId == id && item.DeletedAt == null)
             .Include(item => item.Player)
@@ -62,12 +77,28 @@ public class CharactersApiController : ControllerBase
             return NotFound();
         }
 
+        if (current != null && current.Role == RoleEnum.User && character.PlayerId != current.PlayerId)
+        {
+            return Forbid();
+        }
+
         return Ok(ToDto(character));
     }
 
     [HttpPost]
     public async Task<ActionResult<CharacterDto>> Create([FromBody] CharacterUpsertDto dto)
     {
+        var current = await GetCurrentPlayerAsync();
+        if (current == null)
+        {
+            return Forbid();
+        }
+
+        if (current.Role != RoleEnum.Admin)
+        {
+            dto.PlayerId = current.PlayerId;
+        }
+
         var player = await _context.Players.FirstOrDefaultAsync(item => item.PlayerId == dto.PlayerId && item.DeletedAt == null);
         if (player == null)
         {
@@ -145,6 +176,12 @@ public class CharactersApiController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<CharacterDto>> Update(int id, [FromBody] CharacterUpsertDto dto)
     {
+        var current = await GetCurrentPlayerAsync();
+        if (current == null)
+        {
+            return Forbid();
+        }
+
         var character = await _context.Characters
             .Include(item => item.Player)
             .Include(item => item.Level)
@@ -154,6 +191,16 @@ public class CharactersApiController : ControllerBase
         if (character == null)
         {
             return NotFound();
+        }
+
+        if (current.Role == RoleEnum.User && character.PlayerId != current.PlayerId)
+        {
+            return Forbid();
+        }
+
+        if (current.Role != RoleEnum.Admin)
+        {
+            dto.PlayerId = current.PlayerId;
         }
 
         var player = await _context.Players.FirstOrDefaultAsync(item => item.PlayerId == dto.PlayerId && item.DeletedAt == null);
@@ -231,6 +278,12 @@ public class CharactersApiController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
+        var current = await GetCurrentPlayerAsync();
+        if (current == null)
+        {
+            return Forbid();
+        }
+
         var character = await _context.Characters
             .Include(item => item.EquipmentList)
             .FirstOrDefaultAsync(item => item.CharacterId == id && item.DeletedAt == null);
@@ -238,6 +291,16 @@ public class CharactersApiController : ControllerBase
         if (character == null)
         {
             return NotFound();
+        }
+
+        if (current.Role == RoleEnum.User && character.PlayerId != current.PlayerId)
+        {
+            return Forbid();
+        }
+
+        if (current.Role != RoleEnum.Admin && character.PlayerId != current.PlayerId)
+        {
+            return Forbid();
         }
 
         character.DeletedAt = DateTime.UtcNow;
@@ -250,6 +313,17 @@ public class CharactersApiController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    private async Task<Player?> GetCurrentPlayerAsync()
+    {
+        var username = User?.Identity?.Name;
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            return null;
+        }
+
+        return await _context.Players.FirstOrDefaultAsync(player => player.Username == username && player.DeletedAt == null);
     }
 
     private static bool CharacterMatchesSearch(Character character, string searchTerm)

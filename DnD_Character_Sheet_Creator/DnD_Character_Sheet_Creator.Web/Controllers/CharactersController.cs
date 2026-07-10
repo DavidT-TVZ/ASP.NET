@@ -69,7 +69,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return Json(suggestions);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("Create")]
         public IActionResult Create(int? playerId)
@@ -89,7 +89,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [Route("Create")]
         public IActionResult Create(CharacterFormViewModel viewModel)
@@ -172,7 +172,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -194,7 +194,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Edit/{id?}")]
@@ -218,7 +218,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -295,7 +295,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             }
 
             var current = GetCurrentPlayer();
-            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != owner.Player.PlayerId)
+            if (!CanViewCharacter(owner.Player.PlayerId))
             {
                 return Forbid();
             }
@@ -304,11 +304,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             {
                 Character = character,
                 PlayerId = owner.Player.PlayerId,
-                PlayerName = $"{owner.Player.Name} {owner.Player.Surname}"
+                PlayerName = $"{owner.Player.Name} {owner.Player.Surname}",
+                OwnerUsername = owner.Player.Username
             });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("{id:int}/Attachments")]
         public IActionResult Attachments(int id)
@@ -319,7 +320,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanViewCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -333,7 +334,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return PartialView("_AttachmentList", attachments);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{id:int}/UploadAttachment")]
@@ -345,7 +346,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -383,7 +384,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return Json(new { success = true });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("DeleteAttachment/{id:int}")]
@@ -398,7 +399,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (attachment.Character == null || !CanAccessPlayer(attachment.Character.PlayerId))
+            if (attachment.Character == null || !CanModifyCharacter(attachment.Character.PlayerId))
             {
                 return Forbid();
             }
@@ -415,7 +416,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return Json(new { success = true });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("Remove/{id?}")]
         public IActionResult Remove(int id)
@@ -426,7 +427,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            if (!CanAccessPlayer(character.PlayerId))
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -441,11 +442,12 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             {
                 Character = character,
                 PlayerId = player.PlayerId,
-                PlayerName = $"{player.Name} {player.Surname}"
+                PlayerName = $"{player.Name} {player.Surname}",
+                OwnerUsername = player.Username
             });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Remove")]
@@ -458,8 +460,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return NotFound();
             }
 
-            var current = GetCurrentPlayer();
-            if (current != null && current.Role != RoleEnum.Admin && current.PlayerId != character.PlayerId)
+            if (!CanModifyCharacter(character.PlayerId))
             {
                 return Forbid();
             }
@@ -490,12 +491,18 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("{id:int}/EquipmentSearch")]
         public IActionResult EquipmentSearch(int id, string? query)
         {
-            var equipment = BuildEquipmentCards(id, query);
-
-            if (!equipment.Any() && _characterRepository.GetCharacterById(id) == null)
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
             {
                 return NotFound();
             }
+
+            if (!CanViewCharacter(character.PlayerId))
+            {
+                return Forbid();
+            }
+
+            var equipment = BuildEquipmentCards(id, query);
 
             return PartialView("_EquipmentCards", equipment);
         }
@@ -504,6 +511,17 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [Route("{id:int}/EquipmentAutocomplete")]
         public IActionResult EquipmentAutocomplete(int id, string term)
         {
+            var character = _characterRepository.GetCharacterById(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanViewCharacter(character.PlayerId))
+            {
+                return Forbid();
+            }
+
             var normalizedTerm = term?.Trim();
             if (string.IsNullOrWhiteSpace(normalizedTerm) || normalizedTerm.Length < 2)
             {
@@ -526,13 +544,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var current = GetCurrentPlayer();
             var cards = _playerRepository.GetAllPlayers()
-                .Where(player => current == null || current.Role == RoleEnum.Admin || player.PlayerId == current.PlayerId)
+                .Where(player => current == null || current.Role is RoleEnum.Admin or RoleEnum.Manager || player.PlayerId == current.PlayerId)
                 .SelectMany(player => _characterRepository.GetCharactersByPlayerId(player.PlayerId)
                     .Select(character => new CharacterWithPlayerViewModel
                     {
                         Character = character,
                         PlayerId = player.PlayerId,
-                        PlayerName = $"{player.Name} {player.Surname}"
+                        PlayerName = $"{player.Name} {player.Surname}",
+                        OwnerUsername = player.Username
                     }))
                 .ToList();
 
@@ -603,7 +622,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return _playerRepository.GetPlayerByUsername(username);
         }
 
-        private bool CanAccessPlayer(int playerId)
+        private bool CanViewCharacter(int playerId)
+        {
+            var current = GetCurrentPlayer();
+            return current == null || current.Role is RoleEnum.Admin or RoleEnum.Manager || current.PlayerId == playerId;
+        }
+
+        private bool CanModifyCharacter(int playerId)
         {
             var current = GetCurrentPlayer();
             return current == null || current.Role == RoleEnum.Admin || current.PlayerId == playerId;
@@ -639,14 +664,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 .ToList();
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("{id:int}/equipment/create-form")]
         public IActionResult EquipmentCreateForm(int id)
         {
             var character = _characterRepository.GetCharacterById(id);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var vm = new ViewModels.EquipmentFormViewModel
             {
@@ -656,7 +681,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View("CreateEquipment", vm);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{id:int}/equipment/create")]
@@ -669,7 +694,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var character = _characterRepository.GetCharacterById(vm.CharacterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = new Models.Equipment
             {
@@ -686,14 +711,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("{characterId:int}/equipment/{equipmentId:int}/edit-form")]
         public IActionResult EquipmentEditForm(int characterId, int equipmentId)
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
@@ -712,7 +737,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View("EditEquipment", vm);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{characterId:int}/equipment/{equipmentId:int}/edit")]
@@ -725,7 +750,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var character = _characterRepository.GetCharacterById(vm.CharacterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == vm.EquipmentId);
             if (equipment == null) return NotFound();
@@ -741,14 +766,14 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpGet]
         [Route("{characterId:int}/equipment/{equipmentId:int}/remove-form")]
         public IActionResult EquipmentRemoveForm(int characterId, int equipmentId)
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
@@ -758,7 +783,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             return View("RemoveEquipment", equipment);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{characterId:int}/equipment/{equipmentId:int}/remove")]
@@ -766,7 +791,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         {
             var character = _characterRepository.GetCharacterById(characterId);
             if (character == null) return NotFound();
-            if (!CanAccessPlayer(character.PlayerId)) return Forbid();
+            if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();

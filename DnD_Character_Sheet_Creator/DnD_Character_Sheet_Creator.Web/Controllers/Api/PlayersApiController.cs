@@ -1,12 +1,14 @@
 using DnD_Character_Sheet_Creator.Data;
 using DnD_Character_Sheet_Creator.Models;
 using DnD_Character_Sheet_Creator.Web.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnD_Character_Sheet_Creator.Web.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/players")]
 public class PlayersApiController : ControllerBase
 {
@@ -20,12 +22,19 @@ public class PlayersApiController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PlayerDto>>> GetAll([FromQuery(Name = "search")] string? search)
     {
+        var current = await GetCurrentPlayerAsync();
+
         var players = await _context.Players
             .Where(player => player.DeletedAt == null)
             .Include(player => player.CharacterList)
                 .ThenInclude(character => character.Level)
             .AsNoTracking()
             .ToListAsync();
+
+        if (current != null && current.Role == RoleEnum.User)
+        {
+            players = players.Where(player => player.PlayerId == current.PlayerId).ToList();
+        }
 
         if (!string.IsNullOrWhiteSpace(search))
         {
@@ -44,6 +53,8 @@ public class PlayersApiController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<PlayerDto>> GetById(int id)
     {
+        var current = await GetCurrentPlayerAsync();
+
         var player = await _context.Players
             .Where(item => item.PlayerId == id && item.DeletedAt == null)
             .Include(item => item.CharacterList)
@@ -56,12 +67,29 @@ public class PlayersApiController : ControllerBase
             return NotFound();
         }
 
+        if (current != null && current.Role == RoleEnum.User && current.PlayerId != id)
+        {
+            return Forbid();
+        }
+
         return Ok(ToDto(player));
     }
 
     [HttpPost]
     public async Task<ActionResult<PlayerDto>> Create([FromBody] PlayerUpsertDto dto)
     {
+        var current = await GetCurrentPlayerAsync();
+        if (current == null || current.Role == RoleEnum.User)
+        {
+            return Forbid();
+        }
+
+        var targetRole = dto.Role;
+        if (current.Role == RoleEnum.Manager && targetRole == RoleEnum.Admin)
+        {
+            return BadRequest("Managers cannot assign the Admin role.");
+        }
+
         var player = new Player
         {
             Name = dto.Name.Trim(),
@@ -70,7 +98,7 @@ public class PlayersApiController : ControllerBase
             Email = dto.Email.Trim(),
             Password = dto.Password,
             LastLogin = DateTime.UtcNow,
-            Role = dto.Role
+            Role = targetRole
         };
 
         _context.Players.Add(player);
@@ -82,6 +110,8 @@ public class PlayersApiController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<PlayerDto>> Update(int id, [FromBody] PlayerUpsertDto dto)
     {
+        var current = await GetCurrentPlayerAsync();
+
         var player = await _context.Players
             .Include(item => item.CharacterList)
                 .ThenInclude(character => character.Level)
@@ -92,12 +122,36 @@ public class PlayersApiController : ControllerBase
             return NotFound();
         }
 
+        if (current == null)
+        {
+            return Forbid();
+        }
+
+        if (current.Role == RoleEnum.User && current.PlayerId != id)
+        {
+            return Forbid();
+        }
+
+        if (current.Role == RoleEnum.Manager && current.PlayerId != id)
+        {
+            return Forbid();
+        }
+
+        if (current.Role == RoleEnum.Manager && dto.Role == RoleEnum.Admin)
+        {
+            return BadRequest("Managers cannot assign the Admin role.");
+        }
+
         player.Name = dto.Name.Trim();
         player.Surname = dto.Surname.Trim();
         player.Username = dto.Username.Trim();
         player.Email = dto.Email.Trim();
         player.Password = dto.Password;
-        player.Role = dto.Role;
+
+        if (current.Role == RoleEnum.Admin)
+        {
+            player.Role = dto.Role;
+        }
 
         await _context.SaveChangesAsync();
 
@@ -107,6 +161,12 @@ public class PlayersApiController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
+        var current = await GetCurrentPlayerAsync();
+        if (current == null || current.Role != RoleEnum.Admin)
+        {
+            return Forbid();
+        }
+
         var player = await _context.Players.FirstOrDefaultAsync(item => item.PlayerId == id && item.DeletedAt == null);
         if (player == null)
         {
@@ -117,6 +177,17 @@ public class PlayersApiController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    private async Task<Player?> GetCurrentPlayerAsync()
+    {
+        var username = User?.Identity?.Name;
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            return null;
+        }
+
+        return await _context.Players.FirstOrDefaultAsync(player => player.Username == username && player.DeletedAt == null);
     }
 
     private static bool PlayerMatchesSearch(Player player, string searchTerm)

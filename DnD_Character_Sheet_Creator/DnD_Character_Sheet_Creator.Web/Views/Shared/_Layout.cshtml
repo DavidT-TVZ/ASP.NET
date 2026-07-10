@@ -27,9 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Players" asp-action="Index">Players</a>
-                        </li>
+                        @if (User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Players" asp-action="Index">Players</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Characters" asp-action="Index">Characters</a>
                         </li>
@@ -51,6 +54,7 @@
                                 <div class="fw-bold">@((User.FindFirst("FullName")?.Value) ?? User.Identity?.Name)</div>
                                 <div class="text-muted">@roleLabel</div>
                             </div>
+                            <a class="btn btn-outline-ink btn-sm" asp-controller="Account" asp-action="Profile">Profile</a>
                             <form asp-controller="Account" asp-action="SignOut" method="post" class="m-0">
                                 @Html.AntiForgeryToken()
                                 <button type="submit" class="btn btn-outline-ink btn-sm">Sign out</button>

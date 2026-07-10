@@ -75,6 +75,12 @@ namespace DnD_Character_Sheet_Creator.Tests
         public async Task Create_WithValidData_ShouldReturnCreated()
         {
             // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
+                _factory.SeedDatabase(context);
+            }
+
             var newPlayer = new PlayerUpsertDto
             {
                 Name = "New Player",

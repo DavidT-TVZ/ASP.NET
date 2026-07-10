@@ -1,6 +1,7 @@
 @model IEnumerable<DnD_Character_Sheet_Creator.Web.ViewModels.CharacterWithPlayerViewModel>
 
 @{
+    var currentUsername = User?.Identity?.Name;
     var canManageCharacters = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
 }
 
@@ -27,7 +28,9 @@ else
                     <div class="card-footer bg-transparent border-top-0">
                         <div class="d-flex flex-wrap gap-2">
                             <a class="btn btn-outline-ink btn-sm" asp-action="Details" asp-route-id="@character.Character.CharacterId">View details</a>
-                            @if (canManageCharacters)
+                            @if (User?.Identity?.IsAuthenticated == true && (
+                                User.IsInRole("Admin") ||
+                                string.Equals(currentUsername, character.OwnerUsername, StringComparison.OrdinalIgnoreCase)))
                             {
                                 <a class="btn btn-edit btn-sm" asp-action="Edit" asp-route-id="@character.Character.CharacterId">Edit</a>
                                 <a class="btn btn-outline-danger btn-sm" asp-action="Remove" asp-route-id="@character.Character.CharacterId">Remove</a>

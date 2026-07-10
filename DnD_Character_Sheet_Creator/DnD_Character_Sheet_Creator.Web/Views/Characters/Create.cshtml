@@ -43,13 +43,20 @@
         <div class="card sheet-card reveal mb-4">
             <div class="card-body">
                 <form asp-action="Create" asp-controller="Characters" method="post">
-                    <div class="mb-4">
-                        <label asp-for="PlayerId" class="form-label"></label>
-                        <select asp-for="PlayerId" asp-items="Model.AvailablePlayers" class="form-select">
-                            <option value="">Select a player</option>
-                        </select>
-                        <span asp-validation-for="PlayerId" class="text-danger small d-block mt-1"></span>
-                    </div>
+                    @if (User?.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
+                    {
+                        <div class="mb-4">
+                            <label asp-for="PlayerId" class="form-label"></label>
+                            <select asp-for="PlayerId" asp-items="Model.AvailablePlayers" class="form-select">
+                                <option value="">Select a player</option>
+                            </select>
+                            <span asp-validation-for="PlayerId" class="text-danger small d-block mt-1"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <input asp-for="PlayerId" type="hidden" />
+                    }
 
                     <div class="mb-4">
                         <label asp-for="CharacterName" class="form-label"></label>
