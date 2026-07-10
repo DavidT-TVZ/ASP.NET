@@ -512,6 +512,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 return Forbid();
             }
 
+            ViewData["CharacterId"] = id;
             var equipment = BuildEquipmentCards(id, query);
 
             return PartialView("_EquipmentCards", equipment);
@@ -674,6 +675,34 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 .ToList();
         }
 
+        private List<SelectListItem> GetAvailableEquipmentOptions(int characterId, int? selectedEquipmentId = null)
+        {
+            var character = _characterRepository.GetCharacterById(characterId);
+            if (character == null)
+            {
+                return new List<SelectListItem>();
+            }
+
+            var linkedEquipmentIds = character.EquipmentList
+                .Where(equipment => equipment.DeletedAt == null)
+                .Select(equipment => equipment.EquipmentId)
+                .ToHashSet();
+
+            return _dbContext.Equipment
+                .Where(item => item.DeletedAt == null && !linkedEquipmentIds.Contains(item.EquipmentId))
+                .AsNoTracking()
+                .OrderBy(item => item.Name)
+                .ThenBy(item => item.EquipmentId)
+                .ToList()
+                .Select(item => new SelectListItem
+                {
+                    Value = item.EquipmentId.ToString(),
+                    Text = $"{item.Name} - {(item.Type ?? "Equipment")} - {item.Cost} gp - {item.Weight} wt",
+                    Selected = selectedEquipmentId.HasValue && selectedEquipmentId.Value == item.EquipmentId
+                })
+                .ToList();
+        }
+
         [Authorize]
         [HttpGet]
         [Route("{id:int}/equipment/create-form")]
@@ -683,9 +712,10 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             if (character == null) return NotFound();
             if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
-            var vm = new ViewModels.EquipmentFormViewModel
+            var vm = new ViewModels.CharacterEquipmentSelectionViewModel
             {
-                CharacterId = id
+                CharacterId = id,
+                AvailableEquipment = GetAvailableEquipmentOptions(id)
             };
 
             return View("CreateEquipment", vm);
@@ -695,29 +725,37 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{id:int}/equipment/create")]
-        public IActionResult CreateEquipment(ViewModels.EquipmentFormViewModel vm)
+        public IActionResult CreateEquipment(ViewModels.CharacterEquipmentSelectionViewModel vm)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("CreateEquipment", vm);
-            }
-
             var character = _characterRepository.GetCharacterById(vm.CharacterId);
             if (character == null) return NotFound();
             if (!CanModifyCharacter(character.PlayerId)) return Forbid();
 
-            var equipment = new Models.Equipment
+            if (!ModelState.IsValid)
             {
-                Type = vm.Type,
-                Name = vm.Name,
-                Cost = vm.Cost,
-                Weight = vm.Weight
-            };
+                vm.AvailableEquipment = GetAvailableEquipmentOptions(vm.CharacterId, vm.SelectedEquipmentId);
+                return View("CreateEquipment", vm);
+            }
 
-            equipment.CharacterId = vm.CharacterId;
+            var selectedEquipmentId = vm.SelectedEquipmentId.GetValueOrDefault();
+            var equipment = _dbContext.Equipment.FirstOrDefault(item => item.EquipmentId == selectedEquipmentId && item.DeletedAt == null);
+            if (equipment == null)
+            {
+                ModelState.AddModelError(nameof(vm.SelectedEquipmentId), "Selected equipment was not found.");
+                vm.AvailableEquipment = GetAvailableEquipmentOptions(vm.CharacterId, vm.SelectedEquipmentId);
+                return View("CreateEquipment", vm);
+            }
+
+            if (character.EquipmentList.Any(item => item.EquipmentId == equipment.EquipmentId && item.DeletedAt == null))
+            {
+                ModelState.AddModelError(nameof(vm.SelectedEquipmentId), "That equipment is already added to this character.");
+                vm.AvailableEquipment = GetAvailableEquipmentOptions(vm.CharacterId, vm.SelectedEquipmentId);
+                return View("CreateEquipment", vm);
+            }
+
             character.EquipmentList.Add(equipment);
             _characterRepository.UpdateCharacter(character);
-            _logger.LogInformation("Created equipment {EquipmentId} {EquipmentName} for character {CharacterId}", equipment.EquipmentId, equipment.Name, vm.CharacterId);
+            _logger.LogInformation("Added existing equipment {EquipmentId} {EquipmentName} to character {CharacterId}", equipment.EquipmentId, equipment.Name, vm.CharacterId);
 
             return RedirectToAction("Details", new { id = vm.CharacterId });
         }
@@ -809,11 +847,6 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             if (equipment == null) return NotFound();
 
             character.EquipmentList.Remove(equipment);
-
-            if (!equipment.Characters.Any())
-            {
-                equipment.DeletedAt = DateTime.UtcNow;
-            }
 
             _characterRepository.UpdateCharacter(character);
             _logger.LogInformation("Removed equipment {EquipmentId} {EquipmentName} from character {CharacterId}", equipment.EquipmentId, equipment.Name, characterId);

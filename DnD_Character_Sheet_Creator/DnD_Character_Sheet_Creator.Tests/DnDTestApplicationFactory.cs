@@ -16,40 +16,13 @@ namespace DnD_Character_Sheet_Creator.Tests
 {
     public class DnDTestApplicationFactory : WebApplicationFactory<Program>
     {
-        private readonly string _databaseName = $"DnDTestDb_{Guid.NewGuid():N}";
+        public DnDTestApplicationFactory()
+        {
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Testing");
+        }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            // Ensure the application picks up the Testing environment during builder creation
-            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Testing");
-
-            builder.ConfigureServices(services =>
-            {
-                // Remove the app's DbContext registrations (both options and context)
-                var optionsDescriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<DnDDbContext>));
-
-                if (optionsDescriptor != null)
-                {
-                    services.Remove(optionsDescriptor);
-                }
-
-                var contextDescriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DnDDbContext));
-
-                if (contextDescriptor != null)
-                {
-                    services.Remove(contextDescriptor);
-                }
-
-                // Add DbContext configured for in-memory database
-                services.AddDbContext<DnDDbContext>(options =>
-                {
-                    options.UseInMemoryDatabase(_databaseName);
-                    options.UseLazyLoadingProxies();
-                });
-            });
-
             builder.UseEnvironment("Testing");
         }
 

@@ -140,7 +140,7 @@
 <div class="mb-3">
     @if (canEditCharacter)
     {
-        <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add equipment</a>
+        <a class="btn btn-create" asp-action="EquipmentCreateForm" asp-route-id="@Model.Character.CharacterId">Add existing equipment</a>
     }
 </div>
 <div class="sheet-card mb-4 reveal ajax-list-search-shell" data-search-url="@Url.Action("EquipmentSearch", "Characters", new { id = Model.Character.CharacterId })" data-autocomplete-url="@Url.Action("EquipmentAutocomplete", "Characters", new { id = Model.Character.CharacterId })" data-count-badge="#equipmentCountBadge">
@@ -161,6 +161,7 @@
 </div>
 
 <div id="equipmentListRegion" class="ajax-list-search-region">
+    @{ ViewData["CharacterId"] = Model.Character.CharacterId; }
     @await Html.PartialAsync("_EquipmentCards", Model.Character.EquipmentList.Where(e => e.DeletedAt == null))
 </div>
 

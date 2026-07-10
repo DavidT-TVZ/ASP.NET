@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 namespace DnD_Character_Sheet_Creator.Web.Controllers
 {
     [Route("[controller]")]
-    [Route("Codex")]
     public class CodexController : Controller
     {
         private readonly IPlayerRepository _playerRepository;

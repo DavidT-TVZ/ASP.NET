@@ -15,10 +15,14 @@
             <div class="card-body">
                 <p>Are you sure you want to remove <strong>@Model.Name</strong> from this character?</p>
 
-                <form asp-action="RemoveEquipment" asp-controller="Characters" method="post">
-                    <input type="hidden" name="characterId" value="@Model.CharacterId" />
+                <form asp-action="RemoveEquipment"
+                      asp-controller="Characters"
+                      asp-route-characterId="@Model.CharacterId"
+                      asp-route-equipmentId="@Model.EquipmentId"
+                      method="post">
+                    @Html.AntiForgeryToken()
                     <div class="d-flex gap-2">
-                        <button type="submit" formaction="@Url.Action("RemoveEquipment", "Characters", new { characterId = Model.CharacterId, equipmentId = Model.EquipmentId })" class="btn btn-danger">Remove</button>
+                        <button type="submit" class="btn btn-danger">Remove</button>
                         <a asp-action="Details" asp-route-id="@Model.CharacterId" class="btn btn-outline-ink">Cancel</a>
                     </div>
                 </form>

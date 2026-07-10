@@ -26,9 +26,11 @@ if (!builder.Environment.IsEnvironment("Testing"))
 }
 else
 {
+    var testingDatabaseName = $"DnDTestDb_{Guid.NewGuid():N}";
+
     builder.Services.AddDbContext<DnDDbContext>(options =>
     {
-        options.UseInMemoryDatabase("DnDTestDb");
+        options.UseInMemoryDatabase(testingDatabaseName);
         options.UseLazyLoadingProxies();
     });
 }
@@ -140,6 +142,7 @@ else
             startupLogger.LogInformation("Applying database migrations and seed data");
             var context = scope.ServiceProvider.GetRequiredService<DnDDbContext>();
             context.Database.Migrate();
+            await NormalizeLegacyEquipmentDiscriminatorsAsync(context);
             // Seed database from mock repositories if empty
             if (!context.Players.Any())
             {
@@ -290,6 +293,20 @@ static async Task SyncManagedRoleAsync(UserManager<AppUser> userManager, AppUser
     {
         await userManager.AddToRoleAsync(user, targetRole);
     }
+}
+
+static Task NormalizeLegacyEquipmentDiscriminatorsAsync(DnDDbContext context)
+{
+    return context.Database.ExecuteSqlRawAsync(@"
+UPDATE [Equipment]
+SET [Discriminator] = CASE
+    WHEN [EquipmentId] BETWEEN 1001 AND 1025 THEN 'Weapon'
+    WHEN [EquipmentId] BETWEEN 1101 AND 1113 THEN 'Armour'
+    WHEN [EquipmentId] BETWEEN 1201 AND 1217 THEN 'AdventuringGear'
+    WHEN [EquipmentId] BETWEEN 1301 AND 1337 THEN 'Tools'
+    ELSE COALESCE(NULLIF([Discriminator], ''), 'Equipment')
+END
+WHERE [Discriminator] IS NULL OR [Discriminator] = ''");
 }
 
 public partial class Program { }
