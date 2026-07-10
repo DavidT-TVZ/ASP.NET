@@ -144,11 +144,33 @@ namespace DnD_Character_Sheet_Creator.Tests
             var createdCharacterId = int.Parse(page.Url.Split('/').Last());
 
             await page.ClickAsync("a[href*='/equipment/create-form']");
-            await page.FillAsync("input[name='Name']", "Test Dagger");
-            await page.FillAsync("input[name='Type']", "Weapon");
-            await page.FillAsync("input[name='Cost']", "2");
-            await page.FillAsync("input[name='Weight']", "1");
-            await page.GetByRole(AriaRole.Button, new() { Name = "Add equipment" }).ClickAsync();
+
+            var selectedEquipmentName = await page.EvaluateAsync<string>(@"() => {
+                const select = document.querySelector('select[name=""SelectedEquipmentId""]');
+                if (!select) {
+                    return '';
+                }
+
+                const option = Array.from(select.options).find(item => item.value);
+                return option ? option.textContent.trim() : '';
+            }");
+
+            Assert.False(string.IsNullOrWhiteSpace(selectedEquipmentName));
+
+            var selectedEquipmentValue = await page.EvaluateAsync<string>(@"() => {
+                const select = document.querySelector('select[name=""SelectedEquipmentId""]');
+                if (!select) {
+                    return '';
+                }
+
+                const option = Array.from(select.options).find(item => item.value);
+                return option ? option.value : '';
+            }");
+
+            Assert.False(string.IsNullOrWhiteSpace(selectedEquipmentValue));
+
+            await page.SelectOptionAsync("select[name='SelectedEquipmentId']", new[] { selectedEquipmentValue });
+            await page.GetByRole(AriaRole.Button, new() { Name = "Add existing equipment" }).ClickAsync();
 
             await page.WaitForURLAsync(url =>
                 url.ToString().Contains($"/Characters/Details/{createdCharacterId}", StringComparison.OrdinalIgnoreCase) ||
@@ -157,7 +179,8 @@ namespace DnD_Character_Sheet_Creator.Tests
                 Timeout = 15000
             });
 
-            await Expect(page.GetByText("Test Dagger")).ToBeVisibleAsync();
+            var selectedEquipmentDisplayName = selectedEquipmentName.Split(" - ")[0];
+            await Expect(page.GetByText(selectedEquipmentDisplayName)).ToBeVisibleAsync();
 
             await page.ClickAsync("a[href*='/Characters/Edit/'], a[href*='/Adventurers/Edit/']");
             await page.FillAsync("input[name='CharacterName']", $"{characterName} Edited");
