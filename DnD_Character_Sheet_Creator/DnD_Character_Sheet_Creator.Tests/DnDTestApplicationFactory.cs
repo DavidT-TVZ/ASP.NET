@@ -65,16 +65,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             context.Players.Add(player);
             context.SaveChanges();
 
-            var level = new CharacterLevel
-            {
-                Level = 1,
-                CurrentExperiencePoints = 0,
-                ExperiencePointsToNextLevel = 0,
-                ProficiencyBonus = 2,
-                DateOfLastLevelUp = DateTime.UtcNow
-            };
-            context.CharacterLevels.Add(level);
-            context.SaveChanges();
+            var level = context.CharacterLevels.First(l => l.Level == 1);
 
             var character = new Character
             {
@@ -98,9 +89,8 @@ namespace DnD_Character_Sheet_Creator.Tests
                 WeaponProperties = new List<WeaponPropertiesEnum> { WeaponPropertiesEnum.Finesse },
                 Weight = 2
             };
-            // Associate equipment with the created character so tests can find it
             weapon.CharacterId = character.CharacterId;
-            weapon.Character = character;
+            character.EquipmentList.Add(weapon);
             context.Equipment.Add(weapon);
             context.SaveChanges();
         }

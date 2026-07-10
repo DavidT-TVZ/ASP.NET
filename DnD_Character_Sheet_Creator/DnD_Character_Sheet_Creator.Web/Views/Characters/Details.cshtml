@@ -3,10 +3,12 @@
 @{
     ViewData["Title"] = "Character Details";
     var characterLevel = Model.Character.Level;
-    var xpCurrent = characterLevel?.CurrentExperiencePoints ?? 0;
+    var xpCurrent = Model.Character.CurrentExperiencePoints;
     var xpNext = characterLevel?.ExperiencePointsToNextLevel ?? 0;
     var xpPercent = xpNext <= 0 ? 0 : Math.Clamp((int)Math.Round((double)xpCurrent / xpNext * 100), 0, 100);
+    var lastLevelUp = Model.Character.DateOfLastLevelUp ?? characterLevel?.DateOfLastLevelUp;
     var canManageCharacters = User?.Identity?.IsAuthenticated == true && (User.IsInRole("Admin") || User.IsInRole("Manager"));
+    int AbilityModifier(int score) => (score - 10) / 2;
 }
 
 <section class="sheet-card mb-4 reveal">
@@ -62,11 +64,71 @@
 
             <dt class="col-sm-3">Last Level Up</dt>
             <dd class="col-sm-9">
-                @(characterLevel == null
+                @(lastLevelUp == null
                     ? "N/A"
-                    : await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = characterLevel.DateOfLastLevelUp }))
+                    : await Html.PartialAsync("_DateTimeControl", new DateTimeControlViewModel { Value = lastLevelUp }))
             </dd>
         </dl>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-12 col-lg-4">
+        <div class="card sheet-card h-100 reveal">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Ability Scores</h2>
+                <dl class="row mb-0">
+                    <dt class="col-7">Strength</dt><dd class="col-5">@Model.Character.Strength (@(AbilityModifier(Model.Character.Strength) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Strength))</dd>
+                    <dt class="col-7">Dexterity</dt><dd class="col-5">@Model.Character.Dexterity (@(AbilityModifier(Model.Character.Dexterity) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Dexterity))</dd>
+                    <dt class="col-7">Constitution</dt><dd class="col-5">@Model.Character.Constitution (@(AbilityModifier(Model.Character.Constitution) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Constitution))</dd>
+                    <dt class="col-7">Intelligence</dt><dd class="col-5">@Model.Character.Intelligence (@(AbilityModifier(Model.Character.Intelligence) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Intelligence))</dd>
+                    <dt class="col-7">Wisdom</dt><dd class="col-5">@Model.Character.Wisdom (@(AbilityModifier(Model.Character.Wisdom) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Wisdom))</dd>
+                    <dt class="col-7">Charisma</dt><dd class="col-5">@Model.Character.Charisma (@(AbilityModifier(Model.Character.Charisma) >= 0 ? "+" : "")@AbilityModifier(Model.Character.Charisma))</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card sheet-card h-100 reveal">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Saving Throws</h2>
+                <ul class="list-unstyled mb-0">
+                    <li>Strength: @(Model.Character.StrengthSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Dexterity: @(Model.Character.DexteritySaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Constitution: @(Model.Character.ConstitutionSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Intelligence: @(Model.Character.IntelligenceSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Wisdom: @(Model.Character.WisdomSaveProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Charisma: @(Model.Character.CharismaSaveProficient ? "Proficient" : "Not proficient")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card sheet-card h-100 reveal">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Skills</h2>
+                <ul class="list-unstyled mb-0">
+                    <li>Acrobatics: @(Model.Character.AcrobaticsProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Animal Handling: @(Model.Character.AnimalHandlingProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Arcana: @(Model.Character.ArcanaProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Athletics: @(Model.Character.AthleticsProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Deception: @(Model.Character.DeceptionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>History: @(Model.Character.HistoryProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Insight: @(Model.Character.InsightProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Intimidation: @(Model.Character.IntimidationProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Investigation: @(Model.Character.InvestigationProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Medicine: @(Model.Character.MedicineProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Nature: @(Model.Character.NatureProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Perception: @(Model.Character.PerceptionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Performance: @(Model.Character.PerformanceProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Persuasion: @(Model.Character.PersuasionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Religion: @(Model.Character.ReligionProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Sleight of Hand: @(Model.Character.SleightOfHandProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Stealth: @(Model.Character.StealthProficient ? "Proficient" : "Not proficient")</li>
+                    <li>Survival: @(Model.Character.SurvivalProficient ? "Proficient" : "Not proficient")</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 

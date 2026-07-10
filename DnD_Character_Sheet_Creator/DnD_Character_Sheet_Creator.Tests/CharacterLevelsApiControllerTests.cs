@@ -35,8 +35,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var levels = await response.Content.ReadFromJsonAsync<IEnumerable<CharacterLevelDto>>();
             Assert.NotNull(levels);
-            Assert.Single(levels);
-            Assert.Equal(1, levels.First().Level);
+            Assert.Contains(levels, l => l.Level == 1);
         }
 
         [Fact]
@@ -78,7 +77,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             // Arrange
             var newLevel = new CharacterLevelUpsertDto
             {
-                Level = 2,
+                Level = 21,
                 CurrentExperiencePoints = 0,
                 ExperiencePointsToNextLevel = 300,
                 ProficiencyBonus = 2,
@@ -92,7 +91,7 @@ namespace DnD_Character_Sheet_Creator.Tests
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             var result = await response.Content.ReadFromJsonAsync<CharacterLevelDto>();
             Assert.NotNull(result);
-            Assert.Equal(2, result.Level);
+            Assert.Equal(21, result.Level);
             Assert.Equal(300, result.ExperiencePointsToNextLevel);
         }
 
@@ -135,7 +134,7 @@ namespace DnD_Character_Sheet_Creator.Tests
 
                 var updateDto = new CharacterLevelUpsertDto
                 {
-                    Level = 1,
+                    Level = 21,
                     CurrentExperiencePoints = 0,
                     ExperiencePointsToNextLevel = 50,
                     ProficiencyBonus = 2,
@@ -218,7 +217,7 @@ namespace DnD_Character_Sheet_Creator.Tests
                 // Add another level
                 var level2 = new CharacterLevel
                 {
-                    Level = 2,
+                    Level = 21,
                     CurrentExperiencePoints = 0,
                     ExperiencePointsToNextLevel = 300,
                     ProficiencyBonus = 3,
@@ -229,14 +228,14 @@ namespace DnD_Character_Sheet_Creator.Tests
             }
 
             // Act
-            var response = await _client.GetAsync("/api/character-levels?search=1");
+            var response = await _client.GetAsync("/api/character-levels?search=21");
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var levels = await response.Content.ReadFromJsonAsync<IEnumerable<CharacterLevelDto>>();
             Assert.NotNull(levels);
             Assert.Single(levels);
-            Assert.Equal(1, levels.First().Level);
+            Assert.Equal(21, levels.First().Level);
         }
     }
 }

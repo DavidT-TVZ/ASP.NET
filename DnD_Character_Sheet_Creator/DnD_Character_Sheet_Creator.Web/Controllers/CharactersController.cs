@@ -114,6 +114,38 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
                 Background = viewModel.Background!.Value,
                 Alignment = viewModel.Alignment!.Value,
                 Class = viewModel.Class!.Value,
+                CurrentExperiencePoints = viewModel.CurrentExperiencePoints,
+                DateOfLastLevelUp = viewModel.DateOfLastLevelUp,
+                Strength = viewModel.Strength,
+                Dexterity = viewModel.Dexterity,
+                Constitution = viewModel.Constitution,
+                Intelligence = viewModel.Intelligence,
+                Wisdom = viewModel.Wisdom,
+                Charisma = viewModel.Charisma,
+                StrengthSaveProficient = viewModel.StrengthSaveProficient,
+                DexteritySaveProficient = viewModel.DexteritySaveProficient,
+                ConstitutionSaveProficient = viewModel.ConstitutionSaveProficient,
+                IntelligenceSaveProficient = viewModel.IntelligenceSaveProficient,
+                WisdomSaveProficient = viewModel.WisdomSaveProficient,
+                CharismaSaveProficient = viewModel.CharismaSaveProficient,
+                AcrobaticsProficient = viewModel.AcrobaticsProficient,
+                AnimalHandlingProficient = viewModel.AnimalHandlingProficient,
+                ArcanaProficient = viewModel.ArcanaProficient,
+                AthleticsProficient = viewModel.AthleticsProficient,
+                DeceptionProficient = viewModel.DeceptionProficient,
+                HistoryProficient = viewModel.HistoryProficient,
+                InsightProficient = viewModel.InsightProficient,
+                IntimidationProficient = viewModel.IntimidationProficient,
+                InvestigationProficient = viewModel.InvestigationProficient,
+                MedicineProficient = viewModel.MedicineProficient,
+                NatureProficient = viewModel.NatureProficient,
+                PerceptionProficient = viewModel.PerceptionProficient,
+                PerformanceProficient = viewModel.PerformanceProficient,
+                PersuasionProficient = viewModel.PersuasionProficient,
+                ReligionProficient = viewModel.ReligionProficient,
+                SleightOfHandProficient = viewModel.SleightOfHandProficient,
+                StealthProficient = viewModel.StealthProficient,
+                SurvivalProficient = viewModel.SurvivalProficient,
                 Level = new CharacterLevel
                 {
                     Level = 1,
@@ -203,6 +235,38 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             character.Background = viewModel.Background!.Value;
             character.Alignment = viewModel.Alignment!.Value;
             character.Class = viewModel.Class!.Value;
+            character.CurrentExperiencePoints = viewModel.CurrentExperiencePoints;
+            character.DateOfLastLevelUp = viewModel.DateOfLastLevelUp;
+            character.Strength = viewModel.Strength;
+            character.Dexterity = viewModel.Dexterity;
+            character.Constitution = viewModel.Constitution;
+            character.Intelligence = viewModel.Intelligence;
+            character.Wisdom = viewModel.Wisdom;
+            character.Charisma = viewModel.Charisma;
+            character.StrengthSaveProficient = viewModel.StrengthSaveProficient;
+            character.DexteritySaveProficient = viewModel.DexteritySaveProficient;
+            character.ConstitutionSaveProficient = viewModel.ConstitutionSaveProficient;
+            character.IntelligenceSaveProficient = viewModel.IntelligenceSaveProficient;
+            character.WisdomSaveProficient = viewModel.WisdomSaveProficient;
+            character.CharismaSaveProficient = viewModel.CharismaSaveProficient;
+            character.AcrobaticsProficient = viewModel.AcrobaticsProficient;
+            character.AnimalHandlingProficient = viewModel.AnimalHandlingProficient;
+            character.ArcanaProficient = viewModel.ArcanaProficient;
+            character.AthleticsProficient = viewModel.AthleticsProficient;
+            character.DeceptionProficient = viewModel.DeceptionProficient;
+            character.HistoryProficient = viewModel.HistoryProficient;
+            character.InsightProficient = viewModel.InsightProficient;
+            character.IntimidationProficient = viewModel.IntimidationProficient;
+            character.InvestigationProficient = viewModel.InvestigationProficient;
+            character.MedicineProficient = viewModel.MedicineProficient;
+            character.NatureProficient = viewModel.NatureProficient;
+            character.PerceptionProficient = viewModel.PerceptionProficient;
+            character.PerformanceProficient = viewModel.PerformanceProficient;
+            character.PersuasionProficient = viewModel.PersuasionProficient;
+            character.ReligionProficient = viewModel.ReligionProficient;
+            character.SleightOfHandProficient = viewModel.SleightOfHandProficient;
+            character.StealthProficient = viewModel.StealthProficient;
+            character.SurvivalProficient = viewModel.SurvivalProficient;
             character.LevelId = viewModel.LevelId;
 
             _characterRepository.UpdateCharacter(character);
@@ -609,13 +673,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var equipment = new Models.Equipment
             {
-                CharacterId = vm.CharacterId,
                 Type = vm.Type,
                 Name = vm.Name,
                 Cost = vm.Cost,
                 Weight = vm.Weight
             };
 
+            equipment.CharacterId = vm.CharacterId;
             character.EquipmentList.Add(equipment);
             _characterRepository.UpdateCharacter(character);
 
@@ -633,6 +697,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
 
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
+            equipment.CharacterId = characterId;
 
             var vm = new ViewModels.EquipmentFormViewModel
             {
@@ -665,6 +730,7 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == vm.EquipmentId);
             if (equipment == null) return NotFound();
 
+            equipment.CharacterId = vm.CharacterId;
             equipment.Type = vm.Type;
             equipment.Name = vm.Name;
             equipment.Cost = vm.Cost;
@@ -687,6 +753,8 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
 
+            equipment.CharacterId = characterId;
+
             return View("RemoveEquipment", equipment);
         }
 
@@ -703,8 +771,13 @@ namespace DnD_Character_Sheet_Creator.Web.Controllers
             var equipment = character.EquipmentList.FirstOrDefault(e => e.EquipmentId == equipmentId);
             if (equipment == null) return NotFound();
 
-            // Soft-delete the equipment unless otherwise specified
-            equipment.DeletedAt = DateTime.UtcNow;
+            character.EquipmentList.Remove(equipment);
+
+            if (!equipment.Characters.Any())
+            {
+                equipment.DeletedAt = DateTime.UtcNow;
+            }
+
             _characterRepository.UpdateCharacter(character);
 
             return RedirectToAction("Details", new { id = characterId });

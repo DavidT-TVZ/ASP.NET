@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace DnD_Character_Sheet_Creator.Models
 {
@@ -9,8 +10,8 @@ namespace DnD_Character_Sheet_Creator.Models
         [Key]
         public int EquipmentId { get; set; }
 
-        [ForeignKey("Character")]
-        public int CharacterId { get; set; }
+        [NotMapped]
+        public int? CharacterId { get; set; }
 
         public string? Type { get; set; }
 
@@ -20,7 +21,7 @@ namespace DnD_Character_Sheet_Creator.Models
 
         public int Weight { get; set; }
 
-        public virtual Character? Character { get; set; }
+        public virtual ICollection<Character> Characters { get; set; } = new List<Character>();
         public DateTime? DeletedAt { get; set; }
     }
 }

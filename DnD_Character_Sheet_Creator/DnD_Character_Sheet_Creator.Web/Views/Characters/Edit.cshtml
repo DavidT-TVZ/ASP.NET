@@ -98,6 +98,61 @@
                         <span asp-validation-for="Class" class="text-danger small d-block mt-1"></span>
                     </div>
 
+                    <div class="row g-3 mb-4">
+                        <div class="col-12 col-md-6">
+                            <label asp-for="CurrentExperiencePoints" class="form-label"></label>
+                            <input asp-for="CurrentExperiencePoints" class="form-control" />
+                            <span asp-validation-for="CurrentExperiencePoints" class="text-danger small d-block mt-1"></span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label asp-for="DateOfLastLevelUp" class="form-label"></label>
+                            <input asp-for="DateOfLastLevelUp" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="DateOfLastLevelUp" class="text-danger small d-block mt-1"></span>
+                        </div>
+                    </div>
+
+                    <h2 class="h5 mt-4 mb-3">Ability Scores</h2>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6 col-md-4"><label asp-for="Strength" class="form-label"></label><input asp-for="Strength" class="form-control" /><span asp-validation-for="Strength" class="text-danger small d-block mt-1"></span></div>
+                        <div class="col-6 col-md-4"><label asp-for="Dexterity" class="form-label"></label><input asp-for="Dexterity" class="form-control" /><span asp-validation-for="Dexterity" class="text-danger small d-block mt-1"></span></div>
+                        <div class="col-6 col-md-4"><label asp-for="Constitution" class="form-label"></label><input asp-for="Constitution" class="form-control" /><span asp-validation-for="Constitution" class="text-danger small d-block mt-1"></span></div>
+                        <div class="col-6 col-md-4"><label asp-for="Intelligence" class="form-label"></label><input asp-for="Intelligence" class="form-control" /><span asp-validation-for="Intelligence" class="text-danger small d-block mt-1"></span></div>
+                        <div class="col-6 col-md-4"><label asp-for="Wisdom" class="form-label"></label><input asp-for="Wisdom" class="form-control" /><span asp-validation-for="Wisdom" class="text-danger small d-block mt-1"></span></div>
+                        <div class="col-6 col-md-4"><label asp-for="Charisma" class="form-label"></label><input asp-for="Charisma" class="form-control" /><span asp-validation-for="Charisma" class="text-danger small d-block mt-1"></span></div>
+                    </div>
+
+                    <h2 class="h5 mt-4 mb-3">Saving Throws</h2>
+                    <div class="row g-3 mb-4">
+                        <div class="col-12 col-md-4 form-check"><input asp-for="StrengthSaveProficient" class="form-check-input" /><label asp-for="StrengthSaveProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="DexteritySaveProficient" class="form-check-input" /><label asp-for="DexteritySaveProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="ConstitutionSaveProficient" class="form-check-input" /><label asp-for="ConstitutionSaveProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="IntelligenceSaveProficient" class="form-check-input" /><label asp-for="IntelligenceSaveProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="WisdomSaveProficient" class="form-check-input" /><label asp-for="WisdomSaveProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="CharismaSaveProficient" class="form-check-input" /><label asp-for="CharismaSaveProficient" class="form-check-label"></label></div>
+                    </div>
+
+                    <h2 class="h5 mt-4 mb-3">Skills</h2>
+                    <div class="row g-3 mb-4">
+                        <div class="col-12 col-md-4 form-check"><input asp-for="AcrobaticsProficient" class="form-check-input" /><label asp-for="AcrobaticsProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="AnimalHandlingProficient" class="form-check-input" /><label asp-for="AnimalHandlingProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="ArcanaProficient" class="form-check-input" /><label asp-for="ArcanaProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="AthleticsProficient" class="form-check-input" /><label asp-for="AthleticsProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="DeceptionProficient" class="form-check-input" /><label asp-for="DeceptionProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="HistoryProficient" class="form-check-input" /><label asp-for="HistoryProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="InsightProficient" class="form-check-input" /><label asp-for="InsightProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="IntimidationProficient" class="form-check-input" /><label asp-for="IntimidationProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="InvestigationProficient" class="form-check-input" /><label asp-for="InvestigationProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="MedicineProficient" class="form-check-input" /><label asp-for="MedicineProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="NatureProficient" class="form-check-input" /><label asp-for="NatureProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="PerceptionProficient" class="form-check-input" /><label asp-for="PerceptionProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="PerformanceProficient" class="form-check-input" /><label asp-for="PerformanceProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="PersuasionProficient" class="form-check-input" /><label asp-for="PersuasionProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="ReligionProficient" class="form-check-input" /><label asp-for="ReligionProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="SleightOfHandProficient" class="form-check-input" /><label asp-for="SleightOfHandProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="StealthProficient" class="form-check-input" /><label asp-for="StealthProficient" class="form-check-label"></label></div>
+                        <div class="col-12 col-md-4 form-check"><input asp-for="SurvivalProficient" class="form-check-input" /><label asp-for="SurvivalProficient" class="form-check-label"></label></div>
+                    </div>
+
                     <div class="mb-4">
                         <label asp-for="LevelId" class="form-label"></label>
                         <select asp-for="LevelId" asp-items="Model.LevelOptions" class="form-select">

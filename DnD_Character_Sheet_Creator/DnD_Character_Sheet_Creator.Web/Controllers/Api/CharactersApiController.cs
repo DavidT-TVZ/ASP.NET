@@ -97,6 +97,38 @@ public class CharactersApiController : ControllerBase
             Background = dto.Background!.Value,
             Alignment = dto.Alignment!.Value,
             Class = dto.Class!.Value,
+            CurrentExperiencePoints = dto.CurrentExperiencePoints ?? 0,
+            DateOfLastLevelUp = dto.DateOfLastLevelUp,
+            Strength = dto.Strength ?? 10,
+            Dexterity = dto.Dexterity ?? 10,
+            Constitution = dto.Constitution ?? 10,
+            Intelligence = dto.Intelligence ?? 10,
+            Wisdom = dto.Wisdom ?? 10,
+            Charisma = dto.Charisma ?? 10,
+            StrengthSaveProficient = dto.StrengthSaveProficient,
+            DexteritySaveProficient = dto.DexteritySaveProficient,
+            ConstitutionSaveProficient = dto.ConstitutionSaveProficient,
+            IntelligenceSaveProficient = dto.IntelligenceSaveProficient,
+            WisdomSaveProficient = dto.WisdomSaveProficient,
+            CharismaSaveProficient = dto.CharismaSaveProficient,
+            AcrobaticsProficient = dto.AcrobaticsProficient,
+            AnimalHandlingProficient = dto.AnimalHandlingProficient,
+            ArcanaProficient = dto.ArcanaProficient,
+            AthleticsProficient = dto.AthleticsProficient,
+            DeceptionProficient = dto.DeceptionProficient,
+            HistoryProficient = dto.HistoryProficient,
+            InsightProficient = dto.InsightProficient,
+            IntimidationProficient = dto.IntimidationProficient,
+            InvestigationProficient = dto.InvestigationProficient,
+            MedicineProficient = dto.MedicineProficient,
+            NatureProficient = dto.NatureProficient,
+            PerceptionProficient = dto.PerceptionProficient,
+            PerformanceProficient = dto.PerformanceProficient,
+            PersuasionProficient = dto.PersuasionProficient,
+            ReligionProficient = dto.ReligionProficient,
+            SleightOfHandProficient = dto.SleightOfHandProficient,
+            StealthProficient = dto.StealthProficient,
+            SurvivalProficient = dto.SurvivalProficient,
             Level = level
         };
 
@@ -136,6 +168,38 @@ public class CharactersApiController : ControllerBase
         character.Background = dto.Background!.Value;
         character.Alignment = dto.Alignment!.Value;
         character.Class = dto.Class!.Value;
+        character.CurrentExperiencePoints = dto.CurrentExperiencePoints ?? character.CurrentExperiencePoints;
+        character.DateOfLastLevelUp = dto.DateOfLastLevelUp;
+        character.Strength = dto.Strength ?? character.Strength;
+        character.Dexterity = dto.Dexterity ?? character.Dexterity;
+        character.Constitution = dto.Constitution ?? character.Constitution;
+        character.Intelligence = dto.Intelligence ?? character.Intelligence;
+        character.Wisdom = dto.Wisdom ?? character.Wisdom;
+        character.Charisma = dto.Charisma ?? character.Charisma;
+        character.StrengthSaveProficient = dto.StrengthSaveProficient;
+        character.DexteritySaveProficient = dto.DexteritySaveProficient;
+        character.ConstitutionSaveProficient = dto.ConstitutionSaveProficient;
+        character.IntelligenceSaveProficient = dto.IntelligenceSaveProficient;
+        character.WisdomSaveProficient = dto.WisdomSaveProficient;
+        character.CharismaSaveProficient = dto.CharismaSaveProficient;
+        character.AcrobaticsProficient = dto.AcrobaticsProficient;
+        character.AnimalHandlingProficient = dto.AnimalHandlingProficient;
+        character.ArcanaProficient = dto.ArcanaProficient;
+        character.AthleticsProficient = dto.AthleticsProficient;
+        character.DeceptionProficient = dto.DeceptionProficient;
+        character.HistoryProficient = dto.HistoryProficient;
+        character.InsightProficient = dto.InsightProficient;
+        character.IntimidationProficient = dto.IntimidationProficient;
+        character.InvestigationProficient = dto.InvestigationProficient;
+        character.MedicineProficient = dto.MedicineProficient;
+        character.NatureProficient = dto.NatureProficient;
+        character.PerceptionProficient = dto.PerceptionProficient;
+        character.PerformanceProficient = dto.PerformanceProficient;
+        character.PersuasionProficient = dto.PersuasionProficient;
+        character.ReligionProficient = dto.ReligionProficient;
+        character.SleightOfHandProficient = dto.SleightOfHandProficient;
+        character.StealthProficient = dto.StealthProficient;
+        character.SurvivalProficient = dto.SurvivalProficient;
 
         if (dto.LevelId.HasValue)
         {
@@ -223,6 +287,38 @@ public class CharactersApiController : ControllerBase
             Background = character.Background,
             Alignment = character.Alignment,
             Class = character.Class,
+            CurrentExperiencePoints = character.CurrentExperiencePoints,
+            DateOfLastLevelUp = character.DateOfLastLevelUp,
+            Strength = character.Strength,
+            Dexterity = character.Dexterity,
+            Constitution = character.Constitution,
+            Intelligence = character.Intelligence,
+            Wisdom = character.Wisdom,
+            Charisma = character.Charisma,
+            StrengthSaveProficient = character.StrengthSaveProficient,
+            DexteritySaveProficient = character.DexteritySaveProficient,
+            ConstitutionSaveProficient = character.ConstitutionSaveProficient,
+            IntelligenceSaveProficient = character.IntelligenceSaveProficient,
+            WisdomSaveProficient = character.WisdomSaveProficient,
+            CharismaSaveProficient = character.CharismaSaveProficient,
+            AcrobaticsProficient = character.AcrobaticsProficient,
+            AnimalHandlingProficient = character.AnimalHandlingProficient,
+            ArcanaProficient = character.ArcanaProficient,
+            AthleticsProficient = character.AthleticsProficient,
+            DeceptionProficient = character.DeceptionProficient,
+            HistoryProficient = character.HistoryProficient,
+            InsightProficient = character.InsightProficient,
+            IntimidationProficient = character.IntimidationProficient,
+            InvestigationProficient = character.InvestigationProficient,
+            MedicineProficient = character.MedicineProficient,
+            NatureProficient = character.NatureProficient,
+            PerceptionProficient = character.PerceptionProficient,
+            PerformanceProficient = character.PerformanceProficient,
+            PersuasionProficient = character.PersuasionProficient,
+            ReligionProficient = character.ReligionProficient,
+            SleightOfHandProficient = character.SleightOfHandProficient,
+            StealthProficient = character.StealthProficient,
+            SurvivalProficient = character.SurvivalProficient,
             Player = character.Player == null ? null : new PlayerSummaryDto
             {
                 PlayerId = character.Player.PlayerId,
@@ -248,7 +344,7 @@ public class CharactersApiController : ControllerBase
                 .Select(item => new EquipmentSummaryDto
                 {
                     EquipmentId = item.EquipmentId,
-                    CharacterId = item.CharacterId,
+                    CharacterId = item.CharacterId ?? 0,
                     Type = item.Type,
                     Name = item.Name,
                     Cost = item.Cost,
